@@ -1,0 +1,11 @@
+echo "Running tests..."
+npx vitest run
+
+status=$?
+if [ $status -ne 0 ]; then
+  echo "Tests failed. Push aborted."
+  exit 1
+fi
+
+echo "Tests passed. Proceeding with push."
+exit 0
