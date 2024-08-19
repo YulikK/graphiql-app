@@ -1,8 +1,19 @@
+echo "Running check for branch name..."
+npx validate-branch-name
+
+branch_status=$?
+if [ $branch_status -ne 0 ]; then
+  echo "Branch name validation failed. Push aborted."
+  exit 1
+else
+  echo "Branch name validation passed."
+fi
+
 echo "Running tests..."
 npx vitest run
 
-status=$?
-if [ $status -ne 0 ]; then
+test_status=$?
+if [ $test_status -ne 0 ]; then
   echo "Tests failed. Push aborted."
   exit 1
 fi
