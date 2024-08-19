@@ -21,7 +21,7 @@ jobs:
           route: POST /repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/requested_reviewers
           mediaType: '{"previews":["luke-cage"]}'
           token: ${{ secrets.MY_REPO_TOKEN }}
-          reviewers: '["The-Dmitry", "Yuliya-Karuk"]'
+          reviewers: '["The-Dmitry", "YulikK"]'
 
       - name: Request Review
         if: steps.pr_author.outputs.author == 'The-Dmitry'
