@@ -15,6 +15,7 @@ module.exports = {
     'jsx-a11y',
     'import',
     'simple-import-sort',
+    'unused-imports',
     'prettier',
   ],
   extends: [
@@ -30,7 +31,9 @@ module.exports = {
   rules: {
     'react/react-in-jsx-scope': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/no-unused-vars': 'off',
     '@typescript-eslint/no-explicit-any': 'error',
+    'unused-imports/no-unused-imports': 'error',
     '@typescript-eslint/no-inferrable-types': 'error',
     '@typescript-eslint/ban-ts-comment': 'warn',
     'prettier/prettier': [
