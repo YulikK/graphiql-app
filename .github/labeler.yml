@@ -1,0 +1,30 @@
+documentation:
+  - changed-files:
+      - any-glob-to-any-file: '**/*.md'
+
+chore:
+  - head-branch:
+      - '^chore'
+
+feature:
+  - head-branch:
+      - '^feat'
+
+fix:
+  - head-branch:
+      - '^fix'
+      - '^hotfix'
+
+refactor:
+  - head-branch:
+      - '^refactor'
+
+test:
+  - changed-files:
+      - any-glob-to-any-file: '**/*.spec.ts'
+      - any-glob-to-any-file: '**/*.test.ts'
+
+style:
+  - changed-files:
+      - any-glob-to-any-file: '**/*.scss'
+      - any-glob-to-any-file: '**/*.css'
