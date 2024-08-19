@@ -1,4 +1,4 @@
-## PR Title ✨
+# PR Title ✨
 
 📍 conforms with the following format:
 
