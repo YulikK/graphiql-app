@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
-    "format:fix": "prettier --write \"./**/*.{ts,tsx,css}\"",
+    "format:fix": "prettier --write \"./**/*.{ts,tsx,css,json,md,js,cjs}\"",
     "ci:format": "prettier --check .",
     "prepare": "husky",
     "test": "vitest",
