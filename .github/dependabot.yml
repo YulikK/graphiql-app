@@ -5,7 +5,7 @@ updates:
     schedule:
       interval: 'weekly'
     reviewers:
-      - 'ptchom'
+      - 'YulikK'
     commit-message:
       prefix: 'chore'
     groups:
