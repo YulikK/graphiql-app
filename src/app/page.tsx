@@ -10,6 +10,8 @@ export default function Home() {
       <div className={styles.description}>
         <p>
           <BugIcon />
+          <BugIcon />
+          <BugIcon />
           Get started by editing&nbsp;
           <code className={styles.code}>src/app/page.tsx</code>
         </p>
