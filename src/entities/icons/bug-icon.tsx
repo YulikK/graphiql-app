@@ -1,4 +1,4 @@
-import React, { FC, SVGProps, HTMLAttributes } from 'react';
+import { FC, SVGProps, HTMLAttributes } from 'react';
 
 type BugIconProps = HTMLAttributes<HTMLElement>;
 
