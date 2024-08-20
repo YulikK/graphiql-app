@@ -2,18 +2,6 @@
 const nextConfig = {
   reactStrictMode: true,
   assetPrefix: '',
-  // cleanUrls: true,
-  // trailingSlash: true,
-  // assetPrefix: process.env.NODE_ENV === 'production' ? '/_next/' : '',
-  // async redirects() {
-  //   return [
-  //     {
-  //       source: '/:path*',
-  //       destination: '/index.html',
-  //       permanent: true,
-  //     },
-  //   ];
-  // },
 };
 
 export default nextConfig;
