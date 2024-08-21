@@ -3,6 +3,8 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
 import './globals.css';
+import { AuthProvider } from '../contexts';
+
 import { StyledRoot } from './StyledRoot';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -20,9 +22,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <AppRouterCacheProvider>
-          <StyledRoot>{children}</StyledRoot>
-        </AppRouterCacheProvider>
+        <AuthProvider>
+          <AppRouterCacheProvider>
+            <StyledRoot>{children}</StyledRoot>
+          </AppRouterCacheProvider>
+        </AuthProvider>
       </body>
     </html>
   );

@@ -42,6 +42,7 @@ export function RegistrationFormComponent({
     resolver: yupResolver(validationSchema),
     mode: 'onChange',
   });
+
   const onSubmit = async (data: RegisterForm) => {
     console.log(data);
     const result = await registerWithEmailAndPassword(
