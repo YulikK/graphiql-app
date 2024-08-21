@@ -7,6 +7,7 @@ import { auth } from '@/src/services/firebase/firebase';
 
 export interface AuthContextValue {
   isLoggedIn: boolean | null;
+  loading: boolean;
 }
 
 export const AuthContext = createContext<AuthContextValue | undefined>(
@@ -19,6 +20,7 @@ interface AuthProviderProps {
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -27,13 +29,14 @@ export function AuthProvider({ children }: AuthProviderProps) {
       } else {
         setIsLoggedIn(false);
       }
+      setLoading(false);
     });
 
     return () => unsubscribe();
   }, []);
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn }}>
+    <AuthContext.Provider value={{ isLoggedIn, loading }}>
       {children}
     </AuthContext.Provider>
   );

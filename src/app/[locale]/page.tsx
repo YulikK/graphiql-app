@@ -5,6 +5,8 @@ import { useTranslations } from 'next-intl';
 
 import locales from '../../constants/locales';
 
+import { logout } from '@/src/services/firebase/auth';
+
 export default function HomePage({
   params: { locale },
 }: {
@@ -25,6 +27,9 @@ export default function HomePage({
           </option>
         ))}
       </select>
+      <button type="button" onClick={() => logout()}>
+        Logout
+      </button>
     </>
   );
 }

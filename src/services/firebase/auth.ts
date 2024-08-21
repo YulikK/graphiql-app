@@ -1,6 +1,7 @@
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
 } from 'firebase/auth';
 import { addDoc, collection } from 'firebase/firestore';
 
@@ -37,6 +38,14 @@ export const logInWithEmailAndPassword = async (
     await signInWithEmailAndPassword(auth, email, password);
   } catch (err) {
     console.error(err);
+    alert((err as Error).message);
+  }
+};
+
+export const logout = async () => {
+  try {
+    await signOut(auth);
+  } catch (err) {
     alert((err as Error).message);
   }
 };
