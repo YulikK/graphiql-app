@@ -1,5 +1,24 @@
 {
   "HomePage": {
     "title": "Привет мир!"
+  },
+  "RegistrationPage": {
+    "title": "Регистрация",
+    "nameInput": "Имя",
+    "emailInput": "Почта",
+    "passwordInput": "Пароль",
+    "confirmInput": "Подтвердите пароль",
+    "signUpButton": "Войти"
+  },
+  "Validation": {
+    "nameCapitalized": "Имя должно начинаться с заглавной буквы и содержать только строчные буквы после",
+    "nameRequired": "Имя — обязательное поле",
+    "emailRequired": "Email — обязательное поле",
+    "emailInvalid": "Email должен быть в правильном формате",
+    "passwordRequired": "Пароль — обязательное поле",
+    "passwordMinLength": "Пароль должен содержать минимум {min} символов",
+    "passwordStrength": "Пароль должен содержать 1 цифру, 1 заглавную букву, 1 строчную букву и 1 специальный символ",
+    "confirmPasswordRequired": "Подтверждение пароля — обязательное поле",
+    "passwordsMustMatch": "Пароли должны совпадать"
   }
 }

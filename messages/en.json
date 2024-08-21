@@ -1,5 +1,24 @@
 {
   "HomePage": {
     "title": "Hello world!"
+  },
+  "RegistrationPage": {
+    "title": "Registration",
+    "nameInput": "Name",
+    "emailInput": "Email",
+    "passwordInput": "Password",
+    "confirmInput": "Confirm password",
+    "signUpButton": "Sign Up"
+  },
+  "Validation": {
+    "nameCapitalized": "Name must start with a capital letter and be followed by lowercase letters",
+    "nameRequired": "Name is a required field",
+    "emailRequired": "Email is a required field",
+    "emailInvalid": "Must be a valid email format",
+    "passwordRequired": "Password is a required field",
+    "passwordMinLength": "Password must be at least {min} characters long",
+    "passwordStrength": "Password must contain 1 number, 1 uppercase letter, 1 lowercase letter, and 1 special character",
+    "confirmPasswordRequired": "Confirm Password is a required field",
+    "passwordsMustMatch": "Passwords must match"
   }
 }
