@@ -7,20 +7,17 @@ import { Container, Stack, Typography } from '@mui/material';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
-import {
-  TextFieldElement,
-  PasswordElement,
-  CheckboxElement,
-} from 'react-hook-form-mui';
+import { TextFieldElement, PasswordElement } from 'react-hook-form-mui';
 
 import { useValidationSchema } from '@/src/hooks/useValidationSchema';
 
-export function RegistrationFormComponent({
+export function LoginFormComponent({
   params: { locale },
 }: {
   params: { locale: string };
 }) {
-  const t = useTranslations('RegistrationPage');
+  console.log(locale);
+  const t = useTranslations('LoginPage');
   const validationSchema = useValidationSchema();
 
   const {
@@ -48,14 +45,6 @@ export function RegistrationFormComponent({
           <TextFieldElement
             control={control}
             fullWidth
-            name="name"
-            label={t('nameInput')}
-            required
-            helperText={errors.name?.message || ' '}
-          />
-          <TextFieldElement
-            control={control}
-            fullWidth
             name="email"
             label={t('emailInput')}
             required
@@ -70,24 +59,6 @@ export function RegistrationFormComponent({
             helperText={errors.password?.message || ' '}
             margin="dense"
           />
-          <PasswordElement
-            fullWidth
-            control={control}
-            name="confirmPassword"
-            label={t('confirmInput')}
-            required
-            helperText={errors.confirmPassword?.message || ' '}
-            margin="dense"
-          />
-          <Stack direction="row" alignItems="center" sx={{ width: '100%' }}>
-            <CheckboxElement
-              control={control}
-              name="acceptTerms"
-              label={t('acceptTermInput')}
-              required
-              helperText={errors.acceptTerms?.message || ' '}
-            />
-          </Stack>
           <LoadingButton
             type="submit"
             variant="contained"
@@ -112,15 +83,15 @@ export function RegistrationFormComponent({
             sx={{ padding: '10px' }}
           >
             <Typography variant="body2" sx={{ fontSize: '1rem' }}>
-              {t('loginText')}
+              {t('registrationText')}
             </Typography>
-            <Link href={`/${locale}/login`} passHref>
+            <Link href={`/${locale}/registration`} passHref>
               <Typography
                 variant="body2"
                 color="primary"
                 sx={{ fontSize: '1rem', cursor: 'pointer' }}
               >
-                {t('loginLink')}
+                {t('registrationLink')}
               </Typography>
             </Link>
           </Stack>
@@ -130,4 +101,4 @@ export function RegistrationFormComponent({
   );
 }
 
-export default RegistrationFormComponent;
+export default LoginFormComponent;

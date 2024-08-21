@@ -5,10 +5,21 @@
   "RegistrationPage": {
     "title": "Регистрация",
     "nameInput": "Имя",
-    "emailInput": "Почта",
+    "emailInput": "Эл. почта",
     "passwordInput": "Пароль",
     "confirmInput": "Подтвердите пароль",
-    "signUpButton": "Войти"
+    "acceptTermInput": "Я прочитал(а) и согласен(сна) с Условиями обслуживания",
+    "signUpButton": "Войти",
+    "loginText": "У вас уже есть аккаунт?",
+    "loginLink": "Войти"
+  },
+  "LoginPage": {
+    "title": "Войти",
+    "emailInput": "Эл. почта",
+    "passwordInput": "Пароль",
+    "signUpButton": "Войти",
+    "registrationText": "У вас нет аккаунта?",
+    "registrationLink": "Регистрация"
   },
   "Validation": {
     "nameCapitalized": "Имя должно начинаться с заглавной буквы и содержать только строчные буквы после",
