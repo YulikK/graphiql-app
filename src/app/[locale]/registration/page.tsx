@@ -5,6 +5,7 @@ import LoginIcon from '@mui/icons-material/Login';
 import { LoadingButton } from '@mui/lab';
 import { Container, Stack, Typography } from '@mui/material';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import {
@@ -14,6 +15,15 @@ import {
 } from 'react-hook-form-mui';
 
 import { useValidationSchema } from '@/src/hooks/useValidationSchema';
+import { registerWithEmailAndPassword } from '@/src/services/firebase/auth';
+
+export interface RegisterForm {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  acceptTerms: boolean;
+}
 
 export function RegistrationFormComponent({
   params: { locale },
@@ -22,6 +32,7 @@ export function RegistrationFormComponent({
 }) {
   const t = useTranslations('RegistrationPage');
   const validationSchema = useValidationSchema();
+  const router = useRouter();
 
   const {
     handleSubmit,
@@ -31,7 +42,17 @@ export function RegistrationFormComponent({
     resolver: yupResolver(validationSchema),
     mode: 'onChange',
   });
-  const onSubmit = () => {};
+  const onSubmit = async (data: RegisterForm) => {
+    console.log(data);
+    const result = await registerWithEmailAndPassword(
+      data.name,
+      data.email,
+      data.password
+    );
+    if (result) {
+      router.push('/');
+    }
+  };
 
   return (
     <Container
