@@ -1,9 +1,16 @@
 import { yupResolver } from '@hookform/resolvers/yup';
+import { FirebaseError } from 'firebase/app';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 import { RegisterForm } from '../models/types';
 import { registerWithEmailAndPassword } from '../services/firebase/auth';
+import {
+  AuthenticationLoading,
+  SuccessRegisterMessage,
+  UnexpectedError,
+} from '../utils/consts';
 
 import { useCheckIsAuth } from './useCheckIsAuth';
 import { useRegistrationValidationSchema } from './useRegistrationValidationSchema';
@@ -23,14 +30,22 @@ export const useRegistrationForm = () => {
   });
 
   const onSubmit = async (data: RegisterForm) => {
-    const result = await registerWithEmailAndPassword(
-      data.name,
-      data.email,
-      data.password
-    );
-    if (result) {
-      router.push('/');
-    }
+    toast
+      .promise(
+        registerWithEmailAndPassword(data.name, data.email, data.password),
+        {
+          pending: AuthenticationLoading,
+          success: SuccessRegisterMessage,
+          error: {
+            render({ data }) {
+              return data instanceof FirebaseError
+                ? data.message
+                : UnexpectedError;
+            },
+          },
+        }
+      )
+      .then(() => router.push('/'));
   };
 
   return {

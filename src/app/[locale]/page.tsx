@@ -1,14 +1,21 @@
 'use client';
 
 import { Typography } from '@mui/material';
+import { FirebaseError } from 'firebase/app';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
+import { toast } from 'react-toastify';
 
 import locales from '../../constants/locales';
 
 import { useCheckIsAuth } from '@/src/hooks/useCheckIsAuth';
 import { logout } from '@/src/services/firebase/auth';
+import {
+  AuthenticationLoading,
+  SuccessLogoutMessage,
+  UnexpectedError,
+} from '@/src/utils/consts';
 
 export default function HomePage({
   params: { locale },
@@ -21,6 +28,19 @@ export default function HomePage({
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) =>
     router.replace(e.target.value);
+
+  const handleLogout = async () => {
+    toast.promise(logout, {
+      pending: AuthenticationLoading,
+      success: SuccessLogoutMessage,
+      error: {
+        render({ data }) {
+          return data instanceof FirebaseError ? data.message : UnexpectedError;
+        },
+      },
+    });
+  };
+
   return (
     !loading && (
       <>
@@ -33,7 +53,7 @@ export default function HomePage({
           ))}
         </select>
         {isLoggedIn ? (
-          <button type="button" onClick={() => logout()}>
+          <button type="button" onClick={handleLogout}>
             Logout
           </button>
         ) : (
