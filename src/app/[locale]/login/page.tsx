@@ -12,7 +12,7 @@ import { TextFieldElement, PasswordElement } from 'react-hook-form-mui';
 import GoogleIcon from '@/src/assets/google.svg';
 import { useLoginForm } from '@/src/hooks/useLoginForm';
 
-export function LoginFormComponent({
+export default function LoginPage({
   params: { locale },
 }: {
   params: { locale: string };
@@ -129,5 +129,3 @@ export function LoginFormComponent({
     )
   );
 }
-
-export default LoginFormComponent;

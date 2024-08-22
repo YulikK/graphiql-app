@@ -13,7 +13,7 @@ import {
 
 import { useRegistrationForm } from '@/src/hooks/useRegistrationForm';
 
-export function RegistrationFormComponent({
+export default function RegistrationPage({
   params: { locale },
 }: {
   params: { locale: string };
@@ -132,5 +132,3 @@ export function RegistrationFormComponent({
     )
   );
 }
-
-export default RegistrationFormComponent;
