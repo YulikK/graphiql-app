@@ -3,7 +3,10 @@ import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 
 import { LoginForm } from '../models/types';
-import { logInWithEmailAndPassword } from '../services/firebase/auth';
+import {
+  logInWithEmailAndPassword,
+  loginWithGoogle,
+} from '../services/firebase/auth';
 
 import { useCheckIsAuth } from './useCheckIsAuth';
 import { useLoginValidationSchema } from './useLoginValidationSchema';
@@ -29,11 +32,19 @@ export const useLoginForm = () => {
     }
   };
 
+  const onGoogleSubmit = async () => {
+    const result = await loginWithGoogle();
+    if (result) {
+      router.push('/');
+    }
+  };
+
   return {
     isLoggedIn,
     loading,
     handleSubmit,
     onSubmit,
+    onGoogleSubmit,
     control,
     isValid,
     errors,

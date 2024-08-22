@@ -1,12 +1,15 @@
 'use client';
 
+// import GoogleIcon from '@mui/icons-material/Google';
 import LoginIcon from '@mui/icons-material/Login';
 import { LoadingButton } from '@mui/lab';
-import { Container, Stack, Typography } from '@mui/material';
+import { Button, Container, Stack, Typography } from '@mui/material';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { TextFieldElement, PasswordElement } from 'react-hook-form-mui';
 
+import GoogleIcon from '@/src/assets/google.svg';
 import { useLoginForm } from '@/src/hooks/useLoginForm';
 
 export function LoginFormComponent({
@@ -21,6 +24,7 @@ export function LoginFormComponent({
     loading,
     handleSubmit,
     onSubmit,
+    onGoogleSubmit,
     control,
     isValid,
     errors,
@@ -38,6 +42,29 @@ export function LoginFormComponent({
           padding: '20px',
         }}
       >
+        <Button
+          variant="outlined"
+          startIcon={
+            <Image
+              src={GoogleIcon}
+              alt="Google"
+              style={{ width: 20, height: 20 }}
+            />
+          }
+          onClick={onGoogleSubmit}
+          sx={{
+            width: '100%',
+            padding: '10px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            textTransform: 'none',
+            margin: '10px 0',
+            borderColor: 'grey.500',
+          }}
+        >
+          <Typography variant="button">Continue with Google</Typography>
+        </Button>
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
           <Stack justifyContent="center" alignItems="center" spacing={2}>
             <Typography variant="h4" gutterBottom align="center">

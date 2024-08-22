@@ -1,11 +1,12 @@
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
 } from 'firebase/auth';
 import { addDoc, collection } from 'firebase/firestore';
 
-import { auth, db } from './firebase';
+import { auth, db, provider } from './firebase';
 
 export const registerWithEmailAndPassword = async (
   name: string,
@@ -36,6 +37,16 @@ export const logInWithEmailAndPassword = async (
 ) => {
   try {
     const result = await signInWithEmailAndPassword(auth, email, password);
+    return result;
+  } catch (err) {
+    console.error(err);
+    alert((err as Error).message);
+  }
+};
+
+export const loginWithGoogle = async () => {
+  try {
+    const result = await signInWithPopup(auth, provider);
     return result;
   } catch (err) {
     console.error(err);
