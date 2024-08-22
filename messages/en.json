@@ -19,7 +19,8 @@
     "passwordInput": "Password",
     "signUpButton": "Sign In",
     "registrationText": "Don't have an account?",
-    "registrationLink": "Sign Up"
+    "registrationLink": "Sign Up",
+    "googleText": "Continue with Google"
   },
   "Validation": {
     "nameCapitalized": "Name must start with a capital letter and be followed by lowercase letters",

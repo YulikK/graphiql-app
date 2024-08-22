@@ -1,6 +1,5 @@
 'use client';
 
-// import GoogleIcon from '@mui/icons-material/Google';
 import LoginIcon from '@mui/icons-material/Login';
 import { LoadingButton } from '@mui/lab';
 import { Button, Container, Stack, Typography } from '@mui/material';
@@ -63,7 +62,7 @@ export default function LoginPage({
             borderColor: 'grey.500',
           }}
         >
-          <Typography variant="button">Continue with Google</Typography>
+          <Typography variant="button">{t('googleText')}</Typography>
         </Button>
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
           <Stack justifyContent="center" alignItems="center" spacing={2}>

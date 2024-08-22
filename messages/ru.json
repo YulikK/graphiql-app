@@ -19,7 +19,8 @@
     "passwordInput": "Пароль",
     "signUpButton": "Войти",
     "registrationText": "У вас нет аккаунта?",
-    "registrationLink": "Регистрация"
+    "registrationLink": "Регистрация",
+    "googleText": "Войти с Google"
   },
   "Validation": {
     "nameCapitalized": "Имя должно начинаться с заглавной буквы и содержать только строчные буквы после",
