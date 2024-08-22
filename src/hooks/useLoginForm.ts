@@ -39,9 +39,10 @@ export const useLoginForm = () => {
         success: SuccessLoginMessage,
         error: {
           render({ data }) {
-            return data instanceof FirebaseError
-              ? data.message
-              : UnexpectedError;
+            if (data instanceof FirebaseError) {
+              return data.message;
+            }
+            return 'An unexpected error occurred.';
           },
         },
       })

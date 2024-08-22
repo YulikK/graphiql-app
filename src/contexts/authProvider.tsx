@@ -30,6 +30,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         setIsLoggedIn(false);
       }
       setLoading(false);
+      return user;
     });
 
     return () => unsubscribe();
