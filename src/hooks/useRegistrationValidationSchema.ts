@@ -1,14 +1,15 @@
+'use client';
+
 import { useTranslations } from 'next-intl';
 import * as yup from 'yup';
 
-const validEmailRegExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+import {
+  passwordMinLength,
+  passwordStrengthRegex,
+  validEmailRegExp,
+} from '../utils/consts';
 
-const passwordStrengthRegex =
-  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])(?=.*[\p{S}\p{P}\p{M}\p{N}]).{8,}$/u;
-
-const passwordMinLength = 8;
-
-export const useValidationSchema = () => {
+export const useRegistrationValidationSchema = () => {
   const t = useTranslations('Validation');
 
   return yup.object().shape({

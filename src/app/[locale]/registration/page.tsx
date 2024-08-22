@@ -1,31 +1,17 @@
 'use client';
 
-import { yupResolver } from '@hookform/resolvers/yup';
 import LoginIcon from '@mui/icons-material/Login';
 import { LoadingButton } from '@mui/lab';
 import { Container, Stack, Typography } from '@mui/material';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
 import {
   TextFieldElement,
   PasswordElement,
   CheckboxElement,
 } from 'react-hook-form-mui';
 
-import { useAuth } from '@/src/contexts';
-import { useValidationSchema } from '@/src/hooks/useValidationSchema';
-import { registerWithEmailAndPassword } from '@/src/services/firebase/auth';
-
-export interface RegisterForm {
-  name: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-  acceptTerms: boolean;
-}
+import { useRegistrationForm } from '@/src/hooks/useRegistrationForm';
 
 export function RegistrationFormComponent({
   params: { locale },
@@ -33,38 +19,16 @@ export function RegistrationFormComponent({
   params: { locale: string };
 }) {
   const t = useTranslations('RegistrationPage');
-  const validationSchema = useValidationSchema();
-  const router = useRouter();
-  const { isLoggedIn, loading } = useAuth();
 
   const {
+    isLoggedIn,
+    loading,
     handleSubmit,
-    formState: { errors, isValid },
+    onSubmit,
     control,
-  } = useForm({
-    resolver: yupResolver(validationSchema),
-    mode: 'onChange',
-  });
-
-  const onSubmit = async (data: RegisterForm) => {
-    console.log(data);
-    const result = await registerWithEmailAndPassword(
-      data.name,
-      data.email,
-      data.password
-    );
-    if (result) {
-      router.push('/');
-    }
-  };
-
-  console.log(isLoggedIn, loading);
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      router.push('/');
-    }
-  }, [isLoggedIn, router]);
+    isValid,
+    errors,
+  } = useRegistrationForm();
 
   if (loading) {
     return <div>Loading</div>;

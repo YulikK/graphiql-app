@@ -26,3 +26,13 @@ export interface ValidationErrors {
   password?: FieldError;
   confirmPassword?: FieldError;
 }
+
+export interface RegisterForm {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  acceptTerms: boolean;
+}
+
+export type LoginForm = Pick<RegisterForm, 'email' | 'password'>;
