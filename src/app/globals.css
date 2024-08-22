@@ -86,3 +86,8 @@ body {
   overflow-x: hidden;
   height: 100%;
 }
+
+body {
+  display: flex;
+  flex-direction: column;
+}
