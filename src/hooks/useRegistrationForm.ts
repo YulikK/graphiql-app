@@ -23,7 +23,6 @@ export const useRegistrationForm = () => {
   });
 
   const onSubmit = async (data: RegisterForm) => {
-    console.log(data);
     const result = await registerWithEmailAndPassword(
       data.name,
       data.email,

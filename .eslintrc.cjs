@@ -54,6 +54,15 @@ module.exports = {
         },
       },
     ],
+    'no-console': ['warn', { allow: ['warn', 'error'] }],
+    'no-unused-expressions': [
+      'error',
+      {
+        allowShortCircuit: true,
+        allowTernary: true,
+        allowTaggedTemplates: true,
+      },
+    ],
   },
   settings: {
     react: {
