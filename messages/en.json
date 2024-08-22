@@ -1,5 +1,10 @@
 {
   "HomePage": {
     "title": "Hello world!"
+  },
+  "Header": {
+    "sign-in": "Sign In",
+    "sign-up": "Sign Up",
+    "sign-out": "Sign Out"
   }
 }
