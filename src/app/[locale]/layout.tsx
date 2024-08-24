@@ -1,5 +1,9 @@
+import { Container, Stack } from '@mui/material';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
+
+import Footer from '@/src/components/footer/Footer';
+import Header from '@/src/components/header/Header';
 
 export default async function LocaleLayout({
   children,
@@ -12,7 +16,11 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider messages={messages}>
-      {children}
+      <Header />
+      <Container sx={{ flexGrow: 1 }}>
+        <Stack>{children}</Stack>
+      </Container>
+      <Footer />
     </NextIntlClientProvider>
   );
 }
