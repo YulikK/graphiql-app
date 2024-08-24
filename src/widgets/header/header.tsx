@@ -1,17 +1,11 @@
 'use client';
-import {
-  AppBar,
-  Button,
-  Typography,
-  Toolbar,
-  Box,
-  Container,
-} from '@mui/material';
+import { AppBar, Button, Toolbar, Box, Container } from '@mui/material';
 import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 
-import LocaleSwitcher from '../locale-switcher/LocaleSwitcher';
+import { Logo } from '@/entities/logo/logo.tsx';
+import LocaleSwitcher from '@/features/locale-switcher/locale-switcher.tsx';
 
 export default function Header() {
   const [isShrunk, setShrunk] = useState(false);
@@ -47,14 +41,7 @@ export default function Header() {
       <Container disableGutters sx={{ height: 'inherit' }}>
         <Toolbar style={{ height: '100%', minHeight: '100%' }}>
           <Box sx={{ flexGrow: 1 }}>
-            <Typography
-              variant="h6"
-              component={Link}
-              href={`/${locale}`}
-              color={'white'}
-            >
-              LOGO
-            </Typography>
+            <Logo />
           </Box>
 
           <Box sx={{ display: 'flex', gap: 1 }}>
