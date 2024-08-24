@@ -2,8 +2,8 @@ import { Container, Stack } from '@mui/material';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 
-import Footer from '@/src/components/footer/Footer';
-import Header from '@/src/components/header/Header';
+import Footer from '@/widgets/footer/Footer';
+import Header from '@/widgets/header/Header';
 
 export default async function LocaleLayout({
   children,
