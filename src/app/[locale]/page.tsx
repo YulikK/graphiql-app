@@ -1,84 +1,87 @@
 'use client';
 
-import { Typography } from '@mui/material';
-import { FirebaseError } from 'firebase/app';
+import { Typography, Box, Button, ButtonGroup } from '@mui/material';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { toast } from 'react-toastify';
 
-import locales from '../../constants/locales';
+import { useAuth } from '@/shared/contexts';
 
-import { useCheckIsAuth } from '@/src/hooks/useCheckIsAuth';
-import { logout } from '@/src/services/firebase/auth';
-import {
-  AuthenticationLoading,
-  SuccessLogoutMessage,
-  UnexpectedError,
-} from '@/src/utils/consts';
+const PLACEHOLDER_TEXT =
+  'A description of our marvelous project, or a pretty picture? Or maybe, Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?';
 
-export default function HomePage({
+export default function WelcomePage({
   params: { locale },
 }: {
   params: { locale: string };
 }) {
-  const { isLoggedIn, loading } = useCheckIsAuth();
-  const t = useTranslations('HomePage');
-  const router = useRouter();
+  const { isLoggedIn, loading } = useAuth();
+  const t = useTranslations('WelcomePage');
 
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) =>
-    router.replace(e.target.value);
-
-  const handleLogout = async () => {
-    toast.promise(logout, {
-      pending: AuthenticationLoading,
-      success: SuccessLogoutMessage,
-      error: {
-        render({ data }) {
-          return data instanceof FirebaseError ? data.message : UnexpectedError;
-        },
-      },
-    });
-  };
+  if (loading) {
+    return <div>Loading</div>;
+  }
 
   return (
-    !loading && (
-      <>
-        <h1>{t('title')}</h1>
-        <select name="locales" defaultValue={locale} onChange={handleChange}>
-          {locales.map((v) => (
-            <option key={v} value={v}>
-              {v}
-            </option>
-          ))}
-        </select>
-        {isLoggedIn ? (
-          <button type="button" onClick={handleLogout}>
-            Logout
-          </button>
-        ) : (
-          <>
-            <Link href={`/${locale}/login`} passHref>
-              <Typography
-                variant="body2"
-                color="primary"
-                sx={{ fontSize: '1rem', cursor: 'pointer' }}
-              >
-                Login
+    <>
+      <Box display={{ sm: 'flex' }} gap={2}>
+        <Box
+          flex={1}
+          display={'flex'}
+          flexDirection={'column'}
+          alignItems={'center'}
+          gap={3}
+          paddingBlock={10}
+        >
+          {!isLoggedIn ? (
+            <>
+              <Typography variant="h4" textAlign={'center'}>
+                {t('title-anonymous')}!
               </Typography>
-            </Link>
-            <Link href={`/${locale}/registration`} passHref>
-              <Typography
-                variant="body2"
-                color="primary"
-                sx={{ fontSize: '1rem', cursor: 'pointer' }}
-              >
-                Registration
+              <Box display={'flex'} gap={2}>
+                <Button
+                  variant="outlined"
+                  LinkComponent={Link}
+                  href={`/${locale}/login`}
+                >
+                  {t('sign-in')}
+                </Button>
+                <Button
+                  variant="contained"
+                  LinkComponent={Link}
+                  href={`/${locale}/registration`}
+                >
+                  {t('sign-up')}
+                </Button>
+              </Box>
+            </>
+          ) : (
+            <>
+              <Typography variant="h4" textAlign={'center'}>
+                {t('title-registered')} [User]!
               </Typography>
-            </Link>
-          </>
-        )}
-      </>
-    )
+              <ButtonGroup orientation="vertical">
+                <Button LinkComponent={Link} href={`/${locale}`}>
+                  REST Client
+                </Button>
+                <Button LinkComponent={Link} href={`/${locale}`}>
+                  GraphiQL Client
+                </Button>
+                <Button LinkComponent={Link} href={`/${locale}`}>
+                  History
+                </Button>
+              </ButtonGroup>
+            </>
+          )}
+        </Box>
+        <Box
+          display={'flex'}
+          flex={1}
+          justifyContent={'center'}
+          alignItems={'center'}
+        >
+          <Typography variant="body1">{PLACEHOLDER_TEXT}</Typography>
+        </Box>
+      </Box>
+    </>
   );
 }

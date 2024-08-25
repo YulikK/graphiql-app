@@ -1,6 +1,13 @@
 {
-  "HomePage": {
-    "title": "Привет мир!"
+  "Header": {
+    "sign-in": "Войти",
+    "sign-out": "Выйти"
+  },
+  "WelcomePage": {
+    "title-anonymous": "Добро пожаловать",
+    "title-registered": "С возвращением,",
+    "sign-in": "Войти",
+    "sign-up": "Регистрация"
   },
   "RegistrationPage": {
     "title": "Регистрация",

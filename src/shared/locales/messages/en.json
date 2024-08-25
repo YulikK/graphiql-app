@@ -1,6 +1,13 @@
 {
-  "HomePage": {
-    "title": "Hello world!"
+  "Header": {
+    "sign-in": "Sign In",
+    "sign-out": "Sign Out"
+  },
+  "WelcomePage": {
+    "title-anonymous": "Welcome",
+    "title-registered": "Welcome back,",
+    "sign-in": "Sign In",
+    "sign-up": "Sign Up"
   },
   "RegistrationPage": {
     "title": "Registration",

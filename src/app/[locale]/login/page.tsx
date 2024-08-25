@@ -5,11 +5,14 @@ import { LoadingButton } from '@mui/lab';
 import { Button, Container, Stack, Typography } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
+import { useEffect } from 'react';
 import { TextFieldElement, PasswordElement } from 'react-hook-form-mui';
 
-import GoogleIcon from '@/src/assets/google.svg';
-import { useLoginForm } from '@/src/hooks/useLoginForm';
+import GoogleIcon from '@/assets/google.svg';
+import { useAuth } from '@/shared/contexts';
+import { useLoginForm } from '@/shared/hooks/useLoginForm';
 
 export default function LoginPage({
   params: { locale },
@@ -17,17 +20,18 @@ export default function LoginPage({
   params: { locale: string };
 }) {
   const t = useTranslations('LoginPage');
+  const router = useRouter();
+  const { isLoggedIn, loading } = useAuth();
 
-  const {
-    isLoggedIn,
-    loading,
-    handleSubmit,
-    onSubmit,
-    onGoogleSubmit,
-    control,
-    isValid,
-    errors,
-  } = useLoginForm();
+  useEffect(() => {
+    if (isLoggedIn) {
+      router.push(`/${locale}`);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoggedIn, router]);
+
+  const { handleSubmit, onSubmit, onGoogleSubmit, control, isValid, errors } =
+    useLoginForm();
 
   if (loading) {
     return <div>Loading</div>;

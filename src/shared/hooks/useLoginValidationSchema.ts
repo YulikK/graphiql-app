@@ -4,9 +4,9 @@ import { useTranslations } from 'next-intl';
 import * as yup from 'yup';
 
 import {
+  validEmailRegExp,
   passwordMinLength,
   passwordStrengthRegex,
-  validEmailRegExp,
 } from '../utils/consts';
 
 export const useLoginValidationSchema = () => {

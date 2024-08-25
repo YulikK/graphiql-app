@@ -1,6 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FirebaseError } from 'firebase/app';
-import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
@@ -15,13 +14,10 @@ import {
   UnexpectedError,
 } from '../utils/consts';
 
-import { useCheckIsAuth } from './useCheckIsAuth';
 import { useLoginValidationSchema } from './useLoginValidationSchema';
 
 export const useLoginForm = () => {
   const validationSchema = useLoginValidationSchema();
-  const router = useRouter();
-  const { isLoggedIn, loading } = useCheckIsAuth();
 
   const {
     handleSubmit,
@@ -33,41 +29,35 @@ export const useLoginForm = () => {
   });
 
   const onSubmit = async (data: LoginForm) => {
-    toast
-      .promise(logInWithEmailAndPassword(data.email, data.password), {
-        pending: AuthenticationLoading,
-        success: SuccessLoginMessage,
-        error: {
-          render({ data }) {
-            if (data instanceof FirebaseError) {
-              return data.message;
-            }
-            return 'An unexpected error occurred.';
-          },
+    toast.promise(logInWithEmailAndPassword(data.email, data.password), {
+      pending: AuthenticationLoading,
+      success: SuccessLoginMessage,
+      error: {
+        render({ data }) {
+          if (data instanceof FirebaseError) {
+            return data.message;
+          }
+          return 'An unexpected error occurred.';
         },
-      })
-      .then(() => router.push('/'));
+      },
+    });
+    // .then(() => router.push('/'));
   };
 
   const onGoogleSubmit = async () => {
-    toast
-      .promise(loginWithGoogle, {
-        pending: AuthenticationLoading,
-        success: SuccessLoginMessage,
-        error: {
-          render({ data }) {
-            return data instanceof FirebaseError
-              ? data.message
-              : UnexpectedError;
-          },
+    toast.promise(loginWithGoogle, {
+      pending: AuthenticationLoading,
+      success: SuccessLoginMessage,
+      error: {
+        render({ data }) {
+          return data instanceof FirebaseError ? data.message : UnexpectedError;
         },
-      })
-      .then(() => router.push('/'));
+      },
+    });
+    // .then(() => router.push('/'));
   };
 
   return {
-    isLoggedIn,
-    loading,
     handleSubmit,
     onSubmit,
     onGoogleSubmit,

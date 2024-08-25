@@ -4,14 +4,17 @@ import LoginIcon from '@mui/icons-material/Login';
 import { LoadingButton } from '@mui/lab';
 import { Container, Stack, Typography } from '@mui/material';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
+import { useEffect } from 'react';
 import {
   TextFieldElement,
   PasswordElement,
   CheckboxElement,
 } from 'react-hook-form-mui';
 
-import { useRegistrationForm } from '@/src/hooks/useRegistrationForm';
+import { useAuth } from '@/shared/contexts';
+import { useRegistrationForm } from '@/shared/hooks/useRegistrationForm';
 
 export default function RegistrationPage({
   params: { locale },
@@ -19,16 +22,18 @@ export default function RegistrationPage({
   params: { locale: string };
 }) {
   const t = useTranslations('RegistrationPage');
+  const router = useRouter();
+  const { isLoggedIn, loading } = useAuth();
 
-  const {
-    isLoggedIn,
-    loading,
-    handleSubmit,
-    onSubmit,
-    control,
-    isValid,
-    errors,
-  } = useRegistrationForm();
+  useEffect(() => {
+    if (isLoggedIn) {
+      router.push(`/${locale}`);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoggedIn, router]);
+
+  const { handleSubmit, onSubmit, control, isValid, errors } =
+    useRegistrationForm();
 
   if (loading) {
     return <div>Loading</div>;

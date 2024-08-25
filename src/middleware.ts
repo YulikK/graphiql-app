@@ -1,9 +1,9 @@
 import createMiddleware from 'next-intl/middleware';
 
-import locales from './constants/locales';
+import constants from './shared/locales/constants.ts';
 
 export default createMiddleware({
-  locales,
+  locales: constants,
   defaultLocale: 'en',
   localeDetection: false,
 });
