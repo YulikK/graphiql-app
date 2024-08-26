@@ -41,7 +41,6 @@ export const useLoginForm = () => {
         },
       },
     });
-    // .then(() => router.push('/'));
   };
 
   const onGoogleSubmit = async () => {
@@ -54,7 +53,6 @@ export const useLoginForm = () => {
         },
       },
     });
-    // .then(() => router.push('/'));
   };
 
   return {

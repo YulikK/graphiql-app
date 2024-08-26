@@ -1,8 +1,7 @@
 'use client';
 
 import LoginIcon from '@mui/icons-material/Login';
-import { LoadingButton } from '@mui/lab';
-import { Container, Stack, Typography } from '@mui/material';
+import { Button, Container, Stack, Typography } from '@mui/material';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
@@ -95,7 +94,7 @@ export default function RegistrationPage({
                 helperText={errors.acceptTerms?.message || ' '}
               />
             </Stack>
-            <LoadingButton
+            <Button
               type="submit"
               variant="contained"
               color="primary"
@@ -111,7 +110,7 @@ export default function RegistrationPage({
               disabled={!isValid}
             >
               {t('signUpButton')}
-            </LoadingButton>
+            </Button>
             <Stack
               direction="row"
               spacing={1}

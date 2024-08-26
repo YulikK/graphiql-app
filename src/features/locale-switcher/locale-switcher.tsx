@@ -10,7 +10,6 @@ export default function LocaleSwitcher() {
   const router = useRouter();
 
   const switchLocale = () => {
-    console.log(locale);
     router.replace(
       `${path.replace(locale, locale === 'ru' ? 'en' : 'ru')}?${params.toString()}`
     );

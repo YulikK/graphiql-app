@@ -1,7 +1,6 @@
 'use client';
 
 import LoginIcon from '@mui/icons-material/Login';
-import { LoadingButton } from '@mui/lab';
 import { Button, Container, Stack, Typography } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -90,7 +89,7 @@ export default function LoginPage({
               helperText={errors.password?.message || ' '}
               margin="dense"
             />
-            <LoadingButton
+            <Button
               type="submit"
               variant="contained"
               color="primary"
@@ -106,7 +105,7 @@ export default function LoginPage({
               disabled={!isValid}
             >
               {t('signUpButton')}
-            </LoadingButton>
+            </Button>
             <Stack
               direction="row"
               spacing={1}
