@@ -3,6 +3,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
 } from 'firebase/auth';
 
 import { auth, provider } from './firebase';
@@ -12,16 +13,10 @@ export const registerWithEmailAndPassword = async (
   email: string,
   password: string
 ) => {
-  const result = await createUserWithEmailAndPassword(auth, email, password);
-
-  // можно наверное удалить нафиг
-  // await addDoc(collection(db, 'users'), {
-  //   uid: res.user.uid,
-  //   name,
-  //   authProvider: 'local',
-  //   email,
-  // });
-  return result;
+  const user = await createUserWithEmailAndPassword(auth, email, password);
+  await updateProfile(user.user, {
+    displayName: name,
+  });
 };
 
 export const logInWithEmailAndPassword = async (

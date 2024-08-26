@@ -52,7 +52,7 @@ export default function LoginPage({
             <Image
               src={GoogleIcon}
               alt="Google"
-              style={{ width: 20, height: 20 }}
+              style={{ width: '20px', height: 'auto' }}
             />
           }
           onClick={onGoogleSubmit}

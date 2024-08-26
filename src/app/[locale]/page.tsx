@@ -16,7 +16,7 @@ export default function WelcomePage({
 }: {
   params: { locale: string };
 }) {
-  const { isLoggedIn, loading } = useAuth();
+  const { isLoggedIn, loading, userName } = useAuth();
   const t = useTranslations('WelcomePage');
 
   if (loading) {
@@ -59,7 +59,7 @@ export default function WelcomePage({
           ) : (
             <>
               <Typography variant="h4" textAlign={'center'}>
-                {t('title-registered')} [User]!
+                {t('title-registered')} {userName}
               </Typography>
               <ButtonGroup orientation="vertical">
                 <Button LinkComponent={Link} href={`/${locale}`}>
