@@ -4,10 +4,10 @@ import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
-import { RegisterForm } from '../models/types';
-import { registerWithEmailAndPassword } from '../services/firebase/auth';
-
 import { useRegistrationValidationSchema } from './useRegistrationValidationSchema';
+
+import { RegisterForm } from '@/shared/models/types';
+import { registerWithEmailAndPassword } from '@/shared/services/firebase/auth';
 
 export const useRegistrationForm = () => {
   const t = useTranslations('RegistrationPage');

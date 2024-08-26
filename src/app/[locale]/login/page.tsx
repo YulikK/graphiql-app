@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
-import { TextFieldElement, PasswordElement } from 'react-hook-form-mui';
+import { PasswordElement, TextFieldElement } from 'react-hook-form-mui';
 
 import GoogleIcon from '@/assets/google.svg';
 import { useAuth } from '@/shared/contexts';

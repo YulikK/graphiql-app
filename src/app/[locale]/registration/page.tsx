@@ -7,9 +7,9 @@ import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 import {
-  TextFieldElement,
-  PasswordElement,
   CheckboxElement,
+  PasswordElement,
+  TextFieldElement,
 } from 'react-hook-form-mui';
 
 import { useAuth } from '@/shared/contexts';

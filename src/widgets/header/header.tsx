@@ -1,5 +1,6 @@
 'use client';
-import { AppBar, Button, Toolbar, Box, Container } from '@mui/material';
+
+import { AppBar, Box, Button, Container, Toolbar } from '@mui/material';
 import { FirebaseError } from 'firebase/app';
 import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';

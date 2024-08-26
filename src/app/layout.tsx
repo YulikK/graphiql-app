@@ -3,10 +3,10 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { ToastContainer } from 'react-toastify';
 
-import { AuthProvider } from '../shared/contexts/index.ts';
+import { AuthProvider } from '@/shared/contexts/index.ts';
+import { StyledRoot } from '@/shared/theme/styled-root.tsx';
 import 'react-toastify/dist/ReactToastify.css';
 import './globals.css';
-import { StyledRoot } from '../shared/theme/styled-root.tsx';
 
 const inter = Inter({ subsets: ['latin'] });
 

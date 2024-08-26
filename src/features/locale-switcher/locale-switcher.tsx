@@ -1,4 +1,5 @@
 'use client';
+
 import { Button } from '@mui/material';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useLocale } from 'next-intl';

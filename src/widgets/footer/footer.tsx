@@ -2,7 +2,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import { Box, Container, Link, Typography } from '@mui/material';
 import Image from 'next/image';
 
-import logo from '../../../public/rs-logo.png';
+import logo from '@/assets/rs-logo.png';
 
 export default function Footer() {
   return (

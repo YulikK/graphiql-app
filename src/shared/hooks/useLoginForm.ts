@@ -4,13 +4,13 @@ import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
-import { LoginForm } from '../models/types';
+import { useLoginValidationSchema } from './useLoginValidationSchema';
+
+import { LoginForm } from '@/shared/models/types';
 import {
   logInWithEmailAndPassword,
   logInWithGoogle,
-} from '../services/firebase/auth';
-
-import { useLoginValidationSchema } from './useLoginValidationSchema';
+} from '@/shared/services/firebase/auth';
 
 export const useLoginForm = () => {
   const t = useTranslations('LoginPage');

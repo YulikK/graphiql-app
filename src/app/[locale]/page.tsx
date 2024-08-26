@@ -1,6 +1,6 @@
 'use client';
 
-import { Typography, Box, Button, ButtonGroup } from '@mui/material';
+import { Box, Button, ButtonGroup, Typography } from '@mui/material';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 
