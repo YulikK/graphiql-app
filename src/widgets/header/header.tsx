@@ -23,13 +23,13 @@ export default function Header() {
 
   const handleLogout = async () => {
     toast.promise(logout, {
-      pending: t('authenticationLoading'),
-      success: t('successLogoutMessage'),
+      pending: t('authentication-loading'),
+      success: t('success-logout-message'),
       error: {
         render({ data }) {
           return data instanceof FirebaseError
             ? data.message
-            : t('unexpectedError');
+            : t('unexpected-error');
         },
       },
     });

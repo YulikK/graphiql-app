@@ -2,9 +2,9 @@
   "Header": {
     "sign-in": "Войти",
     "sign-out": "Выйти",
-    "authenticationLoading": "Подождите, идет процесс аутентификации",
-    "successLogoutMessage": "Поздравляем, вы успешно вышли из приложения!",
-    "unexpectedError": "Произошла неожиданная ошибка."
+    "authentication-loading": "Подождите, идет процесс аутентификации",
+    "success-logout-message": "Поздравляем, вы успешно вышли из приложения!",
+    "unexpected-error": "Произошла неожиданная ошибка."
   },
   "WelcomePage": {
     "title-anonymous": "Добро пожаловать",
@@ -14,39 +14,39 @@
   },
   "RegistrationPage": {
     "title": "Регистрация",
-    "nameInput": "Имя",
-    "emailInput": "Эл. почта",
-    "passwordInput": "Пароль",
-    "confirmInput": "Подтвердите пароль",
-    "acceptTermInput": "Я прочитал(а) и согласен(сна) с Условиями обслуживания",
-    "signUpButton": "Войти",
-    "loginText": "У вас уже есть аккаунт?",
-    "loginLink": "Войти",
-    "authenticationLoading": "Подождите, идет процесс аутентификации",
-    "successRegisterMessage": "Поздравляем, вы успешно зарегистрировались!",
-    "unexpectedError": "Произошла неожиданная ошибка."
+    "name-input": "Имя",
+    "email-input": "Эл. почта",
+    "password-input": "Пароль",
+    "confirm-input": "Подтвердите пароль",
+    "accept-term-input": "Я прочитал(а) и согласен(сна) с Условиями обслуживания",
+    "sign-up-button": "Войти",
+    "login-text": "У вас уже есть аккаунт?",
+    "login-link": "Войти",
+    "authentication-loading": "Подождите, идет процесс аутентификации",
+    "success-register-message": "Поздравляем, вы успешно зарегистрировались!",
+    "unexpected-error": "Произошла неожиданная ошибка."
   },
   "LoginPage": {
     "title": "Войти",
-    "emailInput": "Эл. почта",
-    "passwordInput": "Пароль",
-    "signUpButton": "Войти",
-    "registrationText": "У вас нет аккаунта?",
-    "registrationLink": "Регистрация",
-    "googleText": "Войти с Google",
-    "authenticationLoading": "Подождите, идет процесс аутентификации",
-    "successLoginMessage": "Поздравляем, вы успешно залогинились!",
-    "unexpectedError": "Произошла неожиданная ошибка."
+    "email-input": "Эл. почта",
+    "password-input": "Пароль",
+    "sign-up-button": "Войти",
+    "registration-text": "У вас нет аккаунта?",
+    "registration-link": "Регистрация",
+    "google-text": "Войти с Google",
+    "authentication-loading": "Подождите, идет процесс аутентификации",
+    "success-login-message": "Поздравляем, вы успешно залогинились!",
+    "unexpected-error": "Произошла неожиданная ошибка."
   },
   "Validation": {
-    "nameCapitalized": "Имя должно начинаться с заглавной буквы и содержать только строчные буквы после",
-    "nameRequired": "Имя — обязательное поле",
-    "emailRequired": "Email — обязательное поле",
-    "emailInvalid": "Email должен быть в правильном формате",
-    "passwordRequired": "Пароль — обязательное поле",
-    "passwordMinLength": "Пароль должен содержать минимум {min} символов",
-    "passwordStrength": "Пароль должен содержать 1 цифру, 1 заглавную букву, 1 строчную букву и 1 специальный символ",
-    "confirmPasswordRequired": "Подтверждение пароля — обязательное поле",
-    "passwordsMustMatch": "Пароли должны совпадать"
+    "name-capitalized": "Имя должно начинаться с заглавной буквы и содержать только строчные буквы после",
+    "name-required": "Имя — обязательное поле",
+    "email-required": "Email — обязательное поле",
+    "email-invalid": "Email должен быть в правильном формате",
+    "password-required": "Пароль — обязательное поле",
+    "password-min-length": "Пароль должен содержать минимум {min} символов",
+    "password-strength": "Пароль должен содержать 1 цифру, 1 заглавную букву, 1 строчную букву и 1 специальный символ",
+    "confirm-password-required": "Подтверждение пароля — обязательное поле",
+    "passwords-must-match": "Пароли должны совпадать"
   }
 }

@@ -2,9 +2,9 @@
   "Header": {
     "sign-in": "Sign In",
     "sign-out": "Sign Out",
-    "authenticationLoading": "Wait, your authentication in progress",
-    "successLogoutMessage": "Congratulations, you have successfully log out!",
-    "unexpectedError": "An unexpected error occurred."
+    "authentication-loading": "Wait, your authentication in progress",
+    "success-logout-message": "Congratulations, you have successfully log out!",
+    "unexpected-error": "An unexpected error occurred."
   },
   "WelcomePage": {
     "title-anonymous": "Welcome",
@@ -14,39 +14,39 @@
   },
   "RegistrationPage": {
     "title": "Registration",
-    "nameInput": "Name",
-    "emailInput": "Email",
-    "passwordInput": "Password",
-    "confirmInput": "Confirm password",
-    "acceptTermInput": "I have read and agree to the Terms of Service",
-    "signUpButton": "Sign Up",
-    "loginText": "Already have an account?",
-    "loginLink": "Sign In",
-    "authenticationLoading": "Wait, your authentication in progress",
-    "successRegisterMessage": "Congratulations, you have successfully register!",
-    "unexpectedError": "An unexpected error occurred."
+    "name-input": "Name",
+    "email-input": "Email",
+    "password-input": "Password",
+    "confirm-input": "Confirm password",
+    "accept-term-input": "I have read and agree to the Terms of Service",
+    "sign-up-button": "Sign Up",
+    "login-text": "Already have an account?",
+    "login-link": "Sign In",
+    "authentication-loading": "Wait, your authentication in progress",
+    "success-register-message": "Congratulations, you have successfully register!",
+    "unexpected-error": "An unexpected error occurred."
   },
   "LoginPage": {
     "title": "Login",
-    "emailInput": "Email",
-    "passwordInput": "Password",
-    "signUpButton": "Sign In",
-    "registrationText": "Don't have an account?",
-    "registrationLink": "Sign Up",
-    "googleText": "Continue with Google",
-    "authenticationLoading": "Wait, your authentication in progress",
-    "successLoginMessage": "Congratulations, you have successfully logged in!",
-    "unexpectedError": "An unexpected error occurred."
+    "email-input": "Email",
+    "password-input": "Password",
+    "sign-up-button": "Sign In",
+    "registration-text": "Don't have an account?",
+    "registration-link": "Sign Up",
+    "google-text": "Continue with Google",
+    "authentication-loading": "Wait, your authentication in progress",
+    "success-login-message": "Congratulations, you have successfully logged in!",
+    "unexpected-error": "An unexpected error occurred."
   },
   "Validation": {
-    "nameCapitalized": "Name must start with a capital letter and be followed by lowercase letters",
-    "nameRequired": "Name is a required field",
-    "emailRequired": "Email is a required field",
-    "emailInvalid": "Must be a valid email format",
-    "passwordRequired": "Password is a required field",
-    "passwordMinLength": "Password must be at least {min} characters long",
-    "passwordStrength": "Password must contain 1 number, 1 uppercase letter, 1 lowercase letter, and 1 special character",
-    "confirmPasswordRequired": "Confirm Password is a required field",
-    "passwordsMustMatch": "Passwords must match"
+    "name-capitalized": "Name must start with a capital letter and be followed by lowercase letters",
+    "name-required": "Name is a required field",
+    "email-required": "Email is a required field",
+    "email-invalid": "Must be a valid email format",
+    "password-required": "Password is a required field",
+    "password-min-length": "Password must be at least {min} characters long",
+    "password-strength": "Password must contain 1 number, 1 uppercase letter, 1 lowercase letter, and 1 special character",
+    "confirm-password-required": "Confirm Password is a required field",
+    "passwords-must-match": "Passwords must match"
   }
 }

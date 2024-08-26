@@ -11,7 +11,7 @@ import {
   logInWithGoogle,
 } from '@/shared/services/firebase/auth';
 
-import { useLoginValidationSchema } from './useLoginValidationSchema';
+import { useLoginValidationSchema } from './use-login-validation-schema';
 
 export const useLoginForm = () => {
   const t = useTranslations('LoginPage');
@@ -28,13 +28,13 @@ export const useLoginForm = () => {
 
   const onSubmit = async (data: LoginForm) => {
     toast.promise(logInWithEmailAndPassword(data.email, data.password), {
-      pending: t('authenticationLoading'),
-      success: t('successLoginMessage'),
+      pending: t('authentication-loading'),
+      success: t('success-login-message'),
       error: {
         render({ data }) {
           return data instanceof FirebaseError
             ? data.message
-            : t('unexpectedError');
+            : t('unexpected-error');
         },
       },
     });
@@ -42,13 +42,13 @@ export const useLoginForm = () => {
 
   const onGoogleSubmit = async () => {
     toast.promise(logInWithGoogle, {
-      pending: t('authenticationLoading'),
-      success: t('successLoginMessage'),
+      pending: t('authentication-loading'),
+      success: t('success-login-message'),
       error: {
         render({ data }) {
           return data instanceof FirebaseError
             ? data.message
-            : t('unexpectedError');
+            : t('unexpected-error');
         },
       },
     });

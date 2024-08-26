@@ -13,7 +13,7 @@ import { useRouter } from 'next/navigation';
 
 import GoogleIcon from '@/assets/google.svg';
 import { useAuth } from '@/shared/contexts';
-import { useLoginForm } from '@/shared/hooks/useLoginForm';
+import { useLoginForm } from '@/shared/hooks/use-login-form';
 
 export default function LoginPage({
   params: { locale },
@@ -67,7 +67,7 @@ export default function LoginPage({
             borderColor: 'grey.500',
           }}
         >
-          <Typography variant="button">{t('googleText')}</Typography>
+          <Typography variant="button">{t('google-text')}</Typography>
         </Button>
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
           <Stack justifyContent="center" alignItems="center" spacing={2}>
@@ -78,7 +78,7 @@ export default function LoginPage({
               control={control}
               fullWidth
               name="email"
-              label={t('emailInput')}
+              label={t('email-input')}
               required
               helperText={errors.email?.message || ' '}
             />
@@ -86,7 +86,7 @@ export default function LoginPage({
               fullWidth
               control={control}
               name="password"
-              label={t('passwordInput')}
+              label={t('password-input')}
               required
               helperText={errors.password?.message || ' '}
               margin="dense"
@@ -106,7 +106,7 @@ export default function LoginPage({
               startIcon={<LoginIcon />}
               disabled={!isValid}
             >
-              {t('signUpButton')}
+              {t('sign-up-button')}
             </Button>
             <Stack
               direction="row"
@@ -115,7 +115,7 @@ export default function LoginPage({
               sx={{ padding: '10px' }}
             >
               <Typography variant="body2" sx={{ fontSize: '1rem' }}>
-                {t('registrationText')}
+                {t('registration-text')}
               </Typography>
               <Link href={`/${locale}/registration`} passHref>
                 <Typography
@@ -123,7 +123,7 @@ export default function LoginPage({
                   color="primary"
                   sx={{ fontSize: '1rem', cursor: 'pointer' }}
                 >
-                  {t('registrationLink')}
+                  {t('registration-link')}
                 </Typography>
               </Link>
             </Stack>

@@ -16,31 +16,31 @@ export const useRegistrationValidationSchema = () => {
   return yup.object().shape({
     name: yup
       .string()
-      .test('is-capitalized', t('nameCapitalized'), (value) => {
+      .test('is-capitalized', t('name-capitalized'), (value) => {
         if (!value) return false;
         return value[0] === value[0].toUpperCase();
       })
-      .required(t('nameRequired')),
+      .required(t('name-required')),
 
     email: yup
       .string()
-      .required(t('emailRequired'))
-      .matches(validEmailRegExp, t('emailInvalid')),
+      .required(t('email-required'))
+      .matches(validEmailRegExp, t('email-invalid')),
 
     password: yup
       .string()
-      .required(t('passwordRequired'))
+      .required(t('password-required'))
       .min(
         passwordMinLength,
-        t('passwordMinLength', { min: passwordMinLength })
+        t('password-min-length', { min: passwordMinLength })
       )
-      .matches(passwordStrengthRegex, t('passwordStrength')),
+      .matches(passwordStrengthRegex, t('password-strength')),
 
     confirmPassword: yup
       .string()
-      .required(t('confirmPasswordRequired'))
-      .oneOf([yup.ref('password')], t('passwordsMustMatch'))
-      .matches(passwordStrengthRegex, t('passwordStrength')),
+      .required(t('confirm-password-required'))
+      .oneOf([yup.ref('password')], t('passwords-must-match'))
+      .matches(passwordStrengthRegex, t('password-strength')),
 
     acceptTerms: yup
       .boolean()

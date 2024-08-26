@@ -2,7 +2,7 @@
   "editor.formatOnSave": true,
   "[typescript][typescriptreact]": {
     "editor.codeActionsOnSave": {
-    "source.organizeImports": "explicit"
+      "source.organizeImports": "explicit"
     }
   },
   "files.insertFinalNewline": true,
@@ -12,6 +12,6 @@
     "hookform",
     "consts",
     "firestore",
-    "roboto",
+    "roboto"
   ]
 }

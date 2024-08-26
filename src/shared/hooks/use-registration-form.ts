@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 import { RegisterForm } from '@/shared/models/types';
 import { registerWithEmailAndPassword } from '@/shared/services/firebase/auth';
 
-import { useRegistrationValidationSchema } from './useRegistrationValidationSchema';
+import { useRegistrationValidationSchema } from './use-registration-validation-schema';
 
 export const useRegistrationForm = () => {
   const t = useTranslations('RegistrationPage');
@@ -27,13 +27,13 @@ export const useRegistrationForm = () => {
     toast.promise(
       registerWithEmailAndPassword(data.name, data.email, data.password),
       {
-        pending: t('authenticationLoading'),
-        success: t('successRegisterMessage'),
+        pending: t('authentication-loading'),
+        success: t('success-register-message'),
         error: {
           render({ data }) {
             return data instanceof FirebaseError
               ? data.message
-              : t('unexpectedError');
+              : t('unexpected-error');
           },
         },
       }

@@ -15,7 +15,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import { useAuth } from '@/shared/contexts';
-import { useRegistrationForm } from '@/shared/hooks/useRegistrationForm';
+import { useRegistrationForm } from '@/shared/hooks/use-registration-form';
 
 export default function RegistrationPage({
   params: { locale },
@@ -57,7 +57,7 @@ export default function RegistrationPage({
               control={control}
               fullWidth
               name="name"
-              label={t('nameInput')}
+              label={t('name-input')}
               required
               helperText={errors.name?.message || ' '}
             />
@@ -65,7 +65,7 @@ export default function RegistrationPage({
               control={control}
               fullWidth
               name="email"
-              label={t('emailInput')}
+              label={t('email-input')}
               required
               helperText={errors.email?.message || ' '}
             />
@@ -73,7 +73,7 @@ export default function RegistrationPage({
               fullWidth
               control={control}
               name="password"
-              label={t('passwordInput')}
+              label={t('password-input')}
               required
               helperText={errors.password?.message || ' '}
               margin="dense"
@@ -82,7 +82,7 @@ export default function RegistrationPage({
               fullWidth
               control={control}
               name="confirmPassword"
-              label={t('confirmInput')}
+              label={t('confirm-input')}
               required
               helperText={errors.confirmPassword?.message || ' '}
               margin="dense"
@@ -91,7 +91,7 @@ export default function RegistrationPage({
               <CheckboxElement
                 control={control}
                 name="acceptTerms"
-                label={t('acceptTermInput')}
+                label={t('accept-term-input')}
                 required
                 helperText={errors.acceptTerms?.message || ' '}
               />
@@ -111,7 +111,7 @@ export default function RegistrationPage({
               startIcon={<LoginIcon />}
               disabled={!isValid}
             >
-              {t('signUpButton')}
+              {t('sign-up-button')}
             </Button>
             <Stack
               direction="row"
@@ -120,7 +120,7 @@ export default function RegistrationPage({
               sx={{ padding: '10px' }}
             >
               <Typography variant="body2" sx={{ fontSize: '1rem' }}>
-                {t('loginText')}
+                {t('login-text')}
               </Typography>
               <Link href={`/${locale}/login`} passHref>
                 <Typography
@@ -128,7 +128,7 @@ export default function RegistrationPage({
                   color="primary"
                   sx={{ fontSize: '1rem', cursor: 'pointer' }}
                 >
-                  {t('loginLink')}
+                  {t('login-link')}
                 </Typography>
               </Link>
             </Stack>

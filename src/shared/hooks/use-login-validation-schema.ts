@@ -16,16 +16,16 @@ export const useLoginValidationSchema = () => {
   return yup.object().shape({
     email: yup
       .string()
-      .required(t('emailRequired'))
-      .matches(validEmailRegExp, t('emailInvalid')),
+      .required(t('email-required'))
+      .matches(validEmailRegExp, t('email-invalid')),
 
     password: yup
       .string()
-      .required(t('passwordRequired'))
+      .required(t('password-required'))
       .min(
         passwordMinLength,
-        t('passwordMinLength', { min: passwordMinLength })
+        t('password-min-length', { min: passwordMinLength })
       )
-      .matches(passwordStrengthRegex, t('passwordStrength')),
+      .matches(passwordStrengthRegex, t('password-strength')),
   });
 };
