@@ -1,5 +1,6 @@
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { Box, Container, Link, Typography } from '@mui/material';
+
 import Image from 'next/image';
 
 import logo from '@/assets/rs-logo.png';

@@ -1,7 +1,8 @@
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import { ToastContainer } from 'react-toastify';
+
+import { Inter } from 'next/font/google';
 
 import { AuthProvider } from '@/shared/contexts/index.ts';
 import { StyledRoot } from '@/shared/theme/styled-root.tsx';

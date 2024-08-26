@@ -1,8 +1,10 @@
 'use client';
 
-import { Button } from '@mui/material';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useLocale } from 'next-intl';
+
+import { Button } from '@mui/material';
+
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 export default function LocaleSwitcher() {
   const locale = useLocale();

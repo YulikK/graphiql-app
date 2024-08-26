@@ -1,13 +1,14 @@
+import { useTranslations } from 'next-intl';
+
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FirebaseError } from 'firebase/app';
-import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
-import { useRegistrationValidationSchema } from './useRegistrationValidationSchema';
-
 import { RegisterForm } from '@/shared/models/types';
 import { registerWithEmailAndPassword } from '@/shared/services/firebase/auth';
+
+import { useRegistrationValidationSchema } from './useRegistrationValidationSchema';
 
 export const useRegistrationForm = () => {
   const t = useTranslations('RegistrationPage');

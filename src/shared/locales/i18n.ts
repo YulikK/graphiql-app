@@ -1,5 +1,6 @@
-import { notFound } from 'next/navigation';
 import { getRequestConfig } from 'next-intl/server';
+
+import { notFound } from 'next/navigation';
 
 import constants from '@/shared/locales/constants.ts';
 

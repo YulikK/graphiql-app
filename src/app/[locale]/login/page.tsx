@@ -1,13 +1,15 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
+
 import LoginIcon from '@mui/icons-material/Login';
 import { Button, Container, Stack, Typography } from '@mui/material';
+import { useEffect } from 'react';
+import { PasswordElement, TextFieldElement } from 'react-hook-form-mui';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useTranslations } from 'next-intl';
-import { useEffect } from 'react';
-import { PasswordElement, TextFieldElement } from 'react-hook-form-mui';
 
 import GoogleIcon from '@/assets/google.svg';
 import { useAuth } from '@/shared/contexts';

@@ -47,6 +47,25 @@ module.exports = {
     'import/order': [
       'error',
       {
+        groups: [
+          'builtin',
+          'external',
+          'internal',
+          ['parent', 'sibling', 'index'],
+        ],
+        pathGroups: [
+          {
+            pattern: 'next-intl',
+            group: 'external',
+            position: 'before',
+          },
+          {
+            pattern: 'next/**',
+            group: 'external',
+            position: 'after',
+          },
+        ],
+        pathGroupsExcludedImportTypes: ['next-intl'],
         'newlines-between': 'always',
         alphabetize: {
           order: 'asc',

@@ -1,16 +1,18 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
+
 import LoginIcon from '@mui/icons-material/Login';
 import { Button, Container, Stack, Typography } from '@mui/material';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 import {
   CheckboxElement,
   PasswordElement,
   TextFieldElement,
 } from 'react-hook-form-mui';
+
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import { useAuth } from '@/shared/contexts';
 import { useRegistrationForm } from '@/shared/hooks/useRegistrationForm';

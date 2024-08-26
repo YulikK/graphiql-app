@@ -1,11 +1,13 @@
 'use client';
 
+import { useLocale, useTranslations } from 'next-intl';
+
 import { AppBar, Box, Button, Container, Toolbar } from '@mui/material';
 import { FirebaseError } from 'firebase/app';
-import Link from 'next/link';
-import { useLocale, useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+
+import Link from 'next/link';
 
 import { Logo } from '@/entities/logo/logo.tsx';
 import LocaleSwitcher from '@/features/locale-switcher/locale-switcher.tsx';

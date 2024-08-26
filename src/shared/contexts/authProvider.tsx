@@ -1,7 +1,8 @@
 'use client';
 
-import { onAuthStateChanged } from 'firebase/auth';
-import { createContext, ReactNode, useEffect, useState } from 'react';
+import { createContext, ReactNode } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { toast } from 'react-toastify';
 
 import { auth } from '@/shared/services/firebase/firebase';
 
@@ -19,22 +20,12 @@ interface AuthProviderProps {
 }
 
 export function AuthProvider({ children }: AuthProviderProps) {
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [user, loading, error] = useAuthState(auth);
+  const isLoggedIn = Boolean(user);
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setIsLoggedIn(true);
-      } else {
-        setIsLoggedIn(false);
-      }
-      setLoading(false);
-      return user;
-    });
-
-    return () => unsubscribe();
-  }, []);
+  if (error) {
+    toast.error(error.message);
+  }
 
   return (
     <AuthContext.Provider value={{ isLoggedIn, loading }}>
