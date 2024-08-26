@@ -1,22 +1,19 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FirebaseError } from 'firebase/app';
+import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
 import { LoginForm } from '../models/types';
 import {
   logInWithEmailAndPassword,
-  loginWithGoogle,
+  logInWithGoogle,
 } from '../services/firebase/auth';
-import {
-  AuthenticationLoading,
-  SuccessLoginMessage,
-  UnexpectedError,
-} from '../utils/consts';
 
 import { useLoginValidationSchema } from './useLoginValidationSchema';
 
 export const useLoginForm = () => {
+  const t = useTranslations('LoginPage');
   const validationSchema = useLoginValidationSchema();
 
   const {
@@ -30,26 +27,27 @@ export const useLoginForm = () => {
 
   const onSubmit = async (data: LoginForm) => {
     toast.promise(logInWithEmailAndPassword(data.email, data.password), {
-      pending: AuthenticationLoading,
-      success: SuccessLoginMessage,
+      pending: t('authenticationLoading'),
+      success: t('successLoginMessage'),
       error: {
         render({ data }) {
-          if (data instanceof FirebaseError) {
-            return data.message;
-          }
-          return 'An unexpected error occurred.';
+          return data instanceof FirebaseError
+            ? data.message
+            : t('unexpectedError');
         },
       },
     });
   };
 
   const onGoogleSubmit = async () => {
-    toast.promise(loginWithGoogle, {
-      pending: AuthenticationLoading,
-      success: SuccessLoginMessage,
+    toast.promise(logInWithGoogle, {
+      pending: t('authenticationLoading'),
+      success: t('successLoginMessage'),
       error: {
         render({ data }) {
-          return data instanceof FirebaseError ? data.message : UnexpectedError;
+          return data instanceof FirebaseError
+            ? data.message
+            : t('unexpectedError');
         },
       },
     });

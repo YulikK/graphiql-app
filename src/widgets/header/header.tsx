@@ -10,11 +10,6 @@ import { Logo } from '@/entities/logo/logo.tsx';
 import LocaleSwitcher from '@/features/locale-switcher/locale-switcher.tsx';
 import { useAuth } from '@/shared/contexts';
 import { logout } from '@/shared/services/firebase/auth';
-import {
-  AuthenticationLoading,
-  SuccessLogoutMessage,
-  UnexpectedError,
-} from '@/shared/utils/consts';
 
 export default function Header() {
   const [isShrunk, setShrunk] = useState(false);
@@ -25,11 +20,13 @@ export default function Header() {
 
   const handleLogout = async () => {
     toast.promise(logout, {
-      pending: AuthenticationLoading,
-      success: SuccessLogoutMessage,
+      pending: t('authenticationLoading'),
+      success: t('successLogoutMessage'),
       error: {
         render({ data }) {
-          return data instanceof FirebaseError ? data.message : UnexpectedError;
+          return data instanceof FirebaseError
+            ? data.message
+            : t('unexpectedError');
         },
       },
     });

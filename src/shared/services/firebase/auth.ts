@@ -32,7 +32,7 @@ export const logInWithEmailAndPassword = async (
   return result;
 };
 
-export const loginWithGoogle = async () => {
+export const logInWithGoogle = async () => {
   const result = await signInWithPopup(auth, provider);
   return result;
 };

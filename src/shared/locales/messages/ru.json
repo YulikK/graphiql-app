@@ -1,7 +1,10 @@
 {
   "Header": {
     "sign-in": "Войти",
-    "sign-out": "Выйти"
+    "sign-out": "Выйти",
+    "authenticationLoading": "Подождите, идет процесс аутентификации",
+    "successLogoutMessage": "Поздравляем, вы успешно вышли из приложения!",
+    "unexpectedError": "Произошла неожиданная ошибка."
   },
   "WelcomePage": {
     "title-anonymous": "Добро пожаловать",
@@ -18,7 +21,10 @@
     "acceptTermInput": "Я прочитал(а) и согласен(сна) с Условиями обслуживания",
     "signUpButton": "Войти",
     "loginText": "У вас уже есть аккаунт?",
-    "loginLink": "Войти"
+    "loginLink": "Войти",
+    "authenticationLoading": "Подождите, идет процесс аутентификации",
+    "successRegisterMessage": "Поздравляем, вы успешно зарегистрировались!",
+    "unexpectedError": "Произошла неожиданная ошибка."
   },
   "LoginPage": {
     "title": "Войти",
@@ -27,7 +33,10 @@
     "signUpButton": "Войти",
     "registrationText": "У вас нет аккаунта?",
     "registrationLink": "Регистрация",
-    "googleText": "Войти с Google"
+    "googleText": "Войти с Google",
+    "authenticationLoading": "Подождите, идет процесс аутентификации",
+    "successLoginMessage": "Поздравляем, вы успешно залогинились!",
+    "unexpectedError": "Произошла неожиданная ошибка."
   },
   "Validation": {
     "nameCapitalized": "Имя должно начинаться с заглавной буквы и содержать только строчные буквы после",
