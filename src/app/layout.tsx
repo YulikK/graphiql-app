@@ -5,6 +5,8 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { StyledRoot } from '../shared/theme/styled-root.tsx';
 
+import StoreProvider from '@/shared/store/store-providers.tsx';
+
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
@@ -29,7 +31,9 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <AppRouterCacheProvider>
-          <StyledRoot>{children}</StyledRoot>
+          <StoreProvider>
+            <StyledRoot>{children}</StyledRoot>
+          </StoreProvider>
         </AppRouterCacheProvider>
       </body>
     </html>

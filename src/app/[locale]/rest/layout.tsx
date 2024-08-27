@@ -1,3 +1,5 @@
+import RestClient from '@/widgets/rest-client/rest-client';
+
 export default function RestLayout({
   children,
 }: {
@@ -5,7 +7,7 @@ export default function RestLayout({
 }) {
   return (
     <>
-      {/* <RestNavigation /> */}
+      <RestClient />
       {children}
     </>
   );
