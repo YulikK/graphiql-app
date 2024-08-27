@@ -122,11 +122,22 @@ export default function RegistrationPage({
               <Typography variant="body2" sx={{ fontSize: '1rem' }}>
                 {t('login-text')}
               </Typography>
-              <Link href={`/${locale}/login`} passHref>
+              <Link
+                href={`/${locale}/login`}
+                passHref
+                style={{ textDecoration: 'none' }}
+              >
                 <Typography
                   variant="body2"
-                  color="primary"
-                  sx={{ fontSize: '1rem', cursor: 'pointer' }}
+                  color="secondary"
+                  sx={{
+                    fontSize: '1rem',
+                    cursor: 'pointer',
+                    textDecoration: 'underline',
+                    '&:hover': {
+                      textDecoration: 'none',
+                    },
+                  }}
                 >
                   {t('login-link')}
                 </Typography>

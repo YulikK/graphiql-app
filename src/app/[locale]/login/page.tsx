@@ -64,7 +64,6 @@ export default function LoginPage({
             justifyContent: 'center',
             textTransform: 'none',
             margin: '10px 0',
-            borderColor: 'grey.500',
           }}
         >
           <Typography variant="button">{t('google-text')}</Typography>
@@ -117,11 +116,22 @@ export default function LoginPage({
               <Typography variant="body2" sx={{ fontSize: '1rem' }}>
                 {t('registration-text')}
               </Typography>
-              <Link href={`/${locale}/registration`} passHref>
+              <Link
+                href={`/${locale}/registration`}
+                passHref
+                style={{ textDecoration: 'none' }}
+              >
                 <Typography
                   variant="body2"
-                  color="primary"
-                  sx={{ fontSize: '1rem', cursor: 'pointer' }}
+                  color="secondary"
+                  sx={{
+                    fontSize: '1rem',
+                    cursor: 'pointer',
+                    textDecoration: 'underline',
+                    '&:hover': {
+                      textDecoration: 'none',
+                    },
+                  }}
                 >
                   {t('registration-link')}
                 </Typography>

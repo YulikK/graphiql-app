@@ -7,6 +7,8 @@ import { useState } from 'react';
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
+import { useTheme } from '@/shared/contexts';
+
 const languages = ['en', 'ru'];
 
 export default function LocaleSwitcher() {
@@ -14,6 +16,7 @@ export default function LocaleSwitcher() {
   const params = useSearchParams();
   const path = usePathname();
   const router = useRouter();
+  const { darkMode } = useTheme();
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -37,7 +40,9 @@ export default function LocaleSwitcher() {
         sx={{
           border: '1px solid rgba(255, 255, 255, 0.1)',
           borderRadius: '50px',
-          background: 'rgba(255, 255, 255, 0.6)',
+          background: darkMode
+            ? 'rgba(0, 0, 0, 0.3)'
+            : 'rgba(255, 255, 255, 0.6)',
           padding: '0 20px',
         }}
       >

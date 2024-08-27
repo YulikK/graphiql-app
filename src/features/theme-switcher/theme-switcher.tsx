@@ -28,7 +28,7 @@ export const ThemeSwitcher = () => {
               padding: 0,
               '& .MuiSwitch-track': {
                 borderRadius: 40 / 2,
-                backgroundColor: darkMode ? '#333' : '#a9bcf4',
+                backgroundColor: darkMode ? '#4e495e' : '#d5dff9',
                 opacity: 1,
                 height: '100%',
                 width: '100%',
@@ -36,16 +36,18 @@ export const ThemeSwitcher = () => {
               '& .MuiSwitch-thumb': {
                 width: 32,
                 height: 32,
-                backgroundColor: darkMode ? '#f0f0f0' : '#d6dffa',
-                top: 4,
-                left: 4,
+                backgroundColor: darkMode ? '#f0f0f0' : '#7193eb',
                 position: 'absolute',
-                transform: darkMode ? 'translateX(11px)' : 'translateX(0px)',
               },
               '& .MuiSwitch-switchBase': {
                 padding: 0,
                 height: 32,
                 width: 32,
+                top: 4,
+                left: 4,
+              },
+              '& .MuiSwitch-switchBase.Mui-checked': {
+                transform: 'translateX(29px)',
               },
             }}
           />
@@ -64,7 +66,8 @@ export const ThemeSwitcher = () => {
           position: 'absolute',
           zIndex: '1',
           top: '8px',
-          left: darkMode ? '44px' : '13px',
+          left: darkMode ? '42px' : '13px',
+          cursor: 'pointer',
         }}
         onClick={() => toggleTheme()}
       />

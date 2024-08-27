@@ -9,7 +9,14 @@ export const Logo = () => {
   const locale = useLocale();
   return (
     <Link href={`/${locale}`}>
-      <Image src={logo} alt="Logo" style={{ height: '40px', width: 'auto' }} />
+      <Image
+        src={logo}
+        alt="Logo"
+        style={{
+          height: '40px',
+          width: 'auto',
+        }}
+      />
     </Link>
   );
 };

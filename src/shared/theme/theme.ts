@@ -15,30 +15,15 @@ const lightTheme = createTheme({
     fontFamily: roboto.style.fontFamily,
   },
   palette: {
-    mode: 'light', // Светлая тема (по умолчанию)
+    mode: 'light',
     primary: {
-      main: '#ffffff60',
-      // light: '#cfcfcf', // Светлый серый цвет
-      // dark: '#707070', // Темный серый цвет
-      // contrastText: '#ffffff', // Белый текст на сером фоне
+      main: '#000000',
     },
-    // info: {
-    //   main: '#9e9e9e', // Темно-серый цвет для info
-    // },
+    secondary: {
+      main: '#ffffff',
+    },
   },
   components: {
-    // MuiOutlinedInput: {
-    //   styleOverrides: {
-    //     root: {
-    //       '&:hover .MuiOutlinedInput-notchedOutline': {
-    //         borderColor: '#00cece',
-    //       },
-    //       '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-    //         borderColor: '#00cece',
-    //       },
-    //     },
-    //   },
-    // },
     MuiAppBar: {
       styleOverrides: {
         root: {
@@ -48,8 +33,19 @@ const lightTheme = createTheme({
     },
     MuiButton: {
       styleOverrides: {
-        root: {
-          color: '#000000',
+        outlinedPrimary: {
+          backgroundColor: '#ffffff60',
+          borderColor: '#ffffff20',
+          '&:hover': {
+            backgroundColor: '#ffffff40',
+            borderColor: '#ffffff20',
+          },
+        },
+        containedPrimary: {
+          backgroundColor: '#8a88e2',
+          '&:hover': {
+            backgroundColor: '#abaaea',
+          },
         },
       },
     },
@@ -62,6 +58,30 @@ const lightTheme = createTheme({
         },
         list: {
           padding: 0,
+        },
+      },
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          backgroundColor: '#00000020',
+          color: '#3e3d98',
+          '&:hover .MuiOutlinedInput-notchedOutline': {
+            borderColor: '#3e3d98',
+          },
+          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+            borderColor: '#3e3d98',
+          },
+        },
+      },
+    },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          color: '#3e3d98',
+          '&.Mui-focused': {
+            color: '#3e3d98',
+          },
         },
       },
     },
@@ -79,10 +99,10 @@ const darkTheme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
-      main: '#ffffff',
-      light: '#003c3c',
-      dark: '#006464',
-      contrastText: '#ffffff',
+      main: '#ffffff;',
+    },
+    secondary: {
+      main: '#8f8ee4',
     },
   },
   typography: {
@@ -92,30 +112,60 @@ const darkTheme = createTheme({
     MuiAppBar: {
       styleOverrides: {
         root: {
-          backgroundColor: '#9e9e9e', // Темно-серый фон для темной темы для хедера
+          backgroundColor: 'rgba(0, 0, 0, 0.1)',
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        outlinedPrimary: {
+          backgroundColor: '#ffffff60',
+          borderColor: '#ffffff20',
+          '&:hover': {
+            backgroundColor: '#ffffff40',
+            borderColor: '#ffffff20',
+          },
+        },
+        containedPrimary: {
+          backgroundColor: '#cbcbf2',
+          '&:hover': {
+            backgroundColor: '#8f8ee4',
+          },
+        },
+      },
+    },
+    MuiMenu: {
+      styleOverrides: {
+        paper: {
+          backgroundColor: '#231c37',
+          borderRadius: '8px',
+          padding: '0',
+        },
+        list: {
+          padding: 0,
         },
       },
     },
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
+          backgroundColor: '#ffffff30',
+          color: '#cbcbf2',
           '&:hover .MuiOutlinedInput-notchedOutline': {
-            borderColor: '#ffffff',
+            borderColor: '#cbcbf2',
           },
           '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-            borderColor: '#ffffff',
+            borderColor: '#cbcbf2',
           },
-        },
-        input: {
-          backgroundColor: '#404040', // Светло-серый фон для внутреннего input в темной теме
         },
       },
     },
-    MuiInputBase: {
+    MuiInputLabel: {
       styleOverrides: {
         root: {
-          '&.MuiOutlinedInput-root': {
-            backgroundColor: '#404040', // Темно-серый фон для всех инпутов в темной теме
+          color: '#cbcbf2',
+          '&.Mui-focused': {
+            color: '#cbcbf2',
           },
         },
       },
@@ -126,23 +176,6 @@ const darkTheme = createTheme({
           background-color: #9e9e9e;
         }
       `,
-    },
-    MuiButton: {
-      styleOverrides: {
-        root: {
-          color: '#404040',
-          borderColor: '#ffffff',
-        },
-        outlinedPrimary: {
-          backgroundColor: '#404040',
-          color: '#ffffff',
-          borderColor: '#ffffff',
-          '&:hover': {
-            borderColor: '#009d9d',
-            color: '#009d9d',
-          },
-        },
-      },
     },
   },
 });
