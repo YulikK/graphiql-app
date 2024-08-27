@@ -14,7 +14,7 @@ interface RequestParams {
   headers: Record<string, string>;
 }
 
-const makeRequest = async ({ body, method, url, headers }: RequestParams) => {
+const makeRequest = async ({ method, url, body, headers }: RequestParams) => {
   try {
     const result = await fetch(url, {
       method,
@@ -29,7 +29,6 @@ const makeRequest = async ({ body, method, url, headers }: RequestParams) => {
 
     return result.json();
   } catch (e) {
-    console.log('ERROR', e);
     if (e instanceof Error && 'message' in e) {
       return e.message;
     }
@@ -43,15 +42,12 @@ export default async function RestResult({ params, searchParams = {} }: Props) {
   );
   const decodedUrl = Buffer.from(url, 'base64').toString('utf-8');
   const decodeBody = Buffer.from(body, 'base64').toString('utf-8');
-
   const decodeHeaders = Object.fromEntries(
     Object.entries(searchParams).map(([key, value]) => [
       key,
       Buffer.from(value, 'base64').toString('utf-8'),
     ])
   );
-  console.log('BODY', decodeBody);
-  console.log('SEARCH_PARAMS', decodeHeaders);
   const result = await makeRequest({
     body: decodeBody,
     method,

@@ -2,15 +2,17 @@
 import { Box, Stack, Tab, Tabs } from '@mui/material';
 import { useState } from 'react';
 
+import ClientEndpoint from '@/features/client-endpoint/client-endpoint';
+import ClientHeaders from '@/features/client-headers/client-headers';
+import ClientVariables from '@/features/client-variables/client-variables';
+import { RestSubmit, RestQuery, RestMethod, RestBody } from '@/features/rest';
 import {
-  RestSubmit,
-  RestQuery,
-  RestHeaders,
-  RestVariables,
-  RestEndpoint,
-  RestMethod,
-  RestBody,
-} from '@/features/rest';
+  deleteRestHeader,
+  deleteRestVariables,
+  setRestHeader,
+  setRestUrl,
+  setRestVariables,
+} from '@/shared/store/slices/rest-slice';
 
 export default function RestClient() {
   const [index, setIndex] = useState(0);
@@ -19,10 +21,10 @@ export default function RestClient() {
     setIndex(newValue);
   };
   return (
-    <Box marginInline={'auto'} maxWidth={800} width={'100%'} flexGrow={1}>
+    <Box flexGrow={1}>
       <Box display={'flex'}>
         <RestMethod />
-        <RestEndpoint />
+        <ClientEndpoint sliceKey="rest-slice" setUrl={setRestUrl} />
         <RestSubmit />
       </Box>
       <Box
@@ -44,8 +46,20 @@ export default function RestClient() {
       <Stack>
         {index === 0 && <RestQuery />}
         {index === 1 && <RestBody />}
-        {index === 2 && <RestHeaders />}
-        {index === 3 && <RestVariables />}
+        {index === 2 && (
+          <ClientHeaders
+            sliceKey="rest-slice"
+            deleteHeader={deleteRestHeader}
+            setHeader={setRestHeader}
+          />
+        )}
+        {index === 3 && (
+          <ClientVariables
+            sliceKey="rest-slice"
+            deleteVariable={deleteRestVariables}
+            setVariable={setRestVariables}
+          />
+        )}
       </Stack>
     </Box>
   );

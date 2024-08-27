@@ -35,6 +35,7 @@ export default function RestSubmit() {
             return acc + `${index ? '&' : ''}${key}=${btoa(value)}`;
           }, '?')
         : null;
+
     router.push(
       `/${locale}/rest/${method}/${codedUrl}/${codedBody}${codeHeaders ?? ''}`
     );

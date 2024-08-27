@@ -87,7 +87,7 @@ const RestSlice = createSlice({
       newHeaders.splice(payload, 1);
       state.headers = checkLastTuple(newHeaders);
     },
-    addRestVariables(
+    setRestVariables(
       state,
       {
         payload: { index, keyOrValue, newValue },
@@ -110,7 +110,7 @@ export const {
   setRestUrl,
   setRestQuery,
   deleteRestQuery,
-  addRestVariables,
+  setRestVariables,
   deleteRestVariables,
   setRestHeader,
   deleteRestHeader,

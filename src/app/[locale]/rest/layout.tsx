@@ -1,3 +1,5 @@
+import { Stack } from '@mui/material';
+
 import RestClient from '@/widgets/rest-client/rest-client';
 
 export default function RestLayout({
@@ -6,9 +8,16 @@ export default function RestLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
+    <Stack
+      display={'flex'}
+      flexDirection={'column'}
+      marginInline={'auto'}
+      maxWidth={800}
+      width={'100%'}
+      height={'100%'}
+    >
       <RestClient />
       {children}
-    </>
+    </Stack>
   );
 }
