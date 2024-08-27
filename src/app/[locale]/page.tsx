@@ -59,7 +59,7 @@ export default function WelcomePage({
                 {t('title-registered')} [User]!
               </Typography>
               <ButtonGroup orientation="vertical">
-                <Button LinkComponent={Link} href={`/${locale}`}>
+                <Button LinkComponent={Link} href={`/${locale}/rest`}>
                   REST Client
                 </Button>
                 <Button LinkComponent={Link} href={`/${locale}`}>
