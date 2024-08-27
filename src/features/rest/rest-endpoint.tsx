@@ -3,7 +3,7 @@ import { TextField } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '@/shared/hooks/redux-hooks';
 import { setRestUrl } from '@/shared/store/slices/rest-slice';
 
-export default function ClientEndpoint() {
+export default function RestEndpoint() {
   const url = useAppSelector((state) => state['rest-slice'].url);
   const dispatch = useAppDispatch();
   return (

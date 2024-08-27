@@ -14,7 +14,7 @@ const httpMethods: HttpMethods[] = [
   'HEAD',
 ];
 
-export default function ClientMethod() {
+export default function RestMethod() {
   const method = useAppSelector((state) => state['rest-slice'].method);
   const dispatch = useAppDispatch();
   return (

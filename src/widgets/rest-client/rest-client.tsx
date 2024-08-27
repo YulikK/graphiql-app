@@ -2,12 +2,15 @@
 import { Box, Stack, Tab, Tabs } from '@mui/material';
 import { useState } from 'react';
 
-import ClientEndpoint from '@/features/client-endpoint/client-endpoint';
-import ClientMethod from '@/features/client-method/client-method';
-import RestHeaders from '@/features/rest-headers/rest-headers';
-import RestQuery from '@/features/rest-query/rest-query';
-import RestSubmit from '@/features/rest-submit/rest-submit';
-import RestVariables from '@/features/rest-variables/rest-variables';
+import {
+  RestSubmit,
+  RestQuery,
+  RestHeaders,
+  RestVariables,
+  RestEndpoint,
+  RestMethod,
+  RestBody,
+} from '@/features/rest';
 
 export default function RestClient() {
   const [index, setIndex] = useState(0);
@@ -18,8 +21,8 @@ export default function RestClient() {
   return (
     <Box marginInline={'auto'} maxWidth={800} width={'100%'}>
       <Box display={'flex'}>
-        <ClientMethod />
-        <ClientEndpoint />
+        <RestMethod />
+        <RestEndpoint />
         <RestSubmit />
       </Box>
       <Box
@@ -40,6 +43,7 @@ export default function RestClient() {
       </Box>
       <Stack>
         {index === 0 && <RestQuery />}
+        {index === 1 && <RestBody />}
         {index === 2 && <RestHeaders />}
         {index === 3 && <RestVariables />}
       </Stack>
