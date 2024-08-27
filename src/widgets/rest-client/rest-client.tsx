@@ -1,5 +1,5 @@
 'use client';
-import { Box } from '@mui/material';
+import { Box, Stack, Tab, Tabs } from '@mui/material';
 import { useState } from 'react';
 
 import ClientEndpoint from '@/features/client-endpoint/client-endpoint';
@@ -19,6 +19,23 @@ export default function RestClient() {
         <ClientEndpoint />
         <RestSubmit />
       </Box>
+      <Box
+        display={'flex'}
+        justifyContent={'center'}
+        sx={{ borderBottom: 1, borderColor: 'divider' }}
+      >
+        <Tabs
+          value={index}
+          onChange={handleChange}
+          aria-label="basic tabs example"
+        >
+          <Tab label="Query" />
+          <Tab label="Body" />
+          <Tab label="Headers" />
+          <Tab label="Variables" />
+        </Tabs>
+      </Box>
+      <Stack></Stack>
     </Box>
   );
 }

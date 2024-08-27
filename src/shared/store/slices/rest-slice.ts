@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import ChangeVariableItem from '@/shared/interfaces/change-variable-item';
 import { HttpMethods } from '@/shared/types/http-methods';
 import checkLastTuple from '@/shared/utils/check-last-tuple';
 import updateUlrAndQuery from '@/shared/utils/update-url-and-query';
@@ -53,7 +54,7 @@ const RestSlice = createSlice({
       state,
       {
         payload: { index, keyOrValue, newValue },
-      }: PayloadAction<{ index: number; keyOrValue: number; newValue: string }>
+      }: PayloadAction<ChangeVariableItem>
     ) {
       const temp = [...state.query];
       temp[index][keyOrValue] = newValue;
@@ -74,7 +75,7 @@ const RestSlice = createSlice({
       state,
       {
         payload: { index, keyOrValue, newValue },
-      }: PayloadAction<{ index: number; keyOrValue: number; newValue: string }>
+      }: PayloadAction<ChangeVariableItem>
     ) {
       const temp = state.headers;
       temp[index][keyOrValue] = newValue;
@@ -90,7 +91,7 @@ const RestSlice = createSlice({
       state,
       {
         payload: { index, keyOrValue, newValue },
-      }: PayloadAction<{ index: number; keyOrValue: number; newValue: string }>
+      }: PayloadAction<ChangeVariableItem>
     ) {
       const temp = state.variables;
       temp[index][keyOrValue] = newValue;
