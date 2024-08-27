@@ -7,6 +7,7 @@ import ClientMethod from '@/features/client-method/client-method';
 import RestHeaders from '@/features/rest-headers/rest-headers';
 import RestQuery from '@/features/rest-query/rest-query';
 import RestSubmit from '@/features/rest-submit/rest-submit';
+import RestVariables from '@/features/rest-variables/rest-variables';
 
 export default function RestClient() {
   const [index, setIndex] = useState(0);
@@ -40,6 +41,7 @@ export default function RestClient() {
       <Stack>
         {index === 0 && <RestQuery />}
         {index === 2 && <RestHeaders />}
+        {index === 3 && <RestVariables />}
       </Stack>
     </Box>
   );
