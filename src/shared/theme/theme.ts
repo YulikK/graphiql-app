@@ -14,18 +14,18 @@ const lightTheme = createTheme({
   typography: {
     fontFamily: roboto.style.fontFamily,
   },
-  // palette: {
-  //   mode: 'light', // Светлая тема (по умолчанию)
-  //   primary: {
-  //     main: '#00cece', // Основной голубой цвет вместо синего
-  //     light: '#cfcfcf', // Светлый серый цвет
-  //     dark: '#707070', // Темный серый цвет
-  //     contrastText: '#ffffff', // Белый текст на сером фоне
-  //   },
-  //   info: {
-  //     main: '#9e9e9e', // Темно-серый цвет для info
-  //   },
-  // },
+  palette: {
+    mode: 'light', // Светлая тема (по умолчанию)
+    primary: {
+      main: '#ffffff60',
+      // light: '#cfcfcf', // Светлый серый цвет
+      // dark: '#707070', // Темный серый цвет
+      // contrastText: '#ffffff', // Белый текст на сером фоне
+    },
+    // info: {
+    //   main: '#9e9e9e', // Темно-серый цвет для info
+    // },
+  },
   components: {
     // MuiOutlinedInput: {
     //   styleOverrides: {
@@ -39,6 +39,32 @@ const lightTheme = createTheme({
     //     },
     //   },
     // },
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          backgroundColor: '#ffffff60',
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          color: '#000000',
+        },
+      },
+    },
+    MuiMenu: {
+      styleOverrides: {
+        paper: {
+          backgroundColor: '#d6dffa',
+          borderRadius: '8px',
+          padding: '0',
+        },
+        list: {
+          padding: 0,
+        },
+      },
+    },
     MuiCssBaseline: {
       styleOverrides: `
         .footer {

@@ -2,25 +2,60 @@
 
 import { useLocale } from 'next-intl';
 
-import { Button } from '@mui/material';
+import { Button, ListItemText, Menu, MenuItem } from '@mui/material';
+import { useState } from 'react';
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+
+const languages = ['en', 'ru'];
 
 export default function LocaleSwitcher() {
   const locale = useLocale();
   const params = useSearchParams();
   const path = usePathname();
   const router = useRouter();
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
-  const switchLocale = () => {
-    router.replace(
-      `${path.replace(locale, locale === 'ru' ? 'en' : 'ru')}?${params.toString()}`
-    );
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleLocaleChange = (newLocale: string) => {
+    router.replace(`${path.replace(locale, newLocale)}?${params.toString()}`);
+    handleClose();
   };
 
   return (
-    <Button variant="text" onClick={switchLocale} style={{ color: 'white' }}>
-      {locale}
-    </Button>
+    <>
+      <Button
+        variant="text"
+        onClick={handleClick}
+        sx={{
+          border: '1px solid rgba(255, 255, 255, 0.1)',
+          borderRadius: '50px',
+          background: 'rgba(255, 255, 255, 0.6)',
+          padding: '0 20px',
+        }}
+      >
+        {locale}
+      </Button>
+
+      <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
+        {languages.map((lang) => (
+          <MenuItem key={lang} onClick={() => handleLocaleChange(lang)}>
+            <ListItemText
+              primary={lang.toUpperCase()}
+              sx={{
+                padding: '6px',
+              }}
+            />
+          </MenuItem>
+        ))}
+      </Menu>
+    </>
   );
 }
