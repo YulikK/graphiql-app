@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import ClientEndpoint from '@/features/client-endpoint/client-endpoint';
 import ClientMethod from '@/features/client-method/client-method';
+import RestQuery from '@/features/rest-query/rest-query';
 import RestSubmit from '@/features/rest-submit/rest-submit';
 
 export default function RestClient() {
@@ -35,7 +36,7 @@ export default function RestClient() {
           <Tab label="Variables" />
         </Tabs>
       </Box>
-      <Stack></Stack>
+      <Stack>{index === 0 && <RestQuery />}</Stack>
     </Box>
   );
 }

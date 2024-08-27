@@ -107,15 +107,15 @@ const RestSlice = createSlice({
 });
 
 export const {
-  addRestVariables,
-  deleteRestHeader,
-  deleteRestQuery,
-  deleteRestVariables,
-  setRestBody,
-  setRestHeader,
-  setRestMethod,
-  setRestQuery,
   setRestUrl,
+  setRestQuery,
+  deleteRestQuery,
+  addRestVariables,
+  deleteRestVariables,
+  setRestHeader,
+  deleteRestHeader,
+  setRestBody,
+  setRestMethod,
 } = RestSlice.actions;
 
 export default RestSlice;
