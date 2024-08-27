@@ -1,12 +1,15 @@
-import { Box } from '@mui/material';
-import Link from 'next/link';
 import { useLocale } from 'next-intl';
+
+import Image from 'next/image';
+import Link from 'next/link';
+
+import logo from '@/assets/logo.svg';
 
 export const Logo = () => {
   const locale = useLocale();
   return (
     <Link href={`/${locale}`}>
-      <Box component="img" src="/logo.svg" alt="Logo" sx={{ height: 40 }} />
+      <Image src={logo} alt="Logo" style={{ height: '40px', width: 'auto' }} />
     </Link>
   );
 };

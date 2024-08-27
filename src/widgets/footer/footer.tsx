@@ -1,18 +1,19 @@
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { Box, Container, Link, Typography } from '@mui/material';
+
 import Image from 'next/image';
 
-import logo from '../../../public/rs-logo.png';
+import logo from '@/assets/rs-logo.png';
 
 export default function Footer() {
   return (
     <Box
       component="footer"
+      className="footer"
       sx={{
         display: 'flex',
         minHeight: '60px',
         paddingBlock: 1,
-        backgroundColor: '#f8f8f8',
       }}
     >
       <Container
@@ -26,7 +27,7 @@ export default function Footer() {
         }}
       >
         <Link target="_blank" href="https://github.com/YulikK">
-          <GitHubIcon sx={{ width: 40, height: 40 }} />
+          <GitHubIcon sx={{ width: 40, height: 40, color: '#fff' }} />
         </Link>
         <Typography variant="body2">2024</Typography>
         <Link href="https://rs.school/">

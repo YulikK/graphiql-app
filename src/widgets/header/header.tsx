@@ -1,17 +1,39 @@
 'use client';
-import { AppBar, Button, Toolbar, Box, Container } from '@mui/material';
-import Link from 'next/link';
+
 import { useLocale, useTranslations } from 'next-intl';
+
+import { AppBar, Box, Button, Container, Toolbar } from '@mui/material';
+import { FirebaseError } from 'firebase/app';
 import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
+
+import Link from 'next/link';
 
 import { Logo } from '@/entities/logo/logo.tsx';
 import LocaleSwitcher from '@/features/locale-switcher/locale-switcher.tsx';
+import { useAuth } from '@/shared/contexts';
+import { logout } from '@/shared/services/firebase/auth';
 
 export default function Header() {
   const [isShrunk, setShrunk] = useState(false);
   const locale = useLocale();
   const t = useTranslations('Header');
-  const isLogined = false;
+
+  const { isLoggedIn, loading } = useAuth();
+
+  const handleLogout = async () => {
+    toast.promise(logout, {
+      pending: t('authentication-loading'),
+      success: t('success-logout-message'),
+      error: {
+        render({ data }) {
+          return data instanceof FirebaseError
+            ? data.message
+            : t('unexpected-error');
+        },
+      },
+    });
+  };
 
   useEffect(() => {
     const handler = () => {
@@ -33,41 +55,48 @@ export default function Header() {
   }, []);
 
   return (
-    <AppBar
-      color="info"
-      position="sticky"
-      sx={{ height: isShrunk ? 40 : 60, top: 0, transition: 'all linear 0.2s' }}
-    >
-      <Container disableGutters sx={{ height: 'inherit' }}>
-        <Toolbar style={{ height: '100%', minHeight: '100%' }}>
-          <Box sx={{ flexGrow: 1 }}>
-            <Logo />
-          </Box>
+    !loading && (
+      <AppBar
+        color="info"
+        position="sticky"
+        sx={{
+          height: isShrunk ? 40 : 60,
+          top: 0,
+          transition: 'all linear 0.2s',
+        }}
+      >
+        <Container disableGutters sx={{ height: 'inherit' }}>
+          <Toolbar style={{ height: '100%', minHeight: '100%' }}>
+            <Box sx={{ flexGrow: 1 }}>
+              <Logo />
+            </Box>
 
-          <Box sx={{ display: 'flex', gap: 1 }}>
-            <LocaleSwitcher />
-            {isLogined ? (
-              <Button
-                LinkComponent={Link}
-                variant="text"
-                href={'/'}
-                style={{ color: 'white' }}
-              >
-                {t('sign-out')}
-              </Button>
-            ) : (
-              <Button
-                LinkComponent={Link}
-                variant="text"
-                href={`${locale}/login`}
-                style={{ color: 'white' }}
-              >
-                {t('sign-in')}
-              </Button>
-            )}
-          </Box>
-        </Toolbar>
-      </Container>
-    </AppBar>
+            <Box sx={{ display: 'flex', gap: 1 }}>
+              <LocaleSwitcher />
+              {isLoggedIn ? (
+                <Button
+                  // LinkComponent={Link}
+                  variant="text"
+                  // href={'/'}
+                  onClick={handleLogout}
+                  style={{ color: 'white' }}
+                >
+                  {t('sign-out')}
+                </Button>
+              ) : (
+                <Button
+                  LinkComponent={Link}
+                  variant="text"
+                  href={`/${locale}/login`}
+                  style={{ color: 'white' }}
+                >
+                  {t('sign-in')}
+                </Button>
+              )}
+            </Box>
+          </Toolbar>
+        </Container>
+      </AppBar>
+    )
   );
 }

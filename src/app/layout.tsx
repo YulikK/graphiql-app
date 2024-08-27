@@ -1,9 +1,13 @@
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 import type { Metadata } from 'next';
+import { ToastContainer } from 'react-toastify';
+
 import { Inter } from 'next/font/google';
 
+import { AuthProvider } from '@/shared/contexts/index.ts';
+import { StyledRoot } from '@/shared/theme/styled-root.tsx';
+import 'react-toastify/dist/ReactToastify.css';
 import './globals.css';
-import { StyledRoot } from '../shared/theme/styled-root.tsx';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -28,9 +32,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <AppRouterCacheProvider>
-          <StyledRoot>{children}</StyledRoot>
-        </AppRouterCacheProvider>
+        <AuthProvider>
+          <AppRouterCacheProvider>
+            <StyledRoot>
+              {children}
+              <ToastContainer position="top-center" autoClose={2000} />
+            </StyledRoot>
+          </AppRouterCacheProvider>
+        </AuthProvider>
       </body>
     </html>
   );
