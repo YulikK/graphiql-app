@@ -8,7 +8,7 @@ import {
 } from '@/shared/store/slices/rest-slice';
 
 export default function RestVariables() {
-  const { variables } = useAppSelector((state) => state['rest-slice']);
+  const variables = useAppSelector((state) => state['rest-slice'].variables);
   const dispatch = useAppDispatch();
 
   const deleteItem = (index: number) => dispatch(deleteRestVariables(index));

@@ -8,7 +8,7 @@ import {
 } from '@/shared/store/slices/rest-slice';
 
 export default function RestHeaders() {
-  const { headers } = useAppSelector((state) => state['rest-slice']);
+  const headers = useAppSelector((state) => state['rest-slice'].headers);
   const dispatch = useAppDispatch();
   const deleteItem = (index: number) => dispatch(deleteRestHeader(index));
 

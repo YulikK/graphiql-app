@@ -19,7 +19,7 @@ export default function RestClient() {
     setIndex(newValue);
   };
   return (
-    <Box marginInline={'auto'} maxWidth={800} width={'100%'}>
+    <Box marginInline={'auto'} maxWidth={800} width={'100%'} flexGrow={1}>
       <Box display={'flex'}>
         <RestMethod />
         <RestEndpoint />

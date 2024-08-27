@@ -8,7 +8,7 @@ import {
 } from '@/shared/store/slices/rest-slice';
 
 export default function RestQuery() {
-  const { query } = useAppSelector((state) => state['rest-slice']);
+  const query = useAppSelector((state) => state['rest-slice'].query);
   const dispatch = useAppDispatch();
   const deleteItem = (index: number) => dispatch(deleteRestQuery(index));
 
