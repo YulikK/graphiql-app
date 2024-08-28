@@ -24,32 +24,99 @@ import {
 } from '@mui/material';
 import { materialLight } from '@uiw/codemirror-theme-material';
 import ReactCodeMirror from '@uiw/react-codemirror';
-import { SyntheticEvent, useState } from 'react';
+import { graphql } from 'cm6-graphql';
+import {
+  buildClientSchema,
+  getIntrospectionQuery,
+  GraphQLSchema,
+} from 'graphql';
+import { SyntheticEvent, useEffect, useState } from 'react';
+
+type Header = {
+  key: string;
+  value: string;
+};
+
+const fetchSchema = async (url: string) => {
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      query: getIntrospectionQuery(),
+    }),
+  });
+  const result = await response.json();
+  const schema = buildClientSchema(result.data);
+  return schema;
+};
 
 export default function GraphQlPage() {
-  // const [expanded, setExpanded] = useState(false);
-  const [jsonBody, setJsonBody] = useState('{}');
-  const [value, setValue] = useState('headers');
-  const [rows, setRows] = useState([{ key: '', value: '' }]);
+  const [variables, setVariables] = useState('{}');
+  const [graphqlQuery, setGraphqlQuery] = useState('');
+  const [activeTab, setActiveTab] = useState('headers');
+  const [url, setUrl] = useState(
+    'https://swapi-graphql.netlify.app/.netlify/functions/index'
+  );
+  const [schema, setSchema] = useState<GraphQLSchema | null>(null);
+  const [headers, setHeaders] = useState<Header[]>([{ key: '', value: '' }]);
+  const [response, setResponse] = useState('');
 
-  const handleChange = (event: SyntheticEvent, newValue: string) => {
+  useEffect(() => {
+    fetchSchema(`${url}?sdl`).then((newSchema) => {
+      if (newSchema) {
+        setSchema(newSchema);
+      }
+    });
+  }, [url]);
+
+  const handleTabChange = (event: SyntheticEvent, newValue: string) => {
     event.stopPropagation();
 
-    setValue(newValue);
+    setActiveTab(newValue);
   };
   const handleJsonChange = (value: string) => {
-    setJsonBody(value);
+    setVariables(value);
+  };
+  const handleGraphqlChange = (value: string) => {
+    setGraphqlQuery(value);
+  };
+
+  const handleUrlChange = (value: string) => {
+    setUrl(value);
   };
 
   const handleAddRow = () => {
-    setRows([...rows, { key: '', value: '' }]);
+    setHeaders([...headers, { key: '', value: '' }]);
   };
 
   const handleInputChange = (index: number, field: string, value: string) => {
-    const newRows = [...rows];
+    const newRows = [...headers];
     newRows[index] = { ...newRows[index], [field]: value };
-    setRows(newRows);
-    console.log(rows);
+    setHeaders(newRows);
+  };
+
+  const handleSendRequest = async () => {
+    const headersObject = Object.fromEntries(
+      headers
+        .filter((header) => header.key && header.value)
+        .map((header) => [header.key, header.value])
+    );
+
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        ...headersObject,
+      },
+      body: JSON.stringify({
+        query: graphqlQuery,
+        variables: JSON.parse(variables),
+      }),
+    });
+    const result = await response.json();
+    setResponse(JSON.stringify(result, null, 2));
   };
 
   return (
@@ -66,16 +133,23 @@ export default function GraphQlPage() {
           sx={{ ml: 1, flex: 1 }}
           placeholder="URL"
           inputProps={{ 'aria-label': 'URL' }}
+          value={url}
+          onChange={(e) => handleUrlChange(e.target.value)}
           fullWidth
         />
 
         <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-        <IconButton color="primary" sx={{ p: '10px' }} aria-label="directions">
+        <IconButton
+          color="primary"
+          sx={{ p: '10px' }}
+          aria-label="directions"
+          onClick={handleSendRequest}
+        >
           <SendIcon />
         </IconButton>
       </Paper>
 
-      <TabContext value={value}>
+      <TabContext value={activeTab}>
         <Accordion disableGutters={true}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -91,13 +165,22 @@ export default function GraphQlPage() {
                 width: '100%',
               }}
             >
-              <TabList onChange={handleChange} aria-label="request params">
+              <TabList onChange={handleTabChange} aria-label="request params">
+                <Tab label="Variables" value="variables" />
                 <Tab label="Headers" value="headers" />
-                <Tab label="Body" value="body" />
               </TabList>
             </Box>
           </AccordionSummary>
           <AccordionDetails sx={{ padding: 0 }}>
+            <TabPanel value="variables" sx={{ padding: 0 }}>
+              <ReactCodeMirror
+                value={variables}
+                height="200px"
+                extensions={[json()]}
+                theme={materialLight}
+                onChange={(value) => handleJsonChange(value)}
+              />
+            </TabPanel>
             <TabPanel value="headers" sx={{ padding: 0 }}>
               <Box padding={2}>
                 <TableContainer component={Paper}>
@@ -109,7 +192,7 @@ export default function GraphQlPage() {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {rows.map((row, index) => (
+                      {headers.map((row, index) => (
                         <TableRow key={index} hover={true}>
                           <TableCell>
                             <InputBase
@@ -149,18 +232,23 @@ export default function GraphQlPage() {
                 </Button>
               </Box>
             </TabPanel>
-            <TabPanel value="body" sx={{ padding: 0 }}>
-              <ReactCodeMirror
-                value={jsonBody}
-                height="200px"
-                extensions={[json()]}
-                theme={materialLight}
-                onChange={(value) => handleJsonChange(value)}
-              />
-            </TabPanel>
           </AccordionDetails>
         </Accordion>
       </TabContext>
+      <ReactCodeMirror
+        value={graphqlQuery}
+        height="200px"
+        theme={materialLight}
+        extensions={schema ? [graphql(schema)] : []}
+        onChange={(value) => handleGraphqlChange(value)}
+      />
+      <ReactCodeMirror
+        value={response}
+        height="200px"
+        extensions={[json()]}
+        theme={materialLight}
+        editable={false}
+      />
     </Box>
   );
 }
