@@ -88,4 +88,4 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: deploy site
-        run: curl -X POST -d {} ${{ secrets.NETLIFY_BUILD_HOOK }}
+        run: curl -X POST -d {} ${{ secrets.NETLIFI_BUILD_HOOK }}
