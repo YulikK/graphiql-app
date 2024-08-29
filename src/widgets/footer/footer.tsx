@@ -11,6 +11,7 @@ export default function Footer() {
       component="footer"
       className="footer"
       sx={{
+        width: '100%',
         display: 'flex',
         minHeight: '60px',
         paddingBlock: 1,

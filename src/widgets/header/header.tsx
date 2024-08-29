@@ -61,7 +61,6 @@ export default function Header() {
         color="info"
         position="sticky"
         sx={{
-          maxWidth: 'xl',
           height: isShrunk ? 40 : 60,
           top: 0,
           transition: 'all linear 0.2s',

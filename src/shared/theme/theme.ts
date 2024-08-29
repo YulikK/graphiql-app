@@ -88,7 +88,7 @@ const lightTheme = createTheme({
     MuiCssBaseline: {
       styleOverrides: `
         .footer {
-          background-color: #0288d1;
+          background-color: #00000030;
         }
       `,
     },
@@ -173,7 +173,7 @@ const darkTheme = createTheme({
     MuiCssBaseline: {
       styleOverrides: `
         .footer {
-          background-color: #9e9e9e;
+          background-color: #ffffff20;
         }
       `,
     },

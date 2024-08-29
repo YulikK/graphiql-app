@@ -10,7 +10,8 @@
     "title-anonymous": "Welcome",
     "title-registered": "Welcome back,",
     "sign-in": "Sign In",
-    "sign-up": "Sign Up"
+    "sign-up": "Sign Up",
+    "welcome-text": "Explore and interact with APIs effortlessly using our powerful yet lightweight tool combining the best of Postman and GraphiQL. Whether you're working with RESTful APIs or GraphQL endpoints, our platform provides a seamless experience to execute requests, view responses, and manage your API interactions."
   },
   "RegistrationPage": {
     "title": "Registration",

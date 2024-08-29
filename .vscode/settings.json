@@ -12,6 +12,7 @@
     "hookform",
     "consts",
     "firestore",
-    "roboto"
+    "roboto",
+    "GraphiQL",
   ]
 }

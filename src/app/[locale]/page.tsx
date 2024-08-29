@@ -8,9 +8,6 @@ import Link from 'next/link';
 
 import { useAuth } from '@/shared/contexts';
 
-const PLACEHOLDER_TEXT =
-  'A description of our marvelous project, or a pretty picture? Or maybe, Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?';
-
 export default function WelcomePage({
   params: { locale },
 }: {
@@ -36,8 +33,11 @@ export default function WelcomePage({
         >
           {!isLoggedIn ? (
             <>
-              <Typography variant="h4" textAlign={'center'}>
+              <Typography variant="h4" textAlign={'center'} fontWeight={600}>
                 {t('title-anonymous')}!
+              </Typography>
+              <Typography variant="body1" width="80%" textAlign={'center'}>
+                {t('welcome-text')}
               </Typography>
               <Box display={'flex'} gap={2}>
                 <Button
@@ -74,14 +74,6 @@ export default function WelcomePage({
               </ButtonGroup>
             </>
           )}
-        </Box>
-        <Box
-          display={'flex'}
-          flex={1}
-          justifyContent={'center'}
-          alignItems={'center'}
-        >
-          <Typography variant="body1">{PLACEHOLDER_TEXT}</Typography>
         </Box>
       </Box>
     </>
