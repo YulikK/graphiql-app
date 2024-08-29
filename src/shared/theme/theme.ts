@@ -34,10 +34,12 @@ const lightTheme = createTheme({
     MuiButton: {
       styleOverrides: {
         outlinedPrimary: {
-          backgroundColor: '#ffffff60',
+          backgroundColor: '#e8def8',
           borderColor: '#ffffff20',
+          boxShadow:
+            '0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)',
           '&:hover': {
-            backgroundColor: '#ffffff40',
+            backgroundColor: '#e8def860',
             borderColor: '#ffffff20',
           },
         },
@@ -85,6 +87,26 @@ const lightTheme = createTheme({
         },
       },
     },
+    MuiGrid2: {
+      styleOverrides: {
+        root: {
+          '& > .MuiPaper-root': {
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+            borderRadius: '10px',
+            padding: '25px',
+            transition: 'all 0.3s ease-in-out',
+            background:
+              'linear-gradient(180deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.5) 100%)',
+          },
+          '& > .MuiPaper-root:hover': {
+            transform: 'translateY(-5px) scale(1.01)',
+            boxShadow: '0 8px 16px rgba(0, 0, 0, 0.2)',
+            background: '#f0f0f0',
+            zIndex: '2',
+          },
+        },
+      },
+    },
     MuiCssBaseline: {
       styleOverrides: `
         .footer {
@@ -119,7 +141,7 @@ const darkTheme = createTheme({
     MuiButton: {
       styleOverrides: {
         outlinedPrimary: {
-          backgroundColor: '#ffffff60',
+          backgroundColor: '#00000060',
           borderColor: '#ffffff20',
           '&:hover': {
             backgroundColor: '#ffffff40',
@@ -166,6 +188,29 @@ const darkTheme = createTheme({
           color: '#cbcbf2',
           '&.Mui-focused': {
             color: '#cbcbf2',
+          },
+        },
+      },
+    },
+    MuiGrid2: {
+      styleOverrides: {
+        root: {
+          '& > .MuiPaper-root': {
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+            borderRadius: '10px',
+            padding: '25px',
+            transition: 'all 0.3s ease-in-out',
+            background: '#00000020',
+          },
+          '& > .MuiPaper-root:hover': {
+            transform: 'translateY(-5px) scale(1.01)',
+            boxShadow: '0 8px 16px rgba(0, 0, 0, 0.2)',
+            background:
+              'linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.3) 100%)',
+            zIndex: '2',
+          },
+          '& > .MuiPaper-root img': {
+            filter: 'invert(1)',
           },
         },
       },

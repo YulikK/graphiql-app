@@ -32,10 +32,15 @@ export default function BgContainer({
       }}
     >
       <Image
-        fill
         src={darkMode ? bgDark : bgLight}
         alt="Image alt"
-        style={{ objectFit: 'cover', zIndex: '-1' }}
+        style={{
+          position: 'absolute',
+          width: '100%',
+          objectFit: 'cover',
+          zIndex: '-1',
+          height: 'auto',
+        }}
       />
       {children}
     </Container>

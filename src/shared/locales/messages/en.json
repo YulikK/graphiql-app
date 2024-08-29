@@ -11,7 +11,9 @@
     "title-registered": "Welcome back,",
     "sign-in": "Sign In",
     "sign-up": "Sign Up",
-    "welcome-text": "Explore and interact with APIs effortlessly using our powerful yet lightweight tool combining the best of Postman and GraphiQL. Whether you're working with RESTful APIs or GraphQL endpoints, our platform provides a seamless experience to execute requests, view responses, and manage your API interactions."
+    "welcome-text": "Explore and interact with APIs effortlessly using our powerful yet lightweight tool combining the best of Postman and GraphiQL. Whether you're working with RESTful APIs or GraphQL endpoints, our platform provides a seamless experience to execute requests, view responses, and manage your API interactions.",
+    "welcome-titles": "['RESTful Client', 'GraphiQL', 'Query Prettifying', 'Authentication', 'Internationalization', 'Request History']",
+    "welcome-descriptions": "['Easily perform and manage your RESTful API requests with a user-friendly interface designed for efficiency.', 'Take advantage of our built-in GraphiQL interface for smooth and intuitive GraphQL queries and mutations.', 'Automatically format and organize your queries for improved readability and maintenance.', 'Ensure your data is secure with built-in Firebase authentication.', 'Choose your preferred language for a personalized experience.', 'Easily revisit and rerun previous API requests with our comprehensive history feature.']"
   },
   "RegistrationPage": {
     "title": "Registration",
