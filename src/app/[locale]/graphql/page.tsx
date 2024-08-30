@@ -1,6 +1,10 @@
 'use client';
 
+import 'graphiql/graphiql.css';
+
 import { json } from '@codemirror/lang-json';
+import { GraphiQLProvider, DocExplorer } from '@graphiql/react';
+import { createGraphiQLFetcher } from '@graphiql/toolkit';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import SendIcon from '@mui/icons-material/Send';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
@@ -51,6 +55,10 @@ const fetchSchema = async (url: string) => {
   const schema = buildClientSchema(result.data);
   return schema;
 };
+
+const fetcher = createGraphiQLFetcher({
+  url: 'https://swapi-graphql.netlify.app/.netlify/functions/index',
+});
 
 export default function GraphQlPage() {
   const [variables, setVariables] = useState('{}');
@@ -121,6 +129,16 @@ export default function GraphQlPage() {
 
   return (
     <Box component="section" margin="20px 0" width="100%">
+      <Box
+        component="section"
+        margin="20px 0"
+        width="100%"
+        className="graphiql-container"
+      >
+        <GraphiQLProvider fetcher={fetcher}>
+          <DocExplorer />
+        </GraphiQLProvider>
+      </Box>
       <Paper
         component="form"
         sx={{
