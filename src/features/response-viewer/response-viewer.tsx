@@ -13,7 +13,7 @@ export default function ResponseViewer({ value }: Props) {
       height="200px"
       extensions={[json()]}
       editable={false}
-      style={{ fontSize: '18px' }}
+      style={{ fontSize: '18px', backgroundColor: 'transparent' }}
     />
   );
 }
