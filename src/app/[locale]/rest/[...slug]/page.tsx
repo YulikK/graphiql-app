@@ -14,7 +14,7 @@ interface RequestParams
 
 const makeRequest = async ({ method, url, body, headers }: RequestParams) => {
   try {
-    const result = await fetch(url, {
+    const data = await fetch(url, {
       method,
       headers:
         method === 'GET'
@@ -24,8 +24,10 @@ const makeRequest = async ({ method, url, body, headers }: RequestParams) => {
             },
       body: method === 'GET' ? null : body,
     });
+    const result = await data.json();
+    console.log(result);
 
-    return result.json();
+    return result;
   } catch (e) {
     if (e instanceof Error && 'message' in e) {
       return e.message;
