@@ -1,10 +1,6 @@
 'use client';
 
-import 'graphiql/graphiql.css';
-
 import { json } from '@codemirror/lang-json';
-import { GraphiQLProvider, DocExplorer } from '@graphiql/react';
-import { createGraphiQLFetcher } from '@graphiql/toolkit';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import SendIcon from '@mui/icons-material/Send';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
@@ -36,6 +32,8 @@ import {
 } from 'graphql';
 import { SyntheticEvent, useEffect, useState } from 'react';
 
+import { Docs } from '@/widgets/docs/docs';
+
 type Header = {
   key: string;
   value: string;
@@ -55,10 +53,6 @@ const fetchSchema = async (url: string) => {
   const schema = buildClientSchema(result.data);
   return schema;
 };
-
-const fetcher = createGraphiQLFetcher({
-  url: 'https://swapi-graphql.netlify.app/.netlify/functions/index',
-});
 
 export default function GraphQlPage() {
   const [variables, setVariables] = useState('{}');
@@ -129,16 +123,6 @@ export default function GraphQlPage() {
 
   return (
     <Box component="section" margin="20px 0" width="100%">
-      <Box
-        component="section"
-        margin="20px 0"
-        width="100%"
-        className="graphiql-container"
-      >
-        <GraphiQLProvider fetcher={fetcher}>
-          <DocExplorer />
-        </GraphiQLProvider>
-      </Box>
       <Paper
         component="form"
         sx={{
@@ -148,8 +132,9 @@ export default function GraphQlPage() {
         }}
       >
         <InputBase
+          size="small"
           sx={{ ml: 1, flex: 1 }}
-          placeholder="URL"
+          placeholder="endpoint"
           inputProps={{ 'aria-label': 'URL' }}
           value={url}
           onChange={(e) => handleUrlChange(e.target.value)}
@@ -158,6 +143,7 @@ export default function GraphQlPage() {
 
         <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
         <IconButton
+          size="small"
           color="primary"
           sx={{ p: '10px' }}
           aria-label="directions"
@@ -165,6 +151,7 @@ export default function GraphQlPage() {
         >
           <SendIcon />
         </IconButton>
+        <Docs url={url} />
       </Paper>
 
       <TabContext value={activeTab}>
