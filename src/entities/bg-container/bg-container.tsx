@@ -2,8 +2,6 @@
 
 import { Container } from '@mui/material';
 
-import Image from 'next/image';
-
 import bgDark from '@/assets/bg-dark.png';
 import bgLight from '@/assets/bg-light.png';
 import { useTheme } from '@/shared/contexts';
@@ -19,6 +17,11 @@ export default function BgContainer({
     <Container
       maxWidth={false}
       sx={{
+        backgroundImage: darkMode
+          ? `url(${bgDark.src})`
+          : `url(${bgLight.src})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
         position: 'relative',
         display: 'flex',
         flexDirection: 'column',
@@ -31,17 +34,6 @@ export default function BgContainer({
         },
       }}
     >
-      <Image
-        src={darkMode ? bgDark : bgLight}
-        alt="Image alt"
-        style={{
-          position: 'absolute',
-          width: '100%',
-          objectFit: 'cover',
-          zIndex: '-1',
-          height: 'auto',
-        }}
-      />
       {children}
     </Container>
   );

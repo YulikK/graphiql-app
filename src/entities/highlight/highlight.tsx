@@ -29,19 +29,10 @@ export default function Highlight(props: HighlightProps) {
         <Typography variant="h5" textAlign={'center'} fontWeight={600}>
           {props.title}
         </Typography>
-        <Typography variant="body1" textAlign={'center'}>
+        <Typography variant="body1" textAlign={'center'} marginTop={'auto'}>
           {props.description}
         </Typography>
       </Paper>
     </Grid>
   );
 }
-
-// Paper
-// sx={{
-//   flex: 1,
-//   display: 'flex',
-//   flexDirection: 'column',
-//   alignItems: 'center',
-//   gap: '20px',
-// }}
