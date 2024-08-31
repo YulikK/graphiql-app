@@ -12,6 +12,7 @@ const initialState: {
   method: HttpMethods;
   headers: string[][];
   variables: string[][];
+  textMode: boolean;
 } = {
   url: '',
   query: [['', '']],
@@ -22,6 +23,7 @@ const initialState: {
     ['', ''],
   ],
   variables: [['', '']],
+  textMode: false,
 };
 
 const RestSlice = createSlice({
@@ -103,6 +105,9 @@ const RestSlice = createSlice({
       newVariables.splice(payload, 1);
       state.variables = checkLastTuple(newVariables);
     },
+    handleRestBodyMode(state, { payload }: PayloadAction<boolean>) {
+      state.textMode = payload;
+    },
   },
 });
 
@@ -116,6 +121,7 @@ export const {
   deleteRestHeader,
   setRestBody,
   setRestMethod,
+  handleRestBodyMode,
 } = RestSlice.actions;
 
 export default RestSlice;

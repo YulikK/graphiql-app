@@ -1,15 +1,27 @@
 import { json } from '@codemirror/lang-json';
 import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
-import { Alert, Box, IconButton, Snackbar } from '@mui/material';
+import {
+  Alert,
+  Box,
+  FormControlLabel,
+  IconButton,
+  Radio,
+  RadioGroup,
+  Snackbar,
+} from '@mui/material';
 import ReactCodeMirror from '@uiw/react-codemirror';
 import { useState } from 'react';
 
 import { useAppDispatch, useAppSelector } from '@/shared/hooks/redux-hooks';
-import { setRestBody } from '@/shared/store/slices/rest-slice';
+import {
+  handleRestBodyMode,
+  setRestBody,
+} from '@/shared/store/slices/rest-slice';
 import ConvertToValidJsonString from '@/shared/utils/convert-to-valid-json-string';
 
 export default function RestBody() {
   const value = useAppSelector((state) => state['rest-slice'].body);
+  const textMode = useAppSelector((state) => state['rest-slice'].textMode);
   const [error, setError] = useState(false);
   const dispatch = useAppDispatch();
 
@@ -22,22 +34,43 @@ export default function RestBody() {
     setError(true);
   };
 
+  const handleModeChange = (value: boolean) =>
+    dispatch(handleRestBodyMode(value));
+
   return (
     <Box border={'1px solid black'} position="relative">
-      <IconButton
-        color="info"
-        onClick={formatText}
-        title="Make pretty (JSON only)"
-        aria-label="Make pretty"
-        sx={{
-          position: 'absolute',
-          top: 5,
-          right: 15,
-          zIndex: 1,
-        }}
-      >
-        <AutoFixHighIcon />
-      </IconButton>
+      <RadioGroup row sx={{ ml: 1 }}>
+        <FormControlLabel
+          value="json"
+          checked={!textMode}
+          control={<Radio size="small" />}
+          label="JSON"
+          onChange={() => handleModeChange(false)}
+        />
+        <FormControlLabel
+          value="text"
+          checked={textMode}
+          control={<Radio size="small" />}
+          label="Text"
+          onChange={() => handleModeChange(true)}
+        />
+      </RadioGroup>
+      {!textMode && (
+        <IconButton
+          color="info"
+          onClick={formatText}
+          title="Make pretty (JSON only)"
+          aria-label="Make pretty"
+          sx={{
+            position: 'absolute',
+            top: 0,
+            right: 0,
+            zIndex: 1,
+          }}
+        >
+          <AutoFixHighIcon />
+        </IconButton>
+      )}
 
       <ReactCodeMirror
         value={value}

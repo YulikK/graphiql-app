@@ -14,7 +14,7 @@ export default function ResponseViewer({ value }: Props) {
       value={convertToJsonString(value)}
       extensions={[json()]}
       height="100%"
-      minHeight="200px"
+      maxHeight="200px"
       editable={false}
       style={{ fontSize: '18px', backgroundColor: 'transparent' }}
     />

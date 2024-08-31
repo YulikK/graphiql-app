@@ -6,11 +6,12 @@ import { useRouter } from 'next/navigation';
 
 import { useAppSelector } from '@/shared/hooks/redux-hooks';
 import encodeToBase64 from '@/shared/utils/encode-to-base64';
+import sanitizeJsonString from '@/shared/utils/sanitize-json-string';
 
 export default function RestSubmit() {
   const router = useRouter();
   const locale = useLocale();
-  const { method, url, body, headers, variables } = useAppSelector(
+  const { method, url, body, headers, variables, textMode } = useAppSelector(
     (state) => state['rest-slice']
   );
   const makeRequest = () => {
@@ -22,13 +23,10 @@ export default function RestSubmit() {
     const codedUrl = encodeToBase64(
       `${urlWithVariables.trim().replaceAll(' ', '')}`
     );
-    const codedBody = encodeToBase64(
-      `${body
-        .replace(/'/g, '"')
-        .replace(/(['"])?([a-zA-Z0-9_]+)(['"])?:/g, '"$2":')
-        .replaceAll(/\s+/g, '')
-        .replace(/,(\s*})/g, '$1')}`
-    );
+    const codedBody = textMode
+      ? encodeToBase64(body)
+      : encodeToBase64(sanitizeJsonString(body));
+
     const codedHeaders = new URLSearchParams(
       Object.fromEntries(headers.filter(([key, value]) => key && value))
     );
