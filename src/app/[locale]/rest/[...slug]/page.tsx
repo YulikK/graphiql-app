@@ -1,4 +1,5 @@
 import ResponseViewer from '@/features/response-viewer/response-viewer';
+import decodeFromBase64 from '@/shared/utils/decode-from-base64';
 
 interface Props {
   params: {
@@ -16,17 +17,10 @@ const makeRequest = async ({ method, url, body, headers }: RequestParams) => {
   try {
     const data = await fetch(url, {
       method,
-      headers:
-        method === 'GET'
-          ? {}
-          : {
-              ...headers,
-            },
+      headers: method === 'GET' ? {} : headers,
       body: method === 'GET' ? null : body,
     });
     const result = await data.json();
-    console.log(result);
-
     return result;
   } catch (e) {
     if (e instanceof Error && 'message' in e) {
@@ -37,24 +31,17 @@ const makeRequest = async ({ method, url, body, headers }: RequestParams) => {
 };
 
 export default async function RestResult({ params, searchParams = {} }: Props) {
-  console.log(123);
-
   const [method = '', url = '', body = ''] = params.slug.map((item) =>
     decodeURIComponent(item)
   );
-  const decodedUrl = Buffer.from(url, 'base64').toString('utf-8');
-  const decodeBody = Buffer.from(body, 'base64').toString('utf-8');
-  const decodeHeaders = Object.fromEntries(
-    Object.entries(searchParams).map(([key, value]) => [
-      key,
-      Buffer.from(value, 'base64').toString('utf-8'),
-    ])
-  );
+  const decodedUrl = decodeFromBase64(url);
+  const decodeBody = decodeFromBase64(body);
+
   const result = await makeRequest({
     body: decodeBody,
     method,
     url: decodedUrl,
-    headers: decodeHeaders,
+    headers: searchParams,
   });
 
   return <ResponseViewer value={result || ''} />;

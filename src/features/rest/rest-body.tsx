@@ -54,7 +54,7 @@ export default function RestBody() {
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
         <Alert severity="error" onClose={() => setError(false)}>
-          Data is not valid JSON
+          Prettifying is available only for valid JSON
         </Alert>
       </Snackbar>
     </Box>
