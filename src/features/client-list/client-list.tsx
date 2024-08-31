@@ -1,3 +1,5 @@
+import { useTranslations } from 'next-intl';
+
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { Box, IconButton, Stack, TextField } from '@mui/material';
 
@@ -15,6 +17,8 @@ export default function ClientList({
   changeItem,
 }: Props) {
   const dataIsArray = Array.isArray(dataList);
+  const t = useTranslations('RestPage');
+
   return (
     <Stack>
       {dataIsArray &&
@@ -24,7 +28,7 @@ export default function ClientList({
               <DeleteForeverIcon />
             </IconButton>
             <TextField
-              placeholder="Key"
+              placeholder={t('key')}
               variant="standard"
               value={key || ''}
               sx={{ flexGrow: 1 }}
@@ -37,7 +41,7 @@ export default function ClientList({
               }
             />
             <TextField
-              placeholder="Value"
+              placeholder={t('value')}
               variant="standard"
               value={value || ''}
               sx={{ flexGrow: 1 }}

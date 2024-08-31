@@ -17,6 +17,7 @@ const httpMethods: HttpMethods[] = [
 export default function RestMethod() {
   const method = useAppSelector((state) => state['rest-slice'].method);
   const dispatch = useAppDispatch();
+
   return (
     <Select
       defaultValue={method}

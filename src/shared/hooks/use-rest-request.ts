@@ -20,7 +20,7 @@ export default function useRestRequest() {
     const codedUrl = encodeToBase64(
       `${insertVariables(url, variables).trim().replaceAll(' ', '')}`
     );
-    const bodyWithVariables = insertVariables(body, variables, true);
+    const bodyWithVariables = insertVariables(body, variables, !textMode);
 
     const codedBody = textMode
       ? encodeToBase64(bodyWithVariables)

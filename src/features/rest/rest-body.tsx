@@ -1,3 +1,5 @@
+import { useTranslations } from 'next-intl';
+
 import { json } from '@codemirror/lang-json';
 import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
 import {
@@ -13,6 +15,7 @@ import ReactCodeMirror from '@uiw/react-codemirror';
 import { useState } from 'react';
 
 import { useAppDispatch, useAppSelector } from '@/shared/hooks/redux-hooks';
+import useRestRequest from '@/shared/hooks/use-rest-request';
 import {
   handleRestBodyMode,
   setRestBody,
@@ -23,7 +26,9 @@ export default function RestBody() {
   const value = useAppSelector((state) => state['rest-slice'].body);
   const textMode = useAppSelector((state) => state['rest-slice'].textMode);
   const [error, setError] = useState(false);
+  const makeRequest = useRestRequest();
   const dispatch = useAppDispatch();
+  const t = useTranslations('RestPage');
 
   const formatText = () => {
     const result = ConvertToValidJsonString(value);
@@ -51,7 +56,7 @@ export default function RestBody() {
           value="text"
           checked={textMode}
           control={<Radio size="small" />}
-          label="Text"
+          label={t('text')}
           onChange={() => handleModeChange(true)}
         />
       </RadioGroup>
@@ -59,7 +64,7 @@ export default function RestBody() {
         <IconButton
           color="info"
           onClick={formatText}
-          title="Make pretty (JSON only)"
+          title={t('pretty')}
           aria-label="Make pretty"
           sx={{
             position: 'absolute',
@@ -78,6 +83,7 @@ export default function RestBody() {
         extensions={[json()]}
         onChange={(e) => dispatch(setRestBody(e))}
         editable={true}
+        onBlur={makeRequest}
       />
 
       <Snackbar
@@ -87,7 +93,7 @@ export default function RestBody() {
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
         <Alert severity="error" onClose={() => setError(false)}>
-          Prettifying is available only for valid JSON
+          {t('pretty-error')}
         </Alert>
       </Snackbar>
     </Box>

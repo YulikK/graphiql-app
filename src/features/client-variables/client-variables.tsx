@@ -23,6 +23,7 @@ export default function ClientVariables({
 
   const changeItem = (object: ChangeVariableItem) =>
     dispatch(setVariable(object));
+
   return (
     <ClientList
       dataList={variables}

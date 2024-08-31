@@ -22,6 +22,7 @@ export default function ClientHeaders({
 
   const changeItem = (object: ChangeVariableItem) =>
     dispatch(setHeader(object));
+
   return (
     <ClientList
       dataList={headers}

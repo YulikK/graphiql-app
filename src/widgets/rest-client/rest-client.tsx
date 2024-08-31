@@ -1,11 +1,13 @@
 'use client';
+import { useTranslations } from 'next-intl';
+
 import { Box, Stack, Tab, Tabs } from '@mui/material';
 import { useState } from 'react';
 
 import ClientEndpoint from '@/features/client-endpoint/client-endpoint';
 import ClientHeaders from '@/features/client-headers/client-headers';
 import ClientVariables from '@/features/client-variables/client-variables';
-import { RestSubmit, RestQuery, RestMethod, RestBody } from '@/features/rest';
+import { RestBody, RestMethod, RestQuery, RestSubmit } from '@/features/rest';
 import {
   deleteRestHeader,
   deleteRestVariables,
@@ -16,10 +18,12 @@ import {
 
 export default function RestClient() {
   const [index, setIndex] = useState(0);
+  const t = useTranslations('RestPage');
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setIndex(newValue);
   };
+
   return (
     <Box flexGrow={1}>
       <Box display={'flex'}>
@@ -37,10 +41,10 @@ export default function RestClient() {
           onChange={handleChange}
           aria-label="basic tabs example"
         >
-          <Tab label="Query" />
-          <Tab label="Body" />
-          <Tab label="Headers" />
-          <Tab label="Variables" />
+          <Tab label={t('query')} />
+          <Tab label={t('body')} />
+          <Tab label={t('headers')} />
+          <Tab label={t('variables')} />
         </Tabs>
       </Box>
       <Stack>

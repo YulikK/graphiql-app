@@ -1,4 +1,6 @@
 'use client';
+import { useTranslations } from 'next-intl';
+
 import { json } from '@codemirror/lang-json';
 import { Box, Typography } from '@mui/material';
 import ReactCodeMirror from '@uiw/react-codemirror';
@@ -11,9 +13,13 @@ interface Props {
 }
 
 export default function ResponseViewer({ value, status }: Props) {
+  const t = useTranslations('RestPage');
+
   return (
     <Box>
-      <Typography>Status: {status}</Typography>
+      <Typography>
+        {t('status')}: {status}
+      </Typography>
       <ReactCodeMirror
         value={convertToJsonString(value)}
         extensions={[json()]}

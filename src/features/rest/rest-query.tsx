@@ -14,6 +14,7 @@ export default function RestQuery() {
 
   const changeItem = (value: ChangeVariableItem) =>
     dispatch(setRestQuery(value));
+
   return (
     <ClientList
       dataList={query}
