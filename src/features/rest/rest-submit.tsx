@@ -1,40 +1,10 @@
-import { useLocale } from 'next-intl';
-
 import { Button } from '@mui/material';
 
-import { useRouter } from 'next/navigation';
-
-import { useAppSelector } from '@/shared/hooks/redux-hooks';
-import encodeToBase64 from '@/shared/utils/encode-to-base64';
-import sanitizeJsonString from '@/shared/utils/sanitize-json-string';
+import useRestRequest from '@/shared/hooks/use-rest-request';
 
 export default function RestSubmit() {
-  const router = useRouter();
-  const locale = useLocale();
-  const { method, url, body, headers, variables, textMode } = useAppSelector(
-    (state) => state['rest-slice']
-  );
-  const makeRequest = () => {
-    if (!url) return;
-    const urlWithVariables = variables.reduce(
-      (acc, [key, value]) => acc.replaceAll(`{{${key}}}`, value),
-      url
-    );
-    const codedUrl = encodeToBase64(
-      `${urlWithVariables.trim().replaceAll(' ', '')}`
-    );
-    const codedBody = textMode
-      ? encodeToBase64(body)
-      : encodeToBase64(sanitizeJsonString(body));
+  const makeRequest = useRestRequest();
 
-    const codedHeaders = new URLSearchParams(
-      Object.fromEntries(headers.filter(([key, value]) => key && value))
-    );
-
-    router.push(
-      `/${locale}/rest/${method}/${codedUrl}/${codedBody}${codedHeaders ? `?${codedHeaders}` : ''}`
-    );
-  };
   return (
     <Button variant="contained" onClick={makeRequest}>
       Send

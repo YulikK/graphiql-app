@@ -13,8 +13,7 @@ export default function ResponseViewer({ value }: Props) {
     <ReactCodeMirror
       value={convertToJsonString(value)}
       extensions={[json()]}
-      height="100%"
-      maxHeight="200px"
+      height="200px"
       editable={false}
       style={{ fontSize: '18px', backgroundColor: 'transparent' }}
     />
