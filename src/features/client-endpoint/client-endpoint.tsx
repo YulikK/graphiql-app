@@ -1,8 +1,8 @@
 import { TextField } from '@mui/material';
 
 import { useAppDispatch, useAppSelector } from '@/shared/hooks/redux-hooks';
+import { SliceName } from '@/shared/models/slice-name';
 import RestSlice from '@/shared/store/slices/rest-slice';
-import { SliceName } from '@/shared/types/slice-name';
 
 interface Props {
   sliceKey: SliceName;

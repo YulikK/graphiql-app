@@ -1,8 +1,8 @@
-import { Select, MenuItem } from '@mui/material';
+import { MenuItem, Select } from '@mui/material';
 
-import { useAppSelector, useAppDispatch } from '@/shared/hooks/redux-hooks';
+import { useAppDispatch, useAppSelector } from '@/shared/hooks/redux-hooks';
+import { HttpMethods } from '@/shared/models/http-methods';
 import { setRestMethod } from '@/shared/store/slices/rest-slice';
-import { HttpMethods } from '@/shared/types/http-methods';
 
 const httpMethods: HttpMethods[] = [
   'GET',

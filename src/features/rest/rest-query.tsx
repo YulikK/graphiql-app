@@ -1,5 +1,5 @@
-import { useAppSelector, useAppDispatch } from '@/shared/hooks/redux-hooks';
-import ChangeVariableItem from '@/shared/interfaces/change-variable-item';
+import { useAppDispatch, useAppSelector } from '@/shared/hooks/redux-hooks';
+import ChangeVariableItem from '@/shared/models/change-variable-item';
 import {
   deleteRestQuery,
   setRestQuery,
@@ -12,8 +12,8 @@ export default function RestQuery() {
   const dispatch = useAppDispatch();
   const deleteItem = (index: number) => dispatch(deleteRestQuery(index));
 
-  const changeItem = (object: ChangeVariableItem) =>
-    dispatch(setRestQuery(object));
+  const changeItem = (value: ChangeVariableItem) =>
+    dispatch(setRestQuery(value));
   return (
     <ClientList
       dataList={query}

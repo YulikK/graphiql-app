@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import ChangeVariableItem from '@/shared/interfaces/change-variable-item';
-import { HttpMethods } from '@/shared/types/http-methods';
+import ChangeVariableItem from '@/shared/models/change-variable-item';
+import { HttpMethods } from '@/shared/models/http-methods';
 import checkLastTuple from '@/shared/utils/check-last-tuple';
 import updateUlrAndQuery from '@/shared/utils/update-url-and-query';
 

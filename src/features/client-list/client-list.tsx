@@ -1,7 +1,7 @@
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { Box, IconButton, Stack, TextField } from '@mui/material';
 
-import ChangeVariableItem from '@/shared/interfaces/change-variable-item';
+import ChangeVariableItem from '@/shared/models/change-variable-item';
 
 interface Props {
   dataList: string[][];

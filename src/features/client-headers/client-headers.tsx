@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from '@/shared/hooks/redux-hooks';
-import ChangeVariableItem from '@/shared/interfaces/change-variable-item';
+import ChangeVariableItem from '@/shared/models/change-variable-item';
+import { SliceName } from '@/shared/models/slice-name';
 import RestSlice from '@/shared/store/slices/rest-slice';
-import { SliceName } from '@/shared/types/slice-name';
 
 import ClientList from '../client-list/client-list';
 

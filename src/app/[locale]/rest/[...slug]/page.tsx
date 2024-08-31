@@ -15,18 +15,17 @@ interface RequestParams
 
 const makeRequest = async ({ method, url, body, headers }: RequestParams) => {
   try {
-    const data = await fetch(url, {
+    const response = await fetch(url, {
       method,
       headers: method === 'GET' ? {} : headers,
       body: method === 'GET' ? null : body,
     });
-    const result = await data.json();
-    return result;
-  } catch (e) {
-    if (e instanceof Error && 'message' in e) {
-      return e.message;
-    }
-    return 'Error. Invalid URL';
+    const { status } = response;
+    const result = await response.json();
+    return { result, status };
+  } catch (error) {
+    const e = error as Error;
+    return { result: e.message, status: 500 };
   }
 };
 
@@ -35,14 +34,14 @@ export default async function RestResult({ params, searchParams = {} }: Props) {
     decodeURIComponent(item)
   );
   const decodedUrl = decodeFromBase64(url);
-  const decodeBody = decodeFromBase64(body);
+  const decodedBody = decodeFromBase64(body);
 
-  const result = await makeRequest({
-    body: decodeBody,
+  const { result, status } = await makeRequest({
+    body: decodedBody,
     method,
     url: decodedUrl,
     headers: searchParams,
   });
 
-  return <ResponseViewer value={result || ''} />;
+  return <ResponseViewer value={result || ''} status={status} />;
 }
