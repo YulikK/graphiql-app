@@ -109,9 +109,17 @@ const lightTheme = createTheme({
     MuiPaper: {
       styleOverrides: {
         root: {
-          '& > .developer-info': {
+          '& > .accordion-info': {
             background: '#f0f0f0',
           },
+        },
+      },
+    },
+    MuiAccordion: {
+      styleOverrides: {
+        root: {
+          color: '#545454',
+          background: 'rgba(255, 255, 255, 0.4)',
         },
       },
     },
@@ -226,8 +234,19 @@ const darkTheme = createTheme({
     MuiPaper: {
       styleOverrides: {
         root: {
-          '& > .developer-info': {
+          '& > .accordion-info': {
             background: '#8764e1',
+          },
+        },
+      },
+    },
+    MuiAccordion: {
+      styleOverrides: {
+        root: {
+          color: '#cbcbf2',
+          background: '#00000060',
+          '& > img': {
+            filter: 'invert(1)',
           },
         },
       },

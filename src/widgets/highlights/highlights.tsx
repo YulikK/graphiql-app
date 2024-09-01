@@ -15,9 +15,9 @@ const icons: string[] = [rest, graphql, pretty, auth, lang, history];
 
 export default function Highlights() {
   const t = useTranslations('WelcomePage');
-  const titles: string[] = JSON.parse(t('welcome-titles').replace(/'/g, '"'));
+  const titles: string[] = JSON.parse(t('highlights-names').replace(/'/g, '"'));
   const descriptions: string[] = JSON.parse(
-    t('welcome-descriptions').replace(/'/g, '"')
+    t('highlights-descriptions').replace(/'/g, '"')
   );
 
   return (
@@ -30,7 +30,7 @@ export default function Highlights() {
       paddingBlock={14}
     >
       <Typography variant="h2" textAlign={'center'} fontWeight={400}>
-        What we offer
+        {t('highlights-title')}
       </Typography>
       <Grid container spacing={4}>
         {titles.map((el, i) => (

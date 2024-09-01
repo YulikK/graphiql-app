@@ -65,25 +65,25 @@ export default function Welcome({ locale }: { locale: string }) {
               variant="contained"
               LinkComponent={Link}
               href={`/${locale}`}
-              sx={{ padding: '10px 30px' }}
+              sx={{ padding: '10px 30px', textAlign: 'center' }}
             >
-              REST Client
+              {t('rest-client')}
             </Button>
             <Button
               variant="contained"
               LinkComponent={Link}
               href={`/${locale}`}
-              sx={{ padding: '10px 30px' }}
+              sx={{ padding: '10px 30px', textAlign: 'center' }}
             >
-              GraphiQL Client
+              {t('graphiql-client')}
             </Button>
             <Button
               variant="outlined"
               LinkComponent={Link}
               href={`/${locale}`}
-              sx={{ padding: '10px 30px' }}
+              sx={{ padding: '10px 30px', textAlign: 'center' }}
             >
-              History
+              {t('history')}
             </Button>
           </Box>
         )}

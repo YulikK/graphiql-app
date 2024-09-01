@@ -11,12 +11,12 @@ interface DeveloperProps {
   children: React.ReactNode;
 }
 
-export default function CustomBox(props: DeveloperProps) {
+export default function CustomAccordion(props: DeveloperProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <Box
-      className="developer-info"
+      className="accordion-info"
       sx={{
         borderBottomRightRadius: '10px',
         borderBottomLeftRadius: '10px',

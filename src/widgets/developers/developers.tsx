@@ -51,9 +51,11 @@ const tech: { [key: string]: string[] } = {
 
 export default function Developers() {
   const t = useTranslations('WelcomePage');
-  const names: string[] = JSON.parse(t('welcome-names').replace(/'/g, '"'));
-  const roles: string[] = JSON.parse(t('welcome-roles').replace(/'/g, '"'));
-  const skills: string[] = JSON.parse(t('welcome-skills').replace(/'/g, '"'));
+  const names: string[] = JSON.parse(t('developers-names').replace(/'/g, '"'));
+  const roles: string[] = JSON.parse(t('developers-roles').replace(/'/g, '"'));
+  const skills: string[] = JSON.parse(
+    t('developers-skills').replace(/'/g, '"')
+  );
 
   return (
     <Box
@@ -65,7 +67,7 @@ export default function Developers() {
       paddingBlock={14}
     >
       <Typography variant="h2" textAlign={'center'} fontWeight={400}>
-        Our team
+        {t('developers-title')}
       </Typography>
       <Grid container spacing={2}>
         {names.map((el, i) => (

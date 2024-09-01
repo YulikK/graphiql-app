@@ -3,7 +3,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 
 import Image, { StaticImageData } from 'next/image';
 
-import CustomBox from '../custom-box/custom-box';
+import CustomAccordion from '../custom-accordion/custom-accordion';
 
 interface DeveloperProps {
   name: string;
@@ -12,8 +12,6 @@ interface DeveloperProps {
   photo: StaticImageData;
   tech: string[];
 }
-
-const skill = ['react', 'redux', 'next', 'css', 'html'];
 
 export default function Developer(props: DeveloperProps) {
   return (
@@ -61,7 +59,7 @@ export default function Developer(props: DeveloperProps) {
             alt={`${props.name}`}
           />
         </Box>
-        <CustomBox>
+        <CustomAccordion>
           <Typography variant="h5" textAlign={'center'} fontWeight={600}>
             {props.name}
           </Typography>
@@ -81,7 +79,7 @@ export default function Developer(props: DeveloperProps) {
           <Typography variant="body1" textAlign={'center'} marginTop={'auto'}>
             {props.skills}
           </Typography>
-        </CustomBox>
+        </CustomAccordion>
       </Paper>
     </Grid>
   );
