@@ -14,7 +14,10 @@
     "welcome-text": "Explore and interact with APIs effortlessly using our powerful yet lightweight tool combining the best of Postman and GraphiQL. Whether you're working with RESTful APIs or GraphQL endpoints, our platform provides a seamless experience to execute requests, view responses, and manage your API interactions.",
     "welcome-titles": "['RESTful Client', 'GraphiQL', 'Query Prettifying', 'Authentication', 'Internationalization', 'Request History']",
     "welcome-descriptions": "['Easily perform and manage your RESTful API requests with a user-friendly interface designed for efficiency.', 'Take advantage of our built-in GraphiQL interface for smooth and intuitive GraphQL queries and mutations.', 'Automatically format and organize your queries for improved readability and maintenance.', 'Ensure your data is secure with built-in Firebase authentication.', 'Choose your preferred language for a personalized experience.', 'Easily revisit and rerun previous API requests with our comprehensive history feature.']",
-    "welcome-teams": "Used by top teams across the globe"
+    "welcome-teams": "Used by top teams across the globe",
+    "welcome-names": "['Yuliya Kursevich', 'Dmitry Gaponenko', 'Yuliya Karuk']",
+    "welcome-roles": "['Team Lead. Frontend Developer', 'Frontend Developer', 'Frontend Developer']",
+    "welcome-skills": "['She has experience working with React, Redux, MUI, Next.js (SSR), etc. Always open to new knowledge. Excellent team player and is always ready to help her colleagues.', 'He has a strong background in React and Redux, MUI, Next.js (SSR). Analytical thinking.  Eager to learn new things, works well in a team.', 'She has a solid foundation in React and Redux, MUI, Next.js (SSR). Skilled in code refactoring. Collaborative by nature, flexible and is always eager to expand her skill set.']"
   },
   "RegistrationPage": {
     "title": "Registration",

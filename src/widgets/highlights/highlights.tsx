@@ -11,7 +11,7 @@ import pretty from '@/assets/pretty.svg';
 import rest from '@/assets/rest.svg';
 import Highlight from '@/entities/highlight/highlight';
 
-const icons = [rest, graphql, pretty, auth, lang, history];
+const icons: string[] = [rest, graphql, pretty, auth, lang, history];
 
 export default function Highlights() {
   const t = useTranslations('WelcomePage');

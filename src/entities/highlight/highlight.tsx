@@ -19,6 +19,7 @@ export default function Highlight(props: HighlightProps) {
           flexDirection: 'column',
           alignItems: 'center',
           gap: '20px',
+          padding: '25px',
         }}
       >
         <Image

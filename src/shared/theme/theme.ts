@@ -90,19 +90,27 @@ const lightTheme = createTheme({
     MuiGrid2: {
       styleOverrides: {
         root: {
-          '& > .MuiPaper-root': {
+          '& > .item': {
             border: '1px solid rgba(255, 255, 255, 0.1)',
             borderRadius: '10px',
-            padding: '25px',
             transition: 'all 0.3s ease-in-out',
             background:
               'linear-gradient(180deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.5) 100%)',
           },
-          '& > .MuiPaper-root:hover': {
+          '& > .item:hover': {
             transform: 'translateY(-5px) scale(1.01)',
             boxShadow: '0 8px 16px rgba(0, 0, 0, 0.2)',
             background: '#f0f0f0',
             zIndex: '2',
+          },
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          '& > .developer-info': {
+            background: '#f0f0f0',
           },
         },
       },
@@ -195,22 +203,31 @@ const darkTheme = createTheme({
     MuiGrid2: {
       styleOverrides: {
         root: {
-          '& > .MuiPaper-root': {
+          '& > .item': {
             border: '1px solid rgba(255, 255, 255, 0.1)',
             borderRadius: '10px',
             padding: '25px',
             transition: 'all 0.3s ease-in-out',
             background: '#00000020',
           },
-          '& > .MuiPaper-root:hover': {
+          '& > .item:hover': {
             transform: 'translateY(-5px) scale(1.01)',
             boxShadow: '0 8px 16px rgba(0, 0, 0, 0.2)',
             background:
               'linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.3) 100%)',
             zIndex: '2',
           },
-          '& > .MuiPaper-root img': {
+          '& > .item img': {
             filter: 'invert(1)',
+          },
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          '& > .developer-info': {
+            background: '#8764e1',
           },
         },
       },
@@ -219,6 +236,9 @@ const darkTheme = createTheme({
       styleOverrides: `
         .footer {
           background-color: #ffffff20;
+        }
+        .developer-btn img {
+          filter: invert(1);
         }
       `,
     },

@@ -45,3 +45,18 @@ body {
     transform: rotate(360deg);
   }
 }
+
+.developer-img {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+@media screen and (max-width: 900px) {
+  .developer-img {
+    height: auto;
+    max-height: 100px;
+  }
+}
