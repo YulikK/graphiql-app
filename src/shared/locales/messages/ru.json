@@ -1,12 +1,52 @@
 {
   "Header": {
     "sign-in": "Войти",
-    "sign-out": "Выйти"
+    "sign-out": "Выйти",
+    "authentication-loading": "Подождите, идет процесс аутентификации",
+    "success-logout-message": "Поздравляем, вы успешно вышли из приложения!",
+    "unexpected-error": "Произошла неожиданная ошибка."
   },
   "WelcomePage": {
     "title-anonymous": "Добро пожаловать",
     "title-registered": "С возвращением,",
     "sign-in": "Войти",
     "sign-up": "Регистрация"
+  },
+  "RegistrationPage": {
+    "title": "Регистрация",
+    "name-input": "Имя",
+    "email-input": "Эл. почта",
+    "password-input": "Пароль",
+    "confirm-input": "Подтвердите пароль",
+    "accept-term-input": "Я прочитал(а) и согласен(сна) с Условиями обслуживания",
+    "sign-up-button": "Войти",
+    "login-text": "У вас уже есть аккаунт?",
+    "login-link": "Войти",
+    "authentication-loading": "Подождите, идет процесс аутентификации",
+    "success-register-message": "Поздравляем, вы успешно зарегистрировались!",
+    "unexpected-error": "Произошла неожиданная ошибка."
+  },
+  "LoginPage": {
+    "title": "Войти",
+    "email-input": "Эл. почта",
+    "password-input": "Пароль",
+    "sign-up-button": "Войти",
+    "registration-text": "У вас нет аккаунта?",
+    "registration-link": "Регистрация",
+    "google-text": "Войти с Google",
+    "authentication-loading": "Подождите, идет процесс аутентификации",
+    "success-login-message": "Поздравляем, вы успешно залогинились!",
+    "unexpected-error": "Произошла неожиданная ошибка."
+  },
+  "Validation": {
+    "name-capitalized": "Имя должно начинаться с заглавной буквы и содержать только строчные буквы после",
+    "name-required": "Имя — обязательное поле",
+    "email-required": "Email — обязательное поле",
+    "email-invalid": "Email должен быть в правильном формате",
+    "password-required": "Пароль — обязательное поле",
+    "password-min-length": "Пароль должен содержать минимум {min} символов",
+    "password-strength": "Пароль должен содержать 1 цифру, 1 заглавную букву, 1 строчную букву и 1 специальный символ",
+    "confirm-password-required": "Подтверждение пароля — обязательное поле",
+    "passwords-must-match": "Пароли должны совпадать"
   }
 }

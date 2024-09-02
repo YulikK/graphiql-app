@@ -1,0 +1,17 @@
+{
+  "editor.formatOnSave": true,
+  "[typescript][typescriptreact]": {
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    }
+  },
+  "files.insertFinalNewline": true,
+  "cSpell.words": [
+    "toastify",
+    "nextjs",
+    "hookform",
+    "consts",
+    "firestore",
+    "roboto"
+  ]
+}

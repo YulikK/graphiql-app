@@ -1,5 +1,6 @@
-import { Container, Stack } from '@mui/material';
 import { NextIntlClientProvider } from 'next-intl';
+
+import { Container, Stack } from '@mui/material';
 import { getMessages } from 'next-intl/server';
 
 import Footer from '@/widgets/footer/footer.tsx';
