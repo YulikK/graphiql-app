@@ -30,7 +30,7 @@ export const Docs = ({ url }: DocsProps) => {
       <IconButton
         size="small"
         color="primary"
-        sx={{ p: '10px' }}
+        sx={{ p: '10px', ml: 'auto' }}
         aria-label="directions"
         onClick={handleToggleDoc}
       >

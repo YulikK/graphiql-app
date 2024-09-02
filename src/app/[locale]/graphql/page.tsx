@@ -1,43 +1,23 @@
 'use client';
 
-import { json } from '@codemirror/lang-json';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import SendIcon from '@mui/icons-material/Send';
-import { TabContext, TabList, TabPanel } from '@mui/lab';
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Box,
-  Button,
-  Divider,
-  IconButton,
-  InputBase,
-  Paper,
-  Tab,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from '@mui/material';
-import { materialLight } from '@uiw/codemirror-theme-material';
-import ReactCodeMirror from '@uiw/react-codemirror';
-import { graphql } from 'cm6-graphql';
+import 'allotment/dist/style.css';
+import './resize-custom.css';
+import { Box, debounce } from '@mui/material';
+import { Allotment, AllotmentHandle } from 'allotment';
 import {
   buildClientSchema,
   getIntrospectionQuery,
   GraphQLSchema,
 } from 'graphql';
-import { SyntheticEvent, useEffect, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
-import { Docs } from '@/widgets/docs/docs';
+import style from './page.module.css';
 
-type Header = {
-  key: string;
-  value: string;
-};
+import { CodeEditor } from '@/features/code-editor/code-editor';
+import { Header } from '@/shared/types/types';
+import { SettingsTab } from '@/widgets/settings-tab/settings-tab';
+
+const TAB_HEAD_SIZE = 48;
 
 const fetchSchema = async (url: string) => {
   const response = await fetch(url, {
@@ -55,15 +35,16 @@ const fetchSchema = async (url: string) => {
 };
 
 export default function GraphQlPage() {
-  const [variables, setVariables] = useState('{}');
   const [graphqlQuery, setGraphqlQuery] = useState('');
-  const [activeTab, setActiveTab] = useState('headers');
+  const [schema, setSchema] = useState<GraphQLSchema | null>(null);
+  const [response, setResponse] = useState('');
+  const [isSettingsHide, setIsSettingsHide] = useState(true);
+  const refAllotment = useRef<AllotmentHandle>(null);
   const [url, setUrl] = useState(
     'https://swapi-graphql.netlify.app/.netlify/functions/index'
   );
-  const [schema, setSchema] = useState<GraphQLSchema | null>(null);
+  const [variables, setVariables] = useState('{}');
   const [headers, setHeaders] = useState<Header[]>([{ key: '', value: '' }]);
-  const [response, setResponse] = useState('');
 
   useEffect(() => {
     fetchSchema(`${url}?sdl`).then((newSchema) => {
@@ -73,31 +54,30 @@ export default function GraphQlPage() {
     });
   }, [url]);
 
-  const handleTabChange = (event: SyntheticEvent, newValue: string) => {
-    event.stopPropagation();
+  const onMaximize = () => {
+    setIsSettingsHide(false);
+    if (refAllotment.current) {
+      refAllotment.current.resize([300, 500]);
+    }
+  };
+  const onMinimize = () => {
+    setIsSettingsHide(true);
+    if (refAllotment.current) {
+      refAllotment.current.reset();
+    }
+  };
 
-    setActiveTab(newValue);
-  };
-  const handleJsonChange = (value: string) => {
-    setVariables(value);
-  };
   const handleGraphqlChange = (value: string) => {
     setGraphqlQuery(value);
   };
 
-  const handleUrlChange = (value: string) => {
-    setUrl(value);
-  };
-
-  const handleAddRow = () => {
-    setHeaders([...headers, { key: '', value: '' }]);
-  };
-
-  const handleInputChange = (index: number, field: string, value: string) => {
-    const newRows = [...headers];
-    newRows[index] = { ...newRows[index], [field]: value };
-    setHeaders(newRows);
-  };
+  const handleChange = useMemo(
+    () =>
+      debounce((sizes) => {
+        setIsSettingsHide(sizes[0] === TAB_HEAD_SIZE);
+      }, 100),
+    []
+  );
 
   const handleSendRequest = async () => {
     const headersObject = Object.fromEntries(
@@ -122,138 +102,49 @@ export default function GraphQlPage() {
   };
 
   return (
-    <Box component="section" margin="20px 0" width="100%">
-      <Paper
-        component="form"
-        sx={{
-          p: '2px 4px',
-          display: 'flex',
-          alignItems: 'center',
-        }}
+    <Box className={style.container}>
+      <Allotment
+        className={style.splitViewContainer}
+        ref={refAllotment}
+        vertical
+        onChange={handleChange}
       >
-        <InputBase
-          size="small"
-          sx={{ ml: 1, flex: 1 }}
-          placeholder="endpoint"
-          inputProps={{ 'aria-label': 'URL' }}
-          value={url}
-          onChange={(e) => handleUrlChange(e.target.value)}
-          fullWidth
-        />
-
-        <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-        <IconButton
-          size="small"
-          color="primary"
-          sx={{ p: '10px' }}
-          aria-label="directions"
-          onClick={handleSendRequest}
+        <Allotment.Pane
+          minSize={TAB_HEAD_SIZE}
+          preferredSize={`${TAB_HEAD_SIZE}px`}
+          className={style.pane}
         >
-          <SendIcon />
-        </IconButton>
-        <Docs url={url} />
-      </Paper>
-
-      <TabContext value={activeTab}>
-        <Accordion disableGutters={true}>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-label="Expand"
-            aria-controls="additional-actions1-content"
-            id="additional-actions1-header"
-            sx={{ margin: 0 }}
-          >
-            <Box
-              sx={{
-                borderBottom: 1,
-                borderColor: 'divider',
-                width: '100%',
-              }}
-            >
-              <TabList onChange={handleTabChange} aria-label="request params">
-                <Tab label="Variables" value="variables" />
-                <Tab label="Headers" value="headers" />
-              </TabList>
-            </Box>
-          </AccordionSummary>
-          <AccordionDetails sx={{ padding: 0 }}>
-            <TabPanel value="variables" sx={{ padding: 0 }}>
-              <ReactCodeMirror
-                value={variables}
-                height="200px"
-                extensions={[json()]}
-                theme={materialLight}
-                onChange={(value) => handleJsonChange(value)}
-              />
-            </TabPanel>
-            <TabPanel value="headers" sx={{ padding: 0 }}>
-              <Box padding={2}>
-                <TableContainer component={Paper}>
-                  <Table size="small">
-                    <TableHead>
-                      <TableRow>
-                        <TableCell>Key</TableCell>
-                        <TableCell>Value</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {headers.map((row, index) => (
-                        <TableRow key={index} hover={true}>
-                          <TableCell>
-                            <InputBase
-                              value={row.key}
-                              placeholder="Key"
-                              onChange={(e) =>
-                                handleInputChange(index, 'key', e.target.value)
-                              }
-                              fullWidth
-                            />
-                          </TableCell>
-                          <TableCell sx={{ padding: 0 }}>
-                            <InputBase
-                              value={row.value}
-                              placeholder="Value"
-                              onChange={(e) =>
-                                handleInputChange(
-                                  index,
-                                  'value',
-                                  e.target.value
-                                )
-                              }
-                              fullWidth
-                            />
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-                <Button
-                  variant="contained"
-                  onClick={handleAddRow}
-                  sx={{ marginTop: 2 }}
-                >
-                  Add Row
-                </Button>
-              </Box>
-            </TabPanel>
-          </AccordionDetails>
-        </Accordion>
-      </TabContext>
-      <ReactCodeMirror
-        value={graphqlQuery}
-        height="200px"
-        theme={materialLight}
-        extensions={schema ? [graphql(schema)] : []}
-        onChange={(value) => handleGraphqlChange(value)}
-      />
-      <ReactCodeMirror
-        value={response}
-        height="200px"
-        extensions={[json()]}
-        theme={materialLight}
-        editable={false}
-      />
+          <SettingsTab
+            url={url}
+            setUrl={setUrl}
+            headers={headers}
+            setHeaders={setHeaders}
+            variables={variables}
+            setVariables={setVariables}
+            isSettingsHide={isSettingsHide}
+            onMaximize={onMaximize}
+            onMinimize={onMinimize}
+          />
+        </Allotment.Pane>
+        <Allotment.Pane minSize={100} className={style.pane}>
+          <Box className={style['editors-container']}>
+            <Allotment snap>
+              <Allotment.Pane snap preferredSize="50%" className={style.wrap}>
+                <CodeEditor
+                  isGraphQl={true}
+                  schema={schema}
+                  value={graphqlQuery}
+                  onChange={handleGraphqlChange}
+                  onSubmit={handleSendRequest}
+                />
+              </Allotment.Pane>
+              <Allotment.Pane snap preferredSize="50%" className={style.wrap}>
+                <CodeEditor value={response} isEdit={false} />
+              </Allotment.Pane>
+            </Allotment>
+          </Box>
+        </Allotment.Pane>
+      </Allotment>
     </Box>
   );
 }
