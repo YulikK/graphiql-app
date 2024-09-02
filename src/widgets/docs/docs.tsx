@@ -1,8 +1,8 @@
-import { GraphiQLProvider, DocExplorer } from '@graphiql/react';
+import { DocExplorer, GraphiQLProvider } from '@graphiql/react';
 import { createGraphiQLFetcher } from '@graphiql/toolkit';
 import ArticleIcon from '@mui/icons-material/Article';
 import { Box, Drawer, IconButton, TextField } from '@mui/material';
-import 'graphiql/graphiql.css';
+import 'graphiql/graphiql.min.css';
 import { useState } from 'react';
 
 type DocsProps = {

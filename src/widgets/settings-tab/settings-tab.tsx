@@ -21,11 +21,11 @@ import {
 import { Allotment } from 'allotment';
 import { SyntheticEvent, useState } from 'react';
 
-import style from './settings-tab.module.css';
-
 import { CodeEditor } from '@/features/code-editor/code-editor';
 import { Header } from '@/shared/types/types';
 import { Docs } from '@/widgets/docs/docs';
+
+import style from './settings-tab.module.css';
 
 type SettingsTabProps = {
   url: string;

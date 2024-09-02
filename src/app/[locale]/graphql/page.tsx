@@ -1,21 +1,21 @@
 'use client';
 
-import 'allotment/dist/style.css';
-import './resize-custom.css';
 import { Box, debounce } from '@mui/material';
 import { Allotment, AllotmentHandle } from 'allotment';
+import 'allotment/dist/style.css';
 import {
   buildClientSchema,
   getIntrospectionQuery,
   GraphQLSchema,
 } from 'graphql';
 import { useEffect, useMemo, useRef, useState } from 'react';
-
-import style from './page.module.css';
+import './resize-custom.css';
 
 import { CodeEditor } from '@/features/code-editor/code-editor';
 import { Header } from '@/shared/types/types';
 import { SettingsTab } from '@/widgets/settings-tab/settings-tab';
+
+import style from './page.module.css';
 
 const TAB_HEAD_SIZE = 48;
 
