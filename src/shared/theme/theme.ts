@@ -34,19 +34,19 @@ const lightTheme = createTheme({
     MuiButton: {
       styleOverrides: {
         outlinedPrimary: {
-          backgroundColor: '#e8def8',
+          backgroundColor: '#99aef3',
           borderColor: '#ffffff20',
           boxShadow:
             '0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)',
           '&:hover': {
-            backgroundColor: '#e8def860',
+            backgroundColor: '#99aef360',
             borderColor: '#ffffff20',
           },
         },
         containedPrimary: {
-          backgroundColor: '#8a88e2',
+          backgroundColor: '#4c67bd',
           '&:hover': {
-            backgroundColor: '#abaaea',
+            backgroundColor: '#9fb3f4',
           },
         },
       },
@@ -66,7 +66,7 @@ const lightTheme = createTheme({
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
-          backgroundColor: '#00000020',
+          backgroundColor: '#d3dcfa',
           color: '#3e3d98',
           '&:hover .MuiOutlinedInput-notchedOutline': {
             borderColor: '#3e3d98',
@@ -123,10 +123,25 @@ const lightTheme = createTheme({
         },
       },
     },
+    MuiLink: {
+      styleOverrides: {
+        root: {
+          textDecoration: 'none',
+          '&:hover': {
+            transform: 'scale(1.05)',
+            transition: 'all 0.3s ease-in-out',
+          },
+        },
+      },
+    },
     MuiCssBaseline: {
       styleOverrides: `
         .footer {
-          background-color: #00000030;
+          background-color: #c1cef7;
+          box-shadow: 2px -1px 4px -1px rgba(0, 0, 0, 0.2);
+        }
+        .github-icon {
+          fill: #000000;
         }
       `,
     },
@@ -140,7 +155,7 @@ const darkTheme = createTheme({
       main: '#ffffff;',
     },
     secondary: {
-      main: '#8f8ee4',
+      main: '#c1d4f6',
     },
   },
   typography: {
@@ -150,14 +165,14 @@ const darkTheme = createTheme({
     MuiAppBar: {
       styleOverrides: {
         root: {
-          backgroundColor: 'rgba(0, 0, 0, 0.1)',
+          backgroundColor: 'rgba(255, 255, 255, 0.2)',
         },
       },
     },
     MuiButton: {
       styleOverrides: {
         outlinedPrimary: {
-          backgroundColor: '#00000060',
+          backgroundColor: '#9c89ad',
           borderColor: '#ffffff20',
           '&:hover': {
             backgroundColor: '#ffffff40',
@@ -187,7 +202,7 @@ const darkTheme = createTheme({
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
-          backgroundColor: '#ffffff30',
+          backgroundColor: '#5b5575',
           color: '#cbcbf2',
           '&:hover .MuiOutlinedInput-notchedOutline': {
             borderColor: '#cbcbf2',
@@ -251,12 +266,29 @@ const darkTheme = createTheme({
         },
       },
     },
+    MuiLink: {
+      styleOverrides: {
+        root: {
+          textDecoration: 'none',
+          '&:hover': {
+            transform: 'scale(1.05)',
+            transition: 'all 0.3s ease-in-out',
+          },
+        },
+      },
+    },
     MuiCssBaseline: {
       styleOverrides: `
+        .logo {
+          filter: invert(1);
+        }
         .footer {
           background-color: #ffffff20;
         }
         .developer-btn img {
+          filter: invert(1);
+        }
+        .rs-icon {
           filter: invert(1);
         }
       `,

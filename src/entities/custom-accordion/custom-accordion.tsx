@@ -31,8 +31,11 @@ export default function CustomAccordion(props: DeveloperProps) {
         marginTop: 'auto',
         transition: 'all 0.3s ease-in-out',
         '@media (max-width: 900px)': {
-          borderRadius: '10px',
+          borderBottomLeftRadius: '0',
+          borderTopRightRadius: '10px',
           width: '85%',
+          marginBottom: 'auto',
+          marginTop: 'unset',
         },
       }}
     >

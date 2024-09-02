@@ -10,6 +10,7 @@ export const Logo = () => {
   return (
     <Link href={`/${locale}`}>
       <Image
+        className="logo"
         src={logo}
         alt="Logo"
         style={{

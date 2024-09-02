@@ -31,6 +31,10 @@ body {
   flex-direction: column;
 }
 
+a {
+  transition: all 0.3s ease-in-out;
+}
+
 .earth {
   animation: rotate 10s linear infinite;
   width: 350px;
@@ -58,5 +62,11 @@ body {
   .developer-img {
     height: auto;
     max-height: 100px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
   }
+}
+
+.github-link {
+  text-decoration: none;
 }

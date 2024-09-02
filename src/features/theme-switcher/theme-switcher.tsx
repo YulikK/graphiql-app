@@ -26,9 +26,10 @@ export const ThemeSwitcher = () => {
               width: 70,
               height: 40,
               padding: 0,
+              filter: 'drop-shadow(2px 3px 2px #00000050)',
               '& .MuiSwitch-track': {
                 borderRadius: 40 / 2,
-                backgroundColor: darkMode ? '#4e495e' : '#d5dff9',
+                backgroundColor: '#d5dff9',
                 opacity: 1,
                 height: '100%',
                 width: '100%',
