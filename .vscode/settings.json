@@ -13,6 +13,6 @@
     "consts",
     "firestore",
     "roboto",
-    "GraphiQL",
+    "GraphiQL"
   ]
 }
