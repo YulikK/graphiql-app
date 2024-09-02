@@ -24,7 +24,6 @@
   "dependencies": {
     "@codemirror/commands": "^6.6.0",
     "@codemirror/lang-json": "github:codemirror/lang-json",
-    "@codemirror/view": "^6.33.0",
     "@emotion/cache": "^11.13.1",
     "@emotion/react": "^11.13.0",
     "@emotion/styled": "^11.13.0",
