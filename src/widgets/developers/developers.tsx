@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl';
 
 import { Box, Typography } from '@mui/material';
-import Grid from '@mui/material/Unstable_Grid2';
+import Grid from '@mui/material/Grid2';
 
 import { StaticImageData } from 'next/image';
 

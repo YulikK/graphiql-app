@@ -1,5 +1,5 @@
 import { Box, Chip, Paper, Stack, Typography } from '@mui/material';
-import Grid from '@mui/material/Unstable_Grid2';
+import Grid from '@mui/material/Grid2';
 
 import Image, { StaticImageData } from 'next/image';
 
@@ -16,8 +16,7 @@ interface DeveloperProps {
 export default function Developer(props: DeveloperProps) {
   return (
     <Grid
-      sm={12}
-      md={4}
+      size={{ sm: 12, md: 4 }}
       sx={{
         display: 'flex',
         justifyContent: 'center',
