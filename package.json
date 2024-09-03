@@ -35,7 +35,7 @@
     "@uiw/codemirror-theme-material": "^4.23.0",
     "@uiw/react-codemirror": "^4.23.0",
     "allotment": "^1.20.2",
-    "cm6-graphql": "^0.0.7",
+    "cm6-graphql": "^0.1.1",
     "firebase": "^10.13.1",
     "graphiql": "^3.7.1",
     "graphql": "^16.9.0",
