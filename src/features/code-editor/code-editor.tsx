@@ -6,6 +6,10 @@ import ReactCodeMirror, { Extension } from '@uiw/react-codemirror';
 import clsx from 'clsx';
 import { graphql } from 'cm6-graphql';
 import { GraphQLSchema } from 'graphql';
+import parserBabel from 'prettier/plugins/babel';
+import parserEstree from 'prettier/plugins/estree';
+import parserGraphql from 'prettier/plugins/graphql';
+import prettier from 'prettier/standalone';
 import { smoothy } from 'thememirror';
 
 import style from './code-editor.module.css';
@@ -37,16 +41,9 @@ export const CodeEditor = (props: CodeEditorProps) => {
   const handlePrettier = async () => {
     let formatted = value;
     try {
-      const prettier = await import('prettier/standalone');
-      const parserGraphql = await import('prettier/plugins/graphql');
-      const parserBabel = await import('prettier/plugins/babel');
-      const parserEstree = await import('prettier/plugins/estree');
-
       formatted = await prettier.format(value, {
         parser: isGraphQl ? 'graphql' : 'json',
-        plugins: isGraphQl
-          ? [parserGraphql.default]
-          : [parserBabel.default, parserEstree.default],
+        plugins: isGraphQl ? [parserGraphql] : [parserBabel, parserEstree],
       });
     } catch (error) {
       console.error('Error formatting code:', error);
@@ -69,7 +66,7 @@ export const CodeEditor = (props: CodeEditorProps) => {
           theme={smoothy}
           editable={isEdit}
           extensions={extensions}
-          onChange={(value) => (onChange ? onChange(value) : null)}
+          onChange={onChange}
           className={style.cm}
         />
         <ButtonGroup className={style.tools}>
