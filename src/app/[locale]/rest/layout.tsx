@@ -15,6 +15,7 @@ export default function RestLayout({
       maxWidth={800}
       width={'100%'}
       height={'100%'}
+      padding={'10px 0'}
     >
       <RestClient />
       {children}

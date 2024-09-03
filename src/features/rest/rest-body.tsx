@@ -43,7 +43,10 @@ export default function RestBody() {
     dispatch(handleRestBodyMode(value));
 
   return (
-    <Box border={'1px solid black'} position="relative">
+    <Box
+      position="relative"
+      sx={{ border: '1px solid #5b5575', borderRadius: '8px' }}
+    >
       <RadioGroup row sx={{ ml: 1 }}>
         <FormControlLabel
           value="json"

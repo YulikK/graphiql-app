@@ -143,6 +143,22 @@ const lightTheme = createTheme({
         .github-icon {
           fill: #000000;
         }
+        .cm-editor {
+          border-radius: 8px;
+          // border-bottom-right-radius: 8px;
+          // border-bottom-left-radius: 8px;
+        }
+        .cm-editor::first-of-type {
+          border-top-right-radius: 0;
+          border-top-left-radius: 0;
+        }
+        .cm-gutters {
+          border-bottom-left-radius: 8px;
+        }
+        .cm-scroller {
+          border-radius: 8px;
+          border: 1px solid 1px solid #5b5575;
+        }
       `,
     },
   },

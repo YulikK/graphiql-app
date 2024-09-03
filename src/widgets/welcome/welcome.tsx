@@ -80,7 +80,7 @@ export default function Welcome({ locale }: { locale: string }) {
             <Button
               variant="outlined"
               LinkComponent={Link}
-              href={`/${locale}`}
+              href={`/${locale}/history`}
               sx={{ padding: '10px 30px', textAlign: 'center' }}
             >
               {t('history')}

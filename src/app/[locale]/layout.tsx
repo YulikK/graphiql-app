@@ -1,6 +1,6 @@
 import { NextIntlClientProvider } from 'next-intl';
 
-import { Container, Stack } from '@mui/material';
+import { Container } from '@mui/material';
 import { getMessages } from 'next-intl/server';
 
 import BgContainer from '@/entities/bg-container/bg-container';
@@ -20,9 +20,7 @@ export default async function LocaleLayout({
     <NextIntlClientProvider messages={messages}>
       <BgContainer>
         <Header />
-        <Container sx={{ flexGrow: 1 }}>
-          <Stack>{children}</Stack>
-        </Container>
+        <Container sx={{ flexGrow: 1 }}>{children}</Container>
         <Footer />
       </BgContainer>
     </NextIntlClientProvider>
