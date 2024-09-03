@@ -5,10 +5,10 @@ import { ToastContainer } from 'react-toastify';
 import { Inter } from 'next/font/google';
 
 import { AuthProvider } from '@/shared/contexts/index.ts';
-import './globals.css';
-
+import StoreProvider from '@/shared/store/store-providers';
+import { StyledRoot } from '@/shared/theme/styled-root.tsx';
 import 'react-toastify/dist/ReactToastify.css';
-import { StyledRoot } from '../shared/theme/styled-root.tsx';
+import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -35,10 +35,12 @@ export default function RootLayout({
       <body>
         <AuthProvider>
           <AppRouterCacheProvider>
-            <StyledRoot>
-              {children}
-              <ToastContainer position="top-center" autoClose={2000} />
-            </StyledRoot>
+            <StoreProvider>
+              <StyledRoot>
+                {children}
+                <ToastContainer position="top-center" autoClose={2000} />
+              </StyledRoot>
+            </StoreProvider>
           </AppRouterCacheProvider>
         </AuthProvider>
       </body>
