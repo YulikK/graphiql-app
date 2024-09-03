@@ -66,5 +66,18 @@
     "password-strength": "Password must contain 1 number, 1 uppercase letter, 1 lowercase letter, and 1 special character",
     "confirm-password-required": "Confirm Password is a required field",
     "passwords-must-match": "Passwords must match"
+  },
+  "RestPage": {
+    "send": "send",
+    "query": "query",
+    "body": "body",
+    "headers": "headers",
+    "variables": "variables",
+    "key": "key",
+    "value": "value",
+    "status": "Status code",
+    "text": "Text",
+    "pretty": "Make pretty",
+    "pretty-error": " Prettifying is available only for valid JSON"
   }
 }

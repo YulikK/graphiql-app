@@ -1,3 +1,7 @@
+:root {
+  --tab-title-size: 48px;
+}
+
 @media (prefers-color-scheme: light) {
   body {
     background-color: #fff;
