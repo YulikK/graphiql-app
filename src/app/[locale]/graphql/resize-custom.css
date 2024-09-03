@@ -1,0 +1,93 @@
+.read-only {
+  background-color: #f4f4f4 !important;
+}
+
+.read-only .cm-editor {
+  background-color: #f4f4f4;
+}
+
+.read-only .cm-gutters {
+  background-color: #f4f4f4;
+}
+
+.cm-focused {
+  outline: none !important;
+}
+
+.cm-activeLine {
+  background-color: #00000000 !important;
+}
+.cm-activeLineGutter {
+  background-color: #00000000 !important;
+}
+
+.cm-gutters {
+  border-color: #00000000 !important;
+}
+
+.sash::before {
+  border-radius: 5px;
+
+  background: blue !important;
+  opacity: 30%;
+  transition:
+    width 0.3s ease-in-out,
+    height 0.3s ease-in-out,
+    border-radius 0.3s ease-in-out;
+  transform-origin: center;
+}
+
+.sash.sash-vertical::before {
+  width: 5px !important;
+  height: 15px !important;
+  border-radius: 5px;
+}
+
+.sash.sash-horizontal::before {
+  height: 5px !important;
+  width: 15px !important;
+  border-radius: 5px;
+}
+
+.sash.sash-vertical::before {
+  top: 50%;
+  transform: translate(0, -50%);
+}
+
+.sash.sash-horizontal::before {
+  right: 50%;
+  transform: translate(50%, 0);
+}
+
+.sash.sash-vertical.sash-hover::before {
+  width: 5px !important;
+  height: 50px !important;
+  border-radius: 5px;
+}
+
+.sash.sash-horizontal.sash-hover::before {
+  height: 5px !important;
+  width: 50px !important;
+  border-radius: 5px;
+}
+
+.sash.sash-hover:hover::before {
+  border-radius: 5px;
+  transition:
+    width 0.3s ease-in-out,
+    height 0.3s ease-in-out,
+    border-radius 0.3s ease-in-out;
+}
+
+.sash.sash-vertical::before,
+.sash.sash-horizontal::before {
+  border-radius: 5px;
+  transition:
+    width 0.3s ease-in-out,
+    height 0.3s ease-in-out,
+    border-radius 0.3s ease-in-out;
+}
+
+.split-view-view::before {
+  background-color: #f4f4f4 !important;
+}

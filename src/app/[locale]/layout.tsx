@@ -18,8 +18,10 @@ export default async function LocaleLayout({
   return (
     <NextIntlClientProvider messages={messages}>
       <Header />
-      <Container sx={{ flexGrow: 1 }}>
-        <Stack height={'100%'}>{children}</Stack>
+      <Container sx={{ flexGrow: 1, width: '100%', display: 'flex' }}>
+        <Stack height={'100%'} width={'100%'}>
+          {children}
+        </Stack>
       </Container>
       <Footer />
     </NextIntlClientProvider>
