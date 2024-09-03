@@ -5,6 +5,7 @@ import { ToastContainer } from 'react-toastify';
 import { Inter } from 'next/font/google';
 
 import { AuthProvider } from '@/shared/contexts/index.ts';
+import { ThemeAppProvider } from '@/shared/contexts/theme-provider';
 import StoreProvider from '@/shared/store/store-providers';
 import { StyledRoot } from '@/shared/theme/styled-root.tsx';
 import 'react-toastify/dist/ReactToastify.css';
@@ -34,14 +35,16 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <AuthProvider>
-          <AppRouterCacheProvider>
-            <StoreProvider>
-              <StyledRoot>
-                {children}
-                <ToastContainer position="top-center" autoClose={2000} />
-              </StyledRoot>
-            </StoreProvider>
-          </AppRouterCacheProvider>
+          <ThemeAppProvider>
+            <AppRouterCacheProvider>
+              <StoreProvider>
+                <StyledRoot>
+                  {children}
+                  <ToastContainer position="top-center" autoClose={2000} />
+                </StyledRoot>
+              </StoreProvider>
+            </AppRouterCacheProvider>
+          </ThemeAppProvider>
         </AuthProvider>
       </body>
     </html>

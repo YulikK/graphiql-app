@@ -1,7 +1,9 @@
 'use client';
 
-import { CssBaseline, useMediaQuery } from '@mui/material';
+import { CssBaseline } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
+
+import { useTheme } from '@/shared/contexts';
 
 import { darkTheme, lightTheme } from './theme';
 
@@ -10,11 +12,11 @@ export function StyledRoot({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-  const theme = prefersDarkMode ? darkTheme : lightTheme;
+  const { darkMode } = useTheme();
+  const styledTheme = darkMode ? darkTheme : lightTheme;
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={styledTheme}>
       <CssBaseline />
       {children}
     </ThemeProvider>

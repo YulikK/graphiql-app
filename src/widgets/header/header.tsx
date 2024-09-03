@@ -11,6 +11,7 @@ import Link from 'next/link';
 
 import { Logo } from '@/entities/logo/logo.tsx';
 import LocaleSwitcher from '@/features/locale-switcher/locale-switcher.tsx';
+import { ThemeSwitcher } from '@/features/theme-switcher/theme-switcher';
 import { useAuth } from '@/shared/contexts';
 import { logout } from '@/shared/services/firebase/auth';
 
@@ -72,23 +73,17 @@ export default function Header() {
             </Box>
 
             <Box sx={{ display: 'flex', gap: 1 }}>
+              <ThemeSwitcher />
               <LocaleSwitcher />
               {isLoggedIn ? (
-                <Button
-                  // LinkComponent={Link}
-                  variant="text"
-                  // href={'/'}
-                  onClick={handleLogout}
-                  style={{ color: 'white' }}
-                >
+                <Button variant="text" onClick={handleLogout}>
                   {t('sign-out')}
                 </Button>
               ) : (
                 <Button
-                  LinkComponent={Link}
+                  component={Link}
                   variant="text"
                   href={`/${locale}/login`}
-                  style={{ color: 'white' }}
                 >
                   {t('sign-in')}
                 </Button>

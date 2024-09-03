@@ -3,7 +3,13 @@ import { Box, Container, Link, Typography } from '@mui/material';
 
 import Image from 'next/image';
 
-import logo from '@/assets/rs-logo.png';
+import logo from '@/assets/rs-logo.svg';
+
+const githubLinks = [
+  { link: 'https://github.com/YulikK', name: 'YulikK' },
+  { link: 'https://github.com/the-dmitry', name: 'the-dmitry' },
+  { link: 'https://github.com/yuliya-karuk', name: 'yuliya-karuk' },
+];
 
 export default function Footer() {
   return (
@@ -11,6 +17,7 @@ export default function Footer() {
       component="footer"
       className="footer"
       sx={{
+        width: '100%',
         display: 'flex',
         minHeight: '60px',
         paddingBlock: 1,
@@ -22,16 +29,30 @@ export default function Footer() {
           display: 'flex',
           flexDirection: { xs: 'column', sm: 'row' },
           gap: 2,
-          justifyContent: 'space-evenly',
+          justifyContent: 'space-between',
           alignItems: 'center',
         }}
       >
-        <Link target="_blank" href="https://github.com/YulikK">
-          <GitHubIcon sx={{ width: 40, height: 40, color: '#fff' }} />
-        </Link>
-        <Typography variant="body2">2024</Typography>
+        <Box display={'flex'} alignItems={'center'} gap={2}>
+          {githubLinks.map((el) => (
+            <Link
+              className="github-link"
+              key={el.name}
+              target="_blank"
+              href={el.link}
+              style={{ display: 'flex', alignItems: 'center' }}
+            >
+              <GitHubIcon
+                className="github-icon"
+                sx={{ width: 30, height: 30 }}
+              />
+              {el.name}
+            </Link>
+          ))}
+        </Box>
+        <Typography variant="body2">&#169; 2024</Typography>
         <Link href="https://rs.school/">
-          <Image src={logo} alt="rs-school" height={40} />
+          <Image className="rs-icon" src={logo} alt="rs-school" height={30} />
         </Link>
       </Container>
     </Box>
