@@ -17,7 +17,7 @@ export default function ClientList({
   changeItem,
 }: Props) {
   const dataIsArray = Array.isArray(dataList);
-  const t = useTranslations('RestPage');
+  const t = useTranslations('Common');
 
   return (
     <Stack>

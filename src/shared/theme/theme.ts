@@ -161,6 +161,19 @@ const lightTheme = createTheme({
         }
       `,
     },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          '&.item': {
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+            borderRadius: '10px',
+            transition: 'all 0.3s ease-in-out',
+            background:
+              'linear-gradient(180deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.5) 100%)',
+          },
+        },
+      },
+    },
   },
 });
 

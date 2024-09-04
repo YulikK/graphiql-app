@@ -73,11 +73,22 @@
     "body": "body",
     "headers": "headers",
     "variables": "variables",
-    "key": "key",
-    "value": "value",
-    "status": "Status code",
     "text": "Text",
     "pretty": "Make pretty",
     "pretty-error": " Prettifying is available only for valid JSON"
+  },
+  "GraphqlPage": {
+    "headers": "headers",
+    "variables": "variables",
+    "url": "Url",
+    "endpoint": "Endpoint",
+    "documentation": "Documentation",
+    "show-doc": "Show documentation",
+    "error-no-doc-url": "Documentation URL is not set"
+  },
+  "Common": {
+    "key": "key",
+    "value": "value",
+    "status": "Status code"
   }
 }

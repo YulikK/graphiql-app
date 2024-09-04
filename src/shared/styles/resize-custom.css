@@ -1,13 +1,13 @@
 .read-only {
-  background-color: #f4f4f4 !important;
+  /* background-color: #f4f4f4 !important; */
 }
 
 .read-only .cm-editor {
-  background-color: #f4f4f4;
+  /* background-color: #f4f4f4; */
 }
 
 .read-only .cm-gutters {
-  background-color: #f4f4f4;
+  /* background-color: #f4f4f4; */
 }
 
 .cm-focused {
@@ -89,5 +89,5 @@
 }
 
 .split-view-view::before {
-  background-color: #f4f4f4 !important;
+  background-color: transparent !important;
 }

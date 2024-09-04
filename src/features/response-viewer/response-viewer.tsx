@@ -13,7 +13,7 @@ interface Props {
 }
 
 export default function ResponseViewer({ value, status }: Props) {
-  const t = useTranslations('RestPage');
+  const t = useTranslations('Common');
 
   return (
     <Box>

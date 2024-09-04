@@ -9,7 +9,7 @@ export default function RestSubmit() {
   const t = useTranslations('RestPage');
 
   return (
-    <Button variant="contained" onClick={makeRequest}>
+    <Button size="small" variant="contained" onClick={makeRequest}>
       {t('send')}
     </Button>
   );

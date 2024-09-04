@@ -14,14 +14,18 @@
   padding: 20px;
 }
 
-.splitViewContainer .pane,
-.splitViewContainer .rightPane {
+.splitViewContainer:global(.split-view-sash-dragging) .pane{
   transition: none;
 }
 
 .editors-container {
+  height: 100%;
+  width: 100%;
+  padding: 10px 0;
+}
+
+.editors-card {
   display: flex;
   height: 100%;
   width: 100%;
-  background-color: #f4f4f4;
 }

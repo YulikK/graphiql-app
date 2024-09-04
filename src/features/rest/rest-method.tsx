@@ -1,18 +1,12 @@
 import { MenuItem, Select } from '@mui/material';
 
 import { useAppDispatch, useAppSelector } from '@/shared/hooks/redux-hooks';
-import { HttpMethods } from '@/shared/models/http-methods';
+import { HttpMethod } from '@/shared/models/http-methods';
 import { setRestMethod } from '@/shared/store/slices/rest-slice';
 
-const httpMethods: HttpMethods[] = [
-  'GET',
-  'POST',
-  'PUT',
-  'DELETE',
-  'PATCH',
-  'OPTIONS',
-  'HEAD',
-];
+const httpMethods = Object.values(HttpMethod).filter(
+  (value) => typeof value === 'string'
+);
 
 export default function RestMethod() {
   const method = useAppSelector((state) => state['rest-slice'].method);
@@ -20,10 +14,11 @@ export default function RestMethod() {
 
   return (
     <Select
+      size="small"
       defaultValue={method}
       value={method}
       label="Method"
-      onChange={(e) => dispatch(setRestMethod(e.target.value as HttpMethods))}
+      onChange={(e) => dispatch(setRestMethod(e.target.value as HttpMethod))}
     >
       {httpMethods.map((item) => (
         <MenuItem key={item} value={item}>

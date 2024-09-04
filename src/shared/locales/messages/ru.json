@@ -73,11 +73,22 @@
     "body": "тело",
     "headers": "заголовки",
     "variables": "переменные",
-    "key": "ключ",
-    "value": "значение",
-    "status": "Статус код",
     "text": "Текст",
     "pretty": "Форматировать",
     "pretty-error": "Форматирование доступно только для валидного JSON"
+  },
+  "GraphqlPage": {
+    "headers": "заголовки",
+    "variables": "переменные",
+    "url": "Url-адрес",
+    "endpoint": "Точка входа",
+    "documentation": "Справка",
+    "show-doc": "Показать справку",
+    "error-no-doc-url": "URL документации не задан"
+  },
+  "Common": {
+    "key": "ключ",
+    "value": "значение",
+    "status": "Статус код"
   }
 }
