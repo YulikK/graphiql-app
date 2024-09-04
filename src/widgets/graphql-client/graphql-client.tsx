@@ -47,7 +47,6 @@ export default function GraphqlClient({ children }: GraphqlClientProps) {
   const [url, setUrl] = useState(
     'https://swapi-graphql.netlify.app/.netlify/functions/index'
   );
-  const [variables, setVariables] = useState('{}');
   // const [headers, setHeaders] = useState<Header[]>([{ key: '', value: '' }]);
 
   const t = useTranslations('GraphqlPage');
@@ -120,8 +119,6 @@ export default function GraphqlClient({ children }: GraphqlClientProps) {
           className={style.pane}
         >
           <SettingsTab
-            variables={variables}
-            setVariables={setVariables}
             isSettingsHide={isSettingsHide}
             onMaximize={onMaximize}
             onMinimize={onMinimize}

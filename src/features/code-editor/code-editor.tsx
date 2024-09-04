@@ -10,7 +10,9 @@ import parserBabel from 'prettier/plugins/babel';
 import parserEstree from 'prettier/plugins/estree';
 import parserGraphql from 'prettier/plugins/graphql';
 import prettier from 'prettier/standalone';
-import { smoothy } from 'thememirror';
+import { dracula, smoothy } from 'thememirror';
+
+import { useTheme } from '@/shared/contexts';
 
 import style from './code-editor.module.css';
 
@@ -37,6 +39,7 @@ export const CodeEditor = (props: CodeEditorProps) => {
   } else {
     extensions.push(json());
   }
+  const { darkMode } = useTheme();
 
   const handlePrettier = async () => {
     let formatted = value;
@@ -59,11 +62,15 @@ export const CodeEditor = (props: CodeEditorProps) => {
       <Paper
         elevation={isEdit ? 2 : 0}
         square={false}
-        className={clsx(style['editor-wrapper'], { ['read-only']: !isEdit })}
+        className={clsx(
+          style['editor-wrapper'],
+          { ['read-only']: !isEdit },
+          'code-editor'
+        )}
       >
         <ReactCodeMirror
           value={value}
-          theme={smoothy}
+          theme={darkMode ? dracula : smoothy}
           editable={isEdit}
           extensions={extensions}
           onChange={onChange}

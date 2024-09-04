@@ -14,7 +14,7 @@
   padding: 20px;
 }
 
-.splitViewContainer:global(.split-view-sash-dragging) .pane{
+.splitViewContainer:global(.split-view-sash-dragging) .pane {
   transition: none;
 }
 

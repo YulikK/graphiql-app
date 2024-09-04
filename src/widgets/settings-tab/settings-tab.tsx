@@ -17,7 +17,7 @@ import { SyntheticEvent, useState } from 'react';
 
 import ClientEndpoint from '@/features/client-endpoint/client-endpoint';
 import ClientHeaders from '@/features/client-headers/client-headers';
-import { CodeEditor } from '@/features/code-editor/code-editor';
+import { GraphVariables } from '@/features/client-variables-graph/client-variables-graph';
 import {
   deleteGraphHeader,
   setGraphHeader,
@@ -29,26 +29,18 @@ import { Docs } from '@/widgets/docs/docs';
 import style from './settings-tab.module.css';
 
 type SettingsTabProps = {
-  variables: string;
-  setVariables: (value: string) => void;
   isSettingsHide: boolean;
   onMaximize: () => void;
   onMinimize: () => void;
 };
 
 export const SettingsTab = ({
-  variables,
-  setVariables,
   isSettingsHide,
   onMaximize,
   onMinimize,
 }: SettingsTabProps) => {
   const [activeTab, setActiveTab] = useState('url');
   const t = useTranslations('GraphqlPage');
-
-  const handleJsonChange = (value: string) => {
-    setVariables(value);
-  };
 
   const handleTabChange = (event: SyntheticEvent, newValue: string) => {
     event.stopPropagation();
@@ -101,7 +93,7 @@ export const SettingsTab = ({
                   sliceKey="graphql-slice"
                   setUrl={setGraphUrlDoc}
                 />
-                <Docs url={'url'} />
+                <Docs />
               </Box>
             </TableContainer>
           </TabPanel>
@@ -115,7 +107,8 @@ export const SettingsTab = ({
             </TableContainer>
           </TabPanel>
           <TabPanel value="variables" sx={{ padding: 2, height: '100%' }}>
-            <CodeEditor value={variables} onChange={handleJsonChange} />
+            <GraphVariables />
+            {/* <CodeEditor value={variables} onChange={handleJsonChange} /> */}
           </TabPanel>
         </Box>
       </TabContext>

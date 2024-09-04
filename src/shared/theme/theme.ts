@@ -281,6 +281,9 @@ const darkTheme = createTheme({
           '& > .accordion-info': {
             background: '#8764e1',
           },
+          '&.code-editor': {
+            background: '#2d2f3f',
+          },
         },
       },
     },
@@ -321,6 +324,19 @@ const darkTheme = createTheme({
           filter: invert(1);
         }
       `,
+    },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          '&.item': {
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+            borderRadius: '10px',
+            // padding: '25px',
+            transition: 'all 0.3s ease-in-out',
+            background: '#00000090',
+          },
+        },
+      },
     },
   },
 });

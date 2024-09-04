@@ -11,7 +11,7 @@ const initialState: {
   // body: string;
   // method: HttpMethods;
   headers: string[][];
-  // variables: string[][];
+  variables: string;
   // textMode: boolean;
 } = {
   url: '',
@@ -24,7 +24,7 @@ const initialState: {
     ['Content-type', 'application/json'],
     ['', ''],
   ],
-  // variables: [['', '']],
+  variables: '',
   // textMode: false,
 };
 
@@ -86,17 +86,9 @@ const GraphqlSlice = createSlice({
       newHeaders.splice(payload, 1);
       state.headers = checkLastTuple(newHeaders);
     },
-    // setRestVariables(
-    //   state,
-    //   {
-    //     payload: { index, keyOrValue, newValue },
-    //   }: PayloadAction<ChangeVariableItem>
-    // ) {
-    //   const temp = state.variables;
-    //   temp[index][keyOrValue] = newValue;
-    //   const filtered = temp.filter(([key, value]) => key || value);
-    //   state.variables = checkLastTuple(filtered);
-    // },
+    setRestVariables(state, { payload }: PayloadAction<string>) {
+      state.variables = payload;
+    },
     // deleteRestVariables(state, { payload }: PayloadAction<number>) {
     //   const newVariables = state.variables;
     //   newVariables.splice(payload, 1);
@@ -115,7 +107,7 @@ export const {
   // setRestQuery,
   // deleteRestQuery,
   // setRestVariables,
-  // deleteRestVariables,
+  setRestVariables,
   setGraphHeader,
   deleteGraphHeader,
   // setRestBody,
