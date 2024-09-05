@@ -6,14 +6,10 @@ import { Box, Card, debounce } from '@mui/material';
 import { Allotment, AllotmentHandle } from 'allotment';
 import 'allotment/dist/style.css';
 import clsx from 'clsx';
-import {
-  buildClientSchema,
-  getIntrospectionQuery,
-  GraphQLSchema,
-} from 'graphql';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { buildClientSchema, getIntrospectionQuery } from 'graphql';
+import { useMemo, useRef, useState } from 'react';
 
-import { CodeEditor } from '@/features/code-editor/code-editor';
+import { GraphQuery } from '@/features/client-query/client-query';
 import { HttpMethod } from '@/shared/models/http-methods';
 import { SettingsTab } from '@/widgets/settings-tab/settings-tab';
 
@@ -40,23 +36,23 @@ type GraphqlClientProps = {
   children: React.ReactNode;
 };
 export default function GraphqlClient({ children }: GraphqlClientProps) {
-  const [graphqlQuery, setGraphqlQuery] = useState('');
-  const [schema, setSchema] = useState<GraphQLSchema | null>(null);
+  // const [graphqlQuery, setGraphqlQuery] = useState('');
+  // const [schema, setSchema] = useState<GraphQLSchema | null>(null);
   const [isSettingsHide, setIsSettingsHide] = useState(true);
   const refAllotment = useRef<AllotmentHandle>(null);
-  const [url, setUrl] = useState(
-    'https://swapi-graphql.netlify.app/.netlify/functions/index'
-  );
+  // const [url, setUrl] = useState(
+  //   'https://swapi-graphql.netlify.app/.netlify/functions/index'
+  // );
   // const [headers, setHeaders] = useState<Header[]>([{ key: '', value: '' }]);
 
   const t = useTranslations('GraphqlPage');
-  useEffect(() => {
-    fetchSchema(`${url}?sdl`).then((newSchema) => {
-      if (newSchema) {
-        setSchema(newSchema);
-      }
-    });
-  }, [url]);
+  // useEffect(() => {
+  //   fetchSchema(`${url}?sdl`).then((newSchema) => {
+  //     if (newSchema) {
+  //       setSchema(newSchema);
+  //     }
+  //   });
+  // }, [url]);
 
   const onMaximize = () => {
     setIsSettingsHide(false);
@@ -71,9 +67,9 @@ export default function GraphqlClient({ children }: GraphqlClientProps) {
     }
   };
 
-  const handleGraphqlChange = (value: string) => {
-    setGraphqlQuery(value);
-  };
+  // const handleGraphqlChange = (value: string) => {
+  //   setGraphqlQuery(value);
+  // };
 
   const handleSettingsResize = useMemo(
     () =>
@@ -129,13 +125,14 @@ export default function GraphqlClient({ children }: GraphqlClientProps) {
             <Card className={clsx(style['editors-card'], 'item')}>
               <Allotment snap>
                 <Allotment.Pane snap preferredSize="50%" className={style.wrap}>
-                  <CodeEditor
+                  <GraphQuery />
+                  {/* <CodeEditor
                     isGraphQl={true}
                     schema={schema}
                     value={graphqlQuery}
                     onChange={handleGraphqlChange}
                     // onSubmit={handleSendRequest}
-                  />
+                  /> */}
                 </Allotment.Pane>
                 <Allotment.Pane snap preferredSize="50%" className={style.wrap}>
                   {children}

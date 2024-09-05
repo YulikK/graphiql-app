@@ -10,12 +10,12 @@ import ArticleIcon from '@mui/icons-material/Article';
 import { LoadingButton } from '@mui/lab';
 import { Alert, Box, Drawer, Snackbar } from '@mui/material';
 import 'graphiql/graphiql.min.css';
-import { getIntrospectionQuery, IntrospectionQuery } from 'graphql';
 import { useEffect, useState } from 'react';
 
 import { useTheme as useAppTheme } from '@/shared/contexts';
 import { useAppDispatch, useAppSelector } from '@/shared/hooks/redux-hooks';
 import { setGraphSchema } from '@/shared/store/slices/grahpql-client';
+import { fetchGraphSchema } from '@/shared/utils/get-graph-schem';
 
 export const Docs = () => {
   const [showDoc, setShowDoc] = useState(false);
@@ -35,25 +35,19 @@ export const Docs = () => {
     setTheme(darkMode ? 'dark' : 'light');
   }, [darkMode, setTheme]);
 
-  const handleToggleDoc = async () => {
-    if (!fetcher) {
+  const handleDocOpen = async () => {
+    if (!urlDoc) {
       setError(t('error-no-doc-url'));
       return;
     }
 
-    setLoading(true);
-    setError(null);
-
     try {
-      const data = await fetcher({
-        query: getIntrospectionQuery(),
-        operationName: 'IntrospectionQuery',
-      });
-
-      const introspectionJSON =
-        'data' in data && (data.data as unknown as IntrospectionQuery);
-
-      dispatch(setGraphSchema(JSON.stringify(introspectionJSON, null, 2)));
+      if (!fetcher) {
+        setLoading(true);
+        setError(null);
+        const introspectionJSON = await fetchGraphSchema(urlDoc);
+        dispatch(setGraphSchema(JSON.stringify(introspectionJSON, null, 2)));
+      }
       setShowDoc(true);
     } catch (err) {
       setError((err as Error).message);
@@ -75,7 +69,7 @@ export const Docs = () => {
         disabled={!urlDoc}
         sx={{ p: '10px', ml: 'auto' }}
         aria-label={t('show-doc')}
-        onClick={handleToggleDoc}
+        onClick={handleDocOpen}
       >
         <ArticleIcon />
       </LoadingButton>

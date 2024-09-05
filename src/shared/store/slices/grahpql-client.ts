@@ -8,6 +8,7 @@ const initialState: {
   urlDoc: string;
   query: string;
   schema: string;
+  isTrySchemaDownload: boolean;
   // body: string;
   // method: HttpMethods;
   headers: string[][];
@@ -18,6 +19,7 @@ const initialState: {
   urlDoc: '',
   query: '',
   schema: '',
+  isTrySchemaDownload: false,
   // body: '',
   // method: 'GET',
   headers: [
@@ -40,15 +42,24 @@ const GraphqlSlice = createSlice({
       }
       if (!payload) {
         state.urlDoc = '';
+        state.schema = '';
+        state.isTrySchemaDownload = false;
       }
     },
     setGraphUrlDoc(state, { payload }: PayloadAction<string>) {
       state.urlDoc = payload;
+      if (!payload) {
+        state.schema = '';
+        state.isTrySchemaDownload = false;
+      }
     },
     setGraphSchema(state, { payload }: PayloadAction<string>) {
       state.schema = payload;
+      state.isTrySchemaDownload = true;
     },
-
+    setGraphQuery(state, { payload }: PayloadAction<string>) {
+      state.query = payload;
+    },
     // setRestQuery(
     //   state,
     //   {
@@ -104,7 +115,7 @@ export const {
   setGraphUrl,
   setGraphUrlDoc,
   setGraphSchema,
-  // setRestQuery,
+  setGraphQuery,
   // deleteRestQuery,
   // setRestVariables,
   setRestVariables,

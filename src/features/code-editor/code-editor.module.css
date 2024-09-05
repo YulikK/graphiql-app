@@ -6,13 +6,13 @@
 
 .cm {
   padding: 16px;
+  padding-right: 50px;
   flex-grow: 1;
 }
 
 .editor-wrapper {
   width: 100%;
   height: 100%;
-  padding-right: 50px;
 }
 
 .editor .tools {
