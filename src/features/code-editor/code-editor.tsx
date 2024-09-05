@@ -1,7 +1,10 @@
+'use client';
 import { json } from '@codemirror/lang-json';
+import DoneIcon from '@mui/icons-material/Done';
 import FormatPaintIcon from '@mui/icons-material/FormatPaint';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
-import { Box, ButtonGroup, IconButton, Paper } from '@mui/material';
+import WarningAmberIcon from '@mui/icons-material/WarningAmber';
+import { Box, ButtonGroup, Chip, IconButton, Paper } from '@mui/material';
 import ReactCodeMirror, { Extension } from '@uiw/react-codemirror';
 import clsx from 'clsx';
 import { graphql } from 'cm6-graphql';
@@ -10,7 +13,7 @@ import parserBabel from 'prettier/plugins/babel';
 import parserEstree from 'prettier/plugins/estree';
 import parserGraphql from 'prettier/plugins/graphql';
 import prettier from 'prettier/standalone';
-import { dracula, smoothy } from 'thememirror';
+import { dracula, tomorrow } from 'thememirror';
 
 import { useTheme } from '@/shared/contexts';
 
@@ -21,6 +24,7 @@ type CodeEditorProps = {
   schema?: GraphQLSchema | null;
   isEdit?: boolean;
   value: string;
+  status?: number;
   onChange?: (value: string) => void;
   onSubmit?: () => void;
 };
@@ -30,6 +34,7 @@ export const CodeEditor = (props: CodeEditorProps) => {
     schema = null,
     isEdit = true,
     value,
+    status = 0,
     onChange,
     onSubmit,
   } = props;
@@ -70,7 +75,7 @@ export const CodeEditor = (props: CodeEditorProps) => {
       >
         <ReactCodeMirror
           value={value}
-          theme={darkMode ? dracula : smoothy}
+          theme={darkMode ? dracula : tomorrow}
           editable={isEdit}
           extensions={extensions}
           onChange={onChange}
@@ -97,6 +102,15 @@ export const CodeEditor = (props: CodeEditorProps) => {
             </IconButton>
           )}
         </ButtonGroup>
+        {status && (
+          <Chip
+            className={style.status}
+            color={status === 200 ? 'success' : 'error'}
+            label={`Code ${status}`}
+            size="medium"
+            icon={status === 200 ? <DoneIcon /> : <WarningAmberIcon />}
+          />
+        )}
       </Paper>
     </Box>
   );

@@ -2,7 +2,7 @@ import { Stack } from '@mui/material';
 
 import GraphqlClient from '@/widgets/graphql-client/graphql-client';
 
-export default function RestLayout({
+export default function GraphLayout({
   children,
 }: {
   children: React.ReactNode;

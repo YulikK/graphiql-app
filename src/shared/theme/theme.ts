@@ -110,7 +110,16 @@ const lightTheme = createTheme({
       styleOverrides: {
         root: {
           '& > .accordion-info': {
-            background: '#f0f0f0',
+            background: 'transparent',
+          },
+          '&.read-only': {
+            background: 'transparent',
+          },
+          '&.read-only > .cm-theme > .cm-editor': {
+            background: 'transparent',
+          },
+          '&.read-only > .cm-theme > .cm-editor > .cm-scroller > .cm-gutters': {
+            background: 'transparent',
           },
         },
       },
@@ -284,6 +293,15 @@ const darkTheme = createTheme({
           '&.code-editor': {
             background: '#2d2f3f',
           },
+          '&.read-only': {
+            background: 'transparent',
+          },
+          '&.read-only > .cm-theme > .cm-editor': {
+            background: 'transparent',
+          },
+          '&.read-only > .cm-theme > .cm-editor > .cm-scroller > .cm-gutters': {
+            background: 'transparent',
+          },
         },
       },
     },
@@ -331,7 +349,6 @@ const darkTheme = createTheme({
           '&.item': {
             border: '1px solid rgba(255, 255, 255, 0.1)',
             borderRadius: '10px',
-            // padding: '25px',
             transition: 'all 0.3s ease-in-out',
             background: '#00000090',
           },

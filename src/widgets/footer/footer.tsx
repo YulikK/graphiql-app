@@ -52,7 +52,13 @@ export default function Footer() {
         </Box>
         <Typography variant="body2">&#169; 2024</Typography>
         <Link href="https://rs.school/">
-          <Image className="rs-icon" src={logo} alt="rs-school" height={30} />
+          <Image
+            className="rs-icon"
+            src={logo}
+            alt="rs-school"
+            height={30}
+            priority
+          />
         </Link>
       </Container>
     </Box>

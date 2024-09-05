@@ -58,7 +58,6 @@ export const SettingsTab = ({
   };
 
   return (
-    // <Stack>
     <Card elevation={1} className={clsx(style.container, 'item')}>
       <TabContext value={activeTab}>
         <Allotment.Pane minSize={60} maxSize={60} className={style.pane}>
@@ -108,11 +107,9 @@ export const SettingsTab = ({
           </TabPanel>
           <TabPanel value="variables" sx={{ padding: 2, height: '100%' }}>
             <GraphVariables />
-            {/* <CodeEditor value={variables} onChange={handleJsonChange} /> */}
           </TabPanel>
         </Box>
       </TabContext>
     </Card>
-    // </Stack>
   );
 };

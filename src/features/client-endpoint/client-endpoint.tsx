@@ -29,7 +29,6 @@ export default function ClientEndpoint({ setUrl, sliceKey }: Props) {
       size="small"
       variant="outlined"
       onInput={(e) => dispatch(setUrl((e.target as HTMLInputElement).value))}
-      // onChange={(e) => dispatch(setUrl((e.target as HTMLInputElement).value))}
       value={url}
       sx={{ flexGrow: 1 }}
     />

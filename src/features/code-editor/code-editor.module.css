@@ -24,3 +24,11 @@
   margin: 10px;
   margin-right: 15px;
 }
+
+.status {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 10px;
+  margin-right: 15px;
+}

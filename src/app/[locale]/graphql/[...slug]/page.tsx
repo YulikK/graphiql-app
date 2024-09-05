@@ -20,24 +20,23 @@ const makeRequest = async ({ body, url, headers }: RequestParams) => {
       headers: headers,
       body: body,
     });
-    // TODO:  body выглядит так
-    // body: JSON.stringify({
-    //   query: graphqlQuery,
-    //   variables: JSON.parse(variables),
-    // }),
     const { status } = response;
     const result = await response.json();
-    return { result, status };
+    return { result: JSON.stringify(result, null, 2), status };
   } catch (error) {
     const e = error as Error;
     return { result: e.message, status: 500 };
   }
 };
 
-export default async function RestResult({ params, searchParams = {} }: Props) {
+export default async function GraphResult({
+  params,
+  searchParams = {},
+}: Props) {
   const [url = '', body = ''] = params.slug.map((item) =>
     decodeURIComponent(item)
   );
+
   const decodedUrl = decodeFromBase64(url);
   const decodedBody = decodeFromBase64(body);
 
@@ -47,7 +46,5 @@ export default async function RestResult({ params, searchParams = {} }: Props) {
     headers: searchParams,
   });
 
-  return <CodeEditor value={result} isEdit={false} />;
-  // TODO: сделать элемент ResponseViewer переиспользуемым в обоих клиентах
-  // return <ResponseViewer value={result || ''} status={status} />;
+  return <CodeEditor value={result} isEdit={false} status={status} />;
 }

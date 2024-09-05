@@ -12,6 +12,7 @@ export const Logo = () => {
       <Image
         className="logo"
         src={logo}
+        priority
         alt="Logo"
         style={{
           height: '40px',

@@ -2,6 +2,7 @@ import { buildClientSchema } from 'graphql';
 import { useEffect } from 'react';
 
 import { useAppDispatch, useAppSelector } from '@/shared/hooks/redux-hooks';
+import useGraphRequest from '@/shared/hooks/use-graph-request';
 import { selectGraphqlData } from '@/shared/store/selectors/general-graph-selector';
 import {
   setGraphQuery,
@@ -12,6 +13,7 @@ import { fetchGraphSchema } from '@/shared/utils/get-graph-schem';
 import { CodeEditor } from '../code-editor/code-editor';
 
 export const GraphQuery = () => {
+  const makeRequest = useGraphRequest();
   const dispatch = useAppDispatch();
   const { query, schema, url, urlDoc, isTrySchemaDownload } =
     useAppSelector(selectGraphqlData);
@@ -36,8 +38,6 @@ export const GraphQuery = () => {
     }
   }, [schema, url, urlDoc, isTrySchemaDownload, dispatch]);
 
-  // console.log('graphqlSchema', graphqlSchema);
-
   const handleGraphqlChange = (value: string) => {
     dispatch(setGraphQuery(value));
   };
@@ -48,8 +48,7 @@ export const GraphQuery = () => {
       schema={graphqlSchema}
       value={query}
       onChange={handleGraphqlChange}
-      //TODO: add submit
-      // onSubmit={handleSendRequest}
+      onSubmit={makeRequest}
     />
   );
 };
