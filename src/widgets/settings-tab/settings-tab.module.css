@@ -9,10 +9,10 @@
   height: var(--tab-title-size);
 }
 
-.tab-nav {
+/* .tab-nav {
   width: 100%;
   display: flex;
-}
+} */
 
 .tab-list {
   width: 100%;
@@ -20,16 +20,16 @@
   overflow-y: auto;
 }
 
-.tab-nav .tab-panel {
+/* .tab-nav .tab-panel {
   padding: 0;
   width: 100%;
-}
+} */
 
-.tab-request {
+/* .tab-request {
   width: 100%;
   height: 100%;
   padding: 0;
   display: flex;
   flex-direction: column;
   gap: 12px;
-}
+} */

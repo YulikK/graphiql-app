@@ -1,4 +1,4 @@
-import ResponseViewer from '@/features/response-viewer/response-viewer';
+import { CodeEditor } from '@/features/code-editor/code-editor';
 import { HttpMethod } from '@/shared/models/http-methods';
 import decodeFromBase64 from '@/shared/utils/decode-from-base64';
 
@@ -23,7 +23,7 @@ const makeRequest = async ({ method, url, body, headers }: RequestParams) => {
     });
     const { status } = response;
     const result = await response.json();
-    return { result, status };
+    return { result: JSON.stringify(result, null, 2), status };
   } catch (error) {
     const e = error as Error;
     return { result: e.message, status: 500 };
@@ -44,5 +44,5 @@ export default async function RestResult({ params, searchParams = {} }: Props) {
     headers: searchParams,
   });
 
-  return <ResponseViewer value={result || ''} status={status} />;
+  return <CodeEditor value={result} isEdit={false} status={status} />;
 }

@@ -7,7 +7,9 @@ import { Inter } from 'next/font/google';
 import { AuthProvider } from '@/shared/contexts/index.ts';
 import { ThemeAppProvider } from '@/shared/contexts/theme-provider';
 import StoreProvider from '@/shared/store/store-providers';
+import '@/shared/styles/resize-custom.css';
 import { StyledRoot } from '@/shared/theme/styled-root.tsx';
+import 'allotment/dist/style.css';
 import 'react-toastify/dist/ReactToastify.css';
 import './globals.css';
 

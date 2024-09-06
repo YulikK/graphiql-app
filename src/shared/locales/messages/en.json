@@ -89,6 +89,7 @@
   "Common": {
     "key": "key",
     "value": "value",
-    "status": "Status code"
+    "status": "Status code",
+    "label-resize": "Show/hide panel"
   }
 }

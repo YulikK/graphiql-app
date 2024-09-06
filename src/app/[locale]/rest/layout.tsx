@@ -17,8 +17,7 @@ export default function RestLayout({
       height={'100%'}
       padding={'10px 0'}
     >
-      <RestClient />
-      {children}
+      <RestClient>{children}</RestClient>
     </Stack>
   );
 }

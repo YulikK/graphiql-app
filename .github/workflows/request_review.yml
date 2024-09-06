@@ -21,7 +21,7 @@ jobs:
           route: POST /repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/requested_reviewers
           mediaType: '{"previews":["luke-cage"]}'
           token: ${{ secrets.MY_REPO_TOKEN }}
-          reviewers: '["The-Dmitry", "YulikK"]'
+          reviewers: '["The-Dmitry", "YulikK", "SpaNb4"]'
 
       - name: Request Review
         if: steps.pr_author.outputs.author == 'The-Dmitry'
@@ -30,7 +30,7 @@ jobs:
           route: POST /repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/requested_reviewers
           mediaType: '{"previews":["luke-cage"]}'
           token: ${{ secrets.MY_REPO_TOKEN }}
-          reviewers: '["Yuliya-Karuk", "YulikK"]'
+          reviewers: '["Yuliya-Karuk", "YulikK", "SpaNb4"]'
 
       - name: Request Review
         if: steps.pr_author.outputs.author == 'YulikK'
@@ -39,4 +39,4 @@ jobs:
           route: POST /repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/requested_reviewers
           mediaType: '{"previews":["luke-cage"]}'
           token: ${{ secrets.MY_REPO_TOKEN }}
-          reviewers: '["Yuliya-Karuk", "The-Dmitry"]'
+          reviewers: '["Yuliya-Karuk", "The-Dmitry", "SpaNb4"]'

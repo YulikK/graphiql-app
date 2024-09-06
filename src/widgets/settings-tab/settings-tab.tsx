@@ -1,113 +1,35 @@
-import { useTranslations } from 'next-intl';
-
-import ExpandLessIcon from '@mui/icons-material/ExpandLess';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { TabContext, TabList, TabPanel } from '@mui/lab';
-import {
-  Box,
-  Card,
-  IconButton,
-  InputLabel,
-  Tab,
-  TableContainer,
-} from '@mui/material';
-import { Allotment } from 'allotment';
+import { TabContext } from '@mui/lab';
+import { Box, Card } from '@mui/material';
 import clsx from 'clsx';
-import { SyntheticEvent, useState } from 'react';
+import { useState } from 'react';
 
-import ClientEndpoint from '@/features/client-endpoint/client-endpoint';
-import ClientHeaders from '@/features/client-headers/client-headers';
-import { GraphVariables } from '@/features/client-variables-graph/client-variables-graph';
-import {
-  deleteGraphHeader,
-  setGraphHeader,
-  setGraphUrl,
-  setGraphUrlDoc,
-} from '@/shared/store/slices/grahpql-client';
-import { Docs } from '@/widgets/docs/docs';
+import { TabListHeader } from '@/features/tab-list/header/tab-list-header';
+import { TabPanelContainer } from '@/features/tab-list/tab-panel-container/tab-panel-conrainer';
+import { TabsMap } from '@/shared/models/view';
 
 import style from './settings-tab.module.css';
 
 type SettingsTabProps = {
-  isSettingsHide: boolean;
-  onMaximize: () => void;
-  onMinimize: () => void;
+  tabHeaderList: string[];
+  tabPanelList: TabsMap[];
 };
-
 export const SettingsTab = ({
-  isSettingsHide,
-  onMaximize,
-  onMinimize,
+  tabHeaderList,
+  tabPanelList,
 }: SettingsTabProps) => {
-  const [activeTab, setActiveTab] = useState('url');
-  const t = useTranslations('GraphqlPage');
-
-  const handleTabChange = (event: SyntheticEvent, newValue: string) => {
-    event.stopPropagation();
-    setActiveTab(newValue);
-    if (isSettingsHide) {
-      onMaximize();
-    }
-  };
-  const handlePanelVisibleChange = () => {
-    if (isSettingsHide) {
-      onMaximize();
-    } else {
-      onMinimize();
-    }
-  };
+  const [activeTab, setActiveTab] = useState(tabPanelList[0].name);
 
   return (
     <Card elevation={1} className={clsx(style.container, 'item')}>
       <TabContext value={activeTab}>
-        <Allotment.Pane minSize={60} maxSize={60} className={style.pane}>
-          <Box className={style['tab-nav']}>
-            <TabList onChange={handleTabChange} aria-label="request params">
-              <Tab label={t('url')} value="url" />
-              <Tab label={t('headers')} value="headers" />
-              <Tab label={t('variables')} value="variables" />
-            </TabList>
-            <IconButton
-              size="small"
-              color="primary"
-              aria-label="change panel size"
-              onClick={handlePanelVisibleChange}
-              sx={{ ml: 'auto' }}
-            >
-              {isSettingsHide ? <ExpandMoreIcon /> : <ExpandLessIcon />}
-            </IconButton>
-          </Box>
-        </Allotment.Pane>
+        <TabListHeader tabs={tabHeaderList} setActiveTab={setActiveTab} />
 
         <Box className={style['tab-list']}>
-          <TabPanel value="url" className={style['tab-panel']}>
-            <TableContainer component={Box} className={style['tab-request']}>
-              <Box display={'flex'} alignItems={'center'} gap={2}>
-                <InputLabel>{t('endpoint')}</InputLabel>
-                <ClientEndpoint sliceKey="graphql-slice" setUrl={setGraphUrl} />
-              </Box>
-              <Box display={'flex'} alignItems={'center'} gap={2}>
-                <InputLabel>{t('documentation')}</InputLabel>
-                <ClientEndpoint
-                  sliceKey="graphql-slice"
-                  setUrl={setGraphUrlDoc}
-                />
-                <Docs />
-              </Box>
-            </TableContainer>
-          </TabPanel>
-          <TabPanel value="headers" className={style['tab-panel']}>
-            <TableContainer component={Box} className={style['tab-request']}>
-              <ClientHeaders
-                sliceKey="graphql-slice"
-                deleteHeader={deleteGraphHeader}
-                setHeader={setGraphHeader}
-              />
-            </TableContainer>
-          </TabPanel>
-          <TabPanel value="variables" sx={{ padding: 2, height: '100%' }}>
-            <GraphVariables />
-          </TabPanel>
+          {tabPanelList.map((tab) => (
+            <TabPanelContainer name={tab.name} key={tab.name}>
+              {tab.component()}
+            </TabPanelContainer>
+          ))}
         </Box>
       </TabContext>
     </Card>
