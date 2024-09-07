@@ -69,12 +69,12 @@
   },
   "RestPage": {
     "send": "send",
+    "method": "Method",
     "query": "query",
     "body": "body",
     "headers": "headers",
     "variables": "variables",
     "text": "Text",
-    "pretty": "Make pretty",
     "pretty-error": " Prettifying is available only for valid JSON"
   },
   "GraphqlPage": {
@@ -84,12 +84,20 @@
     "endpoint": "Endpoint",
     "documentation": "Documentation",
     "show-doc": "Show documentation",
-    "error-no-doc-url": "Documentation URL is not set"
+    "error-no-doc-url": "Documentation URL is not set",
+    "error-parse-schema": "Error parsing schema"
   },
   "Common": {
     "key": "key",
     "value": "value",
     "status": "Status code",
-    "label-resize": "Show/hide panel"
+    "label-resize": "Show/hide panel",
+    "submit": "Submit",
+    "format-mode": "Format mode",
+    "json": "JSON",
+    "text": "TXT",
+    "pretty": "Make pretty",
+    "status-code": "Code",
+    "error-prettify": "Error formatting code"
   }
 }

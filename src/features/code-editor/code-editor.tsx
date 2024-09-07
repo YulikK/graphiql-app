@@ -1,4 +1,6 @@
 'use client';
+import { useTranslations } from 'next-intl';
+
 import { json } from '@codemirror/lang-json';
 import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
 import DataObjectIcon from '@mui/icons-material/DataObject';
@@ -33,6 +35,10 @@ import { dracula, tomorrow } from 'thememirror';
 import { useTheme } from '@/shared/contexts';
 
 import style from './code-editor.module.css';
+enum Language {
+  JSON = 'json',
+  GRAPHQL = 'graphql',
+}
 
 type CodeEditorProps = {
   isGraphQl?: boolean;
@@ -67,16 +73,17 @@ export const CodeEditor = (props: CodeEditorProps) => {
   }
   const { darkMode } = useTheme();
   const [error, setError] = useState<string | null>(null);
+  const t = useTranslations('Common');
 
   const handlePrettier = async () => {
     let formatted = value;
     try {
       formatted = await prettier.format(value, {
-        parser: isGraphQl ? 'graphql' : 'json',
+        parser: isGraphQl ? Language.GRAPHQL : Language.JSON,
         plugins: isGraphQl ? [parserGraphql] : [parserBabel, parserEstree],
       });
     } catch (error) {
-      setError(`Error formatting code: ${error}`);
+      setError(`${t('error-prettify')}: ${error}`);
     }
     if (onChange) {
       onChange(formatted);
@@ -108,7 +115,7 @@ export const CodeEditor = (props: CodeEditorProps) => {
             <IconButton
               size="small"
               color="primary"
-              aria-label="submit"
+              aria-label={t('submit')}
               onClick={() => onSubmit && onSubmit()}
             >
               <PlayCircleIcon />
@@ -122,16 +129,16 @@ export const CodeEditor = (props: CodeEditorProps) => {
                 orientation="vertical"
                 exclusive
                 onChange={(e, value) => onModeChange(value)}
-                aria-label="format mode"
+                aria-label={t('format-mode')}
                 sx={{ ml: 'auto' }}
               >
-                <Tooltip title="json">
-                  <ToggleButton value={false} aria-label="json">
+                <Tooltip title={t('json')}>
+                  <ToggleButton value={false} aria-label={t('json')}>
                     <DataObjectIcon />
                   </ToggleButton>
                 </Tooltip>
-                <Tooltip title="txt">
-                  <ToggleButton value={true} aria-label="txt">
+                <Tooltip title={t('text')}>
+                  <ToggleButton value={true} aria-label={t('text')}>
                     <TitleIcon />
                   </ToggleButton>
                 </Tooltip>
@@ -146,10 +153,10 @@ export const CodeEditor = (props: CodeEditorProps) => {
                 sx={{ mx: 0.5, my: 1 }}
               />
               <ToggleButtonGroup size="small">
-                <Tooltip title="prettify">
+                <Tooltip title={t('pretty')}>
                   <IconButton
                     size="small"
-                    aria-label="prettify"
+                    aria-label={t('pretty')}
                     onClick={handlePrettier}
                   >
                     <AutoFixHighIcon />
@@ -163,7 +170,7 @@ export const CodeEditor = (props: CodeEditorProps) => {
           <Chip
             className={style.status}
             color={status === 200 ? 'success' : 'error'}
-            label={`Code ${status}`}
+            label={`${t('status-code')} ${status}`}
             size="medium"
             icon={status === 200 ? <DoneIcon /> : <WarningAmberIcon />}
           />

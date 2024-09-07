@@ -10,6 +10,79 @@ const roboto = Roboto({
   display: 'swap',
 });
 
+const codeEditorStyles = {
+  '&.read-only': {
+    background: 'transparent',
+    '& > .cm-theme > .cm-editor': {
+      background: 'transparent',
+      '& > .cm-scroller > .cm-gutters': {
+        background: 'transparent',
+      },
+    },
+  },
+  '& > .cm-theme': {
+    height: '100%',
+    '& > .cm-editor': {
+      height: '100%',
+      '& > .cm-scroller > .cm-content > .cm-activeLine': {
+        background: 'transparent',
+      },
+      '& > .cm-scroller > .cm-gutters': {
+        borderColor: 'transparent',
+        '& > .cm-gutter > .cm-activeLineGutter': {
+          background: 'transparent',
+        },
+      },
+    },
+    '& > .cm-focused': {
+      outline: 'none',
+    },
+  },
+};
+const resizeBarStyles = {
+  '& > .split-view': {
+    '& > .split-view-container > .split-view-view::before': {
+      backgroundColor: 'transparent',
+    },
+    '& > .sash-container > .sash': {
+      '&::before': {
+        borderRadius: '5px',
+        background: '#2c58f7',
+        opacity: '50%',
+        transition:
+          'width 0.3s ease-in-out, height 0.3s ease-in-out, border-radius 0.3s ease-in-out',
+        transformOrigin: 'center',
+      },
+      // '&.sash-hover:hover::before': {
+      //   transition:
+      //     'width 0.3s ease-in-out, height 0.3s ease-in-out, border-radius 0.3s ease-in-out',
+      // },
+      '&.sash-vertical': {
+        '&::before': {
+          width: '5px',
+          height: '15px',
+          top: '50%',
+          transform: 'translate(0, -50%)',
+        },
+        '&.sash-hover::before': {
+          height: '50px',
+        },
+      },
+      '&.sash-horizontal': {
+        '&::before': {
+          width: '15px',
+          height: '5px',
+          right: '50%',
+          transform: 'translate(50%, 0)',
+        },
+        '&.sash-hover::before': {
+          width: '50px',
+        },
+      },
+    },
+  },
+};
+
 const lightTheme = createTheme({
   typography: {
     fontFamily: roboto.style.fontFamily,
@@ -109,18 +182,11 @@ const lightTheme = createTheme({
     MuiPaper: {
       styleOverrides: {
         root: {
+          ...resizeBarStyles,
           '& > .accordion-info': {
             background: 'transparent',
           },
-          '&.read-only': {
-            background: 'transparent',
-          },
-          '&.read-only > .cm-theme > .cm-editor': {
-            background: 'transparent',
-          },
-          '&.read-only > .cm-theme > .cm-editor > .cm-scroller > .cm-gutters': {
-            background: 'transparent',
-          },
+          ...codeEditorStyles,
         },
       },
     },
@@ -179,6 +245,15 @@ const lightTheme = createTheme({
             transition: 'all 0.3s ease-in-out',
             background:
               'linear-gradient(180deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.5) 100%)',
+          },
+        },
+      },
+    },
+    MuiStack: {
+      styleOverrides: {
+        root: {
+          '& > .MuiBox-root ': {
+            ...resizeBarStyles,
           },
         },
       },
@@ -293,15 +368,7 @@ const darkTheme = createTheme({
           '&.code-editor': {
             background: '#2d2f3f',
           },
-          '&.read-only': {
-            background: 'transparent',
-          },
-          '&.read-only > .cm-theme > .cm-editor': {
-            background: 'transparent',
-          },
-          '&.read-only > .cm-theme > .cm-editor > .cm-scroller > .cm-gutters': {
-            background: 'transparent',
-          },
+          ...codeEditorStyles,
         },
       },
     },

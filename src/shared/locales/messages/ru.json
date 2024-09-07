@@ -69,12 +69,12 @@
   },
   "RestPage": {
     "send": "отправить",
+    "method": "Метод",
     "query": "параметры",
     "body": "тело",
     "headers": "заголовки",
     "variables": "переменные",
     "text": "Текст",
-    "pretty": "Форматировать",
     "pretty-error": "Форматирование доступно только для валидного JSON"
   },
   "GraphqlPage": {
@@ -84,12 +84,20 @@
     "endpoint": "Точка входа",
     "documentation": "Справка",
     "show-doc": "Показать справку",
-    "error-no-doc-url": "URL документации не задан"
+    "error-no-doc-url": "URL документации не задан",
+    "error-parse-schema": "Ошибка при разборе схемы"
   },
   "Common": {
     "key": "ключ",
     "value": "значение",
     "status": "Статус код",
-    "label-resize": "Показать/скрыть панель"
+    "label-resize": "Показать/скрыть панель",
+    "submit": "Отправить",
+    "format-mode": "Режим форматирования",
+    "json": "JSON",
+    "text": "Текст",
+    "pretty": "Форматировать",
+    "status-code": "Код",
+    "error-prettify": "Ошибка форматирования кода"
   }
 }
