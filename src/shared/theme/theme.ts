@@ -358,6 +358,7 @@ const darkTheme = createTheme({
     MuiPaper: {
       styleOverrides: {
         root: {
+          ...resizeBarStyles,
           '& > .accordion-info': {
             background: '#8764e1',
           },
@@ -414,6 +415,15 @@ const darkTheme = createTheme({
             borderRadius: '10px',
             transition: 'all 0.3s ease-in-out',
             background: '#00000090',
+          },
+        },
+      },
+    },
+    MuiStack: {
+      styleOverrides: {
+        root: {
+          '& > .MuiBox-root ': {
+            ...resizeBarStyles,
           },
         },
       },
