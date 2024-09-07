@@ -41,7 +41,7 @@ const codeEditorStyles = {
 };
 const resizeBarStyles = {
   '& > .split-view': {
-    '& > .split-view-container > .split-view-view::before': {
+    '& > .split-view-container > .split-view-view:not(:first-child)::before': {
       backgroundColor: 'transparent',
     },
     '& > .sash-container > .sash': {
@@ -53,10 +53,6 @@ const resizeBarStyles = {
           'width 0.3s ease-in-out, height 0.3s ease-in-out, border-radius 0.3s ease-in-out',
         transformOrigin: 'center',
       },
-      // '&.sash-hover:hover::before': {
-      //   transition:
-      //     'width 0.3s ease-in-out, height 0.3s ease-in-out, border-radius 0.3s ease-in-out',
-      // },
       '&.sash-vertical': {
         '&::before': {
           width: '5px',
