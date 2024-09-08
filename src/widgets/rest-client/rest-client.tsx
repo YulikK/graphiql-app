@@ -6,7 +6,7 @@ import { Box, Card } from '@mui/material';
 import ClientEndpoint from '@/features/client-endpoint/client-endpoint';
 import { ResizeHorizontal } from '@/features/resize-horizontal/resize-horizontal';
 import { RestMethod, RestSubmit } from '@/features/rest';
-import { RestTabs, RestTabValue } from '@/features/tab-list/rest/rest-tsbs';
+import { RestTabs, RestTabValue } from '@/features/tab-list/rest/rest-tabs';
 import { setRestUrl } from '@/shared/store/slices/rest-slice';
 
 import { SettingsTab } from '../settings-tab/settings-tab';
