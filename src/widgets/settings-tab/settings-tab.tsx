@@ -3,7 +3,7 @@ import { Box, Card } from '@mui/material';
 import { useState } from 'react';
 
 import { TabListHeader } from '@/features/tab-list/header/tab-list-header';
-import { TabPanelContainer } from '@/features/tab-list/tab-panel-container/tab-panel-conrainer';
+import { TabPanelContainer } from '@/features/tab-list/tab-panel-container/tab-panel-container';
 import { TabsMap } from '@/shared/models/view';
 
 type SettingsTabProps = {
