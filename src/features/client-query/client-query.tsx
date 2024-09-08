@@ -1,9 +1,9 @@
 import { useTranslations } from 'next-intl';
 
-import { Alert, Snackbar } from '@mui/material';
 import { buildClientSchema } from 'graphql';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
+import { useAlertBar } from '@/shared/contexts';
 import { useAppDispatch, useAppSelector } from '@/shared/hooks/redux-hooks';
 import useGraphRequest from '@/shared/hooks/use-graph-request';
 import { selectGraphqlData } from '@/shared/store/selectors/general-graph-selector';
@@ -20,10 +20,10 @@ export const GraphQuery = () => {
 
   const dispatch = useAppDispatch();
 
+  const { setError } = useAlertBar();
+
   const { query, schema, url, urlDoc, isTrySchemaDownload } =
     useAppSelector(selectGraphqlData);
-
-  const [error, setError] = useState<string | null>(null);
 
   const t = useTranslations('GraphqlPage');
 
@@ -54,24 +54,12 @@ export const GraphQuery = () => {
   };
 
   return (
-    <>
-      <CodeEditor
-        isGraphQl={true}
-        schema={graphqlSchema}
-        value={query}
-        onChange={handleGraphqlChange}
-        onSubmit={makeRequest}
-      />
-      <Snackbar
-        open={!!error}
-        onClose={() => setError(null)}
-        autoHideDuration={5000}
-        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-      >
-        <Alert severity="error" onClose={() => setError(null)}>
-          {error}
-        </Alert>
-      </Snackbar>
-    </>
+    <CodeEditor
+      isGraphQl={true}
+      schema={graphqlSchema}
+      value={query}
+      onChange={handleGraphqlChange}
+      onSubmit={makeRequest}
+    />
   );
 };

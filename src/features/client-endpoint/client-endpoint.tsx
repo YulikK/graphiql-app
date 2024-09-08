@@ -1,5 +1,4 @@
-import InsertLinkIcon from '@mui/icons-material/InsertLink';
-import { InputAdornment, TextField } from '@mui/material';
+import { TextField } from '@mui/material';
 
 import { useAppDispatch, useAppSelector } from '@/shared/hooks/redux-hooks';
 import { RootState } from '@/shared/models/redux-types';
@@ -14,8 +13,6 @@ interface Props {
     | typeof GraphqlSlice.actions.setGraphUrl
     | typeof GraphqlSlice.actions.setGraphUrlDoc;
   label?: string;
-  startComponent?: React.ReactNode;
-  endComponent?: React.ReactNode;
   variant?: 'standard' | 'outlined' | 'filled';
 }
 
@@ -23,8 +20,6 @@ export default function ClientEndpoint({
   label,
   setUrl,
   sliceKey,
-  startComponent,
-  endComponent,
   variant = 'outlined',
 }: Props) {
   const isDoc =
@@ -45,16 +40,6 @@ export default function ClientEndpoint({
       onInput={e => dispatch(setUrl((e.target as HTMLInputElement).value))}
       value={url}
       sx={{ flexGrow: 1 }}
-      slotProps={{
-        input: {
-          startAdornment: (
-            <InputAdornment position="start">
-              {startComponent ? startComponent : <InsertLinkIcon />}
-            </InputAdornment>
-          ),
-          endAdornment: endComponent ? endComponent : undefined,
-        },
-      }}
     />
   );
 }

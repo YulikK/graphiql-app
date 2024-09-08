@@ -9,14 +9,12 @@ import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import TitleIcon from '@mui/icons-material/Title';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import {
-  Alert,
   Box,
   ButtonGroup,
   Chip,
   Divider,
   IconButton,
   Paper,
-  Snackbar,
   ToggleButton,
   ToggleButtonGroup,
   Tooltip,
@@ -29,10 +27,9 @@ import parserBabel from 'prettier/plugins/babel';
 import parserEstree from 'prettier/plugins/estree';
 import parserGraphql from 'prettier/plugins/graphql';
 import prettier from 'prettier/standalone';
-import { useState } from 'react';
 import { dracula, tomorrow } from 'thememirror';
 
-import { useTheme } from '@/shared/contexts';
+import { useAlertBar, useTheme } from '@/shared/contexts';
 
 import style from './code-editor.module.css';
 
@@ -78,7 +75,7 @@ export const CodeEditor = (props: CodeEditorProps) => {
 
   const { darkMode } = useTheme();
 
-  const [error, setError] = useState<string | null>(null);
+  const { setError } = useAlertBar();
 
   const t = useTranslations('Common');
 
@@ -211,16 +208,6 @@ export const CodeEditor = (props: CodeEditorProps) => {
           />
         )}
       </Paper>
-      <Snackbar
-        open={!!error}
-        onClose={() => setError(null)}
-        autoHideDuration={5000}
-        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-      >
-        <Alert severity="error" onClose={() => setError(null)}>
-          {error}
-        </Alert>
-      </Snackbar>
     </Box>
   );
 };

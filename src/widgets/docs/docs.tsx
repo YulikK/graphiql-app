@@ -7,18 +7,11 @@ import {
 } from '@graphiql/react';
 import { createGraphiQLFetcher } from '@graphiql/toolkit';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
-import {
-  Alert,
-  Box,
-  Drawer,
-  IconButton,
-  Snackbar,
-  Tooltip,
-} from '@mui/material';
+import { Box, Drawer, IconButton, Tooltip } from '@mui/material';
 import 'graphiql/graphiql.min.css';
 import { useEffect, useState } from 'react';
 
-import { useTheme as useAppTheme } from '@/shared/contexts';
+import { useAlertBar, useTheme as useAppTheme } from '@/shared/contexts';
 import { useAppDispatch, useAppSelector } from '@/shared/hooks/redux-hooks';
 import { setGraphSchema } from '@/shared/store/slices/grahpql-client';
 import { fetchGraphSchema } from '@/shared/utils/get-graph-schem';
@@ -26,7 +19,7 @@ import { fetchGraphSchema } from '@/shared/utils/get-graph-schem';
 export const Docs = () => {
   const [showDoc, setShowDoc] = useState(false);
 
-  const [error, setError] = useState<string | null>(null);
+  const { setError } = useAlertBar();
 
   const dispatch = useAppDispatch();
 
@@ -111,16 +104,6 @@ export const Docs = () => {
           )}
         </Box>
       </Drawer>
-      <Snackbar
-        open={!!error}
-        onClose={() => setError(null)}
-        autoHideDuration={5000}
-        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-      >
-        <Alert severity="error" onClose={() => setError(null)}>
-          {error}
-        </Alert>
-      </Snackbar>
     </>
   );
 };
