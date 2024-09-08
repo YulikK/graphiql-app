@@ -9,12 +9,10 @@ import {
   handleRestBodyMode,
   setRestBody,
 } from '@/shared/store/slices/rest-slice';
-import ConvertToValidJsonString from '@/shared/utils/convert-to-valid-json-string';
 
 import { CodeEditor } from '../code-editor/code-editor';
 
 export default function RestBody() {
-  const [isTextMode, setIsTextMode] = useState(false);
   const value = useAppSelector((state) => state['rest-slice'].body);
   const textMode = useAppSelector((state) => state['rest-slice'].textMode);
   const [error, setError] = useState(false);
@@ -22,17 +20,7 @@ export default function RestBody() {
   const dispatch = useAppDispatch();
   const t = useTranslations('RestPage');
 
-  const formatText = () => {
-    const result = ConvertToValidJsonString(value);
-    if (result) {
-      dispatch(setRestBody(result));
-      return;
-    }
-    setError(true);
-  };
-
   const handleModeChange = (value: boolean) => {
-    setIsTextMode(value);
     dispatch(handleRestBodyMode(value));
   };
 

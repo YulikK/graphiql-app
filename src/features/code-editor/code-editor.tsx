@@ -35,10 +35,10 @@ import { dracula, tomorrow } from 'thememirror';
 import { useTheme } from '@/shared/contexts';
 
 import style from './code-editor.module.css';
-enum Language {
-  JSON = 'json',
-  GRAPHQL = 'graphql',
-}
+const Language = {
+  JSON: 'json',
+  GRAPHQL: 'graphql',
+};
 
 type CodeEditorProps = {
   isGraphQl?: boolean;
@@ -68,7 +68,7 @@ export const CodeEditor = (props: CodeEditorProps) => {
   const extensions: Extension[] = [];
   if (isGraphQl && schema) {
     extensions.push(graphql(schema));
-  } else {
+  } else if (!isTextMode) {
     extensions.push(json());
   }
   const { darkMode } = useTheme();
@@ -91,15 +91,24 @@ export const CodeEditor = (props: CodeEditorProps) => {
   };
 
   return (
-    <Box className={clsx(style.editor, { ['read-only']: !isEdit })}>
+    <Box
+      sx={{
+        width: '100%',
+        height: '100%',
+        position: 'relative',
+      }}
+      className={clsx({ ['read-only']: !isEdit })}
+    >
       <Paper
+        sx={{
+          width: '100%',
+          height: '100%',
+          overflow: 'hidden',
+          position: 'relative',
+        }}
         elevation={isEdit ? 2 : 0}
         square={false}
-        className={clsx(
-          style['editor-wrapper'],
-          { ['read-only']: !isEdit },
-          'code-editor'
-        )}
+        className={clsx({ ['read-only']: !isEdit }, 'code-editor')}
       >
         <ReactCodeMirror
           value={value}
@@ -110,16 +119,29 @@ export const CodeEditor = (props: CodeEditorProps) => {
           onBlur={onBlur}
           className={style.cm}
         />
-        <ButtonGroup className={style.tools}>
+        <ButtonGroup
+          sx={{
+            position: 'absolute',
+            right: 0,
+            top: 0,
+            display: 'flex',
+            flexDirection: 'column',
+            margin: '10px',
+            marginRight: '15px',
+            zIndex: 1,
+          }}
+        >
           {isGraphQl && (
-            <IconButton
-              size="small"
-              color="primary"
-              aria-label={t('submit')}
-              onClick={() => onSubmit && onSubmit()}
-            >
-              <PlayCircleIcon />
-            </IconButton>
+            <Tooltip title={t('submit')}>
+              <IconButton
+                size="small"
+                color="success"
+                aria-label={t('submit')}
+                onClick={() => onSubmit && onSubmit()}
+              >
+                <PlayCircleIcon />
+              </IconButton>
+            </Tooltip>
           )}
           {isEdit && !isGraphQl && onModeChange && (
             <>
@@ -147,11 +169,9 @@ export const CodeEditor = (props: CodeEditorProps) => {
           )}
           {isEdit && !isTextMode && (
             <>
-              <Divider
-                flexItem
-                orientation="horizontal"
-                sx={{ mx: 0.5, my: 1 }}
-              />
+              {(isGraphQl || (isEdit && onModeChange)) && (
+                <Divider orientation="horizontal" sx={{ mx: 0.5, my: 1 }} />
+              )}
               <ToggleButtonGroup size="small">
                 <Tooltip title={t('pretty')}>
                   <IconButton
@@ -168,8 +188,14 @@ export const CodeEditor = (props: CodeEditorProps) => {
         </ButtonGroup>
         {status > 0 && (
           <Chip
-            className={style.status}
-            color={status === 200 ? 'success' : 'error'}
+            sx={{
+              position: 'absolute',
+              right: 0,
+              top: 0,
+              m: '10px',
+              mr: '15px',
+            }}
+            color={status >= 400 ? 'error' : 'success'}
             label={`${t('status-code')} ${status}`}
             size="medium"
             icon={status === 200 ? <DoneIcon /> : <WarningAmberIcon />}

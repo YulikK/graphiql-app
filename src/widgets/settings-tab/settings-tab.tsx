@@ -1,13 +1,10 @@
 import { TabContext } from '@mui/lab';
 import { Box, Card } from '@mui/material';
-import clsx from 'clsx';
 import { useState } from 'react';
 
 import { TabListHeader } from '@/features/tab-list/header/tab-list-header';
 import { TabPanelContainer } from '@/features/tab-list/tab-panel-container/tab-panel-conrainer';
 import { TabsMap } from '@/shared/models/view';
-
-import style from './settings-tab.module.css';
 
 type SettingsTabProps = {
   tabHeaderList: string[];
@@ -22,7 +19,11 @@ export const SettingsTab = ({
   const [activeTab, setActiveTab] = useState(tabPanelList[0].name);
 
   return (
-    <Card elevation={1} className={clsx(style.container, 'item')}>
+    <Card
+      elevation={1}
+      sx={{ width: '100%', height: '100%' }}
+      className={'item'}
+    >
       <TabContext value={activeTab}>
         <TabListHeader
           tabs={tabHeaderList}
@@ -30,10 +31,16 @@ export const SettingsTab = ({
           isGraph={isGraph}
         />
 
-        <Box className={style['tab-list']}>
+        <Box
+          sx={{
+            width: '100%',
+            height: 'calc(100% - 48px)',
+            overflowY: 'auto',
+          }}
+        >
           {tabPanelList.map((tab) => (
             <TabPanelContainer name={tab.name} key={tab.name}>
-              {tab.component()}
+              {tab.renderComponent()}
             </TabPanelContainer>
           ))}
         </Box>

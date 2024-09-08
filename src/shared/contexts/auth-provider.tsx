@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, ReactNode } from 'react';
+import { createContext } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { toast } from 'react-toastify';
 
@@ -17,7 +17,7 @@ export const AuthContext = createContext<AuthContextValue | undefined>(
 );
 
 interface AuthProviderProps {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 export function AuthProvider({ children }: AuthProviderProps) {

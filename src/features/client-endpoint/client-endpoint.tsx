@@ -1,6 +1,5 @@
 import InsertLinkIcon from '@mui/icons-material/InsertLink';
 import { InputAdornment, TextField } from '@mui/material';
-import { ReactElement } from 'react';
 
 import { useAppDispatch, useAppSelector } from '@/shared/hooks/redux-hooks';
 import { RootState } from '@/shared/models/redux-types';
@@ -9,14 +8,14 @@ import GraphqlSlice from '@/shared/store/slices/grahpql-client';
 import RestSlice from '@/shared/store/slices/rest-slice';
 
 interface Props {
-  label: string;
   sliceKey: SliceName;
   setUrl:
     | typeof RestSlice.actions.setRestUrl
     | typeof GraphqlSlice.actions.setGraphUrl
     | typeof GraphqlSlice.actions.setGraphUrlDoc;
-  startComponent?: ReactElement;
-  endComponent?: ReactElement;
+  label?: string;
+  startComponent?: React.ReactNode;
+  endComponent?: React.ReactNode;
   variant?: 'standard' | 'outlined' | 'filled';
 }
 

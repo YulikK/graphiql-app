@@ -12,6 +12,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import GoogleIcon from '@/assets/google.svg';
+import { Loader } from '@/features/loader/loader';
 import { useAuth } from '@/shared/contexts';
 import { useLoginForm } from '@/shared/hooks/use-login-form';
 
@@ -35,7 +36,7 @@ export default function LoginPage({
     useLoginForm();
 
   if (loading) {
-    return <div>Loading</div>;
+    return <Loader />;
   }
 
   return (

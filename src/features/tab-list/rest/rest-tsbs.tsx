@@ -9,22 +9,22 @@ import {
   setRestVariables,
 } from '@/shared/store/slices/rest-slice';
 
-export enum RestTabValue {
-  QUERY = 'query',
-  BODY = 'body',
-  HEADERS = 'headers',
-  VARIABLES = 'variables',
-}
+export const RestTabValue = {
+  QUERY: 'query',
+  BODY: 'body',
+  HEADERS: 'headers',
+  VARIABLES: 'variables',
+} as const;
 
-const queryTap = () => {
+const QueryTap = () => {
   return <RestQuery />;
 };
 
-const bodyTap = () => {
+const BodyTap = () => {
   return <RestBody />;
 };
 
-const headersTab = () => {
+const HeadersTab = () => {
   return (
     <ClientHeaders
       sliceKey="rest-slice"
@@ -34,7 +34,7 @@ const headersTab = () => {
   );
 };
 
-const variablesTab = () => {
+const VariablesTab = () => {
   return (
     <ClientVariables
       sliceKey="rest-slice"
@@ -45,8 +45,8 @@ const variablesTab = () => {
 };
 
 export const RestTabs: TabsMap[] = [
-  { name: RestTabValue.QUERY, component: queryTap },
-  { name: RestTabValue.BODY, component: bodyTap },
-  { name: RestTabValue.HEADERS, component: headersTab },
-  { name: RestTabValue.VARIABLES, component: variablesTab },
+  { name: RestTabValue.QUERY, renderComponent: QueryTap },
+  { name: RestTabValue.BODY, renderComponent: BodyTap },
+  { name: RestTabValue.HEADERS, renderComponent: HeadersTab },
+  { name: RestTabValue.VARIABLES, renderComponent: VariablesTab },
 ];

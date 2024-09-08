@@ -13,17 +13,23 @@ import {
   setGraphUrlDoc,
 } from '@/shared/store/slices/grahpql-client';
 
-export enum GraphTabValue {
-  URL = 'url',
-  HEADERS = 'headers',
-  VARIABLES = 'variables',
-}
+export const GraphTabValue = {
+  URL: 'url',
+  HEADERS: 'headers',
+  VARIABLES: 'variables',
+} as const;
 
 const UrlTap = () => {
   const t = useTranslations('GraphqlPage');
   return (
     <>
-      <Box display={'flex'} alignItems={'center'} gap={2}>
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 2,
+        }}
+      >
         <ClientEndpoint
           sliceKey="graphql-slice"
           setUrl={setGraphUrl}
@@ -31,7 +37,14 @@ const UrlTap = () => {
           variant="standard"
         />
       </Box>
-      <Box display={'flex'} alignItems={'center'} gap={2} marginTop={2}>
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 2,
+          mt: 2,
+        }}
+      >
         <ClientEndpoint
           sliceKey="graphql-slice"
           setUrl={setGraphUrlDoc}
@@ -58,7 +71,7 @@ const VariablesTab = () => {
 };
 
 export const GraphTabs: TabsMap[] = [
-  { name: GraphTabValue.URL, component: UrlTap },
-  { name: GraphTabValue.HEADERS, component: HeadersTab },
-  { name: GraphTabValue.VARIABLES, component: VariablesTab },
+  { name: GraphTabValue.URL, renderComponent: UrlTap },
+  { name: GraphTabValue.HEADERS, renderComponent: HeadersTab },
+  { name: GraphTabValue.VARIABLES, renderComponent: VariablesTab },
 ];

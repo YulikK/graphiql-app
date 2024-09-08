@@ -3,7 +3,7 @@ import { useTranslations } from 'next-intl';
 import { MenuItem, Select } from '@mui/material';
 
 import { useAppDispatch, useAppSelector } from '@/shared/hooks/redux-hooks';
-import { HttpMethod } from '@/shared/models/http-methods';
+import { HttpMethod, HttpMethodType } from '@/shared/models/http-methods';
 import { setRestMethod } from '@/shared/store/slices/rest-slice';
 
 const httpMethods = Object.values(HttpMethod).filter(
@@ -20,7 +20,9 @@ export default function RestMethod() {
       defaultValue={method}
       value={method}
       label={t('method')}
-      onChange={(e) => dispatch(setRestMethod(e.target.value as HttpMethod))}
+      onChange={(e) =>
+        dispatch(setRestMethod(e.target.value as HttpMethodType))
+      }
     >
       {httpMethods.map((item) => (
         <MenuItem key={item} value={item}>

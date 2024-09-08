@@ -1,7 +1,5 @@
 import { TabPanel } from '@mui/lab';
 
-import style from './tab-panel-conrainer.module.css';
-
 type TabPanelContainerProps = {
   name: string;
   children: React.ReactNode;
@@ -11,7 +9,13 @@ export const TabPanelContainer = ({
   children,
 }: TabPanelContainerProps) => {
   return (
-    <TabPanel value={name} className={style['tab-panel']}>
+    <TabPanel
+      value={name}
+      sx={{
+        width: '100%',
+        height: '100%',
+      }}
+    >
       {children}
     </TabPanel>
   );

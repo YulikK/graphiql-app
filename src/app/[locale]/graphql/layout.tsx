@@ -1,5 +1,7 @@
 import { Stack } from '@mui/material';
+import { Suspense } from 'react';
 
+import { Loader } from '@/features/loader/loader';
 import GraphqlClient from '@/widgets/graphql-client/graphql-client';
 
 export default function GraphLayout({
@@ -9,14 +11,18 @@ export default function GraphLayout({
 }) {
   return (
     <Stack
-      display={'flex'}
-      flexDirection={'column'}
-      marginInline={'auto'}
-      width={'100%'}
-      height={'100%'}
-      padding={'10px 0'}
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        marginInline: 'auto',
+        width: '100%',
+        height: '100%',
+        padding: '10px 0',
+      }}
     >
-      <GraphqlClient>{children}</GraphqlClient>
+      <GraphqlClient>
+        <Suspense fallback={<Loader />}>{children}</Suspense>
+      </GraphqlClient>
     </Stack>
   );
 }

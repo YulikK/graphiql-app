@@ -14,6 +14,7 @@ import {
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
+import { Loader } from '@/features/loader/loader';
 import { useAuth } from '@/shared/contexts';
 import { useRegistrationForm } from '@/shared/hooks/use-registration-form';
 
@@ -37,7 +38,7 @@ export default function RegistrationPage({
     useRegistrationForm();
 
   if (loading) {
-    return <div>Loading</div>;
+    return <Loader />;
   }
 
   return (

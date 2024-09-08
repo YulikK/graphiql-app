@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import ChangeVariableItem from '@/shared/models/change-variable-item';
-import { HttpMethod } from '@/shared/models/http-methods';
+import { HttpMethod, HttpMethodType } from '@/shared/models/http-methods';
 import checkLastTuple from '@/shared/utils/check-last-tuple';
 import updateUlrAndQuery from '@/shared/utils/update-url-and-query';
 
@@ -9,7 +9,7 @@ const initialState: {
   url: string;
   query: string[][];
   body: string;
-  method: HttpMethod;
+  method: HttpMethodType;
   headers: string[][];
   variables: string[][];
   textMode: boolean;
@@ -67,7 +67,7 @@ const RestSlice = createSlice({
       newParams.splice(payload, 1);
       [state.url, state.query] = updateUlrAndQuery(state.url, newParams);
     },
-    setRestMethod(state, { payload }: PayloadAction<HttpMethod>) {
+    setRestMethod(state, { payload }: PayloadAction<HttpMethodType>) {
       state.method = payload;
     },
     setRestBody(state, { payload }: PayloadAction<string>) {
