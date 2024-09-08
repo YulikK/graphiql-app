@@ -26,8 +26,6 @@ import { fetchGraphSchema } from '@/shared/utils/get-graph-schem';
 export const Docs = () => {
   const [showDoc, setShowDoc] = useState(false);
 
-  const [loading, setLoading] = useState(false);
-
   const [error, setError] = useState<string | null>(null);
 
   const dispatch = useAppDispatch();
@@ -55,7 +53,6 @@ export const Docs = () => {
 
     try {
       if (!fetcher) {
-        setLoading(true);
         setError(null);
 
         const introspectionJSON = await fetchGraphSchema(urlDoc);
@@ -66,8 +63,6 @@ export const Docs = () => {
       setShowDoc(true);
     } catch (err) {
       setError((err as Error).message);
-    } finally {
-      setLoading(false);
     }
   };
 

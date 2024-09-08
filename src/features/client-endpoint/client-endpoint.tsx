@@ -32,7 +32,7 @@ export default function ClientEndpoint({
     setUrl === GraphqlSlice.actions.setGraphUrlDoc;
 
   const url = useAppSelector((state: RootState) =>
-    isDoc ? state['graphql-slice'].urlDoc : state[sliceKey].url
+    isDoc ? state[sliceKey].urlDoc : state[sliceKey].url
   );
 
   const dispatch = useAppDispatch();
