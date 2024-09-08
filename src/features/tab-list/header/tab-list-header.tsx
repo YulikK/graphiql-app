@@ -43,7 +43,10 @@ export const TabListHeader = ({
   };
 
   return (
-    <Box sx={{ width: '100%', display: 'flex', alignItems: 'center' }}>
+    <Box
+      sx={{ width: '100%', display: 'flex', alignItems: 'center' }}
+      className="tab-header"
+    >
       <TabList onChange={handleTabChange}>
         {tabs.map(tab => (
           <Tab

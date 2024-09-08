@@ -33,6 +33,7 @@ export const SettingsTab = ({
         />
 
         <Box
+          className="scrollable"
           sx={{
             width: '100%',
             height: 'calc(100% - 48px)',

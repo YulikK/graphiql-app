@@ -217,8 +217,6 @@ const lightTheme = createTheme({
         }
         .cm-editor {
           border-radius: 8px;
-          // border-bottom-right-radius: 8px;
-          // border-bottom-left-radius: 8px;
         }
         .cm-editor::first-of-type {
           border-top-right-radius: 0;
@@ -229,7 +227,9 @@ const lightTheme = createTheme({
         }
         .cm-scroller {
           border-radius: 8px;
-          border: 1px solid 1px solid #5b5575;
+        }
+        .tab-header {
+          background: #edf1fc;
         }
       `,
     },
@@ -237,7 +237,6 @@ const lightTheme = createTheme({
       styleOverrides: {
         root: {
           '&.item': {
-            border: '1px solid rgba(255, 255, 255, 0.1)',
             borderRadius: '10px',
             transition: 'all 0.3s ease-in-out',
             background:
@@ -406,13 +405,15 @@ const darkTheme = createTheme({
         .rs-icon {
           filter: invert(1);
         }
+        .tab-header {
+          background: #5b5575;
+        }
       `,
     },
     MuiCard: {
       styleOverrides: {
         root: {
           '&.item': {
-            border: '1px solid rgba(255, 255, 255, 0.1)',
             borderRadius: '10px',
             transition: 'all 0.3s ease-in-out',
             background: '#00000090',
