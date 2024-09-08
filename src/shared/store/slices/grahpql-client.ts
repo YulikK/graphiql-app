@@ -78,7 +78,7 @@ const GraphqlSlice = createSlice({
       newHeaders.splice(payload, 1);
       state.headers = checkLastTuple(newHeaders);
     },
-    setRestVariables(state, { payload }: PayloadAction<string>) {
+    setGraphVariables(state, { payload }: PayloadAction<string>) {
       state.variables = payload;
     },
   },
@@ -89,7 +89,7 @@ export const {
   setGraphUrlDoc,
   setGraphSchema,
   setGraphQuery,
-  setRestVariables,
+  setGraphVariables,
   setGraphHeader,
   deleteGraphHeader,
 } = GraphqlSlice.actions;

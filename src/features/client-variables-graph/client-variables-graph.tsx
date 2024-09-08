@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '@/shared/hooks/redux-hooks';
-import { setRestVariables } from '@/shared/store/slices/grahpql-client';
+import { setGraphVariables } from '@/shared/store/slices/grahpql-client';
 
 import { CodeEditor } from '../code-editor/code-editor';
 
@@ -9,7 +9,7 @@ export const GraphVariables = () => {
   const dispatch = useAppDispatch();
 
   const handleJsonChange = (value: string) => {
-    dispatch(setRestVariables(value));
+    dispatch(setGraphVariables(value));
   };
 
   return <CodeEditor value={variables} onChange={handleJsonChange} />;
