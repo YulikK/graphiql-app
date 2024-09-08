@@ -12,17 +12,23 @@ import style from './settings-tab.module.css';
 type SettingsTabProps = {
   tabHeaderList: string[];
   tabPanelList: TabsMap[];
+  isGraph?: boolean;
 };
 export const SettingsTab = ({
   tabHeaderList,
   tabPanelList,
+  isGraph = false,
 }: SettingsTabProps) => {
   const [activeTab, setActiveTab] = useState(tabPanelList[0].name);
 
   return (
     <Card elevation={1} className={clsx(style.container, 'item')}>
       <TabContext value={activeTab}>
-        <TabListHeader tabs={tabHeaderList} setActiveTab={setActiveTab} />
+        <TabListHeader
+          tabs={tabHeaderList}
+          setActiveTab={setActiveTab}
+          isGraph={isGraph}
+        />
 
         <Box className={style['tab-list']}>
           {tabPanelList.map((tab) => (

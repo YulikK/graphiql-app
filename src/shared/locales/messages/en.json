@@ -81,11 +81,12 @@
     "headers": "headers",
     "variables": "variables",
     "url": "Url",
-    "endpoint": "Endpoint",
-    "documentation": "Documentation",
+    "endpoint": "Api",
+    "documentation": "Doc",
     "show-doc": "Show documentation",
     "error-no-doc-url": "Documentation URL is not set",
-    "error-parse-schema": "Error parsing schema"
+    "error-parse-schema": "Error parsing schema",
+    "need-doc-url": "You need to set the documentation URL"
   },
   "Common": {
     "key": "key",

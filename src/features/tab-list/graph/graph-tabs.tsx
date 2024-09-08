@@ -1,6 +1,6 @@
 import { useTranslations } from 'next-intl';
 
-import { Box, InputLabel } from '@mui/material';
+import { Box } from '@mui/material';
 
 import ClientEndpoint from '@/features/client-endpoint/client-endpoint';
 import ClientHeaders from '@/features/client-headers/client-headers';
@@ -12,7 +12,6 @@ import {
   setGraphUrl,
   setGraphUrlDoc,
 } from '@/shared/store/slices/grahpql-client';
-import { Docs } from '@/widgets/docs/docs';
 
 export enum GraphTabValue {
   URL = 'url',
@@ -25,13 +24,20 @@ const UrlTap = () => {
   return (
     <>
       <Box display={'flex'} alignItems={'center'} gap={2}>
-        <InputLabel>{t('endpoint')}</InputLabel>
-        <ClientEndpoint sliceKey="graphql-slice" setUrl={setGraphUrl} />
+        <ClientEndpoint
+          sliceKey="graphql-slice"
+          setUrl={setGraphUrl}
+          label={t('endpoint')}
+          variant="standard"
+        />
       </Box>
       <Box display={'flex'} alignItems={'center'} gap={2} marginTop={2}>
-        <InputLabel>{t('documentation')}</InputLabel>
-        <ClientEndpoint sliceKey="graphql-slice" setUrl={setGraphUrlDoc} />
-        <Docs />
+        <ClientEndpoint
+          sliceKey="graphql-slice"
+          setUrl={setGraphUrlDoc}
+          label={t('documentation')}
+          variant="standard"
+        />
       </Box>
     </>
   );

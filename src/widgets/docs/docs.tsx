@@ -6,9 +6,15 @@ import {
   useTheme as useDocTheme,
 } from '@graphiql/react';
 import { createGraphiQLFetcher } from '@graphiql/toolkit';
-import ArticleIcon from '@mui/icons-material/Article';
-import { LoadingButton } from '@mui/lab';
-import { Alert, Box, Drawer, Snackbar } from '@mui/material';
+import AutoStoriesIcon from '@mui/icons-material/AutoStories';
+import {
+  Alert,
+  Box,
+  Drawer,
+  IconButton,
+  Snackbar,
+  Tooltip,
+} from '@mui/material';
 import 'graphiql/graphiql.min.css';
 import { useEffect, useState } from 'react';
 
@@ -62,17 +68,20 @@ export const Docs = () => {
 
   return (
     <>
-      <LoadingButton
-        size="small"
-        color="primary"
-        loading={loading}
-        disabled={!urlDoc}
-        sx={{ p: '10px', ml: 'auto' }}
-        aria-label={t('show-doc')}
-        onClick={handleDocOpen}
-      >
-        <ArticleIcon />
-      </LoadingButton>
+      <Tooltip title={t(urlDoc ? 'show-doc' : 'need-doc-url')} arrow>
+        <span>
+          <IconButton
+            size="small"
+            color="primary"
+            disabled={!urlDoc}
+            sx={{ p: '10px', ml: 'auto' }}
+            aria-label={t('show-doc')}
+            onClick={handleDocOpen}
+          >
+            <AutoStoriesIcon />
+          </IconButton>
+        </span>
+      </Tooltip>
       <Drawer
         anchor="right"
         open={showDoc}

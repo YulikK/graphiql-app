@@ -25,7 +25,13 @@ export default function GraphqlClient({ children }: GraphqlClientProps) {
   ];
   return (
     <ResizeHorizontal
-      pane1={<SettingsTab tabHeaderList={tabList} tabPanelList={GraphTabs} />}
+      pane1={
+        <SettingsTab
+          tabHeaderList={tabList}
+          tabPanelList={GraphTabs}
+          isGraph={true}
+        />
+      }
       pane2={
         <Card className={clsx(style['editors-card'], 'item')}>
           <ResizeVertical pane1={<GraphQuery />} pane2={children} />

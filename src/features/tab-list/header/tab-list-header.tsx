@@ -7,14 +7,18 @@ import { Box, IconButton, Tab } from '@mui/material';
 import { SyntheticEvent } from 'react';
 
 import { useResizeContext } from '@/shared/contexts';
-
-import style from './tab-list-header.module.css';
+import { Docs } from '@/widgets/docs/docs';
 
 type ClientTabListProps = {
   tabs: string[];
   setActiveTab: (value: string) => void;
+  isGraph?: boolean;
 };
-export const TabListHeader = ({ tabs, setActiveTab }: ClientTabListProps) => {
+export const TabListHeader = ({
+  isGraph = false,
+  tabs,
+  setActiveTab,
+}: ClientTabListProps) => {
   const { onMaximize, onMinimize, isPaneHide } = useResizeContext();
   const t = useTranslations('Common');
 
@@ -37,7 +41,7 @@ export const TabListHeader = ({ tabs, setActiveTab }: ClientTabListProps) => {
   };
 
   return (
-    <Box className={style.container}>
+    <Box sx={{ width: '100%', display: 'flex', alignItems: 'center' }}>
       <TabList onChange={handleTabChange}>
         {tabs.map((tab) => (
           <Tab
@@ -48,15 +52,17 @@ export const TabListHeader = ({ tabs, setActiveTab }: ClientTabListProps) => {
           />
         ))}
       </TabList>
-      <IconButton
-        size="small"
-        color="primary"
-        aria-label={t('label-resize')}
-        onClick={handlePanelVisibleChange}
-        sx={{ ml: 'auto' }}
-      >
-        {isPaneHide ? <ExpandMoreIcon /> : <ExpandLessIcon />}
-      </IconButton>
+      <Box sx={{ ml: 'auto' }}>
+        {isGraph && <Docs />}
+        <IconButton
+          size="small"
+          color="primary"
+          aria-label={t('label-resize')}
+          onClick={handlePanelVisibleChange}
+        >
+          {isPaneHide ? <ExpandMoreIcon /> : <ExpandLessIcon />}
+        </IconButton>
+      </Box>
     </Box>
   );
 };
