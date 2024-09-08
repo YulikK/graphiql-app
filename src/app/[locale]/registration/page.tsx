@@ -24,7 +24,9 @@ export default function RegistrationPage({
   params: { locale: string };
 }) {
   const t = useTranslations('RegistrationPage');
+
   const router = useRouter();
+
   const { isLoggedIn, loading } = useAuth();
 
   useEffect(() => {

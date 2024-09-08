@@ -14,8 +14,10 @@ import { SettingsTab } from '../settings-tab/settings-tab';
 type RestClientProps = {
   children: React.ReactNode;
 };
+
 export default function RestClient({ children }: RestClientProps) {
   const t = useTranslations('RestPage');
+
   const tabList = [
     t(RestTabValue.QUERY),
     t(RestTabValue.BODY),

@@ -17,18 +17,24 @@ import { CodeEditor } from '../code-editor/code-editor';
 
 export const GraphQuery = () => {
   const makeRequest = useGraphRequest();
+
   const dispatch = useAppDispatch();
+
   const { query, schema, url, urlDoc, isTrySchemaDownload } =
     useAppSelector(selectGraphqlData);
+
   const [error, setError] = useState<string | null>(null);
+
   const t = useTranslations('GraphqlPage');
 
   function getGraphSchema() {
     if (schema === '') return null;
+
     try {
       return buildClientSchema(JSON.parse(schema));
     } catch (error) {
       setError(`${t('error-parse-schema')}: ${error}`);
+
       return null;
     }
   }
@@ -37,7 +43,7 @@ export const GraphQuery = () => {
 
   useEffect(() => {
     if (!schema && (url || urlDoc) && !isTrySchemaDownload) {
-      fetchGraphSchema(url || urlDoc).then((data) => {
+      fetchGraphSchema(url || urlDoc).then(data => {
         dispatch(setGraphSchema(data));
       });
     }

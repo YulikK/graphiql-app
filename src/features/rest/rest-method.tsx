@@ -7,24 +7,25 @@ import { HttpMethod, HttpMethodType } from '@/shared/models/http-methods';
 import { setRestMethod } from '@/shared/store/slices/rest-slice';
 
 const httpMethods = Object.values(HttpMethod).filter(
-  (value) => typeof value === 'string'
+  value => typeof value === 'string'
 );
 
 export default function RestMethod() {
-  const method = useAppSelector((state) => state['rest-slice'].method);
+  const method = useAppSelector(state => state['rest-slice'].method);
+
   const dispatch = useAppDispatch();
+
   const t = useTranslations('RestPage');
+
   return (
     <Select
       size="small"
       defaultValue={method}
       value={method}
       label={t('method')}
-      onChange={(e) =>
-        dispatch(setRestMethod(e.target.value as HttpMethodType))
-      }
+      onChange={e => dispatch(setRestMethod(e.target.value as HttpMethodType))}
     >
-      {httpMethods.map((item) => (
+      {httpMethods.map(item => (
         <MenuItem key={item} value={item}>
           {item}
         </MenuItem>

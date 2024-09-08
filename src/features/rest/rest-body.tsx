@@ -13,11 +13,16 @@ import {
 import { CodeEditor } from '../code-editor/code-editor';
 
 export default function RestBody() {
-  const value = useAppSelector((state) => state['rest-slice'].body);
-  const textMode = useAppSelector((state) => state['rest-slice'].textMode);
+  const value = useAppSelector(state => state['rest-slice'].body);
+
+  const textMode = useAppSelector(state => state['rest-slice'].textMode);
+
   const [error, setError] = useState(false);
+
   const makeRequest = useRestRequest();
+
   const dispatch = useAppDispatch();
+
   const t = useTranslations('RestPage');
 
   const handleModeChange = (value: boolean) => {
@@ -34,7 +39,7 @@ export default function RestBody() {
       <CodeEditor
         isTextMode={textMode}
         value={value}
-        onChange={(e) => dispatch(setRestBody(e))}
+        onChange={e => dispatch(setRestBody(e))}
         onBlur={makeRequest}
         onModeChange={handleModeChange}
       />

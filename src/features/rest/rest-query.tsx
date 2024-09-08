@@ -8,8 +8,10 @@ import {
 import ClientList from '../client-list/client-list';
 
 export default function RestQuery() {
-  const query = useAppSelector((state) => state['rest-slice'].query);
+  const query = useAppSelector(state => state['rest-slice'].query);
+
   const dispatch = useAppDispatch();
+
   const deleteItem = (index: number) => dispatch(deleteRestQuery(index));
 
   const changeItem = (value: ChangeVariableItem) =>

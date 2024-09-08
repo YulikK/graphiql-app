@@ -36,12 +36,13 @@ export default function ClientEndpoint({
   );
 
   const dispatch = useAppDispatch();
+
   return (
     <TextField
       label={label}
       size="small"
       variant={variant}
-      onInput={(e) => dispatch(setUrl((e.target as HTMLInputElement).value))}
+      onInput={e => dispatch(setUrl((e.target as HTMLInputElement).value))}
       value={url}
       sx={{ flexGrow: 1 }}
       slotProps={{

@@ -6,6 +6,7 @@ import useRestRequest from '@/shared/hooks/use-rest-request';
 
 export default function RestSubmit() {
   const makeRequest = useRestRequest();
+
   const t = useTranslations('RestPage');
 
   return (

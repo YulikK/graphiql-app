@@ -15,7 +15,8 @@ export default function ClientVariables({
   setVariable,
   deleteVariable,
 }: Props) {
-  const variables = useAppSelector((state) => state['rest-slice'].variables);
+  const variables = useAppSelector(state => state['rest-slice'].variables);
+
   const dispatch = useAppDispatch();
 
   const deleteItem = (index: number) => dispatch(deleteVariable(index));

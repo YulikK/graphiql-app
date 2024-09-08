@@ -21,8 +21,10 @@ export default function ClientHeaders({
   setHeader,
   deleteHeader,
 }: Props) {
-  const headers = useAppSelector((state) => state[sliceKey].headers);
+  const headers = useAppSelector(state => state[sliceKey].headers);
+
   const dispatch = useAppDispatch();
+
   const deleteItem = (index: number) => dispatch(deleteHeader(index));
 
   const changeItem = (object: ChangeVariableItem) =>

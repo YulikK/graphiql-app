@@ -14,12 +14,14 @@ type ClientTabListProps = {
   setActiveTab: (value: string) => void;
   isGraph?: boolean;
 };
+
 export const TabListHeader = ({
   isGraph = false,
   tabs,
   setActiveTab,
 }: ClientTabListProps) => {
   const { onMaximize, onMinimize, isPaneHide } = useResizeContext();
+
   const t = useTranslations('Common');
 
   const handleTabClick = () => {
@@ -43,7 +45,7 @@ export const TabListHeader = ({
   return (
     <Box sx={{ width: '100%', display: 'flex', alignItems: 'center' }}>
       <TabList onChange={handleTabChange}>
-        {tabs.map((tab) => (
+        {tabs.map(tab => (
           <Tab
             label={tab}
             value={tab.toLowerCase()}

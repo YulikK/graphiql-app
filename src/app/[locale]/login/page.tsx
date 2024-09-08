@@ -22,7 +22,9 @@ export default function LoginPage({
   params: { locale: string };
 }) {
   const t = useTranslations('LoginPage');
+
   const router = useRouter();
+
   const { isLoggedIn, loading } = useAuth();
 
   useEffect(() => {

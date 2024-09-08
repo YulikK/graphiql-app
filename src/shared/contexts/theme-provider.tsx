@@ -22,7 +22,7 @@ export const ThemeAppProvider = ({ children }: ThemeProviderProps) => {
   const [darkMode, setDarkMode] = useState<boolean>(prefersDarkMode);
 
   const toggleTheme = () => {
-    setDarkMode((prevTheme) => !prevTheme);
+    setDarkMode(prevTheme => !prevTheme);
   };
 
   useEffect(() => {

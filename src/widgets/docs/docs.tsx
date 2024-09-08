@@ -25,16 +25,21 @@ import { fetchGraphSchema } from '@/shared/utils/get-graph-schem';
 
 export const Docs = () => {
   const [showDoc, setShowDoc] = useState(false);
+
   const [loading, setLoading] = useState(false);
+
   const [error, setError] = useState<string | null>(null);
+
   const dispatch = useAppDispatch();
+
   const t = useTranslations('GraphqlPage');
 
-  const urlDoc = useAppSelector((state) => state['graphql-slice'].urlDoc);
+  const urlDoc = useAppSelector(state => state['graphql-slice'].urlDoc);
 
   const fetcher = urlDoc ? createGraphiQLFetcher({ url: urlDoc }) : null;
 
   const { setTheme } = useDocTheme();
+
   const { darkMode } = useAppTheme();
 
   useEffect(() => {
@@ -44,6 +49,7 @@ export const Docs = () => {
   const handleDocOpen = async () => {
     if (!urlDoc) {
       setError(t('error-no-doc-url'));
+
       return;
     }
 
@@ -51,9 +57,12 @@ export const Docs = () => {
       if (!fetcher) {
         setLoading(true);
         setError(null);
+
         const introspectionJSON = await fetchGraphSchema(urlDoc);
+
         dispatch(setGraphSchema(JSON.stringify(introspectionJSON, null, 2)));
       }
+
       setShowDoc(true);
     } catch (err) {
       setError((err as Error).message);

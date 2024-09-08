@@ -13,13 +13,16 @@ import { SettingsTab } from '@/widgets/settings-tab/settings-tab';
 type GraphqlClientProps = {
   children: React.ReactNode;
 };
+
 export default function GraphqlClient({ children }: GraphqlClientProps) {
   const t = useTranslations('GraphqlPage');
+
   const tabList = [
     t(GraphTabValue.URL),
     t(GraphTabValue.HEADERS),
     t(GraphTabValue.VARIABLES),
   ];
+
   return (
     <ResizeHorizontal
       pane1={

@@ -30,10 +30,13 @@ const GraphqlSlice = createSlice({
   reducers: {
     setGraphUrl(state, { payload }: PayloadAction<string>) {
       const prevUrl = state.url;
+
       state.url = payload;
+
       if (!state.urlDoc || state.urlDoc === `${prevUrl}?sdl`) {
         state.urlDoc = `${state.url}?sdl`;
       }
+
       if (!payload) {
         state.urlDoc = '';
         state.schema = '';
@@ -42,6 +45,7 @@ const GraphqlSlice = createSlice({
     },
     setGraphUrlDoc(state, { payload }: PayloadAction<string>) {
       state.urlDoc = payload;
+
       if (!payload) {
         state.schema = '';
         state.isTrySchemaDownload = false;
@@ -61,12 +65,16 @@ const GraphqlSlice = createSlice({
       }: PayloadAction<ChangeVariableItem>
     ) {
       const temp = state.headers;
+
       temp[index][keyOrValue] = newValue;
+
       const filtered = temp.filter(([key, value]) => key || value);
+
       state.headers = checkLastTuple(filtered);
     },
     deleteGraphHeader(state, { payload }: PayloadAction<number>) {
       const newHeaders = state.headers;
+
       newHeaders.splice(payload, 1);
       state.headers = checkLastTuple(newHeaders);
     },

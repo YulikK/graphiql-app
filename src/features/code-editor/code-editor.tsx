@@ -35,6 +35,7 @@ import { dracula, tomorrow } from 'thememirror';
 import { useTheme } from '@/shared/contexts';
 
 import style from './code-editor.module.css';
+
 const Language = {
   JSON: 'json',
   GRAPHQL: 'graphql',
@@ -52,6 +53,7 @@ type CodeEditorProps = {
   onBlur?: () => void;
   onModeChange?: (value: boolean) => void;
 };
+
 export const CodeEditor = (props: CodeEditorProps) => {
   const {
     isGraphQl = false,
@@ -65,18 +67,24 @@ export const CodeEditor = (props: CodeEditorProps) => {
     onSubmit,
     onModeChange,
   } = props;
+
   const extensions: Extension[] = [];
+
   if (isGraphQl && schema) {
     extensions.push(graphql(schema));
   } else if (!isTextMode) {
     extensions.push(json());
   }
+
   const { darkMode } = useTheme();
+
   const [error, setError] = useState<string | null>(null);
+
   const t = useTranslations('Common');
 
   const handlePrettier = async () => {
     let formatted = value;
+
     try {
       formatted = await prettier.format(value, {
         parser: isGraphQl ? Language.GRAPHQL : Language.JSON,
@@ -85,6 +93,7 @@ export const CodeEditor = (props: CodeEditorProps) => {
     } catch (error) {
       setError(`${t('error-prettify')}: ${error}`);
     }
+
     if (onChange) {
       onChange(formatted);
     }

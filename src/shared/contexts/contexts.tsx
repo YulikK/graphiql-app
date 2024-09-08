@@ -20,13 +20,16 @@ export const useTheme = () => {
   if (context === undefined) {
     throw new Error('useTheme must be used within a ThemeProvider');
   }
+
   return context;
 };
 
 export const useResizeContext = () => {
   const context = useContext(ResizeContext);
+
   if (!context) {
     throw new Error('useResizeContext must be used within a ResizeProvider');
   }
+
   return context;
 };

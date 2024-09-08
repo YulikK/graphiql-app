@@ -34,7 +34,7 @@ export default function Footer() {
         }}
       >
         <Box display={'flex'} alignItems={'center'} gap={2}>
-          {githubLinks.map((el) => (
+          {githubLinks.map(el => (
             <Link
               className="github-link"
               key={el.name}

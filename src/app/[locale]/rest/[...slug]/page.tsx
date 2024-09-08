@@ -21,20 +21,26 @@ const makeRequest = async ({ method, url, body, headers }: RequestParams) => {
       headers: method === HttpMethod.GET ? {} : headers,
       body: method === HttpMethod.GET ? null : body,
     });
+
     const { status } = response;
+
     const result = await response.json();
+
     return { result: JSON.stringify(result, null, 2), status };
   } catch (error) {
     const e = error as Error;
+
     return { result: e.message, status: 500 };
   }
 };
 
 export default async function RestResult({ params, searchParams = {} }: Props) {
-  const [method = '', url = '', body = ''] = params.slug.map((item) =>
+  const [method = '', url = '', body = ''] = params.slug.map(item =>
     decodeURIComponent(item)
   );
+
   const decodedUrl = decodeFromBase64(url);
+
   const decodedBody = decodeFromBase64(body);
 
   const { result, status } = await makeRequest({

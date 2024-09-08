@@ -21,6 +21,7 @@ export const GraphTabValue = {
 
 const UrlTap = () => {
   const t = useTranslations('GraphqlPage');
+
   return (
     <>
       <Box

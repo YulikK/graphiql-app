@@ -20,11 +20,15 @@ const makeRequest = async ({ body, url, headers }: RequestParams) => {
       headers: headers,
       body: body,
     });
+
     const { status } = response;
+
     const result = await response.json();
+
     return { result: JSON.stringify(result, null, 2), status };
   } catch (error) {
     const e = error as Error;
+
     return { result: e.message, status: 500 };
   }
 };
@@ -33,11 +37,12 @@ export default async function GraphResult({
   params,
   searchParams = {},
 }: Props) {
-  const [url = '', body = ''] = params.slug.map((item) =>
+  const [url = '', body = ''] = params.slug.map(item =>
     decodeURIComponent(item)
   );
 
   const decodedUrl = decodeFromBase64(url);
+
   const decodedBody = decodeFromBase64(body);
 
   const { result, status } = await makeRequest({

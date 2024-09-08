@@ -7,6 +7,7 @@ import logo from '@/assets/logo.svg';
 
 export const Logo = () => {
   const locale = useLocale();
+
   return (
     <Link href={`/${locale}`}>
       <Image

@@ -6,7 +6,7 @@ const selectGraphqlState = (state: RootState) => state['graphql-slice'];
 
 export const selectGraphqlData = createSelector(
   [selectGraphqlState],
-  (graphqlState) => ({
+  graphqlState => ({
     query: graphqlState.query,
     schema: graphqlState.schema,
     url: graphqlState.url,

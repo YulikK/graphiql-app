@@ -17,6 +17,7 @@ export default function ClientList({
   changeItem,
 }: Props) {
   const dataIsArray = Array.isArray(dataList);
+
   const t = useTranslations('Common');
 
   return (
@@ -32,7 +33,7 @@ export default function ClientList({
               variant="standard"
               value={key || ''}
               sx={{ flexGrow: 1 }}
-              onInput={(e) =>
+              onInput={e =>
                 changeItem({
                   index,
                   keyOrValue: 0,
@@ -45,7 +46,7 @@ export default function ClientList({
               variant="standard"
               value={value || ''}
               sx={{ flexGrow: 1 }}
-              onInput={(e) =>
+              onInput={e =>
                 changeItem({
                   index,
                   keyOrValue: 1,

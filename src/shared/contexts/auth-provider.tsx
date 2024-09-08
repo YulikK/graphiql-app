@@ -22,7 +22,9 @@ interface AuthProviderProps {
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, loading, error] = useAuthState(auth);
+
   const userName = user?.displayName || 'Unknown';
+
   const isLoggedIn = Boolean(user);
 
   if (error) {

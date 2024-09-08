@@ -39,6 +39,7 @@ const codeEditorStyles = {
     },
   },
 };
+
 const resizeBarStyles = {
   '& > .split-view': {
     '& > .split-view-container > .split-view-view:not(:first-child)::before': {

@@ -15,6 +15,7 @@ import { useLoginValidationSchema } from './use-login-validation-schema';
 
 export const useLoginForm = () => {
   const t = useTranslations('LoginPage');
+
   const validationSchema = useLoginValidationSchema();
 
   const {

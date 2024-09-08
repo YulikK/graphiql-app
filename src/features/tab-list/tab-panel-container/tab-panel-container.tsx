@@ -4,6 +4,7 @@ type TabPanelContainerProps = {
   name: string;
   children: React.ReactNode;
 };
+
 export const TabPanelContainer = ({
   name,
   children,

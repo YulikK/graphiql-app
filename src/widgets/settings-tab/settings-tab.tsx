@@ -11,6 +11,7 @@ type SettingsTabProps = {
   tabPanelList: TabsMap[];
   isGraph?: boolean;
 };
+
 export const SettingsTab = ({
   tabHeaderList,
   tabPanelList,
@@ -38,7 +39,7 @@ export const SettingsTab = ({
             overflowY: 'auto',
           }}
         >
-          {tabPanelList.map((tab) => (
+          {tabPanelList.map(tab => (
             <TabPanelContainer name={tab.name} key={tab.name}>
               {tab.renderComponent()}
             </TabPanelContainer>

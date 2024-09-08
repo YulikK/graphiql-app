@@ -20,10 +20,12 @@ export const ResizeProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [isPaneHide, setIsPaneHide] = useState(true);
+
   const refAllotment = useRef<AllotmentHandle>(null);
 
   const onMaximize = () => {
     setIsPaneHide(false);
+
     if (refAllotment.current) {
       refAllotment.current.resize([300, 500]);
     }
@@ -31,6 +33,7 @@ export const ResizeProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const onMinimize = () => {
     setIsPaneHide(true);
+
     if (refAllotment.current) {
       refAllotment.current.reset();
     }
@@ -38,7 +41,7 @@ export const ResizeProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const handleSettingsResize = useMemo(
     () =>
-      debounce((sizes) => {
+      debounce(sizes => {
         setIsPaneHide(sizes[0] === TAB_HEAD_SIZE);
       }, 100),
     []
