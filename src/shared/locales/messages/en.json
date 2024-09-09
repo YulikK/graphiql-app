@@ -100,5 +100,8 @@
     "pretty": "Make pretty",
     "status-code": "Code",
     "error-prettify": "Error formatting code"
+  },
+  "HistoryPage": {
+    "title": "History"
   }
 }

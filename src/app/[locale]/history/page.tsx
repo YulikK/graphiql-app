@@ -1,5 +1,7 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
+
 import LinkIcon from '@mui/icons-material/Link';
 import {
   Avatar,
@@ -28,6 +30,8 @@ export default function History({
 }: {
   params: { locale: string };
 }) {
+  const t = useTranslations('HistoryPage');
+
   const { getStorage } = useLocalStorage();
 
   const { isLoggedIn, loading } = useAuth();
@@ -64,6 +68,7 @@ export default function History({
     if (storedData) {
       setData(storedData);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -87,37 +92,31 @@ export default function History({
       height={'100%'}
       padding={'10px 0'}
     >
-      <Typography variant="h1">History</Typography>
-      <List>
+      <Typography variant="h2" textAlign={'center'} fontWeight={400}>
+        {t('title')}
+      </Typography>
+      <List sx={{ display: 'flex', gap: '10px', flexDirection: 'column' }}>
         {data &&
           data.map((el, i) => (
-            // <HistoryItem
-            //   key={i}
-            //   url={el.url}
-            //   query={el.query || null}
-            //   type={el.type}
-            // />
             <ListItem
               key={i}
               sx={{
-                border: '1px solid black',
+                borderRadius: '10px',
+                cursor: 'pointer',
               }}
               onClick={() => handleRequest(el)}
-              // secondaryAction={
-              //   <IconButton edge="end" aria-label="delete">
-              //     <DeleteIcon />
-              //   </IconButton>
-              // }
             >
               <ListItemAvatar>
                 <Avatar>
                   <LinkIcon />
                 </Avatar>
               </ListItemAvatar>
-              <Typography variant="h5" marginRight={'10px'}>
-                {el.type}
+              <Typography variant="h6" marginRight={'10px'} minWidth={'80px'}>
+                {el.type === 'rest'
+                  ? `${el.type} ${(el as SavedRestRequest).method}`
+                  : el.type}
               </Typography>
-              <Typography>{el.url}</Typography>
+              <Typography sx={{ wordBreak: 'break-all' }}>{el.url}</Typography>
             </ListItem>
           ))}
       </List>
