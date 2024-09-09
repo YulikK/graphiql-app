@@ -69,15 +69,36 @@
   },
   "RestPage": {
     "send": "send",
+    "method": "Method",
     "query": "query",
     "body": "body",
     "headers": "headers",
     "variables": "variables",
+    "text": "Text",
+    "pretty-error": " Prettifying is available only for valid JSON"
+  },
+  "GraphqlPage": {
+    "headers": "headers",
+    "variables": "variables",
+    "url": "Url",
+    "endpoint": "Api",
+    "documentation": "Doc",
+    "show-doc": "Show documentation",
+    "error-no-doc-url": "Documentation URL is not set",
+    "error-parse-schema": "Error parsing schema",
+    "need-doc-url": "You need to set the documentation URL"
+  },
+  "Common": {
     "key": "key",
     "value": "value",
     "status": "Status code",
-    "text": "Text",
+    "label-resize": "Show/hide panel",
+    "submit": "Submit",
+    "format-mode": "Format mode",
+    "json": "JSON",
+    "text": "TXT",
     "pretty": "Make pretty",
-    "pretty-error": " Prettifying is available only for valid JSON"
+    "status-code": "Code",
+    "error-prettify": "Error formatting code"
   }
 }

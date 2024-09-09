@@ -16,8 +16,9 @@ export const useRegistrationValidationSchema = () => {
   return yup.object().shape({
     name: yup
       .string()
-      .test('is-capitalized', t('name-capitalized'), (value) => {
+      .test('is-capitalized', t('name-capitalized'), value => {
         if (!value) return false;
+
         return value[0] === value[0].toUpperCase();
       })
       .required(t('name-required')),

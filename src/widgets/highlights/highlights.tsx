@@ -15,7 +15,9 @@ const icons: string[] = [rest, graphql, pretty, auth, lang, history];
 
 export default function Highlights() {
   const t = useTranslations('WelcomePage');
+
   const titles: string[] = JSON.parse(t('highlights-names').replace(/'/g, '"'));
+
   const descriptions: string[] = JSON.parse(
     t('highlights-descriptions').replace(/'/g, '"')
   );

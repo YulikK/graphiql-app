@@ -51,8 +51,11 @@ const tech: { [key: string]: string[] } = {
 
 export default function Developers() {
   const t = useTranslations('WelcomePage');
+
   const names: string[] = JSON.parse(t('developers-names').replace(/'/g, '"'));
+
   const roles: string[] = JSON.parse(t('developers-roles').replace(/'/g, '"'));
+
   const skills: string[] = JSON.parse(
     t('developers-skills').replace(/'/g, '"')
   );

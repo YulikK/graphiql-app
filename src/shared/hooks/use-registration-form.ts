@@ -12,6 +12,7 @@ import { useRegistrationValidationSchema } from './use-registration-validation-s
 
 export const useRegistrationForm = () => {
   const t = useTranslations('RegistrationPage');
+
   const validationSchema = useRegistrationValidationSchema();
 
   const {

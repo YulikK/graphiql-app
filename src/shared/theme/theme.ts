@@ -10,6 +10,76 @@ const roboto = Roboto({
   display: 'swap',
 });
 
+const codeEditorStyles = {
+  '&.read-only': {
+    background: 'transparent',
+    '& > .cm-theme > .cm-editor': {
+      background: 'transparent',
+      '& > .cm-scroller > .cm-gutters': {
+        background: 'transparent',
+      },
+    },
+  },
+  '& > .cm-theme': {
+    height: '100%',
+    '& > .cm-editor': {
+      height: '100%',
+      '& > .cm-scroller > .cm-content > .cm-activeLine': {
+        background: 'transparent',
+      },
+      '& > .cm-scroller > .cm-gutters': {
+        borderColor: 'transparent',
+        '& > .cm-gutter > .cm-activeLineGutter': {
+          background: 'transparent',
+        },
+      },
+    },
+    '& > .cm-focused': {
+      outline: 'none',
+    },
+  },
+};
+
+const resizeBarStyles = {
+  '& > .split-view': {
+    '& > .split-view-container > .split-view-view:not(:first-child)::before': {
+      backgroundColor: 'transparent',
+    },
+    '& > .sash-container > .sash': {
+      '&::before': {
+        borderRadius: '5px',
+        background: '#2c58f7',
+        opacity: '50%',
+        transition:
+          'width 0.3s ease-in-out, height 0.3s ease-in-out, border-radius 0.3s ease-in-out',
+        transformOrigin: 'center',
+      },
+      '&.sash-vertical': {
+        '&::before': {
+          width: '5px',
+          height: '15px',
+          top: '50%',
+          transform: 'translate(0, -50%)',
+        },
+        '&.sash-hover::before': {
+          height: '50px',
+        },
+      },
+      '&.sash-horizontal': {
+        '&::before': {
+          width: '15px',
+          height: '5px',
+          right: '50%',
+          transform: 'translate(50%, 0)',
+        },
+        '&.sash-hover::before': {
+          width: '50px',
+        },
+      },
+    },
+  },
+};
+
 const lightTheme = createTheme({
   typography: {
     fontFamily: roboto.style.fontFamily,
@@ -109,9 +179,11 @@ const lightTheme = createTheme({
     MuiPaper: {
       styleOverrides: {
         root: {
+          ...resizeBarStyles,
           '& > .accordion-info': {
-            background: '#f0f0f0',
+            background: 'transparent',
           },
+          ...codeEditorStyles,
         },
       },
     },
@@ -145,8 +217,6 @@ const lightTheme = createTheme({
         }
         .cm-editor {
           border-radius: 8px;
-          // border-bottom-right-radius: 8px;
-          // border-bottom-left-radius: 8px;
         }
         .cm-editor::first-of-type {
           border-top-right-radius: 0;
@@ -157,9 +227,32 @@ const lightTheme = createTheme({
         }
         .cm-scroller {
           border-radius: 8px;
-          border: 1px solid 1px solid #5b5575;
+        }
+        .tab-header {
+          background: #edf1fc;
         }
       `,
+    },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          '&.item': {
+            borderRadius: '10px',
+            transition: 'all 0.3s ease-in-out',
+            background:
+              'linear-gradient(180deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.5) 100%)',
+          },
+        },
+      },
+    },
+    MuiStack: {
+      styleOverrides: {
+        root: {
+          '& > .MuiBox-root ': {
+            ...resizeBarStyles,
+          },
+        },
+      },
     },
   },
 });
@@ -265,9 +358,14 @@ const darkTheme = createTheme({
     MuiPaper: {
       styleOverrides: {
         root: {
+          ...resizeBarStyles,
           '& > .accordion-info': {
             background: '#8764e1',
           },
+          '&.code-editor': {
+            background: '#2d2f3f',
+          },
+          ...codeEditorStyles,
         },
       },
     },
@@ -307,7 +405,30 @@ const darkTheme = createTheme({
         .rs-icon {
           filter: invert(1);
         }
+        .tab-header {
+          background: #5b5575;
+        }
       `,
+    },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          '&.item': {
+            borderRadius: '10px',
+            transition: 'all 0.3s ease-in-out',
+            background: '#00000090',
+          },
+        },
+      },
+    },
+    MuiStack: {
+      styleOverrides: {
+        root: {
+          '& > .MuiBox-root ': {
+            ...resizeBarStyles,
+          },
+        },
+      },
     },
   },
 });

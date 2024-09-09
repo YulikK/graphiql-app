@@ -61,6 +61,7 @@ export const ThemeSwitcher = () => {
       <Image
         src={darkMode ? dark : light}
         alt="Image alt"
+        priority
         style={{
           objectFit: 'contain',
           width: '30px',

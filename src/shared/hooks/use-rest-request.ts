@@ -9,9 +9,11 @@ import sanitizeJsonString from '../utils/sanitize-json-string';
 
 export default function useRestRequest() {
   const router = useRouter();
+
   const locale = useLocale();
+
   const { method, url, body, headers, variables, textMode } = useAppSelector(
-    (state) => state['rest-slice']
+    state => state['rest-slice']
   );
 
   const makeRequest = () => {
@@ -20,6 +22,7 @@ export default function useRestRequest() {
     const codedUrl = encodeToBase64(
       `${insertVariables(url, variables).trim().replaceAll(' ', '')}`
     );
+
     const bodyWithVariables = insertVariables(body, variables, !textMode);
 
     const codedBody = textMode

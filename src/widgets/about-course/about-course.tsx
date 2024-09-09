@@ -13,9 +13,11 @@ const icons: string[] = [openEveryone, openSource, teach];
 
 export default function AboutCourse() {
   const t = useTranslations('WelcomePage');
+
   const principles: string[] = JSON.parse(
     t('welcome-principles').replace(/'/g, '"')
   );
+
   const principlesDesc: string[] = JSON.parse(
     t('welcome-principles-desc').replace(/'/g, '"')
   );

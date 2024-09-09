@@ -71,7 +71,7 @@ export default function Developer(props: DeveloperProps) {
             gap={1}
             justifyContent={'center'}
           >
-            {props.tech.map((sk) => (
+            {props.tech.map(sk => (
               <Chip key={sk} label={sk} clickable={false} />
             ))}
           </Stack>

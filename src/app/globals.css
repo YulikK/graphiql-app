@@ -1,5 +1,5 @@
 :root {
-  --tab-title-size: 48px;
+  --tab-title-size: 50px;
 }
 
 @media (prefers-color-scheme: light) {
@@ -73,4 +73,34 @@ a {
 
 .github-link {
   text-decoration: none;
+}
+
+.cm-theme .cm-scroller {
+  overflow-y: auto;
+}
+
+.scrollable::-webkit-scrollbar,
+.cm-scroller::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  border: 1px solid #6969dd;
+  border-radius: 10px;
+}
+
+.scrollable::-webkit-scrollbar-track,
+.cm-scroller::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.scrollable::-webkit-scrollbar-thumb,
+.cm-scroller::-webkit-scrollbar-thumb {
+  cursor: pointer;
+  height: 10px;
+  background-color: #6969dd;
+  border-radius: 10px;
+}
+
+.scrollable::-webkit-scrollbar-corner,
+.cm-scroller::-webkit-scrollbar-corner {
+  background-color: transparent;
 }
