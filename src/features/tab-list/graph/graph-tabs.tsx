@@ -19,6 +19,9 @@ export const GraphTabValue = {
   VARIABLES: 'variables',
 } as const;
 
+export type GraphTabValueType =
+  (typeof GraphTabValue)[keyof typeof GraphTabValue];
+
 const UrlTap = () => {
   const t = useTranslations('GraphqlPage');
 
@@ -72,7 +75,7 @@ const VariablesTab = () => {
 };
 
 export const GraphTabs: TabsMap[] = [
-  { name: GraphTabValue.URL, renderComponent: UrlTap },
-  { name: GraphTabValue.HEADERS, renderComponent: HeadersTab },
-  { name: GraphTabValue.VARIABLES, renderComponent: VariablesTab },
+  { name: GraphTabValue.URL, index: 0, renderComponent: UrlTap },
+  { name: GraphTabValue.HEADERS, index: 1, renderComponent: HeadersTab },
+  { name: GraphTabValue.VARIABLES, index: 2, renderComponent: VariablesTab },
 ];

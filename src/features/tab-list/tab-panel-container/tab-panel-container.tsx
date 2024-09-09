@@ -1,23 +1,55 @@
-import { TabPanel } from '@mui/lab';
+import { Box } from '@mui/material';
 
 type TabPanelContainerProps = {
-  name: string;
+  index: number;
+  value: number;
   children: React.ReactNode;
 };
 
-export const TabPanelContainer = ({
-  name,
-  children,
-}: TabPanelContainerProps) => {
+interface TabPanelProps {
+  children?: React.ReactNode;
+  index: number;
+  value: number;
+}
+
+function CustomTabPanel(props: TabPanelProps) {
+  const { children, value, index, ...other } = props;
+
   return (
-    <TabPanel
-      value={name}
+    <Box
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`tab-${index}`}
       sx={{
         width: '100%',
         height: '100%',
+        padding: 2,
       }}
+      {...other}
     >
+      {value === index && (
+        <Box
+          sx={{
+            width: '100%',
+            height: '100%',
+          }}
+        >
+          {children}
+        </Box>
+      )}
+    </Box>
+  );
+}
+
+export const TabPanelContainer = ({
+  value,
+  index,
+  children,
+}: TabPanelContainerProps) => {
+  return (
+    <CustomTabPanel value={value} index={index}>
       {children}
-    </TabPanel>
+    </CustomTabPanel>
   );
 };

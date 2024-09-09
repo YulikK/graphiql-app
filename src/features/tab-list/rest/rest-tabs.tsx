@@ -45,8 +45,8 @@ const VariablesTab = () => {
 };
 
 export const RestTabs: TabsMap[] = [
-  { name: RestTabValue.QUERY, renderComponent: QueryTap },
-  { name: RestTabValue.BODY, renderComponent: BodyTap },
-  { name: RestTabValue.HEADERS, renderComponent: HeadersTab },
-  { name: RestTabValue.VARIABLES, renderComponent: VariablesTab },
+  { name: RestTabValue.QUERY, index: 0, renderComponent: QueryTap },
+  { name: RestTabValue.BODY, index: 1, renderComponent: BodyTap },
+  { name: RestTabValue.HEADERS, index: 2, renderComponent: HeadersTab },
+  { name: RestTabValue.VARIABLES, index: 3, renderComponent: VariablesTab },
 ];

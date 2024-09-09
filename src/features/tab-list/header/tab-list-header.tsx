@@ -2,16 +2,17 @@ import { useTranslations } from 'next-intl';
 
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { TabList } from '@mui/lab';
-import { Box, IconButton, Tab } from '@mui/material';
+import { Box, IconButton, Tab, Tabs } from '@mui/material';
 import { SyntheticEvent } from 'react';
 
 import { useResizeContext } from '@/shared/contexts';
+import { TabsMap } from '@/shared/models/view';
 import { Docs } from '@/widgets/docs/docs';
 
 type ClientTabListProps = {
-  tabs: string[];
-  setActiveTab: (value: string) => void;
+  tabs: TabsMap[];
+  activeTab: number;
+  setActiveTab: (value: number) => void;
   isGraph?: boolean;
 };
 
@@ -19,6 +20,7 @@ export const TabListHeader = ({
   isGraph = false,
   tabs,
   setActiveTab,
+  activeTab,
 }: ClientTabListProps) => {
   const { onMaximize, onMinimize, isPaneHide } = useResizeContext();
 
@@ -30,7 +32,7 @@ export const TabListHeader = ({
     }
   };
 
-  const handleTabChange = (event: SyntheticEvent, newValue: string) => {
+  const handleTabChange = (event: SyntheticEvent, newValue: number) => {
     setActiveTab(newValue);
   };
 
@@ -47,16 +49,16 @@ export const TabListHeader = ({
       sx={{ width: '100%', display: 'flex', alignItems: 'center' }}
       className="tab-header"
     >
-      <TabList onChange={handleTabChange}>
+      <Tabs value={activeTab} onChange={handleTabChange}>
         {tabs.map(tab => (
           <Tab
-            label={tab}
-            value={tab.toLowerCase()}
-            key={tab}
+            label={tab.location || tab.name}
+            value={tab.index}
+            key={tab.index}
             onClick={handleTabClick}
           />
         ))}
-      </TabList>
+      </Tabs>
       <Box sx={{ ml: 'auto' }}>
         {isGraph && <Docs />}
         <IconButton
