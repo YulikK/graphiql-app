@@ -1,7 +1,8 @@
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 import { useRouter } from 'next/navigation';
 
+import { useAlertBar } from '../contexts';
 import encodeToBase64 from '../utils/encode-to-base64';
 
 import { useAppSelector } from './redux-hooks';
@@ -15,25 +16,35 @@ export default function useGraphRequest() {
     state => state['graphql-slice']
   );
 
-  const body = JSON.stringify({
-    query: query,
-    variables: variables ? JSON.parse(variables) : '',
-  });
+  const { setError } = useAlertBar();
+
+  const t = useTranslations('Common');
 
   const makeRequest = () => {
     if (!url) return;
 
-    const codedUrl = encodeToBase64(url);
+    try {
+      const body = JSON.stringify({
+        query: query,
+        variables: variables ? JSON.parse(variables) : '',
+      });
 
-    const codedBody = encodeToBase64(body);
+      const codedUrl = encodeToBase64(url);
 
-    const codedHeaders = new URLSearchParams(
-      Object.fromEntries(headers.filter(([key, value]) => key && value))
-    );
+      const codedBody = encodeToBase64(body);
 
-    router.push(
-      `/${locale}/graphql/${codedUrl}/${codedBody}${codedHeaders ? `?${codedHeaders}` : ''}`
-    );
+      const codedHeaders = new URLSearchParams(
+        Object.fromEntries(headers.filter(([key, value]) => key && value))
+      );
+
+      router.push(
+        `/${locale}/graphql/${codedUrl}/${codedBody}${codedHeaders ? `?${codedHeaders}` : ''}`
+      );
+    } catch (error: unknown) {
+      setError(`${t('error-request')}: ${error}`);
+
+      return;
+    }
   };
 
   return makeRequest;

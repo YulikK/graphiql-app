@@ -1,7 +1,8 @@
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 import { useRouter } from 'next/navigation';
 
+import { useAlertBar } from '../contexts';
 import encodeToBase64 from '../utils/encode-to-base64';
 import insertVariables from '../utils/insert-variables';
 import sanitizeJsonString from '../utils/sanitize-json-string';
@@ -17,26 +18,36 @@ export default function useRestRequest() {
     state => state['rest-slice']
   );
 
+  const { setError } = useAlertBar();
+
+  const t = useTranslations('Common');
+
   const makeRequest = () => {
     if (!url) return;
 
-    const codedUrl = encodeToBase64(
-      `${insertVariables(url, variables).trim().replaceAll(' ', '')}`
-    );
+    try {
+      const codedUrl = encodeToBase64(
+        `${insertVariables(url, variables).trim().replaceAll(' ', '')}`
+      );
 
-    const bodyWithVariables = insertVariables(body, variables, !textMode);
+      const bodyWithVariables = insertVariables(body, variables, !textMode);
 
-    const codedBody = textMode
-      ? encodeToBase64(bodyWithVariables)
-      : encodeToBase64(sanitizeJsonString(bodyWithVariables));
+      const codedBody = textMode
+        ? encodeToBase64(bodyWithVariables)
+        : encodeToBase64(sanitizeJsonString(bodyWithVariables));
 
-    const codedHeaders = new URLSearchParams(
-      Object.fromEntries(headers.filter(([key, value]) => key && value))
-    );
+      const codedHeaders = new URLSearchParams(
+        Object.fromEntries(headers.filter(([key, value]) => key && value))
+      );
 
-    router.push(
-      `/${locale}/rest/${method}/${codedUrl}/${codedBody}${codedHeaders ? `?${codedHeaders}` : ''}`
-    );
+      router.push(
+        `/${locale}/rest/${method}/${codedUrl}/${codedBody}${codedHeaders ? `?${codedHeaders}` : ''}`
+      );
+    } catch (error: unknown) {
+      setError(`${t('error-request')}: ${error}`);
+
+      return;
+    }
   };
 
   return makeRequest;

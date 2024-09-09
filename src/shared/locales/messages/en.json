@@ -99,6 +99,7 @@
     "text": "TXT",
     "pretty": "Make pretty",
     "status-code": "Code",
-    "error-prettify": "Error formatting code"
+    "error-prettify": "Error formatting code",
+    "error-request": "Request error"
   }
 }
