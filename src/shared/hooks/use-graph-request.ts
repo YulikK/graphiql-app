@@ -2,8 +2,9 @@ import { useLocale } from 'next-intl';
 
 import { useRouter } from 'next/navigation';
 
-import { useAppSelector } from './redux-hooks';
 import encodeToBase64 from '../utils/encode-to-base64';
+
+import { useAppSelector } from './redux-hooks';
 
 export default function useGraphRequest() {
   const router = useRouter();

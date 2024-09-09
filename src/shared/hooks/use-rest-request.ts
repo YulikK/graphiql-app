@@ -2,10 +2,11 @@ import { useLocale } from 'next-intl';
 
 import { useRouter } from 'next/navigation';
 
-import { useAppSelector } from './redux-hooks';
 import encodeToBase64 from '../utils/encode-to-base64';
 import insertVariables from '../utils/insert-variables';
 import sanitizeJsonString from '../utils/sanitize-json-string';
+
+import { useAppSelector } from './redux-hooks';
 
 export default function useRestRequest() {
   const router = useRouter();

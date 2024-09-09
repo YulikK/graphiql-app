@@ -1,9 +1,9 @@
 import { useTranslations } from 'next-intl';
 
+import { StaticImageData } from 'next/image';
+
 import { Box, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid2';
-
-import { StaticImageData } from 'next/image';
 
 import template from '@/assets/template.jpg';
 import Developer from '@/entities/developer/developer';

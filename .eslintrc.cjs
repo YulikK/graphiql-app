@@ -14,7 +14,6 @@ module.exports = {
     'react-hooks',
     'jsx-a11y',
     'import',
-    'simple-import-sort',
     'unused-imports',
     'prettier',
   ],
@@ -58,7 +57,9 @@ module.exports = {
           'builtin',
           'external',
           'internal',
-          ['parent', 'sibling', 'index'],
+          'parent',
+          'sibling',
+          'index',
         ],
         pathGroups: [
           {
@@ -69,7 +70,7 @@ module.exports = {
           {
             pattern: 'next/**',
             group: 'external',
-            position: 'after',
+            position: 'before',
           },
         ],
         pathGroupsExcludedImportTypes: ['next-intl'],

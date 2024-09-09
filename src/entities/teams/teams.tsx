@@ -1,8 +1,8 @@
 import { useTranslations } from 'next-intl';
 
-import { Container, Typography } from '@mui/material';
-
 import Image from 'next/image';
+
+import { Container, Typography } from '@mui/material';
 
 import earth from '@/assets/earth.png';
 import teams from '@/assets/teams.png';
