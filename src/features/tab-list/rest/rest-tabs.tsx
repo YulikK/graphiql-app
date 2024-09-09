@@ -16,6 +16,8 @@ export const RestTabValue = {
   VARIABLES: 'variables',
 } as const;
 
+export type RestTabValueType = (typeof RestTabValue)[keyof typeof RestTabValue];
+
 const QueryTap = () => {
   return <RestQuery />;
 };

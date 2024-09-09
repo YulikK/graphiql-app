@@ -6,7 +6,7 @@ import { Box, Card } from '@mui/material';
 import ClientEndpoint from '@/features/client-endpoint/client-endpoint';
 import { ResizeHorizontal } from '@/features/resize-horizontal/resize-horizontal';
 import { RestMethod, RestSubmit } from '@/features/rest';
-import { RestTabs, RestTabValue } from '@/features/tab-list/rest/rest-tabs';
+import { RestTabs, RestTabValueType } from '@/features/tab-list/rest/rest-tabs';
 import { setRestUrl } from '@/shared/store/slices/rest-slice';
 
 import { SettingsTab } from '../settings-tab/settings-tab';
@@ -18,12 +18,9 @@ type RestClientProps = {
 export default function RestClient({ children }: RestClientProps) {
   const t = useTranslations('RestPage');
 
-  const tabList = [
-    t(RestTabValue.QUERY),
-    t(RestTabValue.BODY),
-    t(RestTabValue.HEADERS),
-    t(RestTabValue.VARIABLES),
-  ];
+  RestTabs.forEach(tab => {
+    tab.location = t(tab.name as RestTabValueType);
+  });
 
   return (
     <>
@@ -33,7 +30,7 @@ export default function RestClient({ children }: RestClientProps) {
         <RestSubmit />
       </Box>
       <ResizeHorizontal
-        pane1={<SettingsTab tabHeaderList={tabList} tabPanelList={RestTabs} />}
+        pane1={<SettingsTab tabPanelList={RestTabs} />}
         pane2={
           <Card
             sx={{
