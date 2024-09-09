@@ -2,7 +2,9 @@ import { useLocale } from 'next-intl';
 
 import { useRouter } from 'next/navigation';
 
-import { useAppSelector } from './redux-hooks';
+import { useAppSelector } from '@/shared/hooks/redux-hooks';
+import { useLocalStorage } from '@/shared/hooks/use-local-storage';
+
 import encodeToBase64 from '../utils/encode-to-base64';
 
 export default function useGraphRequest() {
@@ -10,17 +12,38 @@ export default function useGraphRequest() {
 
   const locale = useLocale();
 
-  const { url, headers, variables, query } = useAppSelector(
-    state => state['graphql-slice']
-  );
+  const { setStorage } = useLocalStorage();
+
+  const {
+    url,
+    urlDoc,
+    schema,
+    isTrySchemaDownload,
+    headers,
+    variables,
+    query,
+  } = useAppSelector(state => state['graphql-slice']);
 
   const body = JSON.stringify({
     query: query,
     variables: variables ? JSON.parse(variables) : '',
   });
 
-  const makeRequest = () => {
+  const makeRequest = (isHistoryRequest?: boolean) => {
     if (!url) return;
+
+    if (!isHistoryRequest) {
+      setStorage({
+        url,
+        urlDoc,
+        schema,
+        isTrySchemaDownload,
+        headers,
+        variables,
+        query,
+        type: 'graphql',
+      });
+    }
 
     const codedUrl = encodeToBase64(url);
 

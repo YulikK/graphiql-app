@@ -1,13 +1,16 @@
-import { SavedRestRequest } from '../models/types';
+import { SavedGraphqlRequest, SavedRestRequest } from '../models/types';
 
 const storageKey = 'graphiql-teamDreams';
 
 export const useLocalStorage = () => {
   const isClient = typeof window !== 'undefined';
 
-  const setStorage = (restObj: SavedRestRequest): void => {
+  const setStorage = (
+    restObj: SavedRestRequest | SavedGraphqlRequest
+  ): void => {
     if (isClient) {
       const requests = getStorage() || [];
+
       window.localStorage.setItem(
         storageKey,
         JSON.stringify([...requests, restObj])
@@ -15,11 +18,13 @@ export const useLocalStorage = () => {
     }
   };
 
-  const getStorage = (): SavedRestRequest[] | null => {
+  const getStorage = (): (SavedRestRequest | SavedGraphqlRequest)[] | null => {
     if (isClient) {
       const data = window.localStorage.getItem(storageKey);
+
       return data ? JSON.parse(data) : null;
     }
+
     return null;
   };
 

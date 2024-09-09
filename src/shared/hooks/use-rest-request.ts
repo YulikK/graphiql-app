@@ -3,7 +3,7 @@ import { useLocale } from 'next-intl';
 import { useRouter } from 'next/navigation';
 
 import { useAppSelector } from '@/shared/hooks/redux-hooks';
-import { useLocalStorage } from '@/shared/hooks/useLocalStorage';
+import { useLocalStorage } from '@/shared/hooks/use-local-storage';
 
 import encodeToBase64 from '../utils/encode-to-base64';
 import insertVariables from '../utils/insert-variables';
@@ -14,16 +14,26 @@ export default function useRestRequest() {
 
   const locale = useLocale();
 
-  const { method, url, body, headers, variables, textMode } = useAppSelector(
-    state => state['rest-slice']
-  );
+  const { method, url, body, headers, variables, textMode, query } =
+    useAppSelector(state => state['rest-slice']);
 
   const { setStorage } = useLocalStorage();
 
-  const makeRequest = () => {
+  const makeRequest = (isHistoryRequest?: boolean) => {
     if (!url) return;
 
-    setStorage({ method, url, body, headers, variables, textMode });
+    if (!isHistoryRequest) {
+      setStorage({
+        query,
+        method,
+        url,
+        body,
+        headers,
+        variables,
+        textMode,
+        type: 'rest',
+      });
+    }
 
     const codedUrl = encodeToBase64(
       `${insertVariables(url, variables).trim().replaceAll(' ', '')}`
