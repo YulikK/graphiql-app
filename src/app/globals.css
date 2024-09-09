@@ -54,6 +54,11 @@ a {
   }
 }
 
+.error-img {
+  width: 70%;
+  height: auto;
+}
+
 .developer-img {
   position: absolute;
   top: 0;
