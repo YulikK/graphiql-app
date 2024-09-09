@@ -18,14 +18,14 @@ export const useLocalStorage = () => {
     }
   };
 
-  const getStorage = (): (SavedRestRequest | SavedGraphqlRequest)[] | null => {
+  const getStorage = (): (SavedRestRequest | SavedGraphqlRequest)[] | [] => {
     if (isClient) {
       const data = window.localStorage.getItem(storageKey);
 
-      return data ? JSON.parse(data) : null;
+      return data ? JSON.parse(data) : [];
     }
 
-    return null;
+    return [];
   };
 
   const removeStorage = (): void => {

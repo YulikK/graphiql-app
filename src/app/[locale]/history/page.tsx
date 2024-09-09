@@ -11,6 +11,10 @@ import {
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 
+import { useRouter } from 'next/navigation';
+
+import { Loader } from '@/features/loader/loader';
+import { useAuth } from '@/shared/contexts';
 import { useAppDispatch } from '@/shared/hooks/redux-hooks';
 import useGraphRequest from '@/shared/hooks/use-graph-request';
 import { useLocalStorage } from '@/shared/hooks/use-local-storage';
@@ -19,8 +23,16 @@ import { SavedGraphqlRequest, SavedRestRequest } from '@/shared/models/types';
 import { restoreGraphState } from '@/shared/store/slices/grahpql-client';
 import { restoreRestState } from '@/shared/store/slices/rest-slice';
 
-export default function History() {
+export default function History({
+  params: { locale },
+}: {
+  params: { locale: string };
+}) {
   const { getStorage } = useLocalStorage();
+
+  const { isLoggedIn, loading } = useAuth();
+
+  const router = useRouter();
 
   const dispatch = useAppDispatch();
 
@@ -54,8 +66,15 @@ export default function History() {
     }
   }, []);
 
-  if (!data) {
-    return <div>Loading...</div>;
+  useEffect(() => {
+    if (!isLoggedIn) {
+      router.push(`/${locale}`);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoggedIn, router]);
+
+  if (loading || data === null) {
+    return <Loader />;
   }
 
   return (
