@@ -27,7 +27,7 @@ export default function RestClient({ children }: RestClientProps) {
 
   return (
     <>
-      <Box display={'flex'}>
+      <Box sx={{ width: '100%', maxWidth: 800, m: '0 auto', display: 'flex' }}>
         <RestMethod />
         <ClientEndpoint sliceKey="rest-slice" setUrl={setRestUrl} />
         <RestSubmit />
@@ -38,7 +38,6 @@ export default function RestClient({ children }: RestClientProps) {
           <Card
             sx={{
               display: 'flex',
-
               height: '100%',
               width: '100%',
             }}

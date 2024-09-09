@@ -15,7 +15,6 @@ export default function RestLayout({
         display: 'flex',
         flexDirection: 'column',
         marginInline: 'auto',
-        maxWidth: 800,
         width: '100%',
         height: '100%',
         padding: '10px 0',

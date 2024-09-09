@@ -18,7 +18,9 @@ export default async function LocaleLayout({
     <NextIntlClientProvider messages={messages}>
       <BgContainer>
         <Header />
-        <Container sx={{ flexGrow: 1 }}>{children}</Container>
+        <Container maxWidth={false} sx={{ flexGrow: 1 }}>
+          {children}
+        </Container>
         <Footer />
       </BgContainer>
     </NextIntlClientProvider>

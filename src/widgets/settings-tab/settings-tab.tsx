@@ -22,7 +22,7 @@ export const SettingsTab = ({
   return (
     <Card
       elevation={1}
-      sx={{ width: '100%', height: '100%' }}
+      sx={{ width: '100%', height: '100%', maxWidth: 800, m: '0 auto' }}
       className={'item'}
     >
       <TabContext value={activeTab}>
