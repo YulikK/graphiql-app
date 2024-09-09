@@ -1,4 +1,5 @@
 'use client';
+
 import { useTranslations } from 'next-intl';
 
 import { Box, Stack, Tab, Tabs } from '@mui/material';
@@ -8,6 +9,7 @@ import ClientEndpoint from '@/features/client-endpoint/client-endpoint';
 import ClientHeaders from '@/features/client-headers/client-headers';
 import ClientVariables from '@/features/client-variables/client-variables';
 import { RestBody, RestMethod, RestQuery, RestSubmit } from '@/features/rest';
+import { useAppSelector } from '@/shared/hooks/redux-hooks';
 import {
   deleteRestHeader,
   deleteRestVariables,
@@ -19,6 +21,8 @@ import {
 export default function RestClient() {
   const [index, setIndex] = useState(0);
   const t = useTranslations('RestPage');
+
+  const url = useAppSelector((state) => state);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setIndex(newValue);

@@ -7,6 +7,8 @@ import {
   UseFormWatch,
 } from 'react-hook-form';
 
+import { HttpMethods } from './http-methods';
+
 export interface InputProps<T extends FieldValues> {
   name: Path<T>;
   label: string;
@@ -36,3 +38,15 @@ export interface RegisterForm {
 }
 
 export type LoginForm = Pick<RegisterForm, 'email' | 'password'>;
+
+export interface RestSliceType {
+  url: string;
+  query: string[][];
+  body: string;
+  method: HttpMethods;
+  headers: string[][];
+  variables: string[][];
+  textMode: boolean;
+}
+
+export type SavedRestRequest = Omit<RestSliceType, 'query'>;
