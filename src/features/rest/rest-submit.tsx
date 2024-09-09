@@ -6,10 +6,11 @@ import useRestRequest from '@/shared/hooks/use-rest-request';
 
 export default function RestSubmit() {
   const makeRequest = useRestRequest();
+
   const t = useTranslations('RestPage');
 
   return (
-    <Button variant="contained" onClick={makeRequest}>
+    <Button size="small" variant="contained" onClick={makeRequest}>
       {t('send')}
     </Button>
   );

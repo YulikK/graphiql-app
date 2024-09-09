@@ -1,62 +1,94 @@
-import { DocExplorer, GraphiQLProvider } from '@graphiql/react';
+import { useTranslations } from 'next-intl';
+
+import {
+  DocExplorer,
+  GraphiQLProvider,
+  useTheme as useDocTheme,
+} from '@graphiql/react';
 import { createGraphiQLFetcher } from '@graphiql/toolkit';
-import ArticleIcon from '@mui/icons-material/Article';
-import { Box, Drawer, IconButton, TextField } from '@mui/material';
+import AutoStoriesIcon from '@mui/icons-material/AutoStories';
+import { Box, Drawer, IconButton, Tooltip } from '@mui/material';
 import 'graphiql/graphiql.min.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-type DocsProps = {
-  url: string;
-};
+import { useAlertBar, useTheme as useAppTheme } from '@/shared/contexts';
+import { useAppDispatch, useAppSelector } from '@/shared/hooks/redux-hooks';
+import { setGraphSchema } from '@/shared/store/slices/grahpql-client';
+import { fetchGraphSchema } from '@/shared/utils/get-graph-schem';
 
-export const Docs = ({ url }: DocsProps) => {
+export const Docs = () => {
   const [showDoc, setShowDoc] = useState(false);
-  const [urlDoc, setUrlDoc] = useState(url ? `${url}?sdl` : '');
 
-  const handleToggleDoc = () => {
-    setShowDoc(!showDoc);
+  const { setError } = useAlertBar();
+
+  const dispatch = useAppDispatch();
+
+  const t = useTranslations('GraphqlPage');
+
+  const urlDoc = useAppSelector(state => state['graphql-slice'].urlDoc);
+
+  const fetcher = urlDoc ? createGraphiQLFetcher({ url: urlDoc }) : null;
+
+  const { setTheme } = useDocTheme();
+
+  const { darkMode } = useAppTheme();
+
+  useEffect(() => {
+    setTheme(darkMode ? 'dark' : 'light');
+  }, [darkMode, setTheme]);
+
+  const handleDocOpen = async () => {
+    if (!urlDoc) {
+      setError(t('error-no-doc-url'));
+
+      return;
+    }
+
+    try {
+      if (!fetcher) {
+        setError(null);
+
+        const introspectionJSON = await fetchGraphSchema(urlDoc);
+
+        dispatch(setGraphSchema(JSON.stringify(introspectionJSON, null, 2)));
+      }
+
+      setShowDoc(true);
+    } catch (err) {
+      setError((err as Error).message);
+    }
   };
 
-  const fetcher = createGraphiQLFetcher({
-    url: urlDoc,
-  });
-
-  const handleUrlChange = (value: string) => {
-    setUrlDoc(value);
+  const handleDocClose = () => {
+    setShowDoc(false);
   };
 
   return (
     <>
-      <IconButton
-        size="small"
-        color="primary"
-        sx={{ p: '10px', ml: 'auto' }}
-        aria-label="directions"
-        onClick={handleToggleDoc}
-      >
-        <ArticleIcon />
-      </IconButton>
+      <Tooltip title={t(urlDoc ? 'show-doc' : 'need-doc-url')} arrow>
+        <span>
+          <IconButton
+            size="small"
+            color="primary"
+            disabled={!urlDoc}
+            sx={{ p: '10px', ml: 'auto' }}
+            aria-label={t('show-doc')}
+            onClick={handleDocOpen}
+          >
+            <AutoStoriesIcon />
+          </IconButton>
+        </span>
+      </Tooltip>
       <Drawer
         anchor="right"
         open={showDoc}
-        onClose={handleToggleDoc}
+        onClose={handleDocClose}
         sx={{
           '& .MuiDrawer-paper': {
             width: 350,
           },
         }}
       >
-        <Box width="100%" padding="20px">
-          <TextField
-            hiddenLabel
-            placeholder="endpoint"
-            value={urlDoc}
-            variant="filled"
-            size="small"
-            fullWidth
-            onChange={(e) => handleUrlChange(e.target.value)}
-          />
-        </Box>
         <Box
           component="section"
           margin="20px 0 0 0"
@@ -65,9 +97,11 @@ export const Docs = ({ url }: DocsProps) => {
           overflow="auto"
           className="graphiql-container"
         >
-          <GraphiQLProvider fetcher={fetcher}>
-            <DocExplorer />
-          </GraphiQLProvider>
+          {fetcher && (
+            <GraphiQLProvider fetcher={fetcher}>
+              <DocExplorer />
+            </GraphiQLProvider>
+          )}
         </Box>
       </Drawer>
     </>

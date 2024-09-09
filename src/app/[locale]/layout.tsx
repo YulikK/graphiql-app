@@ -9,10 +9,8 @@ import Header from '@/widgets/header/header.tsx';
 
 export default async function LocaleLayout({
   children,
-  params: { locale },
 }: {
   children: React.ReactNode;
-  params: { locale: string };
 }) {
   const messages = await getMessages();
 
@@ -20,7 +18,9 @@ export default async function LocaleLayout({
     <NextIntlClientProvider messages={messages}>
       <BgContainer>
         <Header />
-        <Container sx={{ flexGrow: 1 }}>{children}</Container>
+        <Container maxWidth={false} sx={{ flexGrow: 1 }}>
+          {children}
+        </Container>
         <Footer />
       </BgContainer>
     </NextIntlClientProvider>

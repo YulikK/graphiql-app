@@ -1,0 +1,8 @@
+.pane {
+  transition: all 0.15s ease-in-out;
+  will-change: width;
+}
+
+:global(.splitViewContainer.split-view-sash-dragging) .pane {
+  transition: none;
+}

@@ -13,6 +13,7 @@ export function StyledRoot({
   children: React.ReactNode;
 }>) {
   const { darkMode } = useTheme();
+
   const styledTheme = darkMode ? darkTheme : lightTheme;
 
   return (

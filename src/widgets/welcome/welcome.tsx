@@ -10,6 +10,7 @@ import { useAuth } from '@/shared/contexts';
 
 export default function Welcome({ locale }: { locale: string }) {
   const { isLoggedIn, loading, userName } = useAuth();
+
   const t = useTranslations('WelcomePage');
 
   if (loading) {

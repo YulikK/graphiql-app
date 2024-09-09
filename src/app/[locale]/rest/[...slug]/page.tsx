@@ -1,4 +1,5 @@
-import ResponseViewer from '@/features/response-viewer/response-viewer';
+import { CodeEditor } from '@/features/code-editor/code-editor';
+import { HttpMethod } from '@/shared/models/http-methods';
 import decodeFromBase64 from '@/shared/utils/decode-from-base64';
 
 interface Props {
@@ -17,23 +18,29 @@ const makeRequest = async ({ method, url, body, headers }: RequestParams) => {
   try {
     const response = await fetch(url, {
       method,
-      headers: method === 'GET' ? {} : headers,
-      body: method === 'GET' ? null : body,
+      headers: method === HttpMethod.GET ? {} : headers,
+      body: method === HttpMethod.GET ? null : body,
     });
+
     const { status } = response;
+
     const result = await response.json();
-    return { result, status };
+
+    return { result: JSON.stringify(result, null, 2), status };
   } catch (error) {
     const e = error as Error;
+
     return { result: e.message, status: 500 };
   }
 };
 
 export default async function RestResult({ params, searchParams = {} }: Props) {
-  const [method = '', url = '', body = ''] = params.slug.map((item) =>
+  const [method = '', url = '', body = ''] = params.slug.map(item =>
     decodeURIComponent(item)
   );
+
   const decodedUrl = decodeFromBase64(url);
+
   const decodedBody = decodeFromBase64(body);
 
   const { result, status } = await makeRequest({
@@ -43,5 +50,5 @@ export default async function RestResult({ params, searchParams = {} }: Props) {
     headers: searchParams,
   });
 
-  return <ResponseViewer value={result || ''} status={status} />;
+  return <CodeEditor value={result} isEdit={false} status={status} />;
 }

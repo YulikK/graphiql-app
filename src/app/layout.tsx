@@ -2,16 +2,14 @@ import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 import type { Metadata } from 'next';
 import { ToastContainer } from 'react-toastify';
 
-import { Inter } from 'next/font/google';
-
+import { AlertProvider } from '@/shared/contexts/alert-context';
 import { AuthProvider } from '@/shared/contexts/index.ts';
 import { ThemeAppProvider } from '@/shared/contexts/theme-provider';
 import StoreProvider from '@/shared/store/store-providers';
 import { StyledRoot } from '@/shared/theme/styled-root.tsx';
+import 'allotment/dist/style.css';
 import 'react-toastify/dist/ReactToastify.css';
 import './globals.css';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'GraphQl-Rest client',
@@ -38,10 +36,12 @@ export default function RootLayout({
           <ThemeAppProvider>
             <AppRouterCacheProvider>
               <StoreProvider>
-                <StyledRoot>
-                  {children}
-                  <ToastContainer position="top-center" autoClose={2000} />
-                </StyledRoot>
+                <AlertProvider>
+                  <StyledRoot>
+                    {children}
+                    <ToastContainer position="top-center" autoClose={2000} />
+                  </StyledRoot>
+                </AlertProvider>
               </StoreProvider>
             </AppRouterCacheProvider>
           </ThemeAppProvider>

@@ -17,7 +17,9 @@ import { logout } from '@/shared/services/firebase/auth';
 
 export default function Header() {
   const [isShrunk, setShrunk] = useState(false);
+
   const locale = useLocale();
+
   const t = useTranslations('Header');
 
   const { isLoggedIn, loading } = useAuth();
@@ -38,7 +40,7 @@ export default function Header() {
 
   useEffect(() => {
     const handler = () => {
-      setShrunk((isShrunk) => {
+      setShrunk(isShrunk => {
         if (!isShrunk && document.body.scrollTop > 20) {
           return true;
         }
@@ -50,6 +52,7 @@ export default function Header() {
         return isShrunk;
       });
     };
+
     document.body.addEventListener('scroll', handler);
 
     return () => document.body.removeEventListener('scroll', handler);

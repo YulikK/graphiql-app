@@ -13,10 +13,15 @@ const languages = ['en', 'ru'];
 
 export default function LocaleSwitcher() {
   const locale = useLocale();
+
   const params = useSearchParams();
+
   const path = usePathname();
+
   const router = useRouter();
+
   const { darkMode } = useTheme();
+
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -50,7 +55,7 @@ export default function LocaleSwitcher() {
       </Button>
 
       <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
-        {languages.map((lang) => (
+        {languages.map(lang => (
           <MenuItem key={lang} onClick={() => handleLocaleChange(lang)}>
             <ListItemText
               primary={lang.toUpperCase()}

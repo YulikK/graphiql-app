@@ -2,73 +2,49 @@
 
 import { useTranslations } from 'next-intl';
 
-import { Box, Stack, Tab, Tabs } from '@mui/material';
-import { useState } from 'react';
+import { Box, Card } from '@mui/material';
 
 import ClientEndpoint from '@/features/client-endpoint/client-endpoint';
-import ClientHeaders from '@/features/client-headers/client-headers';
-import ClientVariables from '@/features/client-variables/client-variables';
-import { RestBody, RestMethod, RestQuery, RestSubmit } from '@/features/rest';
-import { useAppSelector } from '@/shared/hooks/redux-hooks';
-import {
-  deleteRestHeader,
-  deleteRestVariables,
-  setRestHeader,
-  setRestUrl,
-  setRestVariables,
-} from '@/shared/store/slices/rest-slice';
+import { ResizeHorizontal } from '@/features/resize-horizontal/resize-horizontal';
+import { RestMethod, RestSubmit } from '@/features/rest';
+import { RestTabs, RestTabValueType } from '@/features/tab-list/rest/rest-tabs';
+import { setRestUrl } from '@/shared/store/slices/rest-slice';
 
-export default function RestClient() {
-  const [index, setIndex] = useState(0);
+import { SettingsTab } from '../settings-tab/settings-tab';
+
+type RestClientProps = {
+  children: React.ReactNode;
+};
+
+export default function RestClient({ children }: RestClientProps) {
   const t = useTranslations('RestPage');
 
-  const url = useAppSelector((state) => state);
-
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setIndex(newValue);
-  };
+  RestTabs.forEach(tab => {
+    tab.location = t(tab.name as RestTabValueType);
+  });
 
   return (
-    <Box flexGrow={1}>
-      <Box display={'flex'}>
+    <>
+      <Box sx={{ width: '100%', maxWidth: 800, m: '0 auto', display: 'flex' }}>
         <RestMethod />
         <ClientEndpoint sliceKey="rest-slice" setUrl={setRestUrl} />
         <RestSubmit />
       </Box>
-      <Box
-        display={'flex'}
-        justifyContent={'center'}
-        sx={{ borderBottom: 1, borderColor: 'divider' }}
-      >
-        <Tabs
-          value={index}
-          onChange={handleChange}
-          aria-label="basic tabs example"
-        >
-          <Tab label={t('query')} />
-          <Tab label={t('body')} />
-          <Tab label={t('headers')} />
-          <Tab label={t('variables')} />
-        </Tabs>
-      </Box>
-      <Stack>
-        {index === 0 && <RestQuery />}
-        {index === 1 && <RestBody />}
-        {index === 2 && (
-          <ClientHeaders
-            sliceKey="rest-slice"
-            deleteHeader={deleteRestHeader}
-            setHeader={setRestHeader}
-          />
-        )}
-        {index === 3 && (
-          <ClientVariables
-            sliceKey="rest-slice"
-            deleteVariable={deleteRestVariables}
-            setVariable={setRestVariables}
-          />
-        )}
-      </Stack>
-    </Box>
+      <ResizeHorizontal
+        pane1={<SettingsTab tabPanelList={RestTabs} />}
+        pane2={
+          <Card
+            sx={{
+              display: 'flex',
+              height: '100%',
+              width: '100%',
+            }}
+            className={'item'}
+          >
+            {children}
+          </Card>
+        }
+      />
+    </>
   );
 }

@@ -34,7 +34,7 @@ export default function Footer() {
         }}
       >
         <Box display={'flex'} alignItems={'center'} gap={2}>
-          {githubLinks.map((el) => (
+          {githubLinks.map(el => (
             <Link
               className="github-link"
               key={el.name}
@@ -52,7 +52,13 @@ export default function Footer() {
         </Box>
         <Typography variant="body2">&#169; 2024</Typography>
         <Link href="https://rs.school/">
-          <Image className="rs-icon" src={logo} alt="rs-school" height={30} />
+          <Image
+            className="rs-icon"
+            src={logo}
+            alt="rs-school"
+            height={30}
+            priority
+          />
         </Link>
       </Container>
     </Box>
