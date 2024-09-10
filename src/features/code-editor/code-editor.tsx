@@ -24,21 +24,13 @@ import ReactCodeMirror, { Extension } from '@uiw/react-codemirror';
 import clsx from 'clsx';
 import { graphql } from 'cm6-graphql';
 import { GraphQLSchema } from 'graphql';
-import parserBabel from 'prettier/plugins/babel';
-import parserEstree from 'prettier/plugins/estree';
-import parserGraphql from 'prettier/plugins/graphql';
-import prettier from 'prettier/standalone';
 import { dracula, tomorrow } from 'thememirror';
 
 import { useAlertBar, useTheme } from '@/shared/contexts';
 import { useLocalStorage } from '@/shared/hooks/use-local-storage';
+import FormatCode from '@/shared/utils/format-code';
 
 import style from './code-editor.module.css';
-
-const Language = {
-  JSON: 'json',
-  GRAPHQL: 'graphql',
-};
 
 type CodeEditorProps = {
   isGraphQl?: boolean;
@@ -91,10 +83,7 @@ export const CodeEditor = (props: CodeEditorProps) => {
     let formatted = value;
 
     try {
-      formatted = await prettier.format(value, {
-        parser: isGraphQl ? Language.GRAPHQL : Language.JSON,
-        plugins: isGraphQl ? [parserGraphql] : [parserBabel, parserEstree],
-      });
+      formatted = await FormatCode(value, isGraphQl);
     } catch (error) {
       setError(`${t('error-prettify')}: ${error}`);
     }

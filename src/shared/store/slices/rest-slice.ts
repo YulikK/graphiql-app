@@ -127,13 +127,7 @@ const RestSlice = createSlice({
       state.textMode = payload;
     },
     restoreRestState(state, { payload }: PayloadAction<RestSliceType>) {
-      state.body = payload.body;
-      state.headers = payload.headers;
-      state.method = payload.method;
-      state.query = payload.query;
-      state.textMode = payload.textMode;
-      state.url = payload.url;
-      state.variables = payload.variables;
+      return payload;
     },
   },
 });

@@ -25,7 +25,6 @@ import { useAuth } from '@/shared/contexts';
 import { useAppDispatch } from '@/shared/hooks/redux-hooks';
 import useGraphRequest from '@/shared/hooks/use-graph-request';
 import { useLocalStorage } from '@/shared/hooks/use-local-storage';
-import useRestRequest from '@/shared/hooks/use-rest-request';
 import { SavedGraphqlRequest, SavedRestRequest } from '@/shared/models/types';
 import { restoreGraphState } from '@/shared/store/slices/grahpql-client';
 import { restoreRestState } from '@/shared/store/slices/rest-slice';
@@ -35,6 +34,8 @@ import {
 } from '@/shared/utils/history-requests-typeguard';
 import { updateStatuses } from '@/shared/utils/update-statuses';
 import EmptyHistory from '@/widgets/empty-history/empty-history';
+
+// import useRestRequest from '@/shared/hooks/use-rest-request';
 
 export default function History({
   params: { locale },
@@ -48,7 +49,7 @@ export default function History({
   const { getStorage, setStorage, removeStorage } = useLocalStorage();
   const { isLoggedIn, loading } = useAuth();
 
-  const makeRestRequest = useRestRequest();
+  // const makeRestRequest = useRestRequest();
   const makeGraphqlRequest = useGraphRequest();
 
   const [data, setData] = useState<
@@ -60,7 +61,7 @@ export default function History({
       const { type, status, ...slice } = el;
 
       dispatch(restoreRestState(slice));
-      makeRestRequest(true);
+      // makeRestRequest(true);
     } else if (isGraphqlRequest(el)) {
       const { type, status, ...slice } = el;
 

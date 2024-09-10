@@ -33,6 +33,7 @@ export default function ClientList({
               variant="standard"
               value={key || ''}
               sx={{ flexGrow: 1 }}
+              autoComplete="off"
               onInput={e =>
                 changeItem({
                   index,
@@ -46,6 +47,7 @@ export default function ClientList({
               variant="standard"
               value={value || ''}
               sx={{ flexGrow: 1 }}
+              autoComplete="off"
               onInput={e =>
                 changeItem({
                   index,
