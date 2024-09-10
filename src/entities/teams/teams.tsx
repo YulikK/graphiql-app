@@ -33,9 +33,15 @@ export const Teams = () => {
           position: 'absolute',
           bottom: '40px',
           zIndex: 1,
+          userSelect: 'none',
         }}
       />
-      <Image src={earth} alt="Earth" className="earth" />
+      <Image
+        src={earth}
+        alt="Earth"
+        className="earth"
+        style={{ userSelect: 'none' }}
+      />
     </Container>
   );
 };

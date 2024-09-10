@@ -22,7 +22,7 @@ import replaceUrl from '../utils/replace-url';
 
 const DELAY = 500;
 
-export default function useRestUrl(history = false) {
+export default function useRestUrl() {
   const locale = useLocale();
   const router = useRouter();
   const path = usePathname();
@@ -70,15 +70,13 @@ export default function useRestUrl(history = false) {
 
     if (!address) return;
 
-    if (!history) {
-      setRequest({
-        ...store,
-        type: 'rest',
-        status: 100,
-        id: crypto.randomUUID(),
-        browserUrl: address,
-      });
-    }
+    setRequest({
+      ...store,
+      type: 'rest',
+      status: 100,
+      id: crypto.randomUUID(),
+      browserUrl: address,
+    });
 
     isHistory.current = false;
 
