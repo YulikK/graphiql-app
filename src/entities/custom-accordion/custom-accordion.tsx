@@ -18,8 +18,7 @@ export default function CustomAccordion(props: DeveloperProps) {
     <Box
       className="accordion-info"
       sx={{
-        borderBottomRightRadius: '10px',
-        borderBottomLeftRadius: '10px',
+        borderRadius: '10px',
         position: 'relative',
         padding: '10px 9px',
         display: 'flex',
@@ -31,9 +30,6 @@ export default function CustomAccordion(props: DeveloperProps) {
         marginTop: 'auto',
         transition: 'all 0.3s ease-in-out',
         '@media (max-width: 900px)': {
-          borderBottomLeftRadius: '0',
-          borderTopRightRadius: '10px',
-          width: '85%',
           marginBottom: 'auto',
           marginTop: 'unset',
         },

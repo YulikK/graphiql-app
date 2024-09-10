@@ -181,7 +181,7 @@ const lightTheme = createTheme({
         root: {
           ...resizeBarStyles,
           '& > .accordion-info': {
-            background: 'transparent',
+            background: '#f0f0f0',
           },
           ...codeEditorStyles,
         },
