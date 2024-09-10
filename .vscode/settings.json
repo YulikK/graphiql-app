@@ -7,12 +7,15 @@
   },
   "files.insertFinalNewline": true,
   "cSpell.words": [
-    "toastify",
     "nextjs",
     "hookform",
     "consts",
     "firestore",
     "roboto",
-    "GraphiQL"
+    "GraphiQL",
+    "clsx",
+    "Estree",
+    "thememirror",
+    "codemirror"
   ]
 }

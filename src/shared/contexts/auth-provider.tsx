@@ -2,9 +2,10 @@
 
 import { createContext } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { toast } from 'react-toastify';
 
 import { auth } from '@/shared/services/firebase/firebase';
+
+import { useAlertBar } from './contexts';
 
 export interface AuthContextValue {
   isLoggedIn: boolean | null;
@@ -23,12 +24,14 @@ interface AuthProviderProps {
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, loading, error] = useAuthState(auth);
 
+  const { setError } = useAlertBar();
+
   const userName = user?.displayName || 'Unknown';
 
   const isLoggedIn = Boolean(user);
 
   if (error) {
-    toast.error(error.message);
+    setError(error.message);
   }
 
   return (

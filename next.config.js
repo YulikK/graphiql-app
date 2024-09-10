@@ -6,6 +6,19 @@ const withNextIntl = createNextIntlPlugin('./src/shared/locales/i18n.ts');
 const nextConfig = {
   reactStrictMode: true,
   assetPrefix: '',
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'Accept-Language',
+            value: 'en, ru',
+          },
+        ],
+      },
+    ];
+  },
 };
 
 export default withNextIntl(nextConfig);

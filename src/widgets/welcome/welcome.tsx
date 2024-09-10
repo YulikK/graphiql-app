@@ -6,6 +6,7 @@ import { Box, Button, Typography } from '@mui/material';
 
 import Link from 'next/link';
 
+import { Loader } from '@/features/loader/loader';
 import { useAuth } from '@/shared/contexts';
 
 export default function Welcome({ locale }: { locale: string }) {
@@ -14,7 +15,7 @@ export default function Welcome({ locale }: { locale: string }) {
   const t = useTranslations('WelcomePage');
 
   if (loading) {
-    return <div>Loading</div>;
+    return <Loader />;
   }
 
   return (

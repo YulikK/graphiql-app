@@ -5,37 +5,35 @@ import { useLocale, useTranslations } from 'next-intl';
 import { AppBar, Box, Button, Container, Toolbar } from '@mui/material';
 import { FirebaseError } from 'firebase/app';
 import { useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
 
 import Link from 'next/link';
 
 import { Logo } from '@/entities/logo/logo.tsx';
 import LocaleSwitcher from '@/features/locale-switcher/locale-switcher.tsx';
 import { ThemeSwitcher } from '@/features/theme-switcher/theme-switcher';
-import { useAuth } from '@/shared/contexts';
+import { useAlertBar, useAuth } from '@/shared/contexts';
+import { useLocalStorage } from '@/shared/hooks/use-local-storage';
 import { logout } from '@/shared/services/firebase/auth';
 
 export default function Header() {
   const [isShrunk, setShrunk] = useState(false);
 
   const locale = useLocale();
-
   const t = useTranslations('Header');
 
   const { isLoggedIn, loading } = useAuth();
+  const { setError, setSuccess, setPending } = useAlertBar();
+  const { removeStorage } = useLocalStorage();
 
   const handleLogout = async () => {
-    toast.promise(logout, {
-      pending: t('authentication-loading'),
-      success: t('success-logout-message'),
-      error: {
-        render({ data }) {
-          return data instanceof FirebaseError
-            ? data.message
-            : t('unexpected-error');
-        },
-      },
-    });
+    try {
+      setPending(t('authentication-loading'));
+      await logout();
+      removeStorage();
+      setSuccess(t('success-logout-message'));
+    } catch (error) {
+      setError((error as FirebaseError).message || t('unexpected-error'));
+    }
   };
 
   useEffect(() => {

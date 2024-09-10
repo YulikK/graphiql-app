@@ -1,3 +1,5 @@
+import { Container } from '@mui/material';
+
 import { Teams } from '@/entities/teams/teams';
 import AboutCourse from '@/widgets/about-course/about-course';
 import Developers from '@/widgets/developers/developers';
@@ -10,12 +12,12 @@ export default function WelcomePage({
   params: { locale: string };
 }) {
   return (
-    <>
+    <Container>
       <Welcome locale={locale} />
       <Highlights />
       <Teams />
       <Developers />
       <AboutCourse />
-    </>
+    </Container>
   );
 }
