@@ -7,6 +7,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useAppDispatch, useAppSelector } from '@/shared/hooks/redux-hooks';
 import { useLocalStorage } from '@/shared/hooks/use-local-storage';
 
+import { useHistory } from '../contexts';
 import { HttpMethodType } from '../models/http-methods';
 import {
   restoreRestHeaders,
@@ -31,6 +32,8 @@ export default function useRestUrl(history = false) {
   const { setRequest } = useLocalStorage();
 
   const didMount = useRef(false);
+
+  const { isHistory } = useHistory();
 
   const restoreData = useCallback(
     ({ method, url, body, params }: ReturnType<typeof parsePathAndParams>) => {
@@ -67,8 +70,6 @@ export default function useRestUrl(history = false) {
 
     if (!address) return;
 
-    router.push(address);
-
     if (!history) {
       setRequest({
         ...store,
@@ -78,6 +79,10 @@ export default function useRestUrl(history = false) {
         browserUrl: address,
       });
     }
+
+    isHistory.current = false;
+
+    router.push(address);
   };
 
   return makeRequest;

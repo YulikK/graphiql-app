@@ -21,7 +21,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { Loader } from '@/features/loader/loader';
-import { useAuth } from '@/shared/contexts';
+import { useAuth, useHistory } from '@/shared/contexts';
 import { useAppDispatch } from '@/shared/hooks/redux-hooks';
 import { useLocalStorage } from '@/shared/hooks/use-local-storage';
 import { SavedGraphqlRequest, SavedRestRequest } from '@/shared/models/types';
@@ -46,6 +46,8 @@ export default function History({
   const { getStorage, setStorage, removeStorage } = useLocalStorage();
   const { isLoggedIn, loading } = useAuth();
 
+  const { isHistory } = useHistory();
+
   const [data, setData] = useState<
     (SavedRestRequest | SavedGraphqlRequest)[] | null
   >(null);
@@ -55,12 +57,14 @@ export default function History({
       const { type, status, browserUrl, ...slice } = el;
 
       dispatch(restoreRestState(slice));
+      isHistory.current = true;
 
       router.push(browserUrl);
     } else if (isGraphqlRequest(el)) {
       const { type, status, browserUrl, ...slice } = el;
 
       dispatch(restoreGraphState(slice));
+      isHistory.current = true;
 
       router.push(browserUrl);
     }

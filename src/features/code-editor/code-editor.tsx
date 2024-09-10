@@ -26,7 +26,7 @@ import { graphql } from 'cm6-graphql';
 import { GraphQLSchema } from 'graphql';
 import { dracula, tomorrow } from 'thememirror';
 
-import { useAlertBar, useTheme } from '@/shared/contexts';
+import { useAlertBar, useHistory, useTheme } from '@/shared/contexts';
 import { useLocalStorage } from '@/shared/hooks/use-local-storage';
 import FormatCode from '@/shared/utils/format-code';
 
@@ -61,7 +61,9 @@ export const CodeEditor = (props: CodeEditorProps) => {
 
   const { updateStatus } = useLocalStorage();
 
-  if (status !== 0) {
+  const { isHistory } = useHistory();
+
+  if (status !== 0 && isHistory.current === false) {
     updateStatus(status);
   }
 

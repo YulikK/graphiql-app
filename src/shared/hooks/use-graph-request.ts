@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useAppSelector } from '@/shared/hooks/redux-hooks';
 import { useLocalStorage } from '@/shared/hooks/use-local-storage';
 
+import { useHistory } from '../contexts';
 import encodeToBase64 from '../utils/encode-to-base64';
 
 export default function useGraphRequest() {
@@ -13,6 +14,8 @@ export default function useGraphRequest() {
   const locale = useLocale();
 
   const { setRequest } = useLocalStorage();
+
+  const { isHistory } = useHistory();
 
   const {
     url,
@@ -42,7 +45,7 @@ export default function useGraphRequest() {
 
     const browserUrl = `/${locale}/graphql/${codedUrl}/${codedBody}${codedHeaders ? `?${codedHeaders}` : ''}`;
 
-    router.push(browserUrl);
+    isHistory.current = false;
 
     if (!isHistoryRequest) {
       setRequest({
@@ -59,6 +62,8 @@ export default function useGraphRequest() {
         browserUrl,
       });
     }
+
+    router.push(browserUrl);
   };
 
   return makeRequest;
