@@ -5,7 +5,8 @@ import { json } from '@codemirror/lang-json';
 import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
 import DataObjectIcon from '@mui/icons-material/DataObject';
 import DoneIcon from '@mui/icons-material/Done';
-import PlayCircleIcon from '@mui/icons-material/PlayCircle';
+// import PlayCircleIcon from '@mui/icons-material/PlayCircle';
+import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
 import TitleIcon from '@mui/icons-material/Title';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import {
@@ -13,6 +14,7 @@ import {
   ButtonGroup,
   Chip,
   Divider,
+  Fab,
   IconButton,
   Paper,
   ToggleButton,
@@ -132,6 +134,8 @@ export const CodeEditor = (props: CodeEditorProps) => {
             top: 0,
             display: 'flex',
             flexDirection: 'column',
+            alignContent: 'center',
+            justifyContent: 'center',
             margin: '10px',
             marginRight: '15px',
             zIndex: 1,
@@ -139,14 +143,13 @@ export const CodeEditor = (props: CodeEditorProps) => {
         >
           {isGraphQl && (
             <Tooltip title={t('submit')}>
-              <IconButton
-                size="small"
+              <Fab
                 color="success"
                 aria-label={t('submit')}
                 onClick={() => onSubmit && onSubmit()}
               >
-                <PlayCircleIcon />
-              </IconButton>
+                <PlayArrowRoundedIcon />
+              </Fab>
             </Tooltip>
           )}
           {isEdit && !isGraphQl && onModeChange && (
@@ -158,7 +161,13 @@ export const CodeEditor = (props: CodeEditorProps) => {
                 exclusive
                 onChange={(e, value) => onModeChange(value)}
                 aria-label={t('format-mode')}
-                sx={{ ml: 'auto' }}
+                sx={{
+                  ml: 'auto',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
               >
                 <Tooltip title={t('json')}>
                   <ToggleButton value={false} aria-label={t('json')}>
@@ -178,7 +187,15 @@ export const CodeEditor = (props: CodeEditorProps) => {
               {(isGraphQl || (isEdit && onModeChange)) && (
                 <Divider orientation="horizontal" sx={{ mx: 0.5, my: 1 }} />
               )}
-              <ToggleButtonGroup size="small">
+              <ToggleButtonGroup
+                size="small"
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
                 <Tooltip title={t('pretty')}>
                   <IconButton
                     size="small"
