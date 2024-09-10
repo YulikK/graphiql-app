@@ -66,7 +66,7 @@ export default function Welcome({ locale }: { locale: string }) {
             <Button
               variant="contained"
               LinkComponent={Link}
-              href={`/${locale}/rest`}
+              href={`/${locale}/GET`}
               sx={{ padding: '10px 30px', textAlign: 'center' }}
             >
               {t('rest-client')}

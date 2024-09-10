@@ -1,13 +1,10 @@
 export default function decodeFromBase64(value: string) {
-  const base64Standard = value.replace(/-/g, '+').replace(/_/g, '/');
+  const base64String = value.replace(/-/g, '+').replace(/_/g, '/');
 
-  const binaryString = Buffer.from(base64Standard, 'base64').toString('binary');
-
-  return decodeURIComponent(
-    Array.prototype.map
-      .call(binaryString, (c: string) => {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-      })
-      .join('')
+  const paddedBase64String = base64String.padEnd(
+    base64String.length + ((4 - (base64String.length % 4)) % 4),
+    '='
   );
+
+  return Buffer.from(paddedBase64String, 'base64').toString('utf-8');
 }

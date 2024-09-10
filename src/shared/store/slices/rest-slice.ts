@@ -93,6 +93,10 @@ const RestSlice = createSlice({
 
       state.headers = checkLastTuple(filtered);
     },
+    restoreRestHeaders(state, { payload }: PayloadAction<string[][]>) {
+      const filtered = payload.filter(([key, value]) => key || value);
+      state.headers = checkLastTuple(filtered);
+    },
     deleteRestHeader(state, { payload }: PayloadAction<number>) {
       const newHeaders = state.headers;
 
@@ -146,6 +150,7 @@ export const {
   setRestMethod,
   handleRestBodyMode,
   restoreRestState,
+  restoreRestHeaders,
 } = RestSlice.actions;
 
 export default RestSlice;
