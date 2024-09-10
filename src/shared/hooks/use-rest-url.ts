@@ -5,8 +5,8 @@ import { useCallback, useEffect, useRef } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 import { useAppDispatch, useAppSelector } from '@/shared/hooks/redux-hooks';
+import { useLocalStorage } from '@/shared/hooks/use-local-storage';
 
-import { useLocalStorage } from './use-local-storage';
 import { HttpMethodType } from '../models/http-methods';
 import {
   restoreRestHeaders,
@@ -75,6 +75,7 @@ export default function useRestUrl(history = false) {
         type: 'rest',
         status: 100,
         id: crypto.randomUUID(),
+        browserUrl: address,
       });
     }
   };

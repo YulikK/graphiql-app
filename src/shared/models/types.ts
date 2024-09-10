@@ -55,6 +55,7 @@ export type SavedRestRequest = RestSliceType & {
   type: RestRequestType;
   status: number;
   id: string;
+  browserUrl: string;
 };
 
 export type GraphqlRequestType = 'graphql';
@@ -73,4 +74,5 @@ export type SavedGraphqlRequest = GraphqlSliceType & {
   type: GraphqlRequestType;
   status: number;
   id: string;
+  browserUrl: string;
 };

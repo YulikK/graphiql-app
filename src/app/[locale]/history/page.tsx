@@ -23,9 +23,7 @@ import { useRouter } from 'next/navigation';
 import { Loader } from '@/features/loader/loader';
 import { useAuth } from '@/shared/contexts';
 import { useAppDispatch } from '@/shared/hooks/redux-hooks';
-import useGraphRequest from '@/shared/hooks/use-graph-request';
 import { useLocalStorage } from '@/shared/hooks/use-local-storage';
-import useRestUrl from '@/shared/hooks/use-rest-url';
 import { SavedGraphqlRequest, SavedRestRequest } from '@/shared/models/types';
 import { restoreGraphState } from '@/shared/store/slices/grahpql-client';
 import { restoreRestState } from '@/shared/store/slices/rest-slice';
@@ -48,24 +46,23 @@ export default function History({
   const { getStorage, setStorage, removeStorage } = useLocalStorage();
   const { isLoggedIn, loading } = useAuth();
 
-  const makeRestRequest = useRestUrl(true);
-  const makeGraphqlRequest = useGraphRequest();
-
   const [data, setData] = useState<
     (SavedRestRequest | SavedGraphqlRequest)[] | null
   >(null);
 
   const handleRequest = (el: SavedRestRequest | SavedGraphqlRequest) => {
     if (isRestRequest(el)) {
-      const { type, status, ...slice } = el;
+      const { type, status, browserUrl, ...slice } = el;
 
       dispatch(restoreRestState(slice));
-      makeRestRequest();
+
+      router.push(browserUrl);
     } else if (isGraphqlRequest(el)) {
-      const { type, status, ...slice } = el;
+      const { type, status, browserUrl, ...slice } = el;
 
       dispatch(restoreGraphState(slice));
-      makeGraphqlRequest(true);
+
+      router.push(browserUrl);
     }
   };
 
