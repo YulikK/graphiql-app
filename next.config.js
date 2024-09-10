@@ -6,6 +6,27 @@ const withNextIntl = createNextIntlPlugin('./src/shared/locales/i18n.ts');
 const nextConfig = {
   reactStrictMode: true,
   assetPrefix: '',
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'Accept-CH',
+            value: 'Sec-CH-Prefers-Color-Scheme',
+          },
+          {
+            key: 'Vary',
+            value: 'Sec-CH-Prefers-Color-Scheme',
+          },
+          {
+            key: 'Critical-CH',
+            value: 'Sec-CH-Prefers-Color-Scheme',
+          },
+        ],
+      },
+    ];
+  },
 };
 
 export default withNextIntl(nextConfig);

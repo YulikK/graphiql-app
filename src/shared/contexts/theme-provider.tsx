@@ -1,7 +1,6 @@
 'use client';
 
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { createContext, useEffect, useMemo, useState } from 'react';
+import { createContext, useMemo, useState } from 'react';
 
 interface ThemeContextType {
   darkMode: boolean;
@@ -10,24 +9,28 @@ interface ThemeContextType {
 
 type ThemeProviderProps = {
   children?: React.ReactNode;
+  initTheme?: string;
 };
 
 export const ThemeAppContext = createContext<ThemeContextType | undefined>(
   undefined
 );
 
-export const ThemeAppProvider = ({ children }: ThemeProviderProps) => {
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+export const ThemeAppProvider = ({
+  children,
+  initTheme,
+}: ThemeProviderProps) => {
+  // const prefersDarkMode = getInitialTheme(headers()) === 'dark';
 
-  const [darkMode, setDarkMode] = useState<boolean>(prefersDarkMode);
+  const [darkMode, setDarkMode] = useState<boolean>(initTheme === 'dark');
 
   const toggleTheme = () => {
     setDarkMode(prevTheme => !prevTheme);
   };
 
-  useEffect(() => {
-    setDarkMode(prefersDarkMode);
-  }, [prefersDarkMode]);
+  // useEffect(() => {
+  //   setDarkMode(prefersDarkMode);
+  // }, [prefersDarkMode]);
 
   const value = useMemo(() => ({ darkMode, toggleTheme }), [darkMode]);
 

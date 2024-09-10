@@ -1,3 +1,5 @@
+import { headers } from 'next/headers';
+
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 import type { Metadata } from 'next';
 import { ToastContainer } from 'react-toastify';
@@ -7,6 +9,7 @@ import { AuthProvider } from '@/shared/contexts/index.ts';
 import { ThemeAppProvider } from '@/shared/contexts/theme-provider';
 import StoreProvider from '@/shared/store/store-providers';
 import { StyledRoot } from '@/shared/theme/styled-root.tsx';
+import { getInitialTheme } from '@/shared/utils/get-init-theme';
 import 'allotment/dist/style.css';
 import 'react-toastify/dist/ReactToastify.css';
 import './globals.css';
@@ -29,11 +32,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const prefersDarkMode = getInitialTheme(headers());
+
   return (
     <html lang="en">
       <body>
         <AuthProvider>
-          <ThemeAppProvider>
+          <ThemeAppProvider initTheme={prefersDarkMode}>
             <AppRouterCacheProvider>
               <StoreProvider>
                 <AlertProvider>
