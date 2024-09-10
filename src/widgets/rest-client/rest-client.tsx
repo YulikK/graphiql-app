@@ -29,11 +29,11 @@ export default function RestClient({ children }: RestClientProps) {
   const router = useRouter();
 
   useEffect(() => {
-    if (!isLoggedIn) {
+    if (!loading && !isLoggedIn) {
       router.push(`/${locale}`);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoggedIn, router]);
+  }, [isLoggedIn, router, loading]);
 
   const t = useTranslations('RestPage');
 

@@ -12,6 +12,10 @@
     "consts",
     "firestore",
     "roboto",
-    "GraphiQL"
+    "GraphiQL",
+    "clsx",
+    "Estree",
+    "thememirror",
+    "codemirror"
   ]
 }

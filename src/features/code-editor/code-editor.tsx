@@ -1,4 +1,5 @@
 'use client';
+
 import { useTranslations } from 'next-intl';
 
 import { json } from '@codemirror/lang-json';
@@ -30,6 +31,7 @@ import prettier from 'prettier/standalone';
 import { dracula, tomorrow } from 'thememirror';
 
 import { useAlertBar, useTheme } from '@/shared/contexts';
+import { useLocalStorage } from '@/shared/hooks/use-local-storage';
 
 import style from './code-editor.module.css';
 
@@ -64,6 +66,12 @@ export const CodeEditor = (props: CodeEditorProps) => {
     onSubmit,
     onModeChange,
   } = props;
+
+  const { updateStatus } = useLocalStorage();
+
+  if (status !== 0) {
+    updateStatus(status);
+  }
 
   const extensions: Extension[] = [];
 

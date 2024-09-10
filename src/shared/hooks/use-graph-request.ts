@@ -14,7 +14,7 @@ export default function useGraphRequest() {
 
   const locale = useLocale();
 
-  const { setStorage } = useLocalStorage();
+  const { setRequest } = useLocalStorage();
 
   const {
     url,
@@ -37,7 +37,7 @@ export default function useGraphRequest() {
     if (!url) return;
 
     if (!isHistoryRequest) {
-      setStorage({
+      setRequest({
         url,
         urlDoc,
         schema,
@@ -46,6 +46,8 @@ export default function useGraphRequest() {
         variables,
         query,
         type: 'graphql',
+        status: 100,
+        id: crypto.randomUUID(),
       });
     }
 

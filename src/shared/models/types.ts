@@ -39,6 +39,8 @@ export interface RegisterForm {
 
 export type LoginForm = Pick<RegisterForm, 'email' | 'password'>;
 
+export type RestRequestType = 'rest';
+
 export type RestSliceType = {
   url: string;
   query: string[][];
@@ -50,8 +52,12 @@ export type RestSliceType = {
 };
 
 export type SavedRestRequest = RestSliceType & {
-  type: string;
+  type: RestRequestType;
+  status: number;
+  id: string;
 };
+
+export type GraphqlRequestType = 'graphql';
 
 export type GraphqlSliceType = {
   url: string;
@@ -64,5 +70,7 @@ export type GraphqlSliceType = {
 };
 
 export type SavedGraphqlRequest = GraphqlSliceType & {
-  type: string;
+  type: GraphqlRequestType;
+  status: number;
+  id: string;
 };

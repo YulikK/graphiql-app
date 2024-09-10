@@ -209,11 +209,13 @@ const lightTheme = createTheme({
     MuiListItem: {
       styleOverrides: {
         root: {
-          background: 'rgba(255, 255, 255, 0.8)',
-          '&:hover': {
-            transform: 'scale(1.01)',
-            background: 'rgba(255, 255, 255, 0.4)',
-            transition: 'all 0.3s ease-in-out',
+          '& > .MuiBox-root': {
+            background: 'rgba(255, 255, 255, 0.8)',
+            '&:hover': {
+              transform: 'scale(1.01)',
+              background: 'rgba(255, 255, 255, 0.4)',
+              transition: 'all 0.3s ease-in-out',
+            },
           },
         },
       },

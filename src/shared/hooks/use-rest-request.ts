@@ -19,7 +19,7 @@ export default function useRestRequest() {
   const { method, url, body, headers, variables, textMode, query } =
     useAppSelector(state => state['rest-slice']);
 
-  const { setStorage } = useLocalStorage();
+  const { setRequest } = useLocalStorage();
 
   const [shouldSubmit, setShouldSubmit] = useState(false);
 
@@ -27,7 +27,7 @@ export default function useRestRequest() {
     if (!url) return;
 
     if (!isHistoryRequest) {
-      setStorage({
+      setRequest({
         query,
         method,
         url,
@@ -36,6 +36,8 @@ export default function useRestRequest() {
         variables,
         textMode,
         type: 'rest',
+        status: 100,
+        id: crypto.randomUUID(),
       });
     }
 

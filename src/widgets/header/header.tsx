@@ -12,23 +12,24 @@ import { Logo } from '@/entities/logo/logo.tsx';
 import LocaleSwitcher from '@/features/locale-switcher/locale-switcher.tsx';
 import { ThemeSwitcher } from '@/features/theme-switcher/theme-switcher';
 import { useAlertBar, useAuth } from '@/shared/contexts';
+import { useLocalStorage } from '@/shared/hooks/use-local-storage';
 import { logout } from '@/shared/services/firebase/auth';
 
 export default function Header() {
   const [isShrunk, setShrunk] = useState(false);
 
   const locale = useLocale();
-
   const t = useTranslations('Header');
 
   const { isLoggedIn, loading } = useAuth();
-
   const { setError, setSuccess, setPending } = useAlertBar();
+  const { removeStorage } = useLocalStorage();
 
   const handleLogout = async () => {
     try {
       setPending(t('authentication-loading'));
       await logout();
+      removeStorage();
       setSuccess(t('success-logout-message'));
     } catch (error) {
       setError((error as FirebaseError).message || t('unexpected-error'));

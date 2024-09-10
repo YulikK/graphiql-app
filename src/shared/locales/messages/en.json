@@ -102,6 +102,9 @@
     "error-prettify": "Error formatting code"
   },
   "HistoryPage": {
-    "title": "History"
+    "title": "History",
+    "empty-text": "You haven't made any requests yet. Feel free to explore the REST and GraphQL pages to get started!",
+    "rest-client": "REST Client",
+    "graphiql-client": "GraphiQL Client"
   }
 }
