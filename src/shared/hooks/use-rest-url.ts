@@ -6,6 +6,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 import { useAppDispatch, useAppSelector } from '@/shared/hooks/redux-hooks';
 
+import { useLocalStorage } from './use-local-storage';
 import { HttpMethodType } from '../models/http-methods';
 import {
   restoreRestHeaders,
@@ -20,13 +21,14 @@ import replaceUrl from '../utils/replace-url';
 
 const DELAY = 500;
 
-export default function useRestUrl() {
+export default function useRestUrl(history = false) {
   const locale = useLocale();
   const router = useRouter();
   const path = usePathname();
   const params = useSearchParams();
   const dispatch = useAppDispatch();
   const store = useAppSelector(state => state['rest-slice']);
+  const { setRequest } = useLocalStorage();
 
   const didMount = useRef(false);
 
@@ -66,6 +68,15 @@ export default function useRestUrl() {
     if (!address) return;
 
     router.push(address);
+
+    if (!history) {
+      setRequest({
+        ...store,
+        type: 'rest',
+        status: 100,
+        id: crypto.randomUUID(),
+      });
+    }
   };
 
   return makeRequest;
