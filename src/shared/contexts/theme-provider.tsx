@@ -20,17 +20,11 @@ export const ThemeAppProvider = ({
   children,
   initTheme,
 }: ThemeProviderProps) => {
-  // const prefersDarkMode = getInitialTheme(headers()) === 'dark';
-
   const [darkMode, setDarkMode] = useState<boolean>(initTheme === 'dark');
 
   const toggleTheme = () => {
     setDarkMode(prevTheme => !prevTheme);
   };
-
-  // useEffect(() => {
-  //   setDarkMode(prefersDarkMode);
-  // }, [prefersDarkMode]);
 
   const value = useMemo(() => ({ darkMode, toggleTheme }), [darkMode]);
 

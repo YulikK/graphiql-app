@@ -23,6 +23,10 @@ const nextConfig = {
             key: 'Critical-CH',
             value: 'Sec-CH-Prefers-Color-Scheme',
           },
+          {
+            key: 'Accept-Language',
+            value: 'en, ru',
+          },
         ],
       },
     ];
