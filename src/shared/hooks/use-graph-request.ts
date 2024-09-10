@@ -1,5 +1,7 @@
 import { useLocale } from 'next-intl';
 
+import { useEffect, useState } from 'react';
+
 import { useRouter } from 'next/navigation';
 
 import { useAppSelector } from '@/shared/hooks/redux-hooks';
@@ -29,6 +31,8 @@ export default function useGraphRequest() {
     variables: variables ? JSON.parse(variables) : '',
   });
 
+  const [shouldSubmit, setShouldSubmit] = useState(false);
+
   const makeRequest = (isHistoryRequest?: boolean) => {
     if (!url) return;
 
@@ -56,7 +60,19 @@ export default function useGraphRequest() {
     router.push(
       `/${locale}/graphql/${codedUrl}/${codedBody}${codedHeaders ? `?${codedHeaders}` : ''}`
     );
+
+    if (isHistoryRequest) {
+      setShouldSubmit(true);
+    }
   };
+
+  useEffect(() => {
+    if (shouldSubmit) {
+      makeRequest();
+      setShouldSubmit(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [shouldSubmit]);
 
   return makeRequest;
 }
