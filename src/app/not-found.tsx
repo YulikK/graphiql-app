@@ -1,10 +1,15 @@
-import BgContainer from '@/entities/bg-container/bg-container';
-import ErrorComponent from '@/entities/error/error';
+'use client';
 
-export default async function NotFound() {
-  return (
-    <BgContainer>
-      <ErrorComponent />
-    </BgContainer>
-  );
+import { useEffect } from 'react';
+
+import { useRouter } from 'next/navigation';
+
+export default function NotFound() {
+  const router = useRouter();
+
+  useEffect(() => {
+    router.push('/en/notFound');
+  }, [router]);
+
+  return null;
 }

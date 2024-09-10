@@ -1,5 +1,7 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
+
 import { Button, Container, Typography } from '@mui/material';
 
 import Image from 'next/image';
@@ -8,6 +10,8 @@ import Link from 'next/link';
 import errorImg from '@/assets/error.png';
 
 export default function ErrorComponent() {
+  const t = useTranslations('ErrorPage');
+
   return (
     <Container
       sx={{
@@ -21,8 +25,7 @@ export default function ErrorComponent() {
     >
       <Image src={errorImg} alt="error" className="error-img" />
       <Typography variant="h5" textAlign={'center'}>
-        We searched high and low but couldn`t find what are you looking for.
-        <br /> Lets find a better place for you to go.
+        {t('text')}
       </Typography>
       <Button
         variant="contained"
@@ -30,7 +33,7 @@ export default function ErrorComponent() {
         href={`/`}
         sx={{ padding: '10px 30px', marginTop: '15px' }}
       >
-        Go back to Home
+        {t('button')}
       </Button>
     </Container>
   );

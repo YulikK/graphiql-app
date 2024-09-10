@@ -106,5 +106,9 @@
     "empty-text": "You haven't made any requests yet. Feel free to explore the REST and GraphQL pages to get started!",
     "rest-client": "REST Client",
     "graphiql-client": "GraphiQL Client"
+  },
+  "ErrorPage": {
+    "text": "We searched high and low but couldn`t find what are you looking for. Lets find a better place for you to go.",
+    "button": "Go back to Home"
   }
 }
