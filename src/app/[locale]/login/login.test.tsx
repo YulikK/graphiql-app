@@ -2,6 +2,7 @@ import { cleanup, screen } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 import { vi } from 'vitest';
 
+import { UseLoginFormReturn } from '@/shared/hooks/use-login-form';
 import { renderWithProviders } from '@/shared/test-setup/render-router';
 
 import LoginPage from './page';
@@ -14,19 +15,35 @@ type Translations = {
   [key: string]: string;
 };
 
+const onSubmitMock = vi.fn();
+const onGoogleSubmitMock = vi.fn();
+
+vi.mock('@/shared/hooks/use-login-form', async importOriginal => {
+  const actual = (await importOriginal()) as {
+    useLoginForm: () => UseLoginFormReturn;
+  };
+
+  return {
+    ...(actual ?? {}),
+    useLoginForm: vi.fn(() => ({
+      ...actual.useLoginForm(),
+      onSubmit: onSubmitMock,
+      onGoogleSubmit: onGoogleSubmitMock,
+    })),
+  };
+});
+
 const translations: Translations = {
   title: 'Login',
-  'email-input': 'Email',
-  'password-input': 'Password',
   'sign-up-button': 'Sign In',
   'registration-text': "Don't have an account?",
-  'registration-link': 'Sign Up',
   'google-text': 'Continue with Google',
-  'authentication-loading': 'Wait, your authentication in progress',
-  'success-login-message': 'Congratulations, you have successfully logged in!',
-  'unexpected-error': 'An unexpected error occurred.',
   'email-required': 'Email is a required field',
   'email-invalid': 'Must be a valid email format',
+  'password-required': 'Password is a required field',
+  'password-min-length': 'Password must be at least {min} characters long',
+  'password-strength':
+    'Password must contain 1 number, 1 uppercase letter, 1 lowercase letter, and 1 special character',
 };
 
 vi.mock('next-intl', () => ({
@@ -51,7 +68,16 @@ describe('Login Page', () => {
     cleanup();
   });
 
-  it('it render inputs and button', async () => {
+  it('Login page render right data', async () => {
+    renderWithProviders(<LoginPage params={{ locale: 'en' }} />);
+
+    const title = screen.getByText('Login');
+    const text = screen.getByText("Don't have an account?");
+    expect(title).toBeInTheDocument();
+    expect(text).toBeInTheDocument();
+  });
+
+  it('test for email input error', async () => {
     renderWithProviders(<LoginPage params={{ locale: 'en' }} />);
 
     const emailDiv = screen.getByTestId('email');
@@ -70,7 +96,66 @@ describe('Login Page', () => {
     );
 
     expect(requiredError).toBeInTheDocument();
+  });
 
-    expect(screen.getByTestId('password')).toBeInTheDocument();
+  it('test for password input error', async () => {
+    renderWithProviders(<LoginPage params={{ locale: 'en' }} />);
+
+    const passwordDiv = screen.getByTestId('password');
+    const passwordInput = passwordDiv.querySelector('input[name="password"]');
+
+    await userEvent.type(passwordInput!, '12345');
+
+    const minLengthError = await screen.findByText(
+      translations['password-min-length']
+    );
+    expect(minLengthError).toBeInTheDocument();
+
+    await userEvent.clear(passwordInput!);
+
+    const requiredError = await screen.findByText(
+      translations['password-required']
+    );
+    expect(requiredError).toBeInTheDocument();
+
+    await userEvent.type(passwordInput!, '12345QQ!');
+
+    const strengthError = await screen.findByText(
+      translations['password-strength']
+    );
+    expect(strengthError).toBeInTheDocument();
+  });
+
+  it('test inputs with correct data', async () => {
+    renderWithProviders(<LoginPage params={{ locale: 'en' }} />);
+
+    const emailDiv = screen.getByTestId('email');
+    const emailInput = emailDiv.querySelector('input[name="email"]');
+
+    const passwordDiv = screen.getByTestId('password');
+    const passwordInput = passwordDiv.querySelector('input[name="password"]');
+
+    const submitButton = screen.getByRole('button', { name: /sign in/i });
+
+    expect(submitButton).toBeDisabled();
+
+    await userEvent.type(emailInput!, 'test@gmail.com');
+    await userEvent.type(passwordInput!, '123456Qq!');
+
+    expect(submitButton).not.toBeDisabled();
+
+    await userEvent.click(submitButton);
+
+    expect(onSubmitMock).toHaveBeenCalled();
+  });
+
+  it('test google auth', async () => {
+    renderWithProviders(<LoginPage params={{ locale: 'en' }} />);
+
+    const googleButton = screen.getByText(translations['google-text']);
+
+    await userEvent.click(googleButton);
+
+    expect(onGoogleSubmitMock).toHaveBeenCalled();
   });
 });
