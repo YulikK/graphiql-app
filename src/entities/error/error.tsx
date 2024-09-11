@@ -23,7 +23,13 @@ export default function ErrorComponent() {
         alignItems: 'center',
       }}
     >
-      <Image src={errorImg} alt="error" className="error-img" />
+      <Image
+        src={errorImg}
+        alt="error"
+        className="error-img"
+        width={1024}
+        height={640}
+      />
       <Typography variant="h5" textAlign={'center'}>
         {t('text')}
       </Typography>

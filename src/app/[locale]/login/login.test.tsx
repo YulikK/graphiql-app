@@ -71,8 +71,8 @@ describe('Login Page', () => {
   it('Login page render right data', async () => {
     renderWithProviders(<LoginPage params={{ locale: 'en' }} />);
 
-    const title = screen.getByText('Login');
-    const text = screen.getByText("Don't have an account?");
+    const title = screen.getByText(translations['title']);
+    const text = screen.getByText(translations['registration-text']);
     expect(title).toBeInTheDocument();
     expect(text).toBeInTheDocument();
   });
