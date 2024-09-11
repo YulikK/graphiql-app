@@ -31,6 +31,10 @@ import prettier from 'prettier/standalone';
 import { dracula, tomorrow } from 'thememirror';
 
 import { useAlertBar, useTheme } from '@/shared/contexts';
+import {
+  replaceVariablesWithPlaceholders,
+  restoreVariablesFromPlaceholders,
+} from '@/shared/utils/convert-variables';
 
 import style from './code-editor.module.css';
 
@@ -84,10 +88,14 @@ export const CodeEditor = (props: CodeEditorProps) => {
     let formatted = value;
 
     try {
-      formatted = await prettier.format(value, {
+      const placeholderJson = replaceVariablesWithPlaceholders(formatted);
+
+      const formattedJson = await prettier.format(placeholderJson, {
         parser: isGraphQl ? Language.GRAPHQL : Language.JSON,
         plugins: isGraphQl ? [parserGraphql] : [parserBabel, parserEstree],
       });
+
+      formatted = restoreVariablesFromPlaceholders(formattedJson);
     } catch (error) {
       setError(`${t('error-prettify')}: ${error}`);
     }

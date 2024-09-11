@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl';
 
 import { debounce } from '@mui/material';
-import { useCallback, useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 import { useAlertBar } from '@/shared/contexts';
 import { useAppDispatch, useAppSelector } from '@/shared/hooks/redux-hooks';
@@ -25,7 +25,7 @@ export const GraphQuery = () => {
 
   const { setError } = useAlertBar();
 
-  const { query, schema, url, urlDoc, isTrySchemaDownload } =
+  const { query, schema, urlDoc, isTrySchemaDownload } =
     useAppSelector(selectGraphqlData);
 
   const t = useTranslations('GraphqlPage');
@@ -44,10 +44,10 @@ export const GraphQuery = () => {
 
   const graphqlSchema = makeGraphSchema();
 
-  const fetchSchema = useCallback(
-    debounce((url: string) => {
-      if (!schema && url !== '' && !isTrySchemaDownload) {
-        getGraphSchemaOnServer(url)
+  const fetchSchemaRef = useRef(
+    debounce((urlDoc: string, schema, isTrySchemaDownload) => {
+      if (!schema && urlDoc !== '' && !isTrySchemaDownload) {
+        getGraphSchemaOnServer(urlDoc)
           .then(introspectionJSON => {
             dispatch(setGraphSchema(introspectionJSON));
           })
@@ -55,13 +55,14 @@ export const GraphQuery = () => {
             setError((err as Error).message);
           });
       }
-    }, 1000),
-    [schema, isTrySchemaDownload, dispatch]
+    }, 1000)
   );
 
   useEffect(() => {
-    fetchSchema(urlDoc);
-  }, [urlDoc, fetchSchema]);
+    const fetchSchema = fetchSchemaRef.current;
+
+    fetchSchema(urlDoc, schema, isTrySchemaDownload);
+  }, [urlDoc, schema, isTrySchemaDownload, dispatch]);
 
   const handleGraphqlChange = (value: string) => {
     dispatch(setGraphQuery(value));
