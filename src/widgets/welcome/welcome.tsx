@@ -2,9 +2,9 @@
 
 import { useTranslations } from 'next-intl';
 
-import { Box, Button, Typography } from '@mui/material';
-
 import Link from 'next/link';
+
+import { Box, Button, Typography } from '@mui/material';
 
 import { Loader } from '@/features/loader/loader';
 import { useAuth } from '@/shared/contexts';

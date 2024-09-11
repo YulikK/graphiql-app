@@ -2,11 +2,12 @@ import { useLocale } from 'next-intl';
 
 import { useRouter } from 'next/navigation';
 
-import { useAppSelector } from '@/shared/hooks/redux-hooks';
 import { useLocalStorage } from '@/shared/hooks/use-local-storage';
 
 import { useHistory } from '../contexts';
 import encodeToBase64 from '../utils/encode-to-base64';
+
+import { useAppSelector } from './redux-hooks';
 
 export default function useGraphRequest() {
   const router = useRouter();
@@ -27,13 +28,13 @@ export default function useGraphRequest() {
     query,
   } = useAppSelector(state => state['graphql-slice']);
 
-  const body = JSON.stringify({
-    query: query,
-    variables: variables ? JSON.parse(variables) : '',
-  });
-
   const makeRequest = (isHistoryRequest?: boolean) => {
     if (!url) return;
+
+    const body = JSON.stringify({
+      query: query,
+      variables: variables ? JSON.parse(variables) : '',
+    });
 
     const codedUrl = encodeToBase64(url);
 

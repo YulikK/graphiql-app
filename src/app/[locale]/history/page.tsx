@@ -2,6 +2,8 @@
 
 import { useTranslations } from 'next-intl';
 
+import { useRouter } from 'next/navigation';
+
 import DeleteIcon from '@mui/icons-material/Delete';
 import LinkIcon from '@mui/icons-material/Link';
 import {
@@ -17,8 +19,6 @@ import {
   Typography,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
-
-import { useRouter } from 'next/navigation';
 
 import { Loader } from '@/features/loader/loader';
 import { useAuth, useHistory } from '@/shared/contexts';

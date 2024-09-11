@@ -2,10 +2,10 @@
 
 import { useLocale, useTranslations } from 'next-intl';
 
+import { useRouter } from 'next/navigation';
+
 import { Box, Card } from '@mui/material';
 import { useEffect } from 'react';
-
-import { useRouter } from 'next/navigation';
 
 import ClientEndpoint from '@/features/client-endpoint/client-endpoint';
 import { Loader } from '@/features/loader/loader';

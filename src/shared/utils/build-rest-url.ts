@@ -1,7 +1,8 @@
+import { RootState } from '../models/redux-types';
+
 import encodeToBase64 from './encode-to-base64';
 import insertVariables from './insert-variables';
 import sanitizeJsonString from './sanitize-json-string';
-import { RootState } from '../models/redux-types';
 
 const buildRestUrl = (
   { body, headers, method, url, variables, textMode }: RootState['rest-slice'],

@@ -1,8 +1,8 @@
 import { useTranslations } from 'next-intl';
 
-import { Box, Button, Typography } from '@mui/material';
-
 import Link from 'next/link';
+
+import { Box, Button, Typography } from '@mui/material';
 
 import openEveryone from '@/assets/open-everyone.svg';
 import openSource from '@/assets/open-source.svg';

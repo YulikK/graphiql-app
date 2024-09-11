@@ -1,6 +1,6 @@
-import { Box, FormControlLabel, Switch } from '@mui/material';
-
 import Image from 'next/image';
+
+import { Box, FormControlLabel, Switch } from '@mui/material';
 
 import dark from '@/assets/night.png';
 import light from '@/assets/sun.png';

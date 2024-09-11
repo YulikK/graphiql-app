@@ -1,8 +1,8 @@
 import { useLocale } from 'next-intl';
 
-import { useCallback, useEffect, useRef } from 'react';
-
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+
+import { useCallback, useEffect, useRef } from 'react';
 
 import { useAppDispatch, useAppSelector } from '@/shared/hooks/redux-hooks';
 import { useLocalStorage } from '@/shared/hooks/use-local-storage';

@@ -2,10 +2,10 @@
 
 import { useLocale, useTranslations } from 'next-intl';
 
+import { useRouter } from 'next/navigation';
+
 import { Card } from '@mui/material';
 import { useEffect } from 'react';
-
-import { useRouter } from 'next/navigation';
 
 import { GraphQuery } from '@/features/client-query/client-query';
 import { Loader } from '@/features/loader/loader';

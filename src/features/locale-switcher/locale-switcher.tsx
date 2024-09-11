@@ -2,10 +2,10 @@
 
 import { useLocale } from 'next-intl';
 
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+
 import { Button, ListItemText, Menu, MenuItem } from '@mui/material';
 import { useState } from 'react';
-
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 import { useTheme } from '@/shared/contexts';
 

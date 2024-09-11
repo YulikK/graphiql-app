@@ -7,17 +7,28 @@ import {
 } from '@graphiql/react';
 import { createGraphiQLFetcher } from '@graphiql/toolkit';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
-import { Box, Drawer, IconButton, Tooltip } from '@mui/material';
+import {
+  Box,
+  CircularProgress,
+  Drawer,
+  IconButton,
+  Tooltip,
+} from '@mui/material';
 import 'graphiql/graphiql.min.css';
 import { useEffect, useState } from 'react';
 
 import { useAlertBar, useTheme as useAppTheme } from '@/shared/contexts';
 import { useAppDispatch, useAppSelector } from '@/shared/hooks/redux-hooks';
 import { setGraphSchema } from '@/shared/store/slices/grahpql-client';
-import { fetchGraphSchema } from '@/shared/utils/get-graph-schem';
+import {
+  getGraphSchema,
+  getGraphSchemaOnServer,
+} from '@/shared/utils/get-graph-schem';
 
 export const Docs = () => {
   const [showDoc, setShowDoc] = useState(false);
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const { setError } = useAlertBar();
 
@@ -26,6 +37,22 @@ export const Docs = () => {
   const t = useTranslations('GraphqlPage');
 
   const urlDoc = useAppSelector(state => state['graphql-slice'].urlDoc);
+
+  const schema = useAppSelector(state => state['graphql-slice'].schema);
+
+  function makeGraphSchema() {
+    try {
+      if (!schema) return null;
+
+      return getGraphSchema(schema);
+    } catch (error) {
+      setError(`${t('error-parse-schema')}: ${error}`);
+
+      return null;
+    }
+  }
+
+  const graphqlSchema = makeGraphSchema();
 
   const fetcher = urlDoc ? createGraphiQLFetcher({ url: urlDoc }) : null;
 
@@ -45,12 +72,14 @@ export const Docs = () => {
     }
 
     try {
-      if (!fetcher) {
+      if (!schema) {
         setError(null);
+        setIsLoading(true);
 
-        const introspectionJSON = await fetchGraphSchema(urlDoc);
+        const introspectionJSON = await getGraphSchemaOnServer(urlDoc);
 
-        dispatch(setGraphSchema(JSON.stringify(introspectionJSON, null, 2)));
+        dispatch(setGraphSchema(introspectionJSON));
+        setIsLoading(false);
       }
 
       setShowDoc(true);
@@ -75,7 +104,7 @@ export const Docs = () => {
             aria-label={t('show-doc')}
             onClick={handleDocOpen}
           >
-            <AutoStoriesIcon />
+            {isLoading ? <CircularProgress size={20} /> : <AutoStoriesIcon />}
           </IconButton>
         </span>
       </Tooltip>
@@ -97,8 +126,8 @@ export const Docs = () => {
           overflow="auto"
           className="graphiql-container"
         >
-          {fetcher && (
-            <GraphiQLProvider fetcher={fetcher}>
+          {graphqlSchema && fetcher && (
+            <GraphiQLProvider fetcher={fetcher} schema={graphqlSchema}>
               <DocExplorer />
             </GraphiQLProvider>
           )}

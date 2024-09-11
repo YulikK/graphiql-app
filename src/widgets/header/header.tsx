@@ -2,11 +2,11 @@
 
 import { useLocale, useTranslations } from 'next-intl';
 
+import Link from 'next/link';
+
 import { AppBar, Box, Button, Container, Toolbar } from '@mui/material';
 import { FirebaseError } from 'firebase/app';
 import { useEffect, useState } from 'react';
-
-import Link from 'next/link';
 
 import { Logo } from '@/entities/logo/logo.tsx';
 import LocaleSwitcher from '@/features/locale-switcher/locale-switcher.tsx';

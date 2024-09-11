@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl';
 
-import { buildClientSchema } from 'graphql';
-import { useEffect } from 'react';
+import { debounce } from '@mui/material';
+import { useEffect, useRef } from 'react';
 
 import { useAlertBar } from '@/shared/contexts';
 import { useAppDispatch, useAppSelector } from '@/shared/hooks/redux-hooks';
@@ -11,7 +11,10 @@ import {
   setGraphQuery,
   setGraphSchema,
 } from '@/shared/store/slices/grahpql-client';
-import { fetchGraphSchema } from '@/shared/utils/get-graph-schem';
+import {
+  getGraphSchema,
+  getGraphSchemaOnServer,
+} from '@/shared/utils/get-graph-schem';
 
 import { CodeEditor } from '../code-editor/code-editor';
 
@@ -22,16 +25,16 @@ export const GraphQuery = () => {
 
   const { setError } = useAlertBar();
 
-  const { query, schema, url, urlDoc, isTrySchemaDownload } =
+  const { query, schema, urlDoc, isTrySchemaDownload } =
     useAppSelector(selectGraphqlData);
 
   const t = useTranslations('GraphqlPage');
 
-  function getGraphSchema() {
-    if (schema === '') return null;
-
+  function makeGraphSchema() {
     try {
-      return buildClientSchema(JSON.parse(schema));
+      if (!schema) return null;
+
+      return getGraphSchema(schema);
     } catch (error) {
       setError(`${t('error-parse-schema')}: ${error}`);
 
@@ -39,15 +42,27 @@ export const GraphQuery = () => {
     }
   }
 
-  const graphqlSchema = getGraphSchema();
+  const graphqlSchema = makeGraphSchema();
+
+  const fetchSchemaRef = useRef(
+    debounce((urlDoc: string, schema, isTrySchemaDownload) => {
+      if (!schema && urlDoc !== '' && !isTrySchemaDownload) {
+        getGraphSchemaOnServer(urlDoc)
+          .then(introspectionJSON => {
+            dispatch(setGraphSchema(introspectionJSON));
+          })
+          .catch(err => {
+            setError((err as Error).message);
+          });
+      }
+    }, 1000)
+  );
 
   useEffect(() => {
-    if (!schema && (url || urlDoc) && !isTrySchemaDownload) {
-      fetchGraphSchema(url || urlDoc).then(data => {
-        dispatch(setGraphSchema(data));
-      });
-    }
-  }, [schema, url, urlDoc, isTrySchemaDownload, dispatch]);
+    const fetchSchema = fetchSchemaRef.current;
+
+    fetchSchema(urlDoc, schema, isTrySchemaDownload);
+  }, [urlDoc, schema, isTrySchemaDownload, dispatch]);
 
   const handleGraphqlChange = (value: string) => {
     dispatch(setGraphQuery(value));
@@ -60,6 +75,7 @@ export const GraphQuery = () => {
       value={query}
       onChange={handleGraphqlChange}
       onSubmit={makeRequest}
+      onBlur={makeRequest}
     />
   );
 };

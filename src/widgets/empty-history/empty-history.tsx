@@ -1,8 +1,8 @@
 import { useTranslations } from 'next-intl';
 
-import { Box, Button, Container, Typography } from '@mui/material';
-
 import Link from 'next/link';
+
+import { Box, Button, Container, Typography } from '@mui/material';
 
 export default function EmptyHistory({ locale }: { locale: string }) {
   const t = useTranslations('HistoryPage');

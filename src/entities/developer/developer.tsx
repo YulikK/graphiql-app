@@ -1,7 +1,7 @@
+import Image, { StaticImageData } from 'next/image';
+
 import { Box, Chip, Paper, Stack, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid2';
-
-import Image, { StaticImageData } from 'next/image';
 
 import CustomAccordion from '../custom-accordion/custom-accordion';
 
