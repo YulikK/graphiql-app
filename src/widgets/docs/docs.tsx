@@ -20,7 +20,10 @@ import { useEffect, useState } from 'react';
 import { useAlertBar, useTheme as useAppTheme } from '@/shared/contexts';
 import { useAppDispatch, useAppSelector } from '@/shared/hooks/redux-hooks';
 import { setGraphSchema } from '@/shared/store/slices/grahpql-client';
-import { getGraphSchema } from '@/shared/utils/get-graph-schem';
+import {
+  getGraphSchema,
+  getGraphSchemaOnServer,
+} from '@/shared/utils/get-graph-schem';
 
 export const Docs = () => {
   const [showDoc, setShowDoc] = useState(false);
@@ -39,6 +42,8 @@ export const Docs = () => {
 
   function makeGraphSchema() {
     try {
+      if (!schema) return null;
+
       return getGraphSchema(schema);
     } catch (error) {
       setError(`${t('error-parse-schema')}: ${error}`);
@@ -69,17 +74,10 @@ export const Docs = () => {
     try {
       if (!schema) {
         setError(null);
-
         setIsLoading(true);
 
-        // const introspectionJSON = await fetchGraphSchema(urlDoc);
-        const response = await fetch(
-          `/api/graphql-schema?urlDoc=${encodeURIComponent(urlDoc)}`
-        );
+        const introspectionJSON = await getGraphSchemaOnServer(urlDoc);
 
-        const introspectionJSON = await response.json();
-
-        // dispatch(setGraphSchema(JSON.stringify(introspectionJSON, null, 2)));
         dispatch(setGraphSchema(introspectionJSON));
         setIsLoading(false);
       }

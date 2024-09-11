@@ -37,20 +37,20 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <AuthProvider>
-          <ThemeAppProvider initTheme={prefersDarkMode}>
-            <AppRouterCacheProvider>
-              <StoreProvider>
-                <AlertProvider>
+        <AlertProvider>
+          <AuthProvider>
+            <ThemeAppProvider initTheme={prefersDarkMode}>
+              <AppRouterCacheProvider>
+                <StoreProvider>
                   <StyledRoot>
                     {children}
                     <ToastContainer position="top-center" autoClose={2000} />
                   </StyledRoot>
-                </AlertProvider>
-              </StoreProvider>
-            </AppRouterCacheProvider>
-          </ThemeAppProvider>
-        </AuthProvider>
+                </StoreProvider>
+              </AppRouterCacheProvider>
+            </ThemeAppProvider>
+          </AuthProvider>
+        </AlertProvider>
       </body>
     </html>
   );

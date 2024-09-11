@@ -5,7 +5,6 @@ import { json } from '@codemirror/lang-json';
 import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
 import DataObjectIcon from '@mui/icons-material/DataObject';
 import DoneIcon from '@mui/icons-material/Done';
-// import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
 import TitleIcon from '@mui/icons-material/Title';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';

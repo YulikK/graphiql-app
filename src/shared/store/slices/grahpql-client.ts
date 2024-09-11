@@ -35,6 +35,8 @@ const GraphqlSlice = createSlice({
 
       if (!state.urlDoc || state.urlDoc === `${prevUrl}?sdl`) {
         state.urlDoc = `${state.url}?sdl`;
+        state.schema = '';
+        state.isTrySchemaDownload = false;
       }
 
       if (!payload) {
@@ -45,11 +47,11 @@ const GraphqlSlice = createSlice({
     },
     setGraphUrlDoc(state, { payload }: PayloadAction<string>) {
       state.urlDoc = payload;
-
-      if (!payload) {
-        state.schema = '';
-        state.isTrySchemaDownload = false;
-      }
+      state.isTrySchemaDownload = false;
+      state.schema = '';
+    },
+    resetTrySchemaDownload(state) {
+      state.isTrySchemaDownload = false;
     },
     setGraphSchema(state, { payload }: PayloadAction<string>) {
       state.schema = payload;
@@ -87,6 +89,7 @@ const GraphqlSlice = createSlice({
 export const {
   setGraphUrl,
   setGraphUrlDoc,
+  resetTrySchemaDownload,
   setGraphSchema,
   setGraphQuery,
   setGraphVariables,

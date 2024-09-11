@@ -18,8 +18,6 @@ export async function GET(req: NextRequest) {
   } catch (error) {
     const e = error as Error;
 
-    console.error('Error fetching schema:', e.message);
-
     return NextResponse.json({ error: e.message }, { status: 500 });
   }
 }
