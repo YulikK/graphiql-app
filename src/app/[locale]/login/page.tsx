@@ -52,11 +52,7 @@ export default function LoginPage({
         <Button
           variant="outlined"
           startIcon={
-            <Image
-              src={GoogleIcon}
-              alt="Google"
-              style={{ width: '20px', height: 'auto' }}
-            />
+            <Image src={GoogleIcon} alt="Google" width={20} height={20} />
           }
           onClick={onGoogleSubmit}
           sx={{
@@ -77,6 +73,7 @@ export default function LoginPage({
               {t('title')}
             </Typography>
             <TextFieldElement
+              data-testid="email"
               control={control}
               fullWidth
               name="email"
@@ -85,6 +82,7 @@ export default function LoginPage({
               helperText={errors.email?.message || ' '}
             />
             <PasswordElement
+              data-testid="password"
               fullWidth
               control={control}
               name="password"

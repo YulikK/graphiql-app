@@ -16,6 +16,7 @@
     "clsx",
     "Estree",
     "thememirror",
-    "codemirror"
+    "codemirror",
+    "testid"
   ]
 }
