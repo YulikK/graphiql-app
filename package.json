@@ -31,6 +31,7 @@
     "@mui/material": "^6.0.1",
     "@mui/material-nextjs": "^6.0.1",
     "@reduxjs/toolkit": "^2.2.7",
+    "@testing-library/user-event": "^14.5.2",
     "@uiw/codemirror-theme-material": "^4.23.0",
     "@uiw/react-codemirror": "^4.23.0",
     "allotment": "^1.20.2",
