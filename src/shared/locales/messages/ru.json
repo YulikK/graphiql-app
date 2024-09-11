@@ -86,6 +86,7 @@
     "show-doc": "Показать справку",
     "error-no-doc-url": "URL документации не задан",
     "error-parse-schema": "Ошибка при разборе схемы",
+    "error-fetch-schema": "Ошибка при запроса схемы",
     "need-doc-url": "Вам нужно установить URL документации"
   },
   "Common": {
@@ -99,7 +100,8 @@
     "text": "Текст",
     "pretty": "Форматировать",
     "status-code": "Код",
-    "error-prettify": "Ошибка форматирования кода"
+    "error-prettify": "Ошибка форматирования кода",
+    "error-request": "Ошибка запроса"
   },
   "HistoryPage": {
     "title": "История запросов",

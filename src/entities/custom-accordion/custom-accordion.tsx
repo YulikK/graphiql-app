@@ -1,9 +1,9 @@
 'use client';
 
+import Image from 'next/image';
+
 import { Box, Button } from '@mui/material';
 import { useState } from 'react';
-
-import Image from 'next/image';
 
 import arrow from '@/assets/arrow.svg';
 

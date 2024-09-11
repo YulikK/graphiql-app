@@ -86,6 +86,7 @@
     "show-doc": "Show documentation",
     "error-no-doc-url": "Documentation URL is not set",
     "error-parse-schema": "Error parsing schema",
+    "error-fetch-schema": "Error fetching schema",
     "need-doc-url": "You need to set the documentation URL"
   },
   "Common": {
@@ -99,7 +100,8 @@
     "text": "TXT",
     "pretty": "Make pretty",
     "status-code": "Code",
-    "error-prettify": "Error formatting code"
+    "error-prettify": "Error formatting code",
+    "error-request": "Request error"
   },
   "HistoryPage": {
     "title": "History",

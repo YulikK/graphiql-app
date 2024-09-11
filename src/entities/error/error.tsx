@@ -2,10 +2,10 @@
 
 import { useTranslations } from 'next-intl';
 
-import { Button, Container, Typography } from '@mui/material';
-
 import Image from 'next/image';
 import Link from 'next/link';
+
+import { Button, Container, Typography } from '@mui/material';
 
 import errorImg from '@/assets/error.png';
 

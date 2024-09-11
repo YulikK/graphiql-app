@@ -1,7 +1,7 @@
+import Image from 'next/image';
+
 import { Paper, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid2';
-
-import Image from 'next/image';
 
 interface HighlightProps {
   title: string;

@@ -8,6 +8,7 @@ import { RegisterForm } from '@/shared/models/types';
 import { registerWithEmailAndPassword } from '@/shared/services/firebase/auth';
 
 import { useAlertBar } from '../contexts';
+
 import { useRegistrationValidationSchema } from './use-registration-validation-schema';
 
 export const useRegistrationForm = () => {
