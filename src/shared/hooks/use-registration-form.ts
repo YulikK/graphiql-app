@@ -3,10 +3,11 @@ import { useTranslations } from 'next-intl';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FirebaseError } from 'firebase/app';
 import { useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
 
 import { RegisterForm } from '@/shared/models/types';
 import { registerWithEmailAndPassword } from '@/shared/services/firebase/auth';
+
+import { useAlertBar } from '../contexts';
 
 import { useRegistrationValidationSchema } from './use-registration-validation-schema';
 
@@ -14,6 +15,8 @@ export const useRegistrationForm = () => {
   const t = useTranslations('RegistrationPage');
 
   const validationSchema = useRegistrationValidationSchema();
+
+  const { setError, setSuccess, setPending } = useAlertBar();
 
   const {
     handleSubmit,
@@ -25,20 +28,13 @@ export const useRegistrationForm = () => {
   });
 
   const onSubmit = async (data: RegisterForm) => {
-    toast.promise(
-      registerWithEmailAndPassword(data.name, data.email, data.password),
-      {
-        pending: t('authentication-loading'),
-        success: t('success-register-message'),
-        error: {
-          render({ data }) {
-            return data instanceof FirebaseError
-              ? data.message
-              : t('unexpected-error');
-          },
-        },
-      }
-    );
+    try {
+      setPending(t('authentication-loading'));
+      await registerWithEmailAndPassword(data.name, data.email, data.password);
+      setSuccess(t('success-register-message'));
+    } catch (error) {
+      setError((error as FirebaseError).message || t('unexpected-error'));
+    }
   };
 
   return {

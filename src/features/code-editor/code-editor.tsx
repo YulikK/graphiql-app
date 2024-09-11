@@ -1,4 +1,5 @@
 'use client';
+
 import { useTranslations } from 'next-intl';
 
 import { json } from '@codemirror/lang-json';
@@ -30,7 +31,8 @@ import parserGraphql from 'prettier/plugins/graphql';
 import prettier from 'prettier/standalone';
 import { dracula, tomorrow } from 'thememirror';
 
-import { useAlertBar, useTheme } from '@/shared/contexts';
+import { useAlertBar, useHistory, useTheme } from '@/shared/contexts';
+import { useLocalStorage } from '@/shared/hooks/use-local-storage';
 import {
   replaceVariablesWithPlaceholders,
   restoreVariablesFromPlaceholders,
@@ -69,6 +71,14 @@ export const CodeEditor = (props: CodeEditorProps) => {
     onSubmit,
     onModeChange,
   } = props;
+
+  const { updateStatus } = useLocalStorage();
+
+  const { isHistory } = useHistory();
+
+  if (status !== 0 && isHistory.current === false) {
+    updateStatus(status);
+  }
 
   const extensions: Extension[] = [];
 

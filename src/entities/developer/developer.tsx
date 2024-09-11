@@ -46,9 +46,12 @@ export default function Developer(props: DeveloperProps) {
             width: '100%',
             fontSize: '0',
             '@media (max-width: 900px)': {
-              minWidth: '100px',
+              minWidth: '90px',
               width: '15%',
-              height: '100%',
+              position: 'absolute',
+              top: '5px',
+              left: '5px',
+              zIndex: '5',
             },
           }}
         >
@@ -59,10 +62,28 @@ export default function Developer(props: DeveloperProps) {
           />
         </Box>
         <CustomAccordion>
-          <Typography variant="h5" textAlign={'center'} fontWeight={600}>
+          <Typography
+            variant="h5"
+            textAlign={'center'}
+            fontWeight={600}
+            sx={{
+              '@media (max-width: 900px)': {
+                margin: '0 20px 0 100px',
+              },
+            }}
+          >
             {props.name}
           </Typography>
-          <Typography variant="body1" textAlign={'center'} marginTop={'auto'}>
+          <Typography
+            variant="body1"
+            textAlign={'center'}
+            marginTop={'auto'}
+            sx={{
+              '@media (max-width: 900px)': {
+                marginLeft: '100px',
+              },
+            }}
+          >
             {props.role}
           </Typography>
           <Stack

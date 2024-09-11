@@ -40,6 +40,7 @@ export default function ClientEndpoint({
       onInput={e => dispatch(setUrl((e.target as HTMLInputElement).value))}
       value={url}
       sx={{ flexGrow: 1 }}
+      autoComplete="off"
     />
   );
 }

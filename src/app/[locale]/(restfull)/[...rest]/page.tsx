@@ -1,10 +1,13 @@
+import { notFound } from 'next/navigation';
+
 import { CodeEditor } from '@/features/code-editor/code-editor';
 import { HttpMethod } from '@/shared/models/http-methods';
 import decodeFromBase64 from '@/shared/utils/decode-from-base64';
 
 interface Props {
   params: {
-    slug: string[];
+    locale: string;
+    rest: string[];
   };
   searchParams?: Record<string, string>;
 }
@@ -15,6 +18,8 @@ interface RequestParams
 }
 
 const makeRequest = async ({ method, url, body, headers }: RequestParams) => {
+  if (!url) return { result: '', status: 0 };
+
   try {
     const response = await fetch(url, {
       method,
@@ -35,9 +40,11 @@ const makeRequest = async ({ method, url, body, headers }: RequestParams) => {
 };
 
 export default async function RestResult({ params, searchParams = {} }: Props) {
-  const [method = '', url = '', body = ''] = params.slug.map(item =>
-    decodeURIComponent(item)
-  );
+  const [method = '', url = '', body = ''] = params.rest;
+
+  if (!(method.toUpperCase() in HttpMethod)) {
+    notFound();
+  }
 
   const decodedUrl = decodeFromBase64(url);
 

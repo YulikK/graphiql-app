@@ -1,7 +1,5 @@
 import { Stack } from '@mui/material';
-import { Suspense } from 'react';
 
-import { Loader } from '@/features/loader/loader';
 import RestClient from '@/widgets/rest-client/rest-client';
 
 export default function RestLayout({
@@ -20,9 +18,7 @@ export default function RestLayout({
         padding: '10px 0',
       }}
     >
-      <RestClient>
-        <Suspense fallback={<Loader />}>{children}</Suspense>
-      </RestClient>
+      <RestClient>{children}</RestClient>
     </Stack>
   );
 }

@@ -2,18 +2,11 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import ChangeVariableItem from '@/shared/models/change-variable-item';
 import { HttpMethod, HttpMethodType } from '@/shared/models/http-methods';
+import { RestSliceType } from '@/shared/models/types';
 import checkLastTuple from '@/shared/utils/check-last-tuple';
 import updateUlrAndQuery from '@/shared/utils/update-url-and-query';
 
-const initialState: {
-  url: string;
-  query: string[][];
-  body: string;
-  method: HttpMethodType;
-  headers: string[][];
-  variables: string[][];
-  textMode: boolean;
-} = {
+const initialState: RestSliceType = {
   url: '',
   query: [['', '']],
   body: '',
@@ -100,6 +93,10 @@ const RestSlice = createSlice({
 
       state.headers = checkLastTuple(filtered);
     },
+    restoreRestHeaders(state, { payload }: PayloadAction<string[][]>) {
+      const filtered = payload.filter(([key, value]) => key || value);
+      state.headers = checkLastTuple(filtered);
+    },
     deleteRestHeader(state, { payload }: PayloadAction<number>) {
       const newHeaders = state.headers;
 
@@ -129,6 +126,9 @@ const RestSlice = createSlice({
     handleRestBodyMode(state, { payload }: PayloadAction<boolean>) {
       state.textMode = payload;
     },
+    restoreRestState(state, { payload }: PayloadAction<RestSliceType>) {
+      return payload;
+    },
   },
 });
 
@@ -143,6 +143,8 @@ export const {
   setRestBody,
   setRestMethod,
   handleRestBodyMode,
+  restoreRestState,
+  restoreRestHeaders,
 } = RestSlice.actions;
 
 export default RestSlice;

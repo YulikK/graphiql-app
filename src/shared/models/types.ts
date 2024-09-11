@@ -7,6 +7,8 @@ import {
   UseFormWatch,
 } from 'react-hook-form';
 
+import { HttpMethodType } from './http-methods';
+
 export interface InputProps<T extends FieldValues> {
   name: Path<T>;
   label: string;
@@ -36,3 +38,41 @@ export interface RegisterForm {
 }
 
 export type LoginForm = Pick<RegisterForm, 'email' | 'password'>;
+
+export type RestRequestType = 'rest';
+
+export type RestSliceType = {
+  url: string;
+  query: string[][];
+  body: string;
+  method: HttpMethodType;
+  headers: string[][];
+  variables: string[][];
+  textMode: boolean;
+};
+
+export type SavedRestRequest = RestSliceType & {
+  type: RestRequestType;
+  status: number;
+  id: string;
+  browserUrl: string;
+};
+
+export type GraphqlRequestType = 'graphql';
+
+export type GraphqlSliceType = {
+  url: string;
+  urlDoc: string;
+  query: string;
+  schema: string;
+  isTrySchemaDownload: boolean;
+  headers: string[][];
+  variables: string;
+};
+
+export type SavedGraphqlRequest = GraphqlSliceType & {
+  type: GraphqlRequestType;
+  status: number;
+  id: string;
+  browserUrl: string;
+};

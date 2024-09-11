@@ -1,17 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import ChangeVariableItem from '@/shared/models/change-variable-item';
+import { GraphqlSliceType } from '@/shared/models/types';
 import checkLastTuple from '@/shared/utils/check-last-tuple';
 
-const initialState: {
-  url: string;
-  urlDoc: string;
-  query: string;
-  schema: string;
-  isTrySchemaDownload: boolean;
-  headers: string[][];
-  variables: string;
-} = {
+const initialState: GraphqlSliceType = {
   url: '',
   urlDoc: '',
   query: '',
@@ -83,6 +76,15 @@ const GraphqlSlice = createSlice({
     setGraphVariables(state, { payload }: PayloadAction<string>) {
       state.variables = payload;
     },
+    restoreGraphState(state, { payload }: PayloadAction<GraphqlSliceType>) {
+      state.isTrySchemaDownload = payload.isTrySchemaDownload;
+      state.urlDoc = payload.urlDoc;
+      state.headers = payload.headers;
+      state.query = payload.query;
+      state.schema = payload.schema;
+      state.url = payload.url;
+      state.variables = payload.variables;
+    },
   },
 });
 
@@ -95,6 +97,7 @@ export const {
   setGraphVariables,
   setGraphHeader,
   deleteGraphHeader,
+  restoreGraphState,
 } = GraphqlSlice.actions;
 
 export default GraphqlSlice;

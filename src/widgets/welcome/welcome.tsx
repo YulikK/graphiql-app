@@ -6,6 +6,7 @@ import Link from 'next/link';
 
 import { Box, Button, Typography } from '@mui/material';
 
+import { Loader } from '@/features/loader/loader';
 import { useAuth } from '@/shared/contexts';
 
 export default function Welcome({ locale }: { locale: string }) {
@@ -14,7 +15,7 @@ export default function Welcome({ locale }: { locale: string }) {
   const t = useTranslations('WelcomePage');
 
   if (loading) {
-    return <div>Loading</div>;
+    return <Loader />;
   }
 
   return (
@@ -65,7 +66,7 @@ export default function Welcome({ locale }: { locale: string }) {
             <Button
               variant="contained"
               LinkComponent={Link}
-              href={`/${locale}/rest`}
+              href={`/${locale}/GET`}
               sx={{ padding: '10px 30px', textAlign: 'center' }}
             >
               {t('rest-client')}

@@ -2,16 +2,15 @@ import { headers } from 'next/headers';
 
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 import type { Metadata } from 'next';
-import { ToastContainer } from 'react-toastify';
 
 import { AlertProvider } from '@/shared/contexts/alert-context';
+import { HistoryProvider } from '@/shared/contexts/history-context';
 import { AuthProvider } from '@/shared/contexts/index.ts';
 import { ThemeAppProvider } from '@/shared/contexts/theme-provider';
 import StoreProvider from '@/shared/store/store-providers';
 import { StyledRoot } from '@/shared/theme/styled-root.tsx';
 import { getInitialTheme } from '@/shared/utils/get-init-theme';
 import 'allotment/dist/style.css';
-import 'react-toastify/dist/ReactToastify.css';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -40,14 +39,13 @@ export default function RootLayout({
         <AlertProvider>
           <AuthProvider>
             <ThemeAppProvider initTheme={prefersDarkMode}>
-              <AppRouterCacheProvider>
-                <StoreProvider>
-                  <StyledRoot>
-                    {children}
-                    <ToastContainer position="top-center" autoClose={2000} />
-                  </StyledRoot>
-                </StoreProvider>
-              </AppRouterCacheProvider>
+              <HistoryProvider>
+                <AppRouterCacheProvider>
+                  <StoreProvider>
+                    <StyledRoot>{children}</StyledRoot>
+                  </StoreProvider>
+                </AppRouterCacheProvider>
+              </HistoryProvider>
             </ThemeAppProvider>
           </AuthProvider>
         </AlertProvider>

@@ -181,7 +181,7 @@ const lightTheme = createTheme({
         root: {
           ...resizeBarStyles,
           '& > .accordion-info': {
-            background: 'transparent',
+            background: '#f0f0f0',
           },
           ...codeEditorStyles,
         },
@@ -202,6 +202,20 @@ const lightTheme = createTheme({
           '&:hover': {
             transform: 'scale(1.05)',
             transition: 'all 0.3s ease-in-out',
+          },
+        },
+      },
+    },
+    MuiListItem: {
+      styleOverrides: {
+        root: {
+          '& > .MuiBox-root': {
+            background: 'rgba(255, 255, 255, 0.8)',
+            '&:hover': {
+              transform: 'scale(1.01)',
+              background: 'rgba(255, 255, 255, 0.4)',
+              transition: 'all 0.3s ease-in-out',
+            },
           },
         },
       },
@@ -386,6 +400,18 @@ const darkTheme = createTheme({
           textDecoration: 'none',
           '&:hover': {
             transform: 'scale(1.05)',
+            transition: 'all 0.3s ease-in-out',
+          },
+        },
+      },
+    },
+    MuiListItem: {
+      styleOverrides: {
+        root: {
+          background: 'rgba(255, 255, 255, 0.2)',
+          '&:hover': {
+            transform: 'scale(1.01)',
+            background: 'rgba(255, 255, 255, 0.4)',
             transition: 'all 0.3s ease-in-out',
           },
         },
