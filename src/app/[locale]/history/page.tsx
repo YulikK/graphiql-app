@@ -21,11 +21,9 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { Loader } from '@/features/loader/loader';
-import { useAuth } from '@/shared/contexts';
+import { useAuth, useHistory } from '@/shared/contexts';
 import { useAppDispatch } from '@/shared/hooks/redux-hooks';
-import useGraphRequest from '@/shared/hooks/use-graph-request';
 import { useLocalStorage } from '@/shared/hooks/use-local-storage';
-import useRestRequest from '@/shared/hooks/use-rest-request';
 import { SavedGraphqlRequest, SavedRestRequest } from '@/shared/models/types';
 import { restoreGraphState } from '@/shared/store/slices/grahpql-client';
 import { restoreRestState } from '@/shared/store/slices/rest-slice';
@@ -48,8 +46,7 @@ export default function History({
   const { getStorage, setStorage, removeStorage } = useLocalStorage();
   const { isLoggedIn, loading } = useAuth();
 
-  const makeRestRequest = useRestRequest();
-  const makeGraphqlRequest = useGraphRequest();
+  const { isHistory } = useHistory();
 
   const [data, setData] = useState<
     (SavedRestRequest | SavedGraphqlRequest)[] | null
@@ -57,15 +54,19 @@ export default function History({
 
   const handleRequest = (el: SavedRestRequest | SavedGraphqlRequest) => {
     if (isRestRequest(el)) {
-      const { type, status, ...slice } = el;
+      const { type, status, browserUrl, ...slice } = el;
 
       dispatch(restoreRestState(slice));
-      makeRestRequest(true);
+      isHistory.current = true;
+
+      router.push(browserUrl);
     } else if (isGraphqlRequest(el)) {
-      const { type, status, ...slice } = el;
+      const { type, status, browserUrl, ...slice } = el;
 
       dispatch(restoreGraphState(slice));
-      makeGraphqlRequest(true);
+      isHistory.current = true;
+
+      router.push(browserUrl);
     }
   };
 
@@ -139,7 +140,13 @@ export default function History({
           )}
         </Container>
         {data.length > 0 ? (
-          <List sx={{ display: 'flex', gap: '10px', flexDirection: 'column' }}>
+          <List
+            sx={{
+              display: 'flex',
+              gap: '10px',
+              flexDirection: 'column-reverse',
+            }}
+          >
             {data &&
               data.map(el => (
                 <ListItem key={el.id} sx={{ padding: '0' }}>

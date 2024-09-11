@@ -32,8 +32,7 @@ export default function RestClient({ children }: RestClientProps) {
     if (!loading && !isLoggedIn) {
       router.push(`/${locale}`);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoggedIn, router, loading]);
+  }, [isLoggedIn, router, loading, locale]);
 
   const t = useTranslations('RestPage');
 

@@ -93,6 +93,10 @@ const RestSlice = createSlice({
 
       state.headers = checkLastTuple(filtered);
     },
+    restoreRestHeaders(state, { payload }: PayloadAction<string[][]>) {
+      const filtered = payload.filter(([key, value]) => key || value);
+      state.headers = checkLastTuple(filtered);
+    },
     deleteRestHeader(state, { payload }: PayloadAction<number>) {
       const newHeaders = state.headers;
 
@@ -123,13 +127,7 @@ const RestSlice = createSlice({
       state.textMode = payload;
     },
     restoreRestState(state, { payload }: PayloadAction<RestSliceType>) {
-      state.body = payload.body;
-      state.headers = payload.headers;
-      state.method = payload.method;
-      state.query = payload.query;
-      state.textMode = payload.textMode;
-      state.url = payload.url;
-      state.variables = payload.variables;
+      return payload;
     },
   },
 });
@@ -146,6 +144,7 @@ export const {
   setRestMethod,
   handleRestBodyMode,
   restoreRestState,
+  restoreRestHeaders,
 } = RestSlice.actions;
 
 export default RestSlice;
