@@ -1,5 +1,5 @@
 import { cleanup, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { userEvent } from '@testing-library/user-event';
 import { vi } from 'vitest';
 
 import * as text from '@/shared/locales/messages/en.json';
@@ -33,7 +33,7 @@ type Translations = {
 
 const translations: Translations = text['Header'];
 
-vi.mock('next-intl', async importOriginal => ({
+vi.mock('next-intl', async () => ({
   useTranslations: () => (key: string) => {
     return translations[key] || key;
   },

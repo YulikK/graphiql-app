@@ -32,7 +32,7 @@ type Translations = {
 
 const translations: Translations = text['Header'];
 
-vi.mock('next-intl', async importOriginal => ({
+vi.mock('next-intl', async () => ({
   useTranslations: () => (key: string) => {
     return translations[key] || key;
   },
