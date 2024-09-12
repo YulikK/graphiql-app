@@ -26,7 +26,8 @@ const buildRestUrl = (
 
   const codedHeaders = new URLSearchParams(
     Object.fromEntries(headers.filter(([key, value]) => key && value))
-  );
+  ).toString();
+
   const address = [method, codedUrl, codedBody]
     .filter(value => value)
     .join('/');
