@@ -18,15 +18,9 @@ export default function useGraphRequest() {
 
   const { isHistory } = useHistory();
 
-  const {
-    url,
-    urlDoc,
-    schema,
-    isTrySchemaDownload,
-    headers,
-    variables,
-    query,
-  } = useAppSelector(state => state['graphql-slice']);
+  const store = useAppSelector(state => state['graphql-slice']);
+
+  const { url, headers, variables, query } = store;
 
   const makeRequest = (isHistoryRequest?: boolean) => {
     if (!url) return;
@@ -50,13 +44,7 @@ export default function useGraphRequest() {
 
     if (!isHistoryRequest) {
       setRequest({
-        url,
-        urlDoc,
-        schema,
-        isTrySchemaDownload,
-        headers,
-        variables,
-        query,
+        ...store,
         type: 'graphql',
         status: 100,
         id: crypto.randomUUID(),
