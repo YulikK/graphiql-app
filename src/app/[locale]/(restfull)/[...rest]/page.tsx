@@ -17,7 +17,12 @@ interface RequestParams
   url: string;
 }
 
-const makeRequest = async ({ method, url, body, headers }: RequestParams) => {
+export const makeRequest = async ({
+  method,
+  url,
+  body,
+  headers,
+}: RequestParams) => {
   if (!url) return { result: '', status: 0 };
 
   try {
@@ -25,6 +30,7 @@ const makeRequest = async ({ method, url, body, headers }: RequestParams) => {
       method,
       headers: method === HttpMethod.GET ? {} : headers,
       body: method === HttpMethod.GET ? null : body,
+      cache: 'no-cache',
     });
 
     const { status } = response;

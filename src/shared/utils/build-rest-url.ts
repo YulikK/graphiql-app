@@ -18,7 +18,7 @@ const buildRestUrl = (
     `${insertVariables(url, variables).trim().replaceAll(' ', '')}`
   );
 
-  const bodyWithVariables = insertVariables(body, variables, !textMode);
+  const bodyWithVariables = insertVariables(body, variables);
 
   const codedBody = textMode
     ? encodeToBase64(bodyWithVariables)

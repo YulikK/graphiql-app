@@ -1,5 +1,3 @@
-import { useTranslations } from 'next-intl';
-
 import { MenuItem, Select } from '@mui/material';
 
 import { useAppDispatch, useAppSelector } from '@/shared/hooks/redux-hooks';
@@ -15,14 +13,11 @@ export default function RestMethod() {
 
   const dispatch = useAppDispatch();
 
-  const t = useTranslations('RestPage');
-
   return (
     <Select
       size="small"
       defaultValue={method}
       value={method}
-      label={t('method')}
       onChange={e => dispatch(setRestMethod(e.target.value as HttpMethodType))}
     >
       {httpMethods.map(item => (
