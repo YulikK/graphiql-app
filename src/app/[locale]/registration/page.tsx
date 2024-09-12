@@ -57,6 +57,7 @@ export default function RegistrationPage({
               {t('title')}
             </Typography>
             <TextFieldElement
+              data-testid="name"
               control={control}
               fullWidth
               name="name"
@@ -65,6 +66,7 @@ export default function RegistrationPage({
               helperText={errors.name?.message || ' '}
             />
             <TextFieldElement
+              data-testid="email"
               control={control}
               fullWidth
               name="email"
@@ -73,6 +75,7 @@ export default function RegistrationPage({
               helperText={errors.email?.message || ' '}
             />
             <PasswordElement
+              data-testid="password"
               fullWidth
               control={control}
               name="password"
@@ -82,6 +85,7 @@ export default function RegistrationPage({
               margin="dense"
             />
             <PasswordElement
+              data-testid="password-confirm"
               fullWidth
               control={control}
               name="confirmPassword"
@@ -92,6 +96,7 @@ export default function RegistrationPage({
             />
             <Stack direction="row" alignItems="center" sx={{ width: '100%' }}>
               <CheckboxElement
+                data-testid="accept-terms"
                 control={control}
                 name="acceptTerms"
                 label={t('accept-term-input')}

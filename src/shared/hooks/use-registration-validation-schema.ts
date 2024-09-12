@@ -16,12 +16,12 @@ export const useRegistrationValidationSchema = () => {
   return yup.object().shape({
     name: yup
       .string()
+      .required(t('name-required'))
       .test('is-capitalized', t('name-capitalized'), value => {
         if (!value) return false;
 
         return value[0] === value[0].toUpperCase();
-      })
-      .required(t('name-required')),
+      }),
 
     email: yup
       .string()
@@ -45,7 +45,7 @@ export const useRegistrationValidationSchema = () => {
 
     acceptTerms: yup
       .boolean()
-      .oneOf([true], 'You must accept the terms and conditions')
-      .required('You must accept the terms and conditions'),
+      .oneOf([true], t('accept-term'))
+      .required(t('accept-term')),
   });
 };
