@@ -43,13 +43,7 @@ export default function useGraphRequest() {
     isHistory.current = false;
 
     if (!isHistoryRequest) {
-      setRequest({
-        ...store,
-        type: 'graphql',
-        status: 100,
-        id: crypto.randomUUID(),
-        browserUrl,
-      });
+      setRequest(store, 'graphql', browserUrl);
     }
 
     router.push(browserUrl);

@@ -70,13 +70,7 @@ export default function useRestUrl() {
 
     if (!address) return;
 
-    setRequest({
-      ...store,
-      type: 'rest',
-      status: 100,
-      id: crypto.randomUUID(),
-      browserUrl: address,
-    });
+    setRequest(store, 'rest', address);
 
     isHistory.current = false;
 

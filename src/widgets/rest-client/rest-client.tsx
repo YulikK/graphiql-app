@@ -21,16 +21,6 @@ type RestClientProps = {
 export default function RestClient({ children }: RestClientProps) {
   const { isLoggedIn, loading } = usePrivateRedirect();
 
-  // const locale = useLocale();
-
-  // const router = useRouter();
-
-  // useEffect(() => {
-  //   if (!loading && !isLoggedIn) {
-  //     router.push(`/${locale}`);
-  //   }
-  // }, [isLoggedIn, router, loading, locale]);
-
   const t = useTranslations('RestPage');
 
   RestTabs.forEach(tab => {

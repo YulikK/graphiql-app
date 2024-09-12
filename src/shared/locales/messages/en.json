@@ -106,6 +106,7 @@
   },
   "HistoryPage": {
     "title": "History",
+    "button": "Clear All",
     "empty-text": "You haven't made any requests yet. Feel free to explore the REST and GraphQL pages to get started!",
     "rest-client": "REST Client",
     "graphiql-client": "GraphiQL Client"

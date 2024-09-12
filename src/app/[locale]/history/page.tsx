@@ -68,7 +68,7 @@ export default function History({
               sx={{ padding: '10px 30px', textAlign: 'center', height: 'auto' }}
               onClick={clearHistory}
             >
-              Clear All
+              {t('button')}
             </Button>
           )}
         </Container>
@@ -84,6 +84,7 @@ export default function History({
               data.map(el => (
                 <ListItem key={el.id} sx={{ padding: '0' }}>
                   <Box
+                    data-testid="history-item"
                     display={'flex'}
                     alignItems={'center'}
                     onClick={() => handleRequest(el)}
