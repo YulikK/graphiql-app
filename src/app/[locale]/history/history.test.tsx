@@ -137,7 +137,9 @@ describe('History Page', () => {
     const historyItem = screen.getAllByTestId('history-item')[0];
     await userEvent.click(historyItem);
 
-    expect(routerPushMock).toHaveBeenCalled();
+    expect(routerPushMock).toHaveBeenCalledWith(
+      '/en/GET/aHR0cHM6Ly9zd2FwaS5kZXYvYXBpL3Blb3Bs?Content-type=application%2Fjson'
+    );
 
     const clearAllButton = screen.getByText(translations['button']);
 
