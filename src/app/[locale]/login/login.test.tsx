@@ -3,6 +3,7 @@ import { userEvent } from '@testing-library/user-event';
 import { vi } from 'vitest';
 
 import { UseLoginFormReturn } from '@/shared/hooks/use-login-form';
+import * as text from '@/shared/locales/messages/en.json';
 import { renderWithProviders } from '@/shared/test-setup/render-router';
 
 import LoginPage from './page';
@@ -13,6 +14,11 @@ vi.mock('react-firebase-hooks/auth', () => ({
 
 type Translations = {
   [key: string]: string;
+};
+
+const translations: Translations = {
+  ...text['LoginPage'],
+  ...text['Validation'],
 };
 
 const onSubmitMock = vi.fn();
@@ -32,19 +38,6 @@ vi.mock('@/shared/hooks/use-login-form', async importOriginal => {
     })),
   };
 });
-
-const translations: Translations = {
-  title: 'Login',
-  'sign-up-button': 'Sign In',
-  'registration-text': "Don't have an account?",
-  'google-text': 'Continue with Google',
-  'email-required': 'Email is a required field',
-  'email-invalid': 'Must be a valid email format',
-  'password-required': 'Password is a required field',
-  'password-min-length': 'Password must be at least {min} characters long',
-  'password-strength':
-    'Password must contain 1 number, 1 uppercase letter, 1 lowercase letter, and 1 special character',
-};
 
 vi.mock('next-intl', () => ({
   useTranslations: () => (key: string) => {

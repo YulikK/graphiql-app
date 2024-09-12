@@ -5,10 +5,12 @@ import { StaticImageData } from 'next/image';
 import { Box, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 
-import template from '@/assets/template.jpg';
+import secondDev from '@/assets/dima.jpg';
+import firstDev from '@/assets/yulikk.jpg';
+import thirdDev from '@/assets/yuliya.jpg';
 import Developer from '@/entities/developer/developer';
 
-const photos: StaticImageData[] = [template, template, template];
+const photos: StaticImageData[] = [firstDev, secondDev, thirdDev];
 
 const tech: { [key: string]: string[] } = {
   0: [

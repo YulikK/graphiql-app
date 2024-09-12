@@ -37,7 +37,6 @@ export default function Welcome({ locale }: { locale: string }) {
           {!isLoggedIn
             ? t('title-anonymous')
             : `${t('title-registered')} ${userName}`}
-          !
         </Typography>
         <Typography variant="body1" width="60%" textAlign={'center'}>
           {t('welcome-text')}

@@ -24,9 +24,9 @@ export default function Principle(props: PrincipleProps) {
           <Image
             src={props.icon}
             alt={`${props.principle}`}
+            width={30}
+            height={30}
             style={{
-              width: '30px',
-              height: 'auto',
               marginRight: '10px',
               filter: 'drop-shadow(2px 3px 3px #3e3d98)',
             }}
