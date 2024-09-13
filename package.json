@@ -12,7 +12,7 @@
     "format:fix": "prettier --write \"./**/*.{ts,tsx,css,json,md,js,cjs}\"",
     "ci:format": "prettier --check .",
     "prepare": "husky",
-    "test": "vitest",
+    "test": "vitest run",
     "test:coverage": "vitest --coverage"
   },
   "lint-staged": {
