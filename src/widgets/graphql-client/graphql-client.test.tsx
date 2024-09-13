@@ -22,7 +22,7 @@ vi.mock('allotment', () => ({
 describe('GraphqlClient', () => {
   beforeEach(() => {
     testUseLocale.mockReturnValue('en');
-    testUseTranslations.mockReturnValue(() => (key: string) => key);
+    testUseTranslations.mockReturnValue((key: string) => key);
   });
 
   it('renders Loader when loading', () => {

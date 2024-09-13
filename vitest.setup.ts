@@ -1,6 +1,23 @@
-import '@testing-library/jest-dom';
 import React from 'react';
+
+import { server } from '@/shared/test-setup/msw/server';
+
+import '@testing-library/jest-dom';
 global.React = React;
+
+beforeAll(() => {
+  server.listen({
+    onUnhandledRequest: 'warn',
+  });
+});
+
+afterEach(() => {
+  server.resetHandlers();
+});
+
+afterAll(() => {
+  server.close();
+});
 
 vi.mock('next/font/google', () => ({
   Roboto: () => ({
@@ -28,7 +45,11 @@ export const testUseAuth = vi.fn();
 
 export const testUseLocale = vi.fn();
 
-export const testUseTranslations = vi.fn();
+export const testUseTranslations = vi.fn(() => (key: string) => key);
+
+export const testUseAppDispatch = vi.fn();
+
+export const testUseAppSelector = vi.fn();
 
 vi.mock('next/navigation', () => ({
   useRouter: (): { push: () => void } => ({ push: testRouterPush }),
@@ -50,4 +71,9 @@ vi.mock('@/shared/contexts', async importOriginal => {
 vi.mock('next-intl', () => ({
   useLocale: testUseLocale,
   useTranslations: testUseTranslations,
+}));
+
+vi.mock('@/shared/hooks/redux-hooks', () => ({
+  useAppDispatch: testUseAppDispatch,
+  useAppSelector: testUseAppSelector,
 }));

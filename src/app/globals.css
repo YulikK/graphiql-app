@@ -107,7 +107,3 @@ a {
 .cm-scroller::-webkit-scrollbar-corner {
   background-color: transparent;
 }
-
-.cm-variable {
-  color: #ff79c6; /* Выберите цвет для переменных */
-}
