@@ -58,6 +58,8 @@ export default function Developer(props: DeveloperProps) {
           <Image
             className="developer-img"
             src={props.photo}
+            width={300}
+            height={400}
             alt={`${props.name}`}
           />
         </Box>

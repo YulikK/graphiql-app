@@ -15,10 +15,8 @@ export const Logo = () => {
         src={logo}
         priority
         alt="Logo"
-        style={{
-          height: '40px',
-          width: 'auto',
-        }}
+        width={60}
+        height={60}
       />
     </Link>
   );

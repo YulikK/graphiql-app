@@ -23,11 +23,7 @@ export default function Highlight(props: HighlightProps) {
           padding: '25px',
         }}
       >
-        <Image
-          src={props.icon}
-          alt={`${props.title}`}
-          style={{ width: '80px', height: 'auto' }}
-        />
+        <Image src={props.icon} alt={`${props.title}`} width={80} height={80} />
         <Typography variant="h5" textAlign={'center'} fontWeight={600}>
           {props.title}
         </Typography>

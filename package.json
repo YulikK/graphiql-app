@@ -12,8 +12,8 @@
     "format:fix": "prettier --write \"./**/*.{ts,tsx,css,json,md,js,cjs}\"",
     "ci:format": "prettier --check .",
     "prepare": "husky",
-    "test": "vitest run",
-    "test:coverage": "vitest --coverage"
+    "test": "vitest",
+    "test:coverage": "vitest --coverage run"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -31,6 +31,7 @@
     "@mui/material": "^6.0.1",
     "@mui/material-nextjs": "^6.0.1",
     "@reduxjs/toolkit": "^2.2.7",
+    "@testing-library/user-event": "^14.5.2",
     "@uiw/codemirror-theme-material": "^4.23.0",
     "@uiw/react-codemirror": "^4.23.0",
     "allotment": "^1.20.2",
@@ -39,6 +40,7 @@
     "graphiql": "^3.7.1",
     "graphql": "^16.9.0",
     "graphql-ws": "^5.16.0",
+    "msw": "^2.4.5",
     "next": "14.2.7",
     "next-intl": "^3.19.0",
     "react": "^18.3.1",

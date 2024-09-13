@@ -1,4 +1,9 @@
-import { SavedGraphqlRequest, SavedRestRequest } from '../models/types';
+import {
+  GraphqlSliceType,
+  RestSliceType,
+  SavedGraphqlRequest,
+  SavedRestRequest,
+} from '../models/types';
 
 const STORAGE_KEY = 'graphiql-teamDreams';
 
@@ -6,14 +11,24 @@ export const useLocalStorage = () => {
   const isClient = typeof window !== 'undefined';
 
   const setRequest = (
-    restObj: SavedRestRequest | SavedGraphqlRequest
+    sliceObj: RestSliceType | GraphqlSliceType,
+    type: 'rest' | 'graphql',
+    address: string
   ): void => {
     if (isClient) {
+      const result = {
+        ...sliceObj,
+        type,
+        status: 100,
+        id: crypto.randomUUID(),
+        browserUrl: address,
+      };
+
       const requests = getStorage() || [];
 
       window.localStorage.setItem(
         STORAGE_KEY,
-        JSON.stringify([...requests, restObj])
+        JSON.stringify([...requests, result])
       );
     }
   };

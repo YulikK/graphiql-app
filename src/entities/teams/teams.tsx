@@ -27,9 +27,9 @@ export const Teams = () => {
       <Image
         src={teams}
         alt="Teams"
+        width={300}
+        height={300}
         style={{
-          height: 'auto',
-          width: '300px',
           position: 'absolute',
           bottom: '40px',
           zIndex: 1,
@@ -39,6 +39,8 @@ export const Teams = () => {
       <Image
         src={earth}
         alt="Earth"
+        width={300}
+        height={300}
         className="earth"
         style={{ userSelect: 'none' }}
       />
