@@ -6,7 +6,7 @@ import { useRegistrationFormReturn } from '@/shared/hooks/use-registration-form'
 import * as text from '@/shared/locales/messages/en.json';
 import { renderWithProviders } from '@/shared/test-setup/render-router';
 
-import LoginPage from './page';
+import RegistrationPage from './page';
 
 vi.mock('react-firebase-hooks/auth', () => ({
   useAuthState: () => [null, false, null],
@@ -59,8 +59,8 @@ describe('Registration Page', () => {
     cleanup();
   });
 
-  it('Registration page render right data', async () => {
-    renderWithProviders(<LoginPage params={{ locale: 'en' }} />);
+  it('should render RegistrationPage with the correct title and text', async () => {
+    renderWithProviders(<RegistrationPage params={{ locale: 'en' }} />);
 
     const title = screen.getByText(translations['title']);
     const text = screen.getByText(translations['login-text']);
@@ -68,8 +68,8 @@ describe('Registration Page', () => {
     expect(text).toBeInTheDocument();
   });
 
-  it('test for name input error', async () => {
-    renderWithProviders(<LoginPage params={{ locale: 'en' }} />);
+  it('should display name input error messages for invalid and empty input', async () => {
+    renderWithProviders(<RegistrationPage params={{ locale: 'en' }} />);
 
     const nameDiv = screen.getByTestId('name');
     const nameInput = nameDiv.querySelector('input[name="name"]');
@@ -80,7 +80,7 @@ describe('Registration Page', () => {
     const capitalizedError = await screen.findByText(
       translations['name-capitalized']
     );
-    expect(capitalizedError).toBeInTheDocument();
+    expect(capitalizedError).toBeVisible();
 
     await userEvent.clear(nameInput!);
 
@@ -88,11 +88,11 @@ describe('Registration Page', () => {
       translations['name-required']
     );
 
-    expect(requiredError).toBeInTheDocument();
+    expect(requiredError).toBeVisible();
   });
 
-  it('test for email input error', async () => {
-    renderWithProviders(<LoginPage params={{ locale: 'en' }} />);
+  it('should display email input error messages for invalid and empty email', async () => {
+    renderWithProviders(<RegistrationPage params={{ locale: 'en' }} />);
 
     const emailDiv = screen.getByTestId('email');
     const emailInput = emailDiv.querySelector('input[name="email"]');
@@ -101,7 +101,7 @@ describe('Registration Page', () => {
     await userEvent.type(emailInput!, 'testgmail.com');
 
     const invalidError = await screen.findByText(translations['email-invalid']);
-    expect(invalidError).toBeInTheDocument();
+    expect(invalidError).toBeVisible();
 
     await userEvent.clear(emailInput!);
 
@@ -109,11 +109,11 @@ describe('Registration Page', () => {
       translations['email-required']
     );
 
-    expect(requiredError).toBeInTheDocument();
+    expect(requiredError).toBeVisible();
   });
 
-  it('test for password input error', async () => {
-    renderWithProviders(<LoginPage params={{ locale: 'en' }} />);
+  it('should display password input error messages for invalid, empty password or shorter than the minimum length password', async () => {
+    renderWithProviders(<RegistrationPage params={{ locale: 'en' }} />);
 
     const passwordDiv = screen.getByTestId('password');
     const passwordInput = passwordDiv.querySelector('input[name="password"]');
@@ -123,25 +123,25 @@ describe('Registration Page', () => {
     const minLengthError = await screen.findByText(
       translations['password-min-length']
     );
-    expect(minLengthError).toBeInTheDocument();
+    expect(minLengthError).toBeVisible();
 
     await userEvent.clear(passwordInput!);
 
     const requiredError = await screen.findByText(
       translations['password-required']
     );
-    expect(requiredError).toBeInTheDocument();
+    expect(requiredError).toBeVisible();
 
     await userEvent.type(passwordInput!, '12345QQ!');
 
     const strengthError = await screen.findByText(
       translations['password-strength']
     );
-    expect(strengthError).toBeInTheDocument();
+    expect(strengthError).toBeVisible();
   });
 
-  it('test for password confirm input error', async () => {
-    renderWithProviders(<LoginPage params={{ locale: 'en' }} />);
+  it('should display password confirm input error when passwords do not match', async () => {
+    renderWithProviders(<RegistrationPage params={{ locale: 'en' }} />);
 
     const passwordDiv = screen.getByTestId('password');
     const passwordInput = passwordDiv.querySelector('input[name="password"]');
@@ -157,11 +157,11 @@ describe('Registration Page', () => {
 
     const matchError = screen.getByText(translations['passwords-must-match']);
 
-    expect(matchError).toBeInTheDocument();
+    expect(matchError).toBeVisible();
   });
 
-  it('test for acceptTerms confirm input error', async () => {
-    renderWithProviders(<LoginPage params={{ locale: 'en' }} />);
+  it('should display accept terms error when checkbox is not checked', async () => {
+    renderWithProviders(<RegistrationPage params={{ locale: 'en' }} />);
 
     const checkboxDiv = screen.getByTestId('accept-terms');
     const checkbox = checkboxDiv.querySelector('input[type="checkbox"]');
@@ -170,11 +170,11 @@ describe('Registration Page', () => {
     await userEvent.click(checkbox!);
 
     const requiredError = await screen.findByText(translations['accept-term']);
-    expect(requiredError).toBeInTheDocument();
+    expect(requiredError).toBeVisible();
   });
 
-  it('test inputs with correct data', async () => {
-    renderWithProviders(<LoginPage params={{ locale: 'en' }} />);
+  it('should enable submit button and submit form when all fields are filled correctly', async () => {
+    renderWithProviders(<RegistrationPage params={{ locale: 'en' }} />);
 
     const submitButton = screen.getByRole('button', { name: /sign up/i });
 

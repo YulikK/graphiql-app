@@ -34,13 +34,14 @@ describe('404 Page', () => {
     cleanup();
   });
 
-  it('404 page render right data', async () => {
+  it('should render the 404 page with provided data and link to Main page', async () => {
     renderWithProviders(<NotFound />);
 
     const text = screen.getByText(translations['text']);
-    const button = screen.getByText(translations['button']);
+    const linkToMainPage = screen.getByText(translations['button']);
 
+    expect(linkToMainPage).toBeInTheDocument();
+    expect(linkToMainPage.getAttribute('href') === '/').toBeTruthy();
     expect(text).toBeInTheDocument();
-    expect(button).toBeInTheDocument();
   });
 });

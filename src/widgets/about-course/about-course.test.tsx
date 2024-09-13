@@ -22,7 +22,7 @@ vi.mock('next-intl', () => ({
   },
 }));
 
-describe('Developers component', () => {
+describe('AboutCourse component', () => {
   afterAll(() => {
     vi.clearAllMocks();
   });
@@ -32,7 +32,7 @@ describe('Developers component', () => {
     cleanup();
   });
 
-  it('Highlights component render right data', async () => {
+  it('should render the AboutCourse component with provided data', async () => {
     renderWithProviders(<AboutCourse />);
 
     const title = screen.getByText(translations['about-title']);

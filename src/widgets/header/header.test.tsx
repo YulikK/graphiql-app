@@ -1,14 +1,16 @@
 import { cleanup, screen } from '@testing-library/react';
-import { userEvent } from '@testing-library/user-event';
+import userEvent from '@testing-library/user-event';
+import * as firebaseHooks from 'react-firebase-hooks/auth';
 import { vi } from 'vitest';
 
 import * as text from '@/shared/locales/messages/en.json';
+import { userMock } from '@/shared/test-setup/mocks/userMock';
 import { renderWithProviders } from '@/shared/test-setup/render-router';
 
 import Header from './header';
 
 vi.mock('react-firebase-hooks/auth', () => ({
-  useAuthState: () => [null, false, null],
+  useAuthState: vi.fn(),
 }));
 
 const routerReplaceMock = vi.fn();
@@ -50,7 +52,39 @@ describe('Header component', () => {
     cleanup();
   });
 
-  it('header component render right data with unauthorized user', async () => {
+  it('should render header component with sign-out button for authorized users', async () => {
+    vi.mocked(firebaseHooks.useAuthState).mockReturnValue([
+      userMock,
+      false,
+      undefined,
+    ]);
+
+    renderWithProviders(<Header />);
+
+    const signOutButton = screen.getByText(translations['sign-out']);
+    expect(signOutButton).toBeInTheDocument();
+  });
+
+  it('should render header component with sign-in button for unauthorized users', async () => {
+    vi.mocked(firebaseHooks.useAuthState).mockReturnValue([
+      null,
+      false,
+      undefined,
+    ]);
+
+    renderWithProviders(<Header />);
+
+    const signInButton = screen.getByText(translations['sign-in']);
+    expect(signInButton).toBeInTheDocument();
+  });
+
+  it('should change language when a language menu item is clicked', async () => {
+    vi.mocked(firebaseHooks.useAuthState).mockReturnValue([
+      null,
+      false,
+      undefined,
+    ]);
+
     renderWithProviders(<Header />);
 
     const langButton = screen.getByRole('button', { name: /en/i });
@@ -68,8 +102,5 @@ describe('Header component', () => {
     expect(routerReplaceMock).toHaveBeenCalledWith(
       '/ru?param1=value1&param2=value2'
     );
-
-    const signInButton = screen.getByText(translations['sign-in']);
-    expect(signInButton).toBeInTheDocument();
   });
 });

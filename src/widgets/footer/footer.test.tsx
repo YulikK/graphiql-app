@@ -19,13 +19,23 @@ describe('Footer component', () => {
     cleanup();
   });
 
-  it('footer component render right data', async () => {
+  it('should render footer with required 3 links to developers github and RS School link, and required year', async () => {
     renderWithProviders(<Footer />);
 
     const links = screen.getAllByRole('link');
     expect(links).toHaveLength(4);
 
+    const githubLinks = links.filter(link =>
+      link.getAttribute('href')?.includes('github.com')
+    );
+    expect(githubLinks).toHaveLength(3);
+
+    const rsLink = links.filter(link =>
+      link.getAttribute('href')?.includes('rs.school')
+    );
+    expect(rsLink).toHaveLength(1);
+
     const year = screen.getByText(/2024/i);
-    expect(year).toBeInTheDocument();
+    expect(year).toBeVisible();
   });
 });

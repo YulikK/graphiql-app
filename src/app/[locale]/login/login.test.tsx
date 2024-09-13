@@ -61,7 +61,7 @@ describe('Login Page', () => {
     cleanup();
   });
 
-  it('Login page render right data', async () => {
+  it('should render LoginPage with the correct title and text', async () => {
     renderWithProviders(<LoginPage params={{ locale: 'en' }} />);
 
     const title = screen.getByText(translations['title']);
@@ -70,7 +70,7 @@ describe('Login Page', () => {
     expect(text).toBeInTheDocument();
   });
 
-  it('test for email input error', async () => {
+  it('should display email input error messages for invalid and empty email', async () => {
     renderWithProviders(<LoginPage params={{ locale: 'en' }} />);
 
     const emailDiv = screen.getByTestId('email');
@@ -80,7 +80,7 @@ describe('Login Page', () => {
     await userEvent.type(emailInput!, 'testgmail.com');
 
     const invalidError = await screen.findByText(translations['email-invalid']);
-    expect(invalidError).toBeInTheDocument();
+    expect(invalidError).toBeVisible();
 
     await userEvent.clear(emailInput!);
 
@@ -88,10 +88,10 @@ describe('Login Page', () => {
       translations['email-required']
     );
 
-    expect(requiredError).toBeInTheDocument();
+    expect(requiredError).toBeVisible();
   });
 
-  it('test for password input error', async () => {
+  it('should display password input error messages for invalid or empty password', async () => {
     renderWithProviders(<LoginPage params={{ locale: 'en' }} />);
 
     const passwordDiv = screen.getByTestId('password');
@@ -102,24 +102,24 @@ describe('Login Page', () => {
     const minLengthError = await screen.findByText(
       translations['password-min-length']
     );
-    expect(minLengthError).toBeInTheDocument();
+    expect(minLengthError).toBeVisible();
 
     await userEvent.clear(passwordInput!);
 
     const requiredError = await screen.findByText(
       translations['password-required']
     );
-    expect(requiredError).toBeInTheDocument();
+    expect(requiredError).toBeVisible();
 
     await userEvent.type(passwordInput!, '12345QQ!');
 
     const strengthError = await screen.findByText(
       translations['password-strength']
     );
-    expect(strengthError).toBeInTheDocument();
+    expect(strengthError).toBeVisible();
   });
 
-  it('test inputs with correct data', async () => {
+  it('should enable submit button and submit form when all fields are filled correctly', async () => {
     renderWithProviders(<LoginPage params={{ locale: 'en' }} />);
 
     const emailDiv = screen.getByTestId('email');

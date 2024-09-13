@@ -32,7 +32,7 @@ describe('Developers component', () => {
     cleanup();
   });
 
-  it('Highlights component render right data', async () => {
+  it('should render the Developers component with provided data', async () => {
     renderWithProviders(<Developers />);
 
     const name: string = JSON.parse(

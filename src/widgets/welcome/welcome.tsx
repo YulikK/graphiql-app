@@ -44,6 +44,7 @@ export default function Welcome({ locale }: { locale: string }) {
         {!isLoggedIn ? (
           <Box display={'flex'} gap={2}>
             <Button
+              data-testid="sign-in"
               variant="outlined"
               LinkComponent={Link}
               href={`/${locale}/login`}
@@ -52,6 +53,7 @@ export default function Welcome({ locale }: { locale: string }) {
               {t('sign-in')}
             </Button>
             <Button
+              data-testid="sign-up"
               variant="contained"
               LinkComponent={Link}
               href={`/${locale}/registration`}
@@ -63,6 +65,7 @@ export default function Welcome({ locale }: { locale: string }) {
         ) : (
           <Box display={'flex'} gap={2}>
             <Button
+              data-testid="rest"
               variant="contained"
               LinkComponent={Link}
               href={`/${locale}/GET`}
@@ -71,6 +74,7 @@ export default function Welcome({ locale }: { locale: string }) {
               {t('rest-client')}
             </Button>
             <Button
+              data-testid="graphql"
               variant="contained"
               LinkComponent={Link}
               href={`/${locale}/graphql`}
@@ -79,6 +83,7 @@ export default function Welcome({ locale }: { locale: string }) {
               {t('graphiql-client')}
             </Button>
             <Button
+              data-testid="history"
               variant="outlined"
               LinkComponent={Link}
               href={`/${locale}/history`}

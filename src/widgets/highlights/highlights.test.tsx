@@ -28,7 +28,7 @@ describe('Highlights component', () => {
     cleanup();
   });
 
-  it('Highlights component render right data', async () => {
+  it('should render the Highlights component with provided data', async () => {
     vi.mock('react-firebase-hooks/auth', () => ({
       useAuthState: () => [null, false, null],
     }));

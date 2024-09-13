@@ -40,7 +40,7 @@ describe('Theme-switcher component', () => {
     cleanup();
   });
 
-  it('component change theme when is toggled', async () => {
+  it('should change theme when checkbox is clicked', async () => {
     renderWithProviders(<ThemeSwitcher />);
 
     const checkbox = await screen.findByRole('checkbox');
