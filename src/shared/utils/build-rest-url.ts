@@ -18,7 +18,7 @@ const buildRestUrl = (
     `${insertVariables(url, variables).trim().replaceAll(' ', '')}`
   );
 
-  const bodyWithVariables = insertVariables(body, variables, !textMode);
+  const bodyWithVariables = insertVariables(body, variables);
 
   const codedBody = textMode
     ? encodeToBase64(bodyWithVariables)
@@ -26,7 +26,8 @@ const buildRestUrl = (
 
   const codedHeaders = new URLSearchParams(
     Object.fromEntries(headers.filter(([key, value]) => key && value))
-  );
+  ).toString();
+
   const address = [method, codedUrl, codedBody]
     .filter(value => value)
     .join('/');
