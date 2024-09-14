@@ -10,7 +10,7 @@ import done from '@/assets/done.svg';
 import { useHistoryRequest } from '@/shared/hooks/use-history-requests';
 import { SavedGraphqlRequest, SavedRestRequest } from '@/shared/models/types';
 
-const restGet: SavedRestRequest = {
+export const restGet: SavedRestRequest = {
   body: '',
   browserUrl:
     '/en/GET/aHR0cHM6Ly9yaWNrYW5kbW9ydHlhcGkuY29tL2FwaS9jaGFyYWN0ZXIvP25hbWU9cmljayZzdGF0dXM9YWxpdmU?Content-type=application%2Fjson&Accept=*%2F*&Connection=keep-alive',
@@ -37,7 +37,7 @@ const restGet: SavedRestRequest = {
   ],
 };
 
-const restPost: SavedRestRequest = {
+export const restPost: SavedRestRequest = {
   body: '{\n  "userId": "{{user_id}}",\n  "title": "{{post_title}}",\n  "body": "{{post_body}}",\n  "status": "new"\n}',
   browserUrl:
     '/en/POST/aHR0cHM6Ly9qc29ucGxhY2Vob2xkZXIudHlwaWNvZGUuY29tL3Bvc3Rz/eyJ1c2VySWQiOiIxIiwidGl0bGUiOiJNeU5ld1Bvc3QiLCJib2R5IjoiVGhpc2lzdGhlYm9keW9mbXluZXdwb3N0Iiwic3RhdHVzIjoibmV3In0?Content-type=application%2Fjson&Accept=*%2F*&Connection=keep-alive',
@@ -62,7 +62,7 @@ const restPost: SavedRestRequest = {
   ],
 };
 
-const graphqlRequest: SavedGraphqlRequest = {
+export const graphqlRequest: SavedGraphqlRequest = {
   browserUrl:
     '/en/graphql/aHR0cHM6Ly9yaWNrYW5kbW9ydHlhcGkuY29tL2dyYXBocWw/eyJxdWVyeSI6InF1ZXJ5ICgkbmFtZTogU3RyaW5nKSB7XG4gIGNoYXJhY3RlcnMgKGZpbHRlcjoge25hbWU6ICRuYW1lfSkge1xuICAgIHJlc3VsdHMge1xuICAgICAgbmFtZVxuICAgIH1cbiAgfVxufSIsInZhcmlhYmxlcyI6eyJuYW1lIjoiTW9ydHkifX0?Content-type=application%2Fjson&Connection=keep-alive',
   headers: [
