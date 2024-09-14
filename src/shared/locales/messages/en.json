@@ -28,7 +28,9 @@
     "about-title": "Built as Final Task of The Rolling Scopes School",
     "about-description": "RS School is a free and community-based online education program conducted by The Rolling Scopes Community since 2013.",
     "about-courses": "Explore the courses",
-    "about-mentor": "Become a mentor"
+    "about-mentor": "Become a mentor",
+    "preview-title": "Try Ready-Made Requests and Explore Examples",
+    "preview-text": "To make things easier for you, we've prepared a few example queries that you can use as starting points. Click the links below to quickly access pre-configured requests and see how our API works."
   },
   "RegistrationPage": {
     "title": "Registration",
