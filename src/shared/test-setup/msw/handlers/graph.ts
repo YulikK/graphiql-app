@@ -19,9 +19,104 @@ export const testAnswer = {
   },
 };
 
+export const testGraphQLSchema = JSON.stringify({
+  data: {
+    __schema: {
+      queryType: {
+        name: 'Query',
+      },
+      types: [
+        {
+          kind: 'OBJECT',
+          name: 'Query',
+          fields: [
+            {
+              name: 'user',
+              args: [
+                {
+                  name: 'id',
+                  type: {
+                    kind: 'NON_NULL',
+                    name: null,
+                    ofType: {
+                      kind: 'SCALAR',
+                      name: 'ID',
+                      ofType: null,
+                    },
+                  },
+                },
+              ],
+              type: {
+                kind: 'OBJECT',
+                name: 'User',
+                ofType: null,
+              },
+            },
+            {
+              name: 'users',
+              args: [],
+              type: {
+                kind: 'LIST',
+                name: null,
+                ofType: {
+                  kind: 'OBJECT',
+                  name: 'User',
+                  ofType: null,
+                },
+              },
+            },
+          ],
+        },
+        {
+          kind: 'OBJECT',
+          name: 'User',
+          fields: [
+            {
+              name: 'id',
+              type: {
+                kind: 'NON_NULL',
+                name: null,
+                ofType: {
+                  kind: 'SCALAR',
+                  name: 'ID',
+                  ofType: null,
+                },
+              },
+            },
+            {
+              name: 'name',
+              type: {
+                kind: 'NON_NULL',
+                name: null,
+                ofType: {
+                  kind: 'SCALAR',
+                  name: 'String',
+                  ofType: null,
+                },
+              },
+            },
+            {
+              name: 'email',
+              type: {
+                kind: 'NON_NULL',
+                name: null,
+                ofType: {
+                  kind: 'SCALAR',
+                  name: 'String',
+                  ofType: null,
+                },
+              },
+            },
+          ],
+        },
+      ],
+    },
+  },
+});
+
 export const testSchemaAnswer200 = {
   status: 200,
-  data: { schema: 'schema' },
+  data: { schema: testGraphQLSchema },
 };
 
 export const testSchemaAnswer500 = {

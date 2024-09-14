@@ -121,6 +121,8 @@ describe('TabListHeader', () => {
         isGraph={true}
       />
     );
-    expect(screen.getByLabelText('show-doc')).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: /show-doc/i })
+    ).toBeInTheDocument();
   });
 });

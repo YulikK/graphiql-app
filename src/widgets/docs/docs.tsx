@@ -94,12 +94,12 @@ export const Docs = () => {
 
   return (
     <>
-      <Tooltip title={t(schema ? 'show-doc' : 'need-doc-url')} arrow>
+      <Tooltip title={t(!graphqlSchema ? 'show-doc' : 'need-doc-url')} arrow>
         <span>
           <IconButton
             size="small"
             color="primary"
-            disabled={!schema}
+            disabled={!graphqlSchema}
             sx={{ p: '10px', ml: 'auto' }}
             aria-label={t('show-doc')}
             onClick={handleDocOpen}

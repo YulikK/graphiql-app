@@ -88,6 +88,14 @@ vi.mock('@/shared/hooks/use-graph-request', () => ({
   default: testUseGraphRequest,
 }));
 
+vi.mock('graphql', async () => {
+  const actual = await vi.importActual('graphql');
+
+  return {
+    ...actual,
+    buildClientSchema: () => 'schema',
+  };
+});
 vi.mock('@codemirror/lang-json', () => {
   return {
     json: () => ({
