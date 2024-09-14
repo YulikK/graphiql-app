@@ -87,7 +87,7 @@
     "error-no-doc-url": "Documentation URL is not set",
     "error-parse-schema": "Error parsing schema",
     "error-fetch-schema": "Error fetching schema",
-    "need-doc-url": "You need to set the documentation URL"
+    "need-doc-url": "You need to set the correct documentation URL"
   },
   "Common": {
     "key": "key",
