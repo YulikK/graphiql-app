@@ -13,7 +13,7 @@
     "ci:format": "prettier --check .",
     "prepare": "husky",
     "test": "vitest",
-    "test:coverage": "vitest --coverage"
+    "test:coverage": "vitest --coverage run"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [

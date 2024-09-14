@@ -2,7 +2,7 @@ import { useLocale } from 'next-intl';
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useAppDispatch, useAppSelector } from '@/shared/hooks/redux-hooks';
 import { useLocalStorage } from '@/shared/hooks/use-local-storage';
@@ -30,6 +30,7 @@ export default function useRestUrl() {
   const dispatch = useAppDispatch();
   const store = useAppSelector(state => state['rest-slice']);
   const { setRequest } = useLocalStorage();
+  const [lastUrl, setLastUrl] = useState('');
 
   const didMount = useRef(false);
 
@@ -66,21 +67,20 @@ export default function useRestUrl() {
   }, [locale, params, path, restoreData, store]);
 
   const makeRequest = () => {
-    const address = buildRestUrl(store, locale);
+    const url = buildRestUrl(store, locale);
 
-    if (!address) return;
+    if (!url) return;
 
-    setRequest({
-      ...store,
-      type: 'rest',
-      status: 100,
-      id: crypto.randomUUID(),
-      browserUrl: address,
-    });
+    setRequest(store, 'rest', url);
 
     isHistory.current = false;
 
-    router.push(address);
+    if (url === lastUrl) {
+      router.refresh();
+    } else {
+      setLastUrl(url);
+      router.push(url);
+    }
   };
 
   return makeRequest;

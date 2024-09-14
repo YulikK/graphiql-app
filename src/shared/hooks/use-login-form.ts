@@ -2,7 +2,12 @@ import { useTranslations } from 'next-intl';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FirebaseError } from 'firebase/app';
-import { useForm } from 'react-hook-form';
+import {
+  Control,
+  FieldErrors,
+  useForm,
+  UseFormHandleSubmit,
+} from 'react-hook-form';
 
 import { LoginForm } from '@/shared/models/types';
 import {
@@ -14,7 +19,7 @@ import { useAlertBar } from '../contexts';
 
 import { useLoginValidationSchema } from './use-login-validation-schema';
 
-export const useLoginForm = () => {
+export const useLoginForm = (): UseLoginFormReturn => {
   const t = useTranslations('LoginPage');
 
   const validationSchema = useLoginValidationSchema();
@@ -58,4 +63,13 @@ export const useLoginForm = () => {
     isValid,
     errors,
   };
+};
+
+export type UseLoginFormReturn = {
+  handleSubmit: UseFormHandleSubmit<LoginForm>;
+  onSubmit: (data: LoginForm) => Promise<void>;
+  onGoogleSubmit: () => Promise<void>;
+  control: Control<LoginForm>;
+  isValid: boolean;
+  errors: FieldErrors<LoginForm>;
 };

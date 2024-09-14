@@ -1,24 +1,8 @@
 import { StateField } from '@codemirror/state';
 import React from 'react';
 
-import { server } from '@/shared/test-setup/msw/server';
-
 import '@testing-library/jest-dom';
 global.React = React;
-
-beforeAll(() => {
-  server.listen({
-    onUnhandledRequest: 'warn',
-  });
-});
-
-afterEach(() => {
-  server.resetHandlers();
-});
-
-afterAll(() => {
-  server.close();
-});
 
 vi.mock('next/font/google', () => ({
   Roboto: () => ({

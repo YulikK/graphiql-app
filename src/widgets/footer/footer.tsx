@@ -56,6 +56,7 @@ export default function Footer() {
             className="rs-icon"
             src={logo}
             alt="rs-school"
+            width={30}
             height={30}
             priority
           />

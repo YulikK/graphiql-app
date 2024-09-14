@@ -2,8 +2,6 @@
 
 import { useTranslations } from 'next-intl';
 
-import { useRouter } from 'next/navigation';
-
 import DeleteIcon from '@mui/icons-material/Delete';
 import LinkIcon from '@mui/icons-material/Link';
 import {
@@ -18,20 +16,11 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import { useEffect, useState } from 'react';
 
 import { Loader } from '@/features/loader/loader';
-import { useAuth, useHistory } from '@/shared/contexts';
-import { useAppDispatch } from '@/shared/hooks/redux-hooks';
-import { useLocalStorage } from '@/shared/hooks/use-local-storage';
-import { SavedGraphqlRequest, SavedRestRequest } from '@/shared/models/types';
-import { restoreGraphState } from '@/shared/store/slices/grahpql-client';
-import { restoreRestState } from '@/shared/store/slices/rest-slice';
-import {
-  isGraphqlRequest,
-  isRestRequest,
-} from '@/shared/utils/history-requests-typeguard';
-import { updateStatuses } from '@/shared/utils/update-statuses';
+import { useHistoryRequest } from '@/shared/hooks/use-history-requests';
+import { usePrivateRedirect } from '@/shared/hooks/use-private-redirect';
+import { SavedRestRequest } from '@/shared/models/types';
 import EmptyHistory from '@/widgets/empty-history/empty-history';
 
 export default function History({
@@ -40,67 +29,11 @@ export default function History({
   params: { locale: string };
 }) {
   const t = useTranslations('HistoryPage');
-  const router = useRouter();
-  const dispatch = useAppDispatch();
 
-  const { getStorage, setStorage, removeStorage } = useLocalStorage();
-  const { isLoggedIn, loading } = useAuth();
+  const { isLoggedIn, loading } = usePrivateRedirect();
 
-  const { isHistory } = useHistory();
-
-  const [data, setData] = useState<
-    (SavedRestRequest | SavedGraphqlRequest)[] | null
-  >(null);
-
-  const handleRequest = (el: SavedRestRequest | SavedGraphqlRequest) => {
-    if (isRestRequest(el)) {
-      const { type, status, browserUrl, ...slice } = el;
-
-      dispatch(restoreRestState(slice));
-      isHistory.current = true;
-
-      router.push(browserUrl);
-    } else if (isGraphqlRequest(el)) {
-      const { type, status, browserUrl, ...slice } = el;
-
-      dispatch(restoreGraphState(slice));
-      isHistory.current = true;
-
-      router.push(browserUrl);
-    }
-  };
-
-  const handleRemoveItem = (id: string) => {
-    if (data) {
-      const newData = data?.filter(el => el.id !== id);
-      setStorage(newData);
-      setData(newData);
-    }
-  };
-
-  const clearHistory = () => {
-    removeStorage();
-
-    setData([]);
-  };
-
-  useEffect(() => {
-    const storedData = getStorage();
-
-    if (storedData) {
-      const updatedData = updateStatuses(storedData);
-
-      setData(updatedData);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    if (!loading && !isLoggedIn) {
-      router.push(`/${locale}`);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoggedIn, router, loading]);
+  const { data, handleRequest, handleRemoveItem, clearHistory } =
+    useHistoryRequest();
 
   if (loading || data === null) {
     return <Loader />;
@@ -135,7 +68,7 @@ export default function History({
               sx={{ padding: '10px 30px', textAlign: 'center', height: 'auto' }}
               onClick={clearHistory}
             >
-              Clear All
+              {t('button')}
             </Button>
           )}
         </Container>
@@ -151,6 +84,7 @@ export default function History({
               data.map(el => (
                 <ListItem key={el.id} sx={{ padding: '0' }}>
                   <Box
+                    data-testid="history-item"
                     display={'flex'}
                     alignItems={'center'}
                     onClick={() => handleRequest(el)}

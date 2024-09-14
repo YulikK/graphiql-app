@@ -19,7 +19,7 @@ export const ThemeSwitcher = () => {
         control={
           <Switch
             checked={darkMode}
-            onChange={() => toggleTheme()}
+            onChange={toggleTheme}
             color="default"
             inputProps={{ 'aria-label': 'theme switcher' }}
             sx={{
@@ -62,16 +62,17 @@ export const ThemeSwitcher = () => {
         src={darkMode ? dark : light}
         alt="Image alt"
         priority
+        width={30}
+        height={25}
         style={{
           objectFit: 'contain',
-          width: '30px',
           position: 'absolute',
           zIndex: '1',
           top: '8px',
           left: darkMode ? '42px' : '13px',
           cursor: 'pointer',
         }}
-        onClick={() => toggleTheme()}
+        onClick={toggleTheme}
       />
     </Box>
   );

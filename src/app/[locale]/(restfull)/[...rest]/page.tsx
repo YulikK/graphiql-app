@@ -25,6 +25,7 @@ const makeRequest = async ({ method, url, body, headers }: RequestParams) => {
       method,
       headers: method === HttpMethod.GET ? {} : headers,
       body: method === HttpMethod.GET ? null : body,
+      cache: 'no-cache',
     });
 
     const { status } = response;
