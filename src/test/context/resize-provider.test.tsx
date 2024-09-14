@@ -1,5 +1,11 @@
 import { act, render, screen } from '@testing-library/react';
-import { ReactElement, useContext } from 'react';
+import {
+  forwardRef,
+  ReactElement,
+  useContext,
+  useImperativeHandle,
+  useRef,
+} from 'react';
 
 import {
   ResizeContext,
@@ -7,12 +13,31 @@ import {
   ResizeProvider,
 } from '@/shared/contexts/resize-provider';
 
-vi.mock('allotment', () => ({
-  Allotment: ({ children }: { children: ReactElement }) => {
-    return <div>{children}</div>;
-  },
-  Pane: ({ children }: { children: ReactElement }) => <div>{children}</div>,
-}));
+vi.mock('allotment', () => {
+  const Allotment = forwardRef(
+    ({ children }: { children: ReactElement }, ref) => {
+      const localRef = useRef<HTMLDivElement>(null);
+
+      useImperativeHandle(ref, () => ({
+        resize: (sizes: number[]) => () => vi.fn(() => sizes),
+        reset: () => vi.fn(),
+      }));
+
+      return <div ref={localRef}>{children}</div>;
+    }
+  );
+  Allotment.displayName = 'Allotment';
+
+  const Pane = ({ children }: { children: ReactElement }) => (
+    <div>{children}</div>
+  );
+  Pane.displayName = 'Pane';
+
+  return {
+    Allotment,
+    Pane,
+  };
+});
 
 describe('ResizeProvider', () => {
   it('should have initial state with isPaneHide true', () => {

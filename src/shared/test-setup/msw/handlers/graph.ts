@@ -45,6 +45,9 @@ const handlers = [
   http.post(`${TEST_GRAPH_SCHEMA_400}`, () =>
     HttpResponse.json(testSchemaAnswer400)
   ),
+  http.get(`/api/graphql-schema*`, () =>
+    HttpResponse.json(testSchemaAnswer200)
+  ),
 ];
 
 export default handlers;

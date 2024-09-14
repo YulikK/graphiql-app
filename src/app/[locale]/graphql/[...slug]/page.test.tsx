@@ -6,23 +6,6 @@ import GraphResult from './page';
 
 describe('GraphResult', () => {
   it('renders CodeEditor with fetched data', async () => {
-    vi.mock('@/features/code-editor/code-editor', () => ({
-      CodeEditor: ({
-        value,
-        isEdit,
-        status,
-      }: {
-        value: string;
-        isEdit: boolean;
-        status: number;
-      }) => (
-        <div>
-          <div>{value}</div>
-          <div>{isEdit ? 'Editable' : 'Read-only'}</div>
-          <div>{status}</div>
-        </div>
-      ),
-    }));
     const params = {
       slug: [
         'aHR0cHM6Ly9hcGkudXJsLmNvbQ',
@@ -36,7 +19,7 @@ describe('GraphResult', () => {
 
     renderWithProviders(<>{component}</>);
 
-    expect(screen.getByText('Read-only')).toBeInTheDocument();
-    expect(screen.getByText('200')).toBeInTheDocument();
+    const textbox = screen.getByRole('textbox');
+    expect(textbox).toHaveAttribute('contenteditable', 'false');
   });
 });

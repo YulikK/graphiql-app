@@ -18,13 +18,6 @@ export default defineConfig({
         __dirname,
         'node_modules/@codemirror/state/dist/index.cjs'
       ),
-      '@codemirror/view': path.resolve(
-        __dirname,
-        'node_modules/@codemirror/view/dist/index.cjs'
-      ),
     },
-  },
-  optimizeDeps: {
-    exclude: ['@codemirror/state', '@codemirror/view'],
   },
 });

@@ -1,3 +1,4 @@
+import { StateField } from '@codemirror/state';
 import React from 'react';
 
 import { server } from '@/shared/test-setup/msw/server';
@@ -51,6 +52,10 @@ export const testUseAppDispatch = vi.fn();
 
 export const testUseAppSelector = vi.fn();
 
+export const testUseGraphRequest = vi.fn();
+
+export const testUseResizeContext = vi.fn();
+
 vi.mock('next/navigation', () => ({
   useRouter: (): { push: () => void } => ({ push: testRouterPush }),
   usePathname: (): string => '/',
@@ -65,6 +70,7 @@ vi.mock('@/shared/contexts', async importOriginal => {
   return {
     ...(typeof actual === 'object' ? actual : {}),
     useAuth: testUseAuth,
+    useResizeContext: testUseResizeContext,
   };
 });
 
@@ -77,3 +83,40 @@ vi.mock('@/shared/hooks/redux-hooks', () => ({
   useAppDispatch: testUseAppDispatch,
   useAppSelector: testUseAppSelector,
 }));
+
+vi.mock('@/shared/hooks/use-graph-request', () => ({
+  default: testUseGraphRequest,
+}));
+
+vi.mock('@codemirror/lang-json', () => {
+  return {
+    json: () => ({
+      language: () => ({
+        parser: {
+          configure: () => ({}),
+        },
+      }),
+      extension: StateField.define({
+        create: () => ({}),
+        update: () => ({}),
+      }),
+    }),
+  };
+});
+
+vi.mock('thememirror', () => {
+  return {
+    dracula: {
+      extension: StateField.define({
+        create: () => ({}),
+        update: () => ({}),
+      }),
+    },
+    tomorrow: {
+      extension: StateField.define({
+        create: () => ({}),
+        update: () => ({}),
+      }),
+    },
+  };
+});

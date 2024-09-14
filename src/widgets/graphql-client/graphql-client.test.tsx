@@ -12,13 +12,6 @@ import {
 
 import GraphqlClient from './graphql-client';
 
-vi.mock('allotment', () => ({
-  Allotment: ({ children }: { children: ReactElement }) => {
-    return <div>{children}</div>;
-  },
-  Pane: ({ children }: { children: ReactElement }) => <div>{children}</div>,
-}));
-
 describe('GraphqlClient', () => {
   beforeEach(() => {
     testUseLocale.mockReturnValue('en');

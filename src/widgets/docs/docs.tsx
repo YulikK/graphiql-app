@@ -124,6 +124,7 @@ export const Docs = () => {
           padding="0 20px"
           width="100%"
           overflow="auto"
+          data-testid="docs"
           className="graphiql-container"
         >
           {graphqlSchema && fetcher && (

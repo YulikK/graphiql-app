@@ -2,14 +2,7 @@
 
 import { debounce } from '@mui/material';
 import { Allotment, AllotmentHandle } from 'allotment';
-import React, {
-  createContext,
-  forwardRef,
-  useImperativeHandle,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import React, { createContext, useMemo, useRef, useState } from 'react';
 
 import { TAB_HEAD_SIZE } from '../models/view';
 
@@ -23,18 +16,12 @@ export const ResizeContext = createContext<ResizeContextProps | undefined>(
   undefined
 );
 
-export const ResizeProvider = forwardRef<
-  AllotmentHandle,
-  { children: React.ReactNode }
->(({ children }, ref) => {
+export const ResizeProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [isPaneHide, setIsPaneHide] = useState(true);
 
   const refAllotment = useRef<AllotmentHandle>(null);
-
-  useImperativeHandle(ref, () => ({
-    resize: (sizes: number[]) => refAllotment.current?.resize(sizes),
-    reset: () => refAllotment.current?.reset(),
-  }));
 
   const onMaximize = () => {
     setIsPaneHide(false);
@@ -72,6 +59,4 @@ export const ResizeProvider = forwardRef<
       </Allotment>
     </ResizeContext.Provider>
   );
-});
-
-ResizeProvider.displayName = 'ResizeProvider';
+};
