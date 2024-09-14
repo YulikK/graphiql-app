@@ -9,6 +9,23 @@ export default defineConfig({
     setupFiles: './vitest.setup.ts',
     coverage: {
       reporter: ['text', 'json', 'html'],
+      exclude: [
+        'node_modules/',
+        'dist',
+        '.vite',
+        'vitest.config.ts',
+        '.validate-branch-namerc.cjs',
+        './src/global.d.ts',
+        './src/middleware.ts',
+        'postcss.config.js',
+        '.eslintrc.cjs',
+        '**/*.test.{js,jsx,ts,tsx}',
+        '.next/',
+        'next-env.d.ts',
+        'next.config.js',
+        './src/shared/locales/**',
+        './src/shared/models/**',
+      ],
     },
   },
   resolve: {

@@ -15,7 +15,7 @@ vi.mock('@/widgets/graphql-client/graphql-client', async importOriginal => {
 });
 
 describe('GraphLayout', () => {
-  it('renders children with GraphqlClient and Loader', () => {
+  it('renders children with GraphqlClient', () => {
     render(
       <GraphLayout>
         <div>Child Content</div>

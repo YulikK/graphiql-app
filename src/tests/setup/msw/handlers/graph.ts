@@ -131,6 +131,7 @@ export const testSchemaAnswer400 = {
 
 const handlers = [
   http.post(`${TEST_GRAPH_API}`, () => HttpResponse.json(testAnswer)),
+  http.get(`${TEST_GRAPH_API}`, () => HttpResponse.json(testAnswer)),
   http.post(`${TEST_GRAPH_SCHEMA_200}`, () =>
     HttpResponse.json(testSchemaAnswer200)
   ),
