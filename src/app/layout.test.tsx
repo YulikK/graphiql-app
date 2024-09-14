@@ -32,13 +32,9 @@ vi.mock('@/shared/contexts/index.ts', () => ({
 }));
 
 vi.mock('@/shared/contexts/theme-provider', () => ({
-  ThemeAppProvider: ({
-    children,
-    initTheme,
-  }: {
-    children: React.ReactNode;
-    initTheme: boolean;
-  }) => <div>{children}</div>,
+  ThemeAppProvider: ({ children }: { children: React.ReactNode }) => (
+    <div>{children}</div>
+  ),
 }));
 
 vi.mock('@/shared/store/store-providers', () => ({
