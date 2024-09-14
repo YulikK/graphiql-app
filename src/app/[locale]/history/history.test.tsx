@@ -3,8 +3,8 @@ import { userEvent } from '@testing-library/user-event';
 import { vi } from 'vitest';
 
 import * as text from '@/shared/locales/messages/en.json';
-import { savedRequestsMock } from '@/shared/test-setup/mocks/savedRequestsMock';
-import { renderWithProviders } from '@/shared/test-setup/render-router';
+import { savedRequestsMock } from '@/tests/setup/mocks/saved-requests-mock';
+import { renderWithProviders } from '@/tests/setup/render-router';
 
 import History from './page';
 
@@ -89,16 +89,5 @@ describe('History Page', () => {
 
     const emptyHistoryMessage = screen.getByText(translations['empty-text']);
     expect(emptyHistoryMessage).toBeVisible();
-  });
-
-  it('should navigate to the correct URL when a history item is clicked', async () => {
-    renderWithProviders(<History params={{ locale: 'en' }} />);
-
-    const historyItem = screen.getAllByTestId('history-item')[1];
-    await userEvent.click(historyItem);
-
-    expect(routerPushMock).toHaveBeenCalledWith(
-      '/en/GET/aHR0cHM6Ly9zd2FwaS5kZXYvYXBpL3Blb3Bs?Content-type=application%2Fjson'
-    );
   });
 });

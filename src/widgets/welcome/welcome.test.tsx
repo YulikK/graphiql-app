@@ -3,8 +3,8 @@ import * as firebaseHooks from 'react-firebase-hooks/auth';
 import { vi } from 'vitest';
 
 import * as text from '@/shared/locales/messages/en.json';
-import { userMock } from '@/shared/test-setup/mocks/userMock';
-import { renderWithProviders } from '@/shared/test-setup/render-router';
+import { userMock } from '@/tests/setup/mocks/user-mock';
+import { renderWithProviders } from '@/tests/setup/render-router';
 
 import Welcome from './welcome';
 

@@ -2,7 +2,7 @@ import { cleanup, screen } from '@testing-library/react';
 import { vi } from 'vitest';
 
 import * as text from '@/shared/locales/messages/en.json';
-import { renderWithProviders } from '@/shared/test-setup/render-router';
+import { renderWithProviders } from '@/tests/setup/render-router';
 
 import AboutCourse from './about-course';
 

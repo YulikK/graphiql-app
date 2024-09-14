@@ -1,6 +1,25 @@
-import '@testing-library/jest-dom';
+import { StateField } from '@codemirror/state';
 import React from 'react';
+
+import { server } from '@/tests/setup/msw/server';
+
+import '@testing-library/jest-dom';
+
 global.React = React;
+
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
+
+beforeAll(() => {
+  server.listen({
+    onUnhandledRequest: 'warn',
+  });
+
+  // Need it for debugging api requests
+  // server.events.on('request:start', ({ request }) => {
+  //   console.log('Outgoing:', request.method, request.url);
+  // });
+});
 
 vi.mock('next/font/google', () => ({
   Roboto: () => ({
@@ -12,6 +31,98 @@ vi.mock('next/font/google', () => ({
 
 vi.mock('@/shared/services/firebase/firebase.ts', () => ({
   app: {},
-  auth: {},
+  auth: {
+    onAuthStateChanged: vi.fn(() => {
+      return () => {};
+    }),
+  },
   db: {},
 }));
+
+export const testGetParams = vi.fn();
+
+export const testRouterPush = vi.fn();
+
+export const testUseLocale = vi.fn();
+
+export const testUseTranslations = vi.fn(() => (key: string) => key);
+
+export const testUseAppDispatch = vi.fn();
+
+export const testUseAppSelector = vi.fn();
+
+export const testUseGraphRequest = vi.fn();
+
+export const testUseResizeContext = vi.fn();
+
+vi.mock('next/navigation', () => ({
+  useRouter: (): { push: () => void } => ({ push: testRouterPush }),
+  usePathname: (): string => '/',
+  useSearchParams: (): object => ({
+    get: testGetParams,
+  }),
+}));
+
+vi.mock('@/shared/contexts', async importOriginal => {
+  const actual = await importOriginal();
+
+  return {
+    ...(typeof actual === 'object' ? actual : {}),
+    useResizeContext: testUseResizeContext,
+  };
+});
+
+vi.mock('next-intl', () => ({
+  useLocale: testUseLocale,
+  useTranslations: testUseTranslations,
+}));
+
+vi.mock('@/shared/hooks/redux-hooks', () => ({
+  useAppDispatch: testUseAppDispatch,
+  useAppSelector: testUseAppSelector,
+}));
+
+vi.mock('@/shared/hooks/use-graph-request', () => ({
+  default: testUseGraphRequest,
+}));
+
+vi.mock('graphql', async () => {
+  const actual = await vi.importActual('graphql');
+
+  return {
+    ...actual,
+    buildClientSchema: () => 'schema',
+  };
+});
+vi.mock('@codemirror/lang-json', () => {
+  return {
+    json: () => ({
+      language: () => ({
+        parser: {
+          configure: () => ({}),
+        },
+      }),
+      extension: StateField.define({
+        create: () => ({}),
+        update: () => ({}),
+      }),
+    }),
+  };
+});
+
+vi.mock('thememirror', () => {
+  return {
+    dracula: {
+      extension: StateField.define({
+        create: () => ({}),
+        update: () => ({}),
+      }),
+    },
+    tomorrow: {
+      extension: StateField.define({
+        create: () => ({}),
+        update: () => ({}),
+      }),
+    },
+  };
+});

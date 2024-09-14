@@ -4,7 +4,7 @@ import { vi } from 'vitest';
 
 import { useRegistrationFormReturn } from '@/shared/hooks/use-registration-form';
 import * as text from '@/shared/locales/messages/en.json';
-import { renderWithProviders } from '@/shared/test-setup/render-router';
+import { renderWithProviders } from '@/tests/setup/render-router';
 
 import RegistrationPage from './page';
 

@@ -6,7 +6,7 @@ import React, { createContext, useMemo, useRef, useState } from 'react';
 
 import { TAB_HEAD_SIZE } from '../models/view';
 
-interface ResizeContextProps {
+export interface ResizeContextProps {
   onMaximize: () => void;
   onMinimize: () => void;
   isPaneHide: boolean;
