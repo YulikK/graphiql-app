@@ -2,7 +2,7 @@ import { EditorView } from '@codemirror/view';
 import { fireEvent, screen } from '@testing-library/react';
 
 import { setGraphQuery } from '@/shared/store/slices/grahpql-client';
-import { renderWithProviders } from '@/shared/test-setup/render-router';
+import { renderWithProviders } from '@/tests/setup/render-router';
 
 import {
   testUseAppDispatch,
@@ -11,6 +11,7 @@ import {
 } from '../../../vitest.setup';
 
 import { GraphQuery } from './client-query';
+
 const mockDispatch = vi.fn();
 const mockMakeRequest = vi.fn();
 

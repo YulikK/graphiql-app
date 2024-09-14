@@ -8,7 +8,7 @@ import {
   TEST_GRAPH_SCHEMA_500,
   testSchemaAnswer400,
   testSchemaAnswer500,
-} from '@/shared/test-setup/msw/handlers/graph';
+} from '@/tests/setup/msw/handlers/graph';
 
 import { GET } from './route';
 
@@ -28,6 +28,7 @@ describe('GET', () => {
     );
     const res = await GET(req);
     const json = await res.json();
+
     expect(JSON.parse(json)).toEqual(testSchemaAnswer400.data);
   });
 

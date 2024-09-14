@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react';
 
-import { renderWithProviders } from '@/shared/test-setup/render-router';
+import { renderWithProviders } from '@/tests/setup/render-router';
 
 import { ResizeVertical } from './resize-vertical';
 

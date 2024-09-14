@@ -1,16 +1,21 @@
 import { screen } from '@testing-library/react';
 import { ReactElement } from 'react';
+import * as firebaseHooks from 'react-firebase-hooks/auth';
 
-import { renderWithProviders } from '@/shared/test-setup/render-router';
+import { userMock } from '@/tests/setup/mocks/userMock';
+import { renderWithProviders } from '@/tests/setup/render-router';
 
 import {
   testRouterPush,
-  testUseAuth,
   testUseLocale,
   testUseTranslations,
 } from '../../../vitest.setup';
 
 import GraphqlClient from './graphql-client';
+
+vi.mock('react-firebase-hooks/auth', () => ({
+  useAuthState: vi.fn(),
+}));
 
 describe('GraphqlClient', () => {
   beforeEach(() => {
@@ -19,7 +24,11 @@ describe('GraphqlClient', () => {
   });
 
   it('renders Loader when loading', () => {
-    testUseAuth.mockReturnValue({ isLoggedIn: false, loading: true });
+    vi.mocked(firebaseHooks.useAuthState).mockReturnValue([
+      null,
+      true,
+      undefined,
+    ]);
 
     renderWithProviders(<GraphqlClient>Child Content</GraphqlClient>);
 
@@ -27,7 +36,11 @@ describe('GraphqlClient', () => {
   });
 
   it('redirects to locale when not logged in', () => {
-    testUseAuth.mockReturnValue({ isLoggedIn: false, loading: false });
+    vi.mocked(firebaseHooks.useAuthState).mockReturnValue([
+      null,
+      false,
+      undefined,
+    ]);
 
     renderWithProviders(<GraphqlClient>Child Content</GraphqlClient>);
 
@@ -35,7 +48,11 @@ describe('GraphqlClient', () => {
   });
 
   it('renders children when logged in', () => {
-    testUseAuth.mockReturnValue({ isLoggedIn: true, loading: false });
+    vi.mocked(firebaseHooks.useAuthState).mockReturnValue([
+      userMock,
+      false,
+      undefined,
+    ]);
     vi.mock('@/widgets/settings-tab/settings-tab', () => ({
       SettingsTab: () => <div>SettingsTab</div>,
     }));

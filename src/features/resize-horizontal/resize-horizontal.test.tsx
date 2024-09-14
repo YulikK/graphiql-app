@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
 import React from 'react';
 
-import { renderWithProviders } from '@/shared/test-setup/render-router';
+import { renderWithProviders } from '@/tests/setup/render-router';
 
 import { ResizeHorizontal } from './resize-horizontal';
 

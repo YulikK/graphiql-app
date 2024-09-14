@@ -3,8 +3,8 @@ import { fireEvent, screen, waitFor } from '@testing-library/react';
 import {
   TEST_GRAPH_SCHEMA_200,
   testGraphQLSchema,
-} from '@/shared/test-setup/msw/handlers/graph';
-import { renderWithProviders } from '@/shared/test-setup/render-router';
+} from '@/tests/setup/msw/handlers/graph';
+import { renderWithProviders } from '@/tests/setup/render-router';
 
 import { testUseAppSelector } from '../../../vitest.setup';
 

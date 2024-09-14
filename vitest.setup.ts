@@ -1,8 +1,25 @@
 import { StateField } from '@codemirror/state';
 import React from 'react';
 
+import { server } from '@/tests/setup/msw/server';
+
 import '@testing-library/jest-dom';
+
 global.React = React;
+
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
+
+beforeAll(() => {
+  server.listen({
+    onUnhandledRequest: 'warn',
+  });
+
+  // Need it for debugging api requests
+  // server.events.on('request:start', ({ request }) => {
+  //   console.log('Outgoing:', request.method, request.url);
+  // });
+});
 
 vi.mock('next/font/google', () => ({
   Roboto: () => ({
@@ -25,8 +42,6 @@ vi.mock('@/shared/services/firebase/firebase.ts', () => ({
 export const testGetParams = vi.fn();
 
 export const testRouterPush = vi.fn();
-
-export const testUseAuth = vi.fn();
 
 export const testUseLocale = vi.fn();
 
@@ -53,7 +68,6 @@ vi.mock('@/shared/contexts', async importOriginal => {
 
   return {
     ...(typeof actual === 'object' ? actual : {}),
-    useAuth: testUseAuth,
     useResizeContext: testUseResizeContext,
   };
 });

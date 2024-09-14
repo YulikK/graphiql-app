@@ -1,7 +1,7 @@
 import { fireEvent, screen } from '@testing-library/react';
 
 import { TabsMap } from '@/shared/models/view';
-import { renderWithProviders } from '@/shared/test-setup/render-router';
+import { renderWithProviders } from '@/tests/setup/render-router';
 
 import { testUseResizeContext } from '../../../../vitest.setup';
 
