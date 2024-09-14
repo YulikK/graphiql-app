@@ -3,7 +3,7 @@ import { userEvent } from '@testing-library/user-event';
 import { vi } from 'vitest';
 
 import * as text from '@/shared/locales/messages/en.json';
-import { savedRequestsMock } from '@/tests/setup/mocks/savedRequestsMock';
+import { savedRequestsMock } from '@/tests/setup/mocks/saved-requests-mock';
 import { renderWithProviders } from '@/tests/setup/render-router';
 
 import History from './page';

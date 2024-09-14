@@ -4,7 +4,7 @@ import * as firebaseHooks from 'react-firebase-hooks/auth';
 import { vi } from 'vitest';
 
 import * as text from '@/shared/locales/messages/en.json';
-import { userMock } from '@/tests/setup/mocks/userMock';
+import { userMock } from '@/tests/setup/mocks/user-mock';
 import { renderWithProviders } from '@/tests/setup/render-router';
 
 import Header from './header';
