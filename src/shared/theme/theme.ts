@@ -245,6 +245,16 @@ const lightTheme = createTheme({
         .tab-header {
           background: #edf1fc;
         }
+        .MuiButtonBase-root.history-button {
+          background: rgba(255, 255, 255, 0.6);
+        }
+        .MuiButtonBase-root.history-button > svg {
+          filter: invert(1);
+        }
+        .MuiAccordionSummary-content {
+          align-items: center;
+          gap: 10px;
+        }
       `,
     },
     MuiCard: {
@@ -408,11 +418,13 @@ const darkTheme = createTheme({
     MuiListItem: {
       styleOverrides: {
         root: {
-          background: 'rgba(255, 255, 255, 0.2)',
-          '&:hover': {
-            transform: 'scale(1.01)',
-            background: 'rgba(255, 255, 255, 0.4)',
-            transition: 'all 0.3s ease-in-out',
+          '& > .MuiBox-root': {
+            background: 'rgba(255, 255, 255, 0.2)',
+            '&:hover': {
+              transform: 'scale(1.01)',
+              background: 'rgba(255, 255, 255, 0.4)',
+              transition: 'all 0.3s ease-in-out',
+            },
           },
         },
       },
@@ -433,6 +445,19 @@ const darkTheme = createTheme({
         }
         .tab-header {
           background: #5b5575;
+        }
+        .history-icon {
+          filter: invert(1);
+        }
+        .MuiButtonBase-root.history-button {
+          background: rgba(0, 0, 0, 0.3);
+        }
+        .MuiButtonBase-root.history-button > svg {
+          filter: invert(1);
+        }
+        .MuiAccordionSummary-content {
+          align-items: center;
+          gap: 10px;
         }
       `,
     },

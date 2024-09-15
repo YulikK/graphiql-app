@@ -4,7 +4,15 @@ import { useLocale, useTranslations } from 'next-intl';
 
 import Link from 'next/link';
 
-import { AppBar, Box, Button, Container, Toolbar } from '@mui/material';
+import HistoryIcon from '@mui/icons-material/History';
+import {
+  AppBar,
+  Box,
+  Button,
+  Container,
+  Toolbar,
+  Tooltip,
+} from '@mui/material';
 import { FirebaseError } from 'firebase/app';
 import { useEffect, useState } from 'react';
 
@@ -74,6 +82,17 @@ export default function Header() {
             </Box>
 
             <Box sx={{ display: 'flex', gap: 1 }}>
+              <Tooltip title={t('history')}>
+                <Button
+                  className="history-button"
+                  variant="contained"
+                  component={Link}
+                  href={`/${locale}/history`}
+                  sx={{ minWidth: 'unset', padding: '5px 8px' }}
+                >
+                  <HistoryIcon />
+                </Button>
+              </Tooltip>
               <ThemeSwitcher />
               <LocaleSwitcher />
               {isLoggedIn ? (

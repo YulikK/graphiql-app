@@ -2,7 +2,6 @@ import { useContext } from 'react';
 
 import { AlertContext } from './alert-context';
 import { AuthContext } from './auth-provider';
-import { HistoryContext } from './history-context';
 import { ResizeContext } from './resize-provider';
 import { ThemeAppContext } from './theme-provider';
 
@@ -41,16 +40,6 @@ export const useAlertBar = () => {
 
   if (!context) {
     throw new Error('useAlertBar must be used within an AlertProvider');
-  }
-
-  return context;
-};
-
-export const useHistory = () => {
-  const context = useContext(HistoryContext);
-
-  if (!context) {
-    throw new Error('useHistory must be used within an HistoryProvider');
   }
 
   return context;

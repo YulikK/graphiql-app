@@ -51,37 +51,11 @@ export const useLocalStorage = () => {
     }
   };
 
-  const updateStatus = (
-    newStatus: number
-  ): (SavedRestRequest | SavedGraphqlRequest) | undefined => {
-    if (isClient) {
-      const requests = getStorage() || [];
-
-      if (requests.length === 0) {
-        return;
-      }
-
-      const lastRequest = requests[requests.length - 1];
-
-      const updatedLastRequest = {
-        ...lastRequest,
-        status: newStatus,
-      };
-
-      const updatedRequests = [
-        ...requests.slice(0, requests.length - 1),
-        updatedLastRequest,
-      ];
-
-      setStorage(updatedRequests);
-    }
-  };
-
   const removeStorage = (): void => {
     if (isClient) {
       window.localStorage.removeItem(STORAGE_KEY);
     }
   };
 
-  return { setStorage, setRequest, getStorage, removeStorage, updateStatus };
+  return { setStorage, setRequest, getStorage, removeStorage };
 };

@@ -8,6 +8,8 @@ import { renderWithProviders } from '@/tests/setup/render-router';
 
 import History from './page';
 
+vi.unmock('@/shared/hooks/redux-hooks');
+
 vi.mock('react-firebase-hooks/auth', () => ({
   useAuthState: () => [{}, false, null],
 }));
@@ -89,5 +91,19 @@ describe('History Page', () => {
 
     const emptyHistoryMessage = screen.getByText(translations['empty-text']);
     expect(emptyHistoryMessage).toBeVisible();
+  });
+
+  it('should navigate to the correct URL when a history item is clicked', async () => {
+    renderWithProviders(<History params={{ locale: 'en' }} />);
+
+    const requestButton = screen.getAllByRole('button', {
+      name: translations['request-button'],
+    })[1];
+
+    await userEvent.click(requestButton);
+
+    expect(routerPushMock).toHaveBeenCalledWith(
+      '/en/GET/aHR0cHM6Ly9zd2FwaS5kZXYvYXBpL3Blb3Bs?Content-type=application%2Fjson'
+    );
   });
 });
