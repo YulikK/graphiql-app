@@ -6,7 +6,10 @@ export default function parsePathAndParams(path: string, searchParams: string) {
     .map(item => {
       const [key, value] = item.split('=');
 
-      return [key, decodeURIComponent(value)];
+      return [
+        key,
+        decodeURIComponent(value ? value.replace(/\+/g, ' ') : value),
+      ];
     });
 
   return { method, url, body, params };
