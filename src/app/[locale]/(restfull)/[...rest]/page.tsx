@@ -23,8 +23,8 @@ const makeRequest = async ({ method, url, body, headers }: RequestParams) => {
   try {
     const response = await fetch(url, {
       method,
-      headers: method === HttpMethod.GET ? {} : headers,
-      body: method === HttpMethod.GET ? null : body,
+      headers: headers,
+      body: body ? body : null,
       cache: 'no-cache',
     });
 

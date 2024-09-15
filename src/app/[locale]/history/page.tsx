@@ -132,7 +132,7 @@ export default function History({
                         {t('request-button')}
                       </Button>
                     </AccordionSummary>
-                    <AccordionDetails sx={{ textAlign: 'center' }}>
+                    <AccordionDetails>
                       {el.type === 'rest' ? (
                         el.method === 'GET' ? (
                           <RestDescription

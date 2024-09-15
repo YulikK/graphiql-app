@@ -121,3 +121,19 @@ vi.mock('thememirror', () => {
     },
   };
 });
+
+vi.mock('cm6-graphql', () => {
+  return {
+    graphql: () => ({
+      language: () => ({
+        parser: {
+          configure: () => ({}),
+        },
+      }),
+      extension: StateField.define({
+        create: () => ({}),
+        update: () => ({}),
+      }),
+    }),
+  };
+});

@@ -1,5 +1,7 @@
 import { Box, Container, Typography } from '@mui/material';
 
+import { CodeEditor } from '@/features/code-editor/code-editor';
+
 interface RestDescriptionProps {
   query: string[][];
   variables: string[][];
@@ -29,7 +31,9 @@ export default function RestDescription(props: RestDescriptionProps) {
         </Container>
       ))}
       {props.body && <Typography variant="h6">Body</Typography>}
-      {props.body && <pre>{props.body}</pre>}
+      {props.body && (
+        <CodeEditor value={props.body} isGraphQl={false} isEdit={false} />
+      )}
     </Box>
   );
 }
