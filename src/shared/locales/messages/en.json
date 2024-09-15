@@ -4,7 +4,8 @@
     "sign-out": "Sign Out",
     "authentication-loading": "Wait, your authentication in progress",
     "success-logout-message": "Congratulations, you have successfully log out!",
-    "unexpected-error": "An unexpected error occurred."
+    "unexpected-error": "An unexpected error occurred.",
+    "history": "History"
   },
   "WelcomePage": {
     "title-anonymous": "Welcome",
@@ -111,7 +112,8 @@
     "button": "Clear All",
     "empty-text": "You haven't made any requests yet. Feel free to explore the REST and GraphQL pages to get started!",
     "rest-client": "REST Client",
-    "graphiql-client": "GraphiQL Client"
+    "graphiql-client": "GraphiQL Client",
+    "request-button": "Go"
   },
   "ErrorPage": {
     "text": "We searched high and low but couldn`t find what are you looking for. Lets find a better place for you to go.",

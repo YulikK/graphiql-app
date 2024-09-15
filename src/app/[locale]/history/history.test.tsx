@@ -94,8 +94,11 @@ describe('History Page', () => {
   it('should navigate to the correct URL when a history item is clicked', async () => {
     renderWithProviders(<History params={{ locale: 'en' }} />);
 
-    const historyItem = screen.getAllByTestId('history-item')[1];
-    await userEvent.click(historyItem);
+    const requestButton = screen.getAllByRole('button', {
+      name: translations['request-button'],
+    })[1];
+
+    await userEvent.click(requestButton);
 
     expect(routerPushMock).toHaveBeenCalledWith(
       '/en/GET/aHR0cHM6Ly9zd2FwaS5kZXYvYXBpL3Blb3Bs?Content-type=application%2Fjson'

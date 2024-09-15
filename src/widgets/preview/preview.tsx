@@ -119,7 +119,7 @@ export default function Preview() {
       >
         {links.map(el => (
           <Button
-            onClick={() => handleRequest(el.request)}
+            onClick={e => handleRequest(e, el.request)}
             key={el.id}
             variant="contained"
             sx={{

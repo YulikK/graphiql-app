@@ -51,31 +51,39 @@ export const useLocalStorage = () => {
     }
   };
 
-  const updateStatus = (
-    newStatus: number
-  ): (SavedRestRequest | SavedGraphqlRequest) | undefined => {
-    if (isClient) {
-      const requests = getStorage() || [];
+  // const updateStatus = (
+  //   newStatus: number,
+  //   url: string
+  // ): (SavedRestRequest | SavedGraphqlRequest) | undefined => {
+  //   if (isClient) {
+  //     const requests = getStorage() || [];
 
-      if (requests.length === 0) {
-        return;
-      }
+  //     if (requests.length === 0) {
+  //       return;
+  //     }
 
-      const lastRequest = requests[requests.length - 1];
+  // const indexOfRequestWithStatus100 = requests.findIndex(
+  //   request => request.status === 100
+  // );
 
-      const updatedLastRequest = {
-        ...lastRequest,
-        status: newStatus,
-      };
+  // if (indexOfRequestWithStatus100) {
+  //   requests[indexOfRequestWithStatus100].status = newStatus;
+  // }
+  //     const lastRequest = requests[requests.length - 1];
 
-      const updatedRequests = [
-        ...requests.slice(0, requests.length - 1),
-        updatedLastRequest,
-      ];
+  //     const updatedLastRequest = {
+  //       ...lastRequest,
+  //       status: newStatus,
+  //     };
 
-      setStorage(updatedRequests);
-    }
-  };
+  //     const updatedRequests = [
+  //       ...requests.slice(0, requests.length - 1),
+  //       updatedLastRequest,
+  //     ];
+
+  //     setStorage(updatedRequests);
+  //   }
+  // };
 
   const removeStorage = (): void => {
     if (isClient) {
@@ -83,5 +91,5 @@ export const useLocalStorage = () => {
     }
   };
 
-  return { setStorage, setRequest, getStorage, removeStorage, updateStatus };
+  return { setStorage, setRequest, getStorage, removeStorage };
 };

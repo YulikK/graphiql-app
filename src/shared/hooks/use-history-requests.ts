@@ -2,7 +2,6 @@ import { useRouter } from 'next/navigation';
 
 import { useEffect, useState } from 'react';
 
-import { useHistory } from '../contexts';
 import { SavedGraphqlRequest, SavedRestRequest } from '../models/types';
 import { restoreGraphState } from '../store/slices/grahpql-client';
 import { restoreRestState } from '../store/slices/rest-slice';
@@ -10,7 +9,6 @@ import {
   isGraphqlRequest,
   isRestRequest,
 } from '../utils/history-requests-typeguard';
-import { updateStatuses } from '../utils/update-statuses';
 
 import { useAppDispatch } from './redux-hooks';
 import { useLocalStorage } from './use-local-storage';
@@ -21,25 +19,26 @@ export const useHistoryRequest = () => {
 
   const { getStorage, setStorage, removeStorage } = useLocalStorage();
 
-  const { isHistory } = useHistory();
-
   const [data, setData] = useState<
     (SavedRestRequest | SavedGraphqlRequest)[] | null
   >(null);
 
-  const handleRequest = (el: SavedRestRequest | SavedGraphqlRequest) => {
+  const handleRequest = (
+    e: React.MouseEvent<HTMLElement>,
+    el: SavedRestRequest | SavedGraphqlRequest
+  ) => {
+    e.stopPropagation();
+
     if (isRestRequest(el)) {
       const { type, status, browserUrl, ...slice } = el;
 
       dispatch(restoreRestState(slice));
-      isHistory.current = true;
 
       router.push(browserUrl);
     } else if (isGraphqlRequest(el)) {
       const { type, status, browserUrl, ...slice } = el;
 
       dispatch(restoreGraphState(slice));
-      isHistory.current = true;
 
       router.push(browserUrl);
     }
@@ -63,8 +62,7 @@ export const useHistoryRequest = () => {
     const storedData = getStorage();
 
     if (storedData) {
-      const updatedData = updateStatuses(storedData);
-      setData(updatedData);
+      setData(storedData);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

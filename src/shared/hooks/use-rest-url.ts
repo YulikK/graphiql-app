@@ -7,7 +7,6 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/shared/hooks/redux-hooks';
 import { useLocalStorage } from '@/shared/hooks/use-local-storage';
 
-import { useHistory } from '../contexts';
 import { HttpMethodType } from '../models/http-methods';
 import {
   restoreRestHeaders,
@@ -33,8 +32,6 @@ export default function useRestUrl() {
   const [lastUrl, setLastUrl] = useState('');
 
   const didMount = useRef(false);
-
-  const { isHistory } = useHistory();
 
   const restoreData = useCallback(
     ({ method, url, body, params }: ReturnType<typeof parsePathAndParams>) => {
@@ -72,8 +69,6 @@ export default function useRestUrl() {
     if (!url) return;
 
     setRequest(store, 'rest', url);
-
-    isHistory.current = false;
 
     if (url === lastUrl) {
       router.refresh();

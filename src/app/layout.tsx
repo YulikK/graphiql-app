@@ -4,7 +4,6 @@ import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 import type { Metadata } from 'next';
 
 import { AlertProvider } from '@/shared/contexts/alert-context';
-import { HistoryProvider } from '@/shared/contexts/history-context';
 import { AuthProvider } from '@/shared/contexts/index.ts';
 import { ThemeAppProvider } from '@/shared/contexts/theme-provider';
 import StoreProvider from '@/shared/store/store-providers';
@@ -39,13 +38,11 @@ export default function RootLayout({
         <AlertProvider>
           <AuthProvider>
             <ThemeAppProvider initTheme={prefersDarkMode}>
-              <HistoryProvider>
-                <AppRouterCacheProvider>
-                  <StoreProvider>
-                    <StyledRoot>{children}</StyledRoot>
-                  </StoreProvider>
-                </AppRouterCacheProvider>
-              </HistoryProvider>
+              <AppRouterCacheProvider>
+                <StoreProvider>
+                  <StyledRoot>{children}</StyledRoot>
+                </StoreProvider>
+              </AppRouterCacheProvider>
             </ThemeAppProvider>
           </AuthProvider>
         </AlertProvider>

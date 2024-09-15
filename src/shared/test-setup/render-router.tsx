@@ -6,7 +6,6 @@ import React, { PropsWithChildren } from 'react';
 
 import { AuthProvider } from '../contexts';
 import { AlertProvider } from '../contexts/alert-context';
-import { HistoryProvider } from '../contexts/history-context';
 import { ThemeAppProvider } from '../contexts/theme-provider';
 import GraphqlSlice from '../store/slices/grahpql-client';
 import RestSlice from '../store/slices/rest-slice';
@@ -50,13 +49,11 @@ export async function renderWithProviders(
     <AlertProvider>
       <AuthProvider>
         <ThemeAppProvider>
-          <HistoryProvider>
-            <AppRouterCacheProvider>
-              <StoreProvider>
-                <StyledRoot>{children}</StyledRoot>
-              </StoreProvider>
-            </AppRouterCacheProvider>
-          </HistoryProvider>
+          <AppRouterCacheProvider>
+            <StoreProvider>
+              <StyledRoot>{children}</StyledRoot>
+            </StoreProvider>
+          </AppRouterCacheProvider>
         </ThemeAppProvider>
       </AuthProvider>
     </AlertProvider>

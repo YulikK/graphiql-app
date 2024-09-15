@@ -2,21 +2,27 @@
 
 import { useTranslations } from 'next-intl';
 
+import Image from 'next/image';
+
 import DeleteIcon from '@mui/icons-material/Delete';
-import LinkIcon from '@mui/icons-material/Link';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {
-  Avatar,
-  Box,
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
   Button,
   Container,
   IconButton,
   List,
   ListItem,
-  ListItemAvatar,
   Stack,
   Typography,
 } from '@mui/material';
 
+import graphLogo from '@/assets/graphql.svg';
+import restLogo from '@/assets/restFul.svg';
+import GraphDescription from '@/entities/graph-description/graph-description';
+import RestDescription from '@/entities/rest-description/rest-description';
 import { Loader } from '@/features/loader/loader';
 import { useHistoryRequest } from '@/shared/hooks/use-history-requests';
 import { usePrivateRedirect } from '@/shared/hooks/use-private-redirect';
@@ -83,11 +89,8 @@ export default function History({
             {data &&
               data.map(el => (
                 <ListItem key={el.id} sx={{ padding: '0' }}>
-                  <Box
+                  <Accordion
                     data-testid="history-item"
-                    display={'flex'}
-                    alignItems={'center'}
-                    onClick={() => handleRequest(el)}
                     sx={{
                       width: '100%',
                       borderRadius: '10px',
@@ -95,29 +98,62 @@ export default function History({
                       padding: '8px 12px',
                     }}
                   >
-                    <ListItemAvatar>
-                      <Avatar
-                        sx={{
-                          background:
-                            Math.floor(el.status / 100) === 2 ? 'green' : 'red',
-                        }}
-                      >
-                        <LinkIcon />
-                      </Avatar>
-                    </ListItemAvatar>
-                    <Typography
-                      variant="h6"
-                      marginRight={'10px'}
-                      minWidth={'80px'}
+                    <AccordionSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel1-content"
+                      id="panel1-header"
                     >
-                      {el.type === 'rest'
-                        ? `${el.type} ${(el as SavedRestRequest).method}`
-                        : el.type}
-                    </Typography>
-                    <Typography sx={{ wordBreak: 'break-all' }}>
-                      {el.url}
-                    </Typography>
-                  </Box>
+                      <Image
+                        className="history-icon"
+                        src={el.type === 'rest' ? restLogo : graphLogo}
+                        alt="type logo"
+                        width={30}
+                        height={30}
+                      />
+                      <Typography variant="h6" minWidth={'90px'}>
+                        {el.type === 'rest'
+                          ? `${el.type} ${(el as SavedRestRequest).method}`
+                          : el.type}
+                      </Typography>
+                      <Typography sx={{ wordBreak: 'break-all' }}>
+                        {el.url}
+                      </Typography>
+                      <Button
+                        variant="contained"
+                        sx={{
+                          margin: '0 10px',
+                          marginLeft: 'auto',
+                          padding: '10px 30px',
+                          textAlign: 'center',
+                          height: 'auto',
+                        }}
+                        onClick={e => handleRequest(e, el)}
+                      >
+                        {t('request-button')}
+                      </Button>
+                    </AccordionSummary>
+                    <AccordionDetails sx={{ textAlign: 'center' }}>
+                      {el.type === 'rest' ? (
+                        el.method === 'GET' ? (
+                          <RestDescription
+                            query={el.query}
+                            variables={el.variables}
+                          />
+                        ) : (
+                          <RestDescription
+                            query={el.query}
+                            variables={el.variables}
+                            body={el.body}
+                          />
+                        )
+                      ) : (
+                        <GraphDescription
+                          query={el.query}
+                          variables={el.variables}
+                        />
+                      )}
+                    </AccordionDetails>
+                  </Accordion>
                   <IconButton
                     edge="end"
                     aria-label="delete"
