@@ -156,7 +156,7 @@ export const CodeEditor = (props: CodeEditorProps) => {
             zIndex: 1,
           }}
         >
-          {isGraphQl && (
+          {isGraphQl && isEdit && (
             <Tooltip title={t('submit')}>
               <Fab
                 color="success"
