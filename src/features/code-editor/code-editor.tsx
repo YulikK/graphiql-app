@@ -29,6 +29,7 @@ import parserBabel from 'prettier/plugins/babel';
 import parserEstree from 'prettier/plugins/estree';
 import parserGraphql from 'prettier/plugins/graphql';
 import prettier from 'prettier/standalone';
+import { useEffect, useMemo, useState } from 'react';
 import { dracula, tomorrow } from 'thememirror';
 
 import { useAlertBar, useHistory, useTheme } from '@/shared/contexts';
@@ -76,7 +77,26 @@ export const CodeEditor = (props: CodeEditorProps) => {
     updateStatus(status);
   }
 
-  const extensions: Extension[] = [];
+  const [extensions, setExtensions] = useState<Extension[]>([]);
+
+  useEffect(() => {
+    const newExtensions: Extension[] = [];
+
+    if (isGraphQl && schema) {
+      newExtensions.push(graphql(schema));
+    } else if (isGraphQl) {
+      newExtensions.push(graphql());
+    } else if (!isTextMode) {
+      newExtensions.push(json());
+    }
+
+    setExtensions(newExtensions);
+  }, [isGraphQl, schema, isTextMode]);
+
+  const editorKey = useMemo(
+    () => (isGraphQl ? JSON.stringify(schema) : undefined),
+    [schema, isGraphQl]
+  );
 
   if (isGraphQl && schema) {
     extensions.push(graphql(schema));
@@ -128,6 +148,7 @@ export const CodeEditor = (props: CodeEditorProps) => {
         className={clsx({ ['read-only']: !isEdit }, 'code-editor')}
       >
         <ReactCodeMirror
+          key={editorKey}
           value={value}
           theme={darkMode ? dracula : tomorrow}
           editable={isEdit}
