@@ -4,13 +4,13 @@ import type { RenderOptions } from '@testing-library/react';
 import { render } from '@testing-library/react';
 import React, { PropsWithChildren } from 'react';
 
-import { AuthProvider } from '../contexts';
-import { AlertProvider } from '../contexts/alert-context';
-import { ThemeAppProvider } from '../contexts/theme-provider';
-import GraphqlSlice from '../store/slices/grahpql-client';
-import RestSlice from '../store/slices/rest-slice';
-import StoreProvider from '../store/store-providers';
-import { StyledRoot } from '../theme/styled-root';
+import { AuthProvider } from '@/shared/contexts';
+import { AlertProvider } from '@/shared/contexts/alert-context';
+import { ThemeAppProvider } from '@/shared/contexts/theme-provider';
+import GraphqlSlice from '@/shared/store/slices/grahpql-client';
+import RestSlice from '@/shared/store/slices/rest-slice';
+import StoreProvider from '@/shared/store/store-providers';
+import { StyledRoot } from '@/shared/theme/styled-root';
 
 const rootReducer = combineReducers({
   [RestSlice.reducerPath]: RestSlice.reducer,

@@ -3,9 +3,11 @@ import { userEvent } from '@testing-library/user-event';
 import { vi } from 'vitest';
 
 import * as text from '@/shared/locales/messages/en.json';
-import { renderWithProviders } from '@/shared/test-setup/render-router';
+import { renderWithProviders } from '@/tests/setup/render-router';
 
 import Preview, { graphqlRequest, restGet, restPost } from './preview';
+
+vi.unmock('@/shared/hooks/redux-hooks');
 
 vi.mock('react-firebase-hooks/auth', () => ({
   useAuthState: () => [{}, false, null],

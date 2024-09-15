@@ -58,14 +58,5 @@ export default async function RestResult({ params, searchParams = {} }: Props) {
     headers: searchParams,
   });
 
-  // const queryParams = new URLSearchParams(searchParams).toString();
-
-  return (
-    <CodeEditor
-      value={result}
-      isEdit={false}
-      status={status}
-      // url={`/${params.locale}/${method}/${url}${body ? '/' : ''}${body}?${queryParams}`}
-    />
-  );
+  return <CodeEditor value={result} isEdit={false} status={status} />;
 }

@@ -3,10 +3,12 @@ import { userEvent } from '@testing-library/user-event';
 import { vi } from 'vitest';
 
 import * as text from '@/shared/locales/messages/en.json';
-import { savedRequestsMock } from '@/shared/test-setup/mocks/savedRequestsMock';
-import { renderWithProviders } from '@/shared/test-setup/render-router';
+import { savedRequestsMock } from '@/tests/setup/mocks/saved-requests-mock';
+import { renderWithProviders } from '@/tests/setup/render-router';
 
 import History from './page';
+
+vi.unmock('@/shared/hooks/redux-hooks');
 
 vi.mock('react-firebase-hooks/auth', () => ({
   useAuthState: () => [{}, false, null],

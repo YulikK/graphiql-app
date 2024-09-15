@@ -94,12 +94,12 @@ export const Docs = () => {
 
   return (
     <>
-      <Tooltip title={t(urlDoc ? 'show-doc' : 'need-doc-url')} arrow>
+      <Tooltip title={t(!graphqlSchema ? 'show-doc' : 'need-doc-url')} arrow>
         <span>
           <IconButton
             size="small"
             color="primary"
-            disabled={!urlDoc}
+            disabled={!graphqlSchema}
             sx={{ p: '10px', ml: 'auto' }}
             aria-label={t('show-doc')}
             onClick={handleDocOpen}
@@ -124,6 +124,7 @@ export const Docs = () => {
           padding="0 20px"
           width="100%"
           overflow="auto"
+          data-testid="docs"
           className="graphiql-container"
         >
           {graphqlSchema && fetcher && (
