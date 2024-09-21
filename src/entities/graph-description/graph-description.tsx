@@ -8,8 +8,6 @@ interface GraphDescriptionProps {
 }
 
 export default function GraphDescription(props: GraphDescriptionProps) {
-  console.log(props);
-
   return (
     <Box display={'flex'} flexDirection={'column'} gap={'10px'}>
       {props.variables && <Typography variant="h6">Variables</Typography>}
