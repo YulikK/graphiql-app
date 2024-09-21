@@ -1,0 +1,91 @@
+name: Continuous Integration
+
+env:
+  NEXT_PUBLIC_FIREBASE_API_KEY: ${{ secrets.NEXT_PUBLIC_FIREBASE_API_KEY }}
+  NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: ${{ secrets.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN }}
+  NEXT_PUBLIC_FIREBASE_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_PROJECT_ID }}
+  NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET: ${{ secrets.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET }}
+  NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID }}
+  NEXT_PUBLIC_FIREBASE_APP_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_APP_ID }}
+  NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID }}
+
+on:
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Format code with Prettier
+        run: npm run ci:format
+
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Vitest tests
+        run: npm run test
+
+      - name: Generate coverage report
+        run: npm run test:coverage
+
+  build:
+    runs-on: ubuntu-latest
+
+    needs: format
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js ${{matrix.node-version}}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{matrix.node-version}}
+      - name: Install dependencies
+        run: npm install
+      - name: Build application
+        run: npm run build
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js ${{matrix.node-version}}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{matrix.node-version}}
+      - name: Install dependencies
+        run: npm install
+      - name: deploy site
+        run: curl -X POST -d {} ${{ secrets.NETLIFI_BUILD_HOOK }}

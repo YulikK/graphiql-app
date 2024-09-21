@@ -1,0 +1,122 @@
+{
+  "Header": {
+    "sign-in": "Sign In",
+    "sign-out": "Sign Out",
+    "authentication-loading": "Wait, your authentication in progress",
+    "success-logout-message": "Congratulations, you have successfully log out!",
+    "unexpected-error": "An unexpected error occurred.",
+    "history": "History"
+  },
+  "WelcomePage": {
+    "title-anonymous": "Welcome",
+    "title-registered": "Welcome back,",
+    "sign-in": "Sign In",
+    "sign-up": "Sign Up",
+    "rest-client": "REST Client",
+    "graphiql-client": "GraphiQL Client",
+    "history": "History",
+    "welcome-text": "Explore and interact with APIs effortlessly using our powerful yet lightweight tool combining the best of Postman and GraphiQL. Whether you're working with RESTful APIs or GraphQL endpoints, our platform provides a seamless experience to execute requests, view responses, and manage your API interactions.",
+    "highlights-title": "What we offer",
+    "highlights-names": "['RESTful Client', 'GraphiQL', 'Query Prettifying', 'Authentication', 'Internationalization', 'Request History']",
+    "highlights-descriptions": "['Easily perform and manage your RESTful API requests with a user-friendly interface designed for efficiency.', 'Take advantage of our built-in GraphiQL interface for smooth and intuitive GraphQL queries and mutations.', 'Automatically format and organize your queries for improved readability and maintenance.', 'Ensure your data is secure with built-in Firebase authentication.', 'Choose your preferred language for a personalized experience.', 'Easily revisit and rerun previous API requests with our comprehensive history feature.']",
+    "welcome-teams": "Used by top teams across the globe",
+    "developers-title": "Our team",
+    "developers-names": "['Yuliya Kursevich', 'Dmitry Gaponenko', 'Yuliya Karuk']",
+    "developers-roles": "['Team Lead. Frontend Developer', 'Frontend Developer', 'Frontend Developer']",
+    "developers-skills": "['She has experience working with React, Redux, MUI, Next.js (SSR), etc. Always open to new knowledge. Excellent team player and is always ready to help her colleagues.', 'He has a strong background in React and Redux, MUI, Next.js (SSR). Analytical thinking.  Eager to learn new things, works well in a team.', 'She has a solid foundation in React and Redux, MUI, Next.js (SSR). Skilled in code refactoring. Collaborative by nature, flexible and is always eager to expand her skill set.']",
+    "welcome-principles": "['Open to everyone', 'Open source philosophy', 'Teach it forward']",
+    "welcome-principles-desc": "['Free courses, no obligations, and no contracts. No age limit. Only students’ time and dedication are required. Students can repeatedly attend courses.', 'Our Learning Management System platform and educational materials are publicly available on GitHub and YouTube.', 'Students study at school for free, but we request that they return as mentors to pass on their knowledge to the next generation of students.']",
+    "about-title": "Built as Final Task of The Rolling Scopes School",
+    "about-description": "RS School is a free and community-based online education program conducted by The Rolling Scopes Community since 2013.",
+    "about-courses": "Explore the courses",
+    "about-mentor": "Become a mentor",
+    "preview-title": "Try Ready-Made Requests and Explore Examples",
+    "preview-text": "To make things easier for you, we've prepared a few example queries that you can use as starting points. Click the links below to quickly access pre-configured requests and see how our API works."
+  },
+  "RegistrationPage": {
+    "title": "Registration",
+    "name-input": "Name",
+    "email-input": "Email",
+    "password-input": "Password",
+    "confirm-input": "Confirm password",
+    "accept-term-input": "I have read and agree to the Terms of Service",
+    "sign-up-button": "Sign Up",
+    "login-text": "Already have an account?",
+    "login-link": "Sign In",
+    "authentication-loading": "Wait, your authentication in progress",
+    "success-register-message": "Congratulations, you have successfully register!",
+    "unexpected-error": "An unexpected error occurred."
+  },
+  "LoginPage": {
+    "title": "Login",
+    "email-input": "Email",
+    "password-input": "Password",
+    "sign-up-button": "Sign In",
+    "registration-text": "Don't have an account?",
+    "registration-link": "Sign Up",
+    "google-text": "Continue with Google",
+    "authentication-loading": "Wait, your authentication in progress",
+    "success-login-message": "Congratulations, you have successfully logged in!",
+    "unexpected-error": "An unexpected error occurred."
+  },
+  "Validation": {
+    "name-capitalized": "Name must start with a capital letter and be followed by lowercase letters",
+    "name-required": "Name is a required field",
+    "email-required": "Email is a required field",
+    "email-invalid": "Must be a valid email format",
+    "password-required": "Password is a required field",
+    "password-min-length": "Password must be at least {min} characters long",
+    "password-strength": "Password must contain 1 number, 1 uppercase letter, 1 lowercase letter, and 1 special character",
+    "confirm-password-required": "Confirm Password is a required field",
+    "passwords-must-match": "Passwords must match",
+    "accept-term": "You must accept the terms and conditions"
+  },
+  "RestPage": {
+    "send": "send",
+    "method": "Method",
+    "query": "query",
+    "body": "body",
+    "headers": "headers",
+    "variables": "variables",
+    "text": "Text",
+    "pretty-error": " Prettifying is available only for valid JSON"
+  },
+  "GraphqlPage": {
+    "headers": "headers",
+    "variables": "variables",
+    "url": "Url",
+    "endpoint": "Api",
+    "documentation": "Doc",
+    "show-doc": "Show documentation",
+    "error-no-doc-url": "Documentation URL is not set",
+    "error-parse-schema": "Error parsing schema",
+    "error-fetch-schema": "Error fetching schema",
+    "need-doc-url": "You need to set the correct documentation URL"
+  },
+  "Common": {
+    "key": "key",
+    "value": "value",
+    "status": "Status code",
+    "label-resize": "Show/hide panel",
+    "submit": "Submit",
+    "format-mode": "Format mode",
+    "json": "JSON",
+    "text": "TXT",
+    "pretty": "Make pretty",
+    "status-code": "Code",
+    "error-prettify": "Error formatting code",
+    "error-request": "Request error"
+  },
+  "HistoryPage": {
+    "title": "History",
+    "button": "Clear All",
+    "empty-text": "You haven't made any requests yet. Feel free to explore the REST and GraphQL pages to get started!",
+    "rest-client": "REST Client",
+    "graphiql-client": "GraphiQL Client",
+    "request-button": "Go"
+  },
+  "ErrorPage": {
+    "text": "We searched high and low but couldn`t find what are you looking for. Lets find a better place for you to go.",
+    "button": "Go back to Home"
+  }
+}
